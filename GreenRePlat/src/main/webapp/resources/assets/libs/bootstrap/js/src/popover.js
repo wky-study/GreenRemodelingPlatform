@@ -30,7 +30,7 @@ const Default = {
   trigger: 'click'
 }
 
-const DefaultType = {
+cont DefaultType = {
   ...Tooltip.DefaultType,
   content: '(null|string|element|function)'
 }
