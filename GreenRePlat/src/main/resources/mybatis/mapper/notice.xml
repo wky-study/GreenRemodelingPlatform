@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.notice.dao.INoticeDAO">
+
+	<select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">
+		SELECT
+			  a.notice_no
+			, a.notice_title
+			, a.mem_id
+			, b.mem_nick
+			, a.notice_content
+			, TO CHAR(notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date	
+			, a.notice_count
+		FROM notice a, member b
+		WHERE 1=1
+			AND a.mem_id = b.mem_id
+	
+	</select>
+	
+</mapper>
