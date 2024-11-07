@@ -245,9 +245,6 @@
 		
 		document.getElementById("writeBtn").addEventListener("click", ()=>{
 			
-			/* 맴버테이블 나오면 지우기 */
-			v_id = 'a001';
-			
 			location.href = '${pageContext.request.contextPath }/reviewWriteView';
 			
 			if(v_id){

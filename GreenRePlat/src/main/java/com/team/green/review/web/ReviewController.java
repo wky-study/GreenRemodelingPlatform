@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.common.exception.BizNotFoundException;
 import com.team.green.common.vo.SearchVO;
+import com.team.green.member.dto.MemberDTO;
 import com.team.green.review.dto.ReviewDTO;
 import com.team.green.review.service.ReviewService;
 
@@ -76,9 +77,9 @@ public class ReviewController {
 		
 		System.out.println(session.getAttribute("login"));
 		
-//		if(session.getAttribute("login") == null) {
-//			return "redirect:/loginView";
-//		}
+		if(session.getAttribute("login") == null) {
+			return "redirect:/loginView";
+		}
 		
 		return "review/reviewWriteView";
 	}
@@ -87,14 +88,14 @@ public class ReviewController {
 	@PostMapping("/reviewWriteDo")
 	public String reviewWriteDo(ReviewDTO review, String imgFileName, HttpSession session) {
 		
-//		MemberDTO login= (MemberDTO)session.getAttribute("login");
-//		
-//		review.setMemId(login.getMemId());
-//		review.setMemName(login.getMemName());
-//		review.setReviewPath(imgFileName);
-//		System.out.println(review);
-//		
-//		reviewService.writeReview(review);
+		MemberDTO login= (MemberDTO)session.getAttribute("login");
+		
+		review.setMemId(login.getMemId());
+		review.setMemName(login.getMemName());
+		review.setReviewPath(imgFileName);
+		System.out.println(review);
+		
+		reviewService.writeReview(review);
 
 		
 		return "redirect:reviewView";
