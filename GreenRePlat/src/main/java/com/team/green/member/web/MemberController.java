@@ -3,7 +3,10 @@ package com.team.green.member.web;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,11 @@ public class MemberController {
 	@RequestMapping("/registView")
 	public String registView() {
 		return "member/registView";
+	}
+	
+	@RequestMapping("/loginView")
+	public String loginView() {
+		return "member/loginView";
 	}
 
 	@PostMapping("/registDo")
@@ -52,5 +60,27 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		return "member/registView";
+	}
+	
+	@PostMapping("/loginDo")
+	public String loginDo(MemberDTO member, HttpSession session, boolean rememberId, HttpServletResponse resp) {
+		MemberDTO memInfo = memSvc.loginMember(member);
+		System.out.println("rememberId: "+rememberId);
+		session.setAttribute("memInfo", memInfo);
+		if(rememberId) {
+			Cookie cookie = new Cookie("rememberId", member.getMemId());
+			resp.addCookie(cookie);
+
+		}else {
+			Cookie cookie = new Cookie("rememberId", "");
+			cookie.setMaxAge(0);
+			resp.addCookie(cookie);
+		}
+		return "redirect:/";
+	}
+	@RequestMapping("/logoutDo")
+	public String logoutDo(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 }

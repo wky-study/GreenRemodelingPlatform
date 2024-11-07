@@ -11,9 +11,18 @@ public class MemberService {
 	
 	@Autowired
 	IMemberDAO dao;
-	
+	/*	회원가입
+	 * 
+	 */
 	public int registMember(MemberDTO member) {
 		int result = dao.registMember(member);
+		return result;
+	}
+	/*	로그인
+	 * 
+	 */
+	public MemberDTO loginMember(MemberDTO member) {
+		MemberDTO result = dao.loginMember(member);
 		return result;
 	}
 
