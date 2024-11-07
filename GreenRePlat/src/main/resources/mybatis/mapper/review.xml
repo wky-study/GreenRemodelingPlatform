@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.review.dao.IReviewDAO">
+
+	<sql id="reviewSearch">
+	    <if test="searchWord != null">
+	    	<choose>
+	    		<when test="searchOption == 'title'">AND a.review_title LIKE '%' || #{searchWord} || '%'</when>
+	    		<when test="searchOption == 'content'">AND a.review_content LIKE '%' || #{searchWord} || '%'</when>
+	    		<when test="searchOption == 'name'">AND b.mem_name = #{searchWord} </when>
+	    	</choose>
+	    </if>
+	</sql>
+
+	<!-- 리뷰 게시판 목록 불러오기 -->
+	<select id="getReviewList" resultType="com.team.green.review.dto.ReviewDTO" parameterType="com.team.green.common.vo.SearchVO">
+		SELECT * FROM (
+		    SELECT
+		        a.*
+		        , ROWNUM AS rnum
+		    FROM (
+		        SELECT 
+		              a.review_no
+		            , a.review_title 
+		            , a.mem_id 
+		            , NVL(b.mem_name, '탈퇴한 회원') AS mem_name
+		            , a.review_content 
+		            , a.review_path
+		            , TO_CHAR(review_date,'YYYY-MM-DD HH24:MI') AS review_date
+		            , a.review_count
+		        FROM review a , members b
+		        WHERE 1=1
+		            AND a.mem_id = b.mem_id(+)
+		            AND a.del_yn = 'N'
+		       	<include refid="reviewSearch"/>
+		        ORDER BY review_no DESC
+		    ) a
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+
+	<!-- 리뷰 게시판 총 갯수 가져오기 -->
+	<select id="getReviewCount" resultType="int" parameterType="com.team.green.common.vo.SearchVO">
+		SELECT COUNT(*)
+		FROM review a , members b 
+		WHERE 1=1 
+		    AND del_yn = 'N'
+		    AND a.mem_id = b.mem_id(+)
+		    <include refid="reviewSearch"/>
+	</select>
+
+	<!-- 리뷰 게시글 한개 조회 하기 -->
+	<select id="getReview" parameterType="int" resultType="com.team.green.review.dto.ReviewDTO">
+		SELECT 
+		      a.review_no
+		    , a.review_title 
+		    , a.mem_id 
+		    , NVL(b.mem_name, '탈퇴한 회원') AS mem_name
+		    , a.review_content 
+		    , a.review_path
+		    , TO_CHAR(review_date,'YYYY-MM-DD HH24:MI:SS') AS review_date
+		    , a.review_count
+		FROM review a , members b
+		WHERE 1=1
+		    AND a.mem_id = b.mem_id(+) 
+		    AND del_yn = 'N'
+		    AND review_no = #{no}		
+	</select>
+
+	<!-- 리뷰게시글 작성  -->
+	<insert id="writeReview" parameterType="com.team.green.review.dto.ReviewDTO">
+		INSERT INTO review(
+			 review_no
+		   , mem_id
+		   , mem_name
+		   , review_title
+		   , review_content
+		   , review_date
+		   , del_yn
+		   , review_count
+		   , review_path
+		) VALUES(
+			  (SELECT COUNT(*)+1 FROM review)
+			, #{memId}
+			, #{memName}
+			, #{reviewTitle}
+			, #{reviewContent}
+			, SYSDATE
+			, 'N'
+			, 0
+			, #{reviewPath}
+		)
+	</insert>
+
+
+	<!-- 리뷰게시글 조회수 -->
+	<update id="reviewCountUp" parameterType="int">
+		UPDATE review
+		SET 
+			review_count = review_count + 1
+		WHERE 1=1
+			AND review_no = #{no}
+	</update>
+
+	<!-- 리뷰게시글 수정 -->
+	<update id="updateReview" parameterType="com.team.green.review.dto.ReviewDTO">
+		UPDATE review 
+		SET
+		      review_title = #{reviewTitle}
+		    , review_content = #{reviewContent}
+		WHERE 1=1
+		    AND review_no = #{reviewNo}	
+	</update>
+
+	<!-- 리뷰게시판 글 삭제 -->
+	<update id="deleteReview">
+		UPDATE review
+		SET
+			del_yn = 'Y'
+		WHERE 1=1
+			AND review_no = #{reviewNo}
+	</update>
+
+	<!-- 리뷰게시판 아이디 null로 -->
+	<update id="noMemIdReview" parameterType="String">
+		UPDATE review
+		SET	mem_id = null
+		WHERE 1=1
+			AND mem_id = #{memId}
+	</update>	
+	
+
+
+
+</mapper>
