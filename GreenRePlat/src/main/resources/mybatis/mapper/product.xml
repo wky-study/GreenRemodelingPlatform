@@ -17,26 +17,22 @@
 		SELECT *
 		FROM (
 		    SELECT 
-		        a.*,
-		        ROWNUM AS rnum
-		    FROM (
-		        SELECT 
-		            prod_no,
-		            prod_company,
-		            prod_model,
-		            prod_manufacturer,
-		            prod_efficiency,
-		            prod_image_src,
-		            prod_name,
-		            prod_price,
-		            prod_type
-		        FROM product
-		        ORDER BY prod_no DESC
-		    ) a
+		        prod_no,
+		        prod_company,
+		        prod_model,
+		        prod_manufacturer,
+		        prod_efficiency,
+		        prod_image_src,
+		        prod_name,
+		        prod_price,
+		        prod_type,
+		        ROW_NUMBER() OVER (ORDER BY prod_no DESC) AS rnum  
+		    FROM product
+		    WHERE 1=1
+		    <include refid="productSearch"/>
 		)
-		WHERE rnum BETWEEN #{start} AND #{end}	
-		<include refid="productSearch"/>
-		ORDER BY prod_no DESC		
+		WHERE rnum BETWEEN #{start} AND #{end}
+		ORDER BY prod_no DESC				
 		
 	</select>
 

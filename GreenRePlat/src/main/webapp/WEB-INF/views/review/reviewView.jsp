@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>제품 목록</title>
+<title>리뷰 게시판</title>
 
 </head>
 
@@ -22,6 +22,7 @@
 		cursor:pointer;
 	}
 	
+	
 </style>
 
 
@@ -35,15 +36,16 @@
 			<div class="card-body">
 				<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">
 					<!-- 카드 그리기 -->
-					<c:forEach items="${keyProduct}" var="ProductDTO">
-						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/productDetailView?no=${ProductDTO.prodNo}"'>
+					
+					<c:forEach items="${keyReview}" var="ReviewDTO">
+						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/reviewDetailView?no=${ReviewDTO.reviewNo}"'>
 							<img
-								src="${ProductDTO.prodImageSrc}"
+								src="${pageContext.request.contextPath }/displayImage?fileName=${ReviewDTO.reviewPath}"
 								class="card-img-top" >
 							<div class="card-body">
-								<h5 class="card-title">${ProductDTO.prodModal}</h5>
-								<p class="card-text">${ProductDTO.prodName}</p>
-								<span class="fw-bold">${ProductDTO.prodPrice}원</span>
+								<h5 class="card-title">${ReviewDTO.reviewTitle}</h5>
+								<p class="card-text">${ReviewDTO.memName}</p>
+								<span class="fw-bold">${ReviewDTO.reviewDate}</span>
 							</div>
 						</div>
 					</c:forEach>
@@ -66,12 +68,12 @@
 					    <li class="page-item ${keySearch.firstPage == 1 ? 'disabled' : '' }">
 
 					    	<c:if test="${keySearch.searchWord != null}">
-						      <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Previous">
+						      <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Previous">
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 					    	</c:if>
 					    	<c:if test="${keySearch.searchWord == null}">
-						      <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Previous">
+						      <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Previous">
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 					    	</c:if>
@@ -86,10 +88,10 @@
 					    <c:forEach begin="${keySearch.firstPage }" end="${keySearch.lastPage }" var="num">
 							    <li class="page-item ${keySearch.pageNo == num ? 'active' : '' } ">
 							    	<c:if test="${keySearch.searchWord != null}">
-									    <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
+									    <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
 							    	</c:if>						    
 							    	<c:if test="${keySearch.searchWord == null}">
-									    <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
+									    <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
 							    	</c:if>						    
 							    </li>
 					    </c:forEach>
@@ -98,12 +100,12 @@
 				    <!-- 마지막 페이지 도달 시 disabled 추가 -->
 					    <li class="page-item ${keySearch.pageNo == keySearch.finalPage ? 'disabled' : ''  }">
 						    <c:if test="${keySearch.searchWord == null}">
-						     <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Next">
+						     <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Next">
 						    	 <span aria-hidden="true">&raquo;</span>
 						     </a>
 						    </c:if>
 						    <c:if test="${keySearch.searchWord != null}">
-						     <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Next">
+						     <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Next">
 						    	 <span aria-hidden="true">&raquo;</span>
 						     </a>
 						    </c:if>
@@ -112,14 +114,22 @@
 				    
 				  </ul>
 				</nav>
-			</div>					
+			</div>		
+			
+			<!-- 글쓰기 버튼 -->
+			<div class="d-flex justify-content-end me-5 my-write-btn" >
+				<button id="writeBtn" class="btn btn-outline-secondary" >글쓰기</button>
+			</div>
+			
+			
+						
 			<!-- 검색기능 -->
 			<div class="d-flex justify-content-center mb-3">
-				<form class="d-flex" action="${pageContext.request.contextPath }/productView" method="GET" >
+				<form class="d-flex" action="${pageContext.request.contextPath }/reviewView" method="GET" >
 					<select class="form-select me-1" name="searchOption">
-						<option value="name" selected>제품명</option>
-						<option value="model">모델명</option>
-						<option value="type">타입</option>
+						<option value="title" selected>제목</option>
+						<option value="content">내용</option>
+						<option value="name">작성자</option>
 					</select>
 
 					<input class="form-control me-1" type="text" name="searchWord">
@@ -143,7 +153,7 @@
 
 	<script type="text/javascript">
 	    window.onload = function() {
-	        const baseUrl = "${pageContext.request.contextPath}/productView";
+	        const baseUrl = "${pageContext.request.contextPath}/reviewView";
 	        // 주소창의 URL을 기본 URL로 설정
 	        window.history.replaceState({}, '', baseUrl);
 	    };	
@@ -158,7 +168,7 @@
 		console.log(event.target);
 		console.log(event.target.value);
 		
-		let v_url = "${pageContext.request.contextPath}/productView";
+		let v_url = "${pageContext.request.contextPath}/reviewView";
 		let v_query = "?rowSizePerPage=" + event.target.value;
 			v_query += "&pageNo=${keySearch.pageNo}";
 		
@@ -184,15 +194,15 @@
 	     
 	     if(v_searchWord == "" ){
 	    	 if(v_lastPage % 10 != 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage}";
 	    	 }else if(v_lastPage % 10 == 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1}";
 	    	 }
 	     }else if(v_searchWord != ""){
 	    	 if(v_lastPage % 10 != 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
 	    	 }else if(v_lastPage % 10 == 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
 	    	 }
 	     }
 		
@@ -218,9 +228,38 @@
 		
 	})	
 	
+	document.getElementById("writeBtn").addEventListener("click", ()=>{
+		
+		document.getElementById("writeBtn").submit();
+		
+	});
+	
+	
 	
 	</script>
 	
+		<!-- 글 작성 script -->
+	<script type="text/javascript">
+	
+		let v_id = '${sessionScope.login.memId}';
+		
+		document.getElementById("writeBtn").addEventListener("click", ()=>{
+			
+			/* 맴버테이블 나오면 지우기 */
+			v_id = 'a001';
+			
+			location.href = '${pageContext.request.contextPath }/reviewWriteView';
+			
+			if(v_id){
+				location.href = '${pageContext.request.contextPath }/reviewWriteView';
+			}
+			else{
+				alert("로그인 후 글쓰기가 가능합니다.");
+				location.href = '${pageContext.request.contextPath}/loginView';
+			} 
+			
+		})
+	</script>
 
 </body>
 
