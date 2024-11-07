@@ -18,12 +18,10 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	@RequestMapping("/productView")
+    @RequestMapping("/productView")
 	public String productView(Model model, SearchVO search) {
-
-		
+    	
 		int productCount = productService.getProductCount(search);
-		
 		// DB로 부터 가져온 전체 게시글의 수를 search의 필드변수에 넣어줌
 		search.setProdCount(productCount);
 		search.setting();

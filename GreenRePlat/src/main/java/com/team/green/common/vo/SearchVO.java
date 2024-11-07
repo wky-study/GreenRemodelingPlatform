@@ -27,10 +27,9 @@ public class SearchVO {
 	
 	public SearchVO() {
 	}
-
-
-	public SearchVO(String searchWord, String searchOption, int pageNo, int rowSizePerPage, int prodCount,
-			int start, int end, int firstPage, int lastPage, int finalPage) {
+	
+	public SearchVO(String searchWord, String searchOption, int pageNo, int rowSizePerPage,
+			int prodCount, int start, int end, int firstPage, int lastPage, int finalPage) {
 		this.searchWord = searchWord;
 		this.searchOption = searchOption;
 		this.pageNo = pageNo;
@@ -42,7 +41,7 @@ public class SearchVO {
 		this.lastPage = lastPage;
 		this.finalPage = finalPage;
 	}
-	
+
 	public void setting() {
 		start = rowSizePerPage * (pageNo - 1) + 1;
 		end = rowSizePerPage * pageNo;
@@ -67,109 +66,90 @@ public class SearchVO {
 		}
 		
 	}
-	
+
 	@Override
 	public String toString() {
-		return "PageSearchVO [searchWord=" + searchWord + ", searchOption=" + searchOption + ", pageNo=" + pageNo
-				+ ", rowSizePerPage=" + rowSizePerPage + ", prodCount=" + prodCount + ", start=" + start + ", end="
-				+ end + ", firstPage=" + firstPage + ", lastPage=" + lastPage + ", finalPage=" + finalPage + "]";
+		return "SearchVO [searchWord=" + searchWord + ", searchOption=" + searchOption 
+				+ ", pageNo=" + pageNo + ", rowSizePerPage=" + rowSizePerPage + ", prodCount=" + prodCount + ", start="
+				+ start + ", end=" + end + ", firstPage=" + firstPage + ", lastPage=" + lastPage + ", finalPage="
+				+ finalPage + "]";
 	}
-
 
 	public String getSearchWord() {
 		return searchWord;
 	}
 
-
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
-
 
 	public String getSearchOption() {
 		return searchOption;
 	}
 
-
 	public void setSearchOption(String searchOption) {
 		this.searchOption = searchOption;
 	}
-
 
 	public int getPageNo() {
 		return pageNo;
 	}
 
-
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
-
 
 	public int getRowSizePerPage() {
 		return rowSizePerPage;
 	}
 
-
 	public void setRowSizePerPage(int rowSizePerPage) {
 		this.rowSizePerPage = rowSizePerPage;
 	}
-
 
 	public int getProdCount() {
 		return prodCount;
 	}
 
-
 	public void setProdCount(int prodCount) {
 		this.prodCount = prodCount;
 	}
-
 
 	public int getStart() {
 		return start;
 	}
 
-
 	public void setStart(int start) {
 		this.start = start;
 	}
-
 
 	public int getEnd() {
 		return end;
 	}
 
-
 	public void setEnd(int end) {
 		this.end = end;
 	}
-
 
 	public int getFirstPage() {
 		return firstPage;
 	}
 
-
 	public void setFirstPage(int firstPage) {
 		this.firstPage = firstPage;
 	}
-
 
 	public int getLastPage() {
 		return lastPage;
 	}
 
-
 	public void setLastPage(int lastPage) {
 		this.lastPage = lastPage;
 	}
 
-
 	public int getFinalPage() {
 		return finalPage;
 	}
-
 
 	public void setFinalPage(int finalPage) {
 		this.finalPage = finalPage;

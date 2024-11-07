@@ -32,19 +32,19 @@
 
 	<div class="container-fluid">
 		<div class="card">
+			
 			<div class="card-body">
 				<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">
-					
 					<!-- 카드 그리기 -->
 					<c:forEach items="${keyProduct}" var="ProductDTO">
-						<div class="card my-card" onclick='window.location.href = "${pageContext.request.contextPath }/productDetailView?no=${ProductDTO.productNo}"'>
+						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/productDetailView?no=${ProductDTO.prodNo}"'>
 							<img
 								src="${ProductDTO.prodImageSrc}"
 								class="card-img-top" >
 							<div class="card-body">
 								<h5 class="card-title">${ProductDTO.prodModal}</h5>
 								<p class="card-text">${ProductDTO.prodName}</p>
-								<span class="fw-bold">${ProductDTO.prodPrice} 원</span>
+								<span class="fw-bold">${ProductDTO.prodPrice}원</span>
 							</div>
 						</div>
 					</c:forEach>
@@ -124,9 +124,9 @@
 					</select>
 
 					<input class="form-control me-1" type="text" name="searchWord">
-					<button class="btn btn-primary" type="submit">
-						<svg xmlns="http:www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12">
+					<button class="btn btn-outline-primary" type="submit">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+						  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
 						</svg>
 					</button>
 				</form>
@@ -218,7 +218,6 @@
 			v_searchForm.submit();
 		
 	})	
-	
 	
 	
 	</script>
