@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.product.dao.IProductDAO">
+
+	<sql id="productSearch">
+	    <if test="searchWord != null">
+	    	<choose>
+	    		<when test="searchOption == 'name'">AND prod_name LIKE '%' || #{searchWord} || '%'</when>
+	    		<when test="searchOption == 'model'">AND prod_model LIKE '%' || #{searchWord} || '%'</when>
+	    		<when test="searchOption == 'type'">AND prod_type LIKE '%' || #{searchWord} || '%'</when>
+	    	</choose>
+	    </if>
+	</sql>
+
+	<!-- 리뷰 게시판 목록 불러오기 -->
+	<select id="getProductList" resultType="com.team.green.product.dto.ProductDTO" parameterType="com.team.green.common.vo.SearchVO">
+		SELECT *
+		FROM (
+		    SELECT 
+		        a.*,
+		        ROWNUM AS rnum
+		    FROM (
+		        SELECT 
+		            prod_no,
+		            prod_company,
+		            prod_model,
+		            prod_manufacturer,
+		            prod_efficiency,
+		            prod_image_src,
+		            prod_name,
+		            prod_price,
+		            prod_type
+		        FROM product
+		        ORDER BY prod_no DESC
+		    ) a
+		)
+		WHERE rnum BETWEEN #{start} AND #{end}	
+		<include refid="productSearch"/>
+		ORDER BY prod_no DESC		
+		
+	</select>
+
+	<!-- 리뷰 게시판 총 갯수 가져오기 -->
+	<select id="getProductCount" resultType="int" parameterType="com.team.green.common.vo.SearchVO">
+		SELECT COUNT(prod_no) AS total_count
+		FROM product
+		WHERE 1=1
+		<include refid="productSearch"/>
+	</select>
+	
+
+
+
+</mapper>
