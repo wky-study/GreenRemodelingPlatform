@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.member.dao.IMemberDAO">
+
+<!-- 회원가입 -->
+<insert id = "registMember" parameterType = "com.team.green.member.dto.MemberDTO">
+	INSERT INTO members(
+		MEM_NAME
+		,MEM_ID
+		,MEM_PW
+		,MEM_RN
+		,MEM_ADDRESS
+		,MEM_PHONE
+		,MEM_NICK
+		,MEM_TYPE
+		,MEM_IMG
+		,COM_CEO
+		,COM_BRC
+		,COM_MA_NM
+		,COM_MA_PN
+		,MEM_HP
+		,MEM_DATE
+	) VALUES(
+		#{memName}
+		,#{memId}
+		,#{memPw}
+		,#{memRn}
+		,#{memAddress}
+		,#{memPhone}
+		,#{memNick}
+		,#{memType}
+		,#{memImg}
+		,#{comCeo}
+		,#{comBrc}
+		,#{comMaNm}
+		,#{comMaPn}
+		,#{memHp}
+		,#{memDate}
+	)
+</insert>
+
+</mapper>
