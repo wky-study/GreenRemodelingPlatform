@@ -9,11 +9,12 @@
 			, a.mem_id
 			, b.mem_nick
 			, a.notice_content
-			, TO CHAR(notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date	
+			, TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date	
 			, a.notice_count
-		FROM notice a, member b
+		FROM notice a, members b
 		WHERE 1=1
 			AND a.mem_id = b.mem_id
+			AND a.del_yn = 'N'
 	
 	</select>
 	

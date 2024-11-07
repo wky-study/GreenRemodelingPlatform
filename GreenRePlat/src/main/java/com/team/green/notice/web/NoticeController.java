@@ -2,6 +2,8 @@ package com.team.green.notice.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,14 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeList);
 		
 		return "notice/noticeView";
+	}
+	
+	@RequestMapping("/noticeWriteView")
+	public String noticeWriteView(HttpSession session) {
+//		if(session.getAttribute("login") == null) {
+//			return "redirect:/loginView";
+//		}
+		return "notice/noticeWriteView";
 	}
 
 }
