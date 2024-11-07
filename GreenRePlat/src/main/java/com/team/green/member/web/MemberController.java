@@ -20,12 +20,19 @@ public class MemberController {
 
 	@Autowired
 	MemberService memSvc;
-
+	
+	
+	/*	회원가입화면으로 이동
+	 * 
+	 */
 	@RequestMapping("/registView")
 	public String registView() {
 		return "member/registView";
 	}
-	
+
+	/*	로그인화면으로 이동
+	 * 
+	 */
 	@RequestMapping("/loginView")
 	public String loginView() {
 		return "member/loginView";
@@ -61,7 +68,9 @@ public class MemberController {
 		}
 		return "member/registView";
 	}
-	
+	/*	로그인 실행
+	 * 
+	 */
 	@PostMapping("/loginDo")
 	public String loginDo(MemberDTO member, HttpSession session, boolean rememberId, HttpServletResponse resp) {
 		MemberDTO memInfo = memSvc.loginMember(member);
@@ -78,6 +87,9 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	/*	로그아웃 실행
+	 * 
+	 */
 	@RequestMapping("/logoutDo")
 	public String logoutDo(HttpSession session) {
 		session.invalidate();
