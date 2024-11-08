@@ -62,7 +62,7 @@ public class NoticeController {
 		// 세션에 담긴 회원 정보 확인
 		MemberDTO login = (MemberDTO) session.getAttribute("login");
 		
-		// 로그인 정보가 없을 경우 memId에 null 값을 설정
+		// 로그인 정보가 없을 경우 memId에 null 값을 설정 - 작업용으로 해둔 코드
 		if (login == null) {
 			notice.setMemId(null);
 		} else {
