@@ -15,6 +15,14 @@ public class SearchVO {
 	
 	private int reviewCount;		/* 리뷰 게시판 글 수 */
 	
+	private int noticeCount;
+	
+	public SearchVO(int noticeCount) {
+		super();
+		this.noticeCount = noticeCount;
+	}
+
+
 	// WHERE rnum BETWEEN start AND end
 	private int start;				/* 시작 글 번호 */
 	private int end;				/* 끝 글 번호 */
@@ -32,18 +40,29 @@ public class SearchVO {
 	
 
 	public SearchVO(String searchWord, String searchOption, int pageNo, int rowSizePerPage, int prodCount,
-			int reviewCount, int start, int end, int firstPage, int lastPage, int finalPage) {
+			int reviewCount, int noticeCount, int start, int end, int firstPage, int lastPage, int finalPage) {
 		this.searchWord = searchWord;
 		this.searchOption = searchOption;
 		this.pageNo = pageNo;
 		this.rowSizePerPage = rowSizePerPage;
 		this.prodCount = prodCount;
 		this.reviewCount = reviewCount;
+		this.noticeCount = noticeCount;
 		this.start = start;
 		this.end = end;
 		this.firstPage = firstPage;
 		this.lastPage = lastPage;
 		this.finalPage = finalPage;
+	}
+
+
+	public int getNoticeCount() {
+		return noticeCount;
+	}
+
+
+	public void setNoticeCount(int noticeCount) {
+		this.noticeCount = noticeCount;
 	}
 
 
@@ -95,14 +114,38 @@ public class SearchVO {
 		}
 		
 	}
-
+	
+	public void noticeSetting() {
+		start = rowSizePerPage * (pageNo - 1) + 1;
+		end = rowSizePerPage * pageNo;
+		
+		// 화면에 그려질 페이지넘버의 개수가 10개인 경우
+		// pageNo가  1~10 면  1~10 페이지 출력 firstPage = 1 | lastPage = 10
+		// pageNo가 11~20 면 11~20 페이지 출력 firstPage = 11 | lastPage = 20 
+		// pageNo가 21~30 면 21~30 페이지 출력 firstPage = 21 | lastPage = 30 
+		firstPage = ((pageNo - 1) / 10) * 10 + 1;
+		lastPage = firstPage + 9;
+		
+		// 전체 게시글 수가 409개가 있다
+		// 전체 페이지의 수는? 41개 (=마지막 페이지 번호)
+		// 전체 게시글수가 324개가 있다.
+		// 전체 페이지의 수는 33개 
+		// 324 / rowSizePerPage -> 32.4 -> 33 
+		finalPage = (int)Math.ceil((double)reviewCount / rowSizePerPage);
+		
+		// 계산된 lastPage가 finalPage보다 크다면 동일하게 수정
+		if(lastPage > finalPage) {
+			lastPage = finalPage;
+		}
+		
+	}
 
 	@Override
 	public String toString() {
 		return "SearchVO [searchWord=" + searchWord + ", searchOption=" + searchOption + ", pageNo=" + pageNo
 				+ ", rowSizePerPage=" + rowSizePerPage + ", prodCount=" + prodCount + ", reviewCount=" + reviewCount
-				+ ", start=" + start + ", end=" + end + ", firstPage=" + firstPage + ", lastPage=" + lastPage
-				+ ", finalPage=" + finalPage + "]";
+				+ ", noticeCount=" + noticeCount + ", start=" + start + ", end=" + end + ", firstPage=" + firstPage
+				+ ", lastPage=" + lastPage + ", finalPage=" + finalPage + "]";
 	}
 
 
@@ -214,6 +257,9 @@ public class SearchVO {
 	public void setFinalPage(int finalPage) {
 		this.finalPage = finalPage;
 	}
+
+
+
 
 	
 	
