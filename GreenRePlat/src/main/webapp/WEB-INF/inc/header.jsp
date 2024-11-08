@@ -32,11 +32,53 @@
 			<!-- Sidebar navigation-->
 			<nav class="sidebar-nav scroll-sidebar" data-simplebar="">
 				<ul id="sidebarnav">
+				
+					<li class="nav-small-cap"><i
+						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
+						class="hide-menu">우리쓰는것들</span></li>
+						<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">홈</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/registView" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">회원가입</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/loginView" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">로그인</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/productView" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">productView</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/noticeView" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">noticeView</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/reviewView" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">reviewView</span>
+					</a></li>
+					
+					
 					<li class="nav-small-cap"><i
 						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
 						class="hide-menu">Home</span></li>
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="./ui-buttons.html" aria-expanded="false">
+						href="${pageContext.request.contextPath}/" aria-expanded="false">
 							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
 									class="fs-6"></iconify-icon>
 						</span> <span class="hide-menu">Dashboard</span>
@@ -171,7 +213,7 @@
 										class="d-flex align-items-center gap-2 dropdown-item"> <i
 										class="ti ti-list-check fs-6"></i>
 										<p class="mb-0 fs-3">My Task</p>
-									</a> <a href="./authentication-login.html"
+									</a> <a href="${pageContext.request.contextPath}/logoutDo"
 										class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
 								</div>
 							</div></li>
