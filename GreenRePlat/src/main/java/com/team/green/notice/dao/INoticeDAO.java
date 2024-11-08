@@ -27,7 +27,7 @@ public interface INoticeDAO {
 	int updateNotice(NoticeDTO notice);
 	
 	// 리뷰 게시글 삭제
-	int deleteNotice(int noticeNo);
+	int noticeDeleteDo(int noticeNo);
 	
 	// 탈퇴 회원 아이디 null 값 변경
 	int noMemIdNotice(String memId);

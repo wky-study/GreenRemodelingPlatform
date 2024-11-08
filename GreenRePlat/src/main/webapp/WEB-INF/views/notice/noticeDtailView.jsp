@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%@include file="/WEB-INF/inc/header.jsp" %>
+	
+	<%@include file="/WEB-INF/inc/footer.jsp" %>
 </body>
 </html>

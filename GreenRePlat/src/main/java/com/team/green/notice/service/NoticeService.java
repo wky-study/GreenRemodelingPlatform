@@ -25,13 +25,13 @@ public class NoticeService {
 	}
 	
 	// 글 총 갯수 가져오기
-	public int getnoticeCount(SearchVO search) {
+	public int getNoticeCount(SearchVO search) {
 		int result = dao.getNoticeCount(search);
 		return result;
-	};
+	}
 	
 	// 글 한개 조회 하기
-	public NoticeDTO getnotice(int no) throws BizNotFoundException {
+	public NoticeDTO getNotice(int no) throws BizNotFoundException {
 		NoticeDTO result = dao.getnotice(no);
 		
 		if(result == null) {
@@ -39,19 +39,19 @@ public class NoticeService {
 		}
 		
 		return result;
-	};
+	}
 	
 	// 글 작성하기
 	public int writeNotice(NoticeDTO notice) {
 		int result = dao.writeNotice(notice);
 		return result;
-	};
+	}
 	
 	// 글 조회수 업데이트
 	public int noticeCountUp(int no) {
 		int result = dao.noticeCountUp(no);
 		return result;
-	};
+	}
 	
 	// 글 수정
 	public int updateNotice(NoticeDTO notice) {
@@ -61,15 +61,15 @@ public class NoticeService {
 	}
 	
 	// 글 삭제
-	public int deletenotice(int noticeNo) {
-		int result = dao.deleteNotice(noticeNo);
+	public int noticeDeleteDo(int noticeNo) {
+		int result = dao.noticeDeleteDo(noticeNo);
 		return result;
-	};
+	}
 	
-	// 탈퇴 회원 아이디 null 값 변경
+	// 탈퇴 회원 아이디 null 값 변경 - 공지사항 게시판에는 적용안할거같음
 	public int noMemIdnotice(String memId) {
 		int result = dao.noMemIdNotice(memId);
 		return result;
-	};
+	}
 
 }
