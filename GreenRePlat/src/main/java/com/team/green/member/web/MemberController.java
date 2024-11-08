@@ -38,6 +38,14 @@ public class MemberController {
 		return "member/loginView";
 	}
 
+	/*	회원수정화면으로 이동
+	 * 
+	 */
+	@RequestMapping("/settingView")
+	public String settingView() {
+		return "member/settingView";
+	}
+	
 	@PostMapping("/registDo")
 	public String registMember(HttpServletRequest req) {
 		String memName, memId, memPw, memRn, memAddress, memPhone, memNick, memType, memImg, comCeo, comBrc, comMaNm, comMaPn, memHp;
