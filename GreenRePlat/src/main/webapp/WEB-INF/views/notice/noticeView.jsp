@@ -46,7 +46,7 @@
 										<th scope="row" class="ps-0 fw-medium"><span
 											class="table-link1 text-truncate d-block">${notice.noticeNo}</span>
 										</th>
-										<td><a href="/"
+										<td><a href="${pageContext.request.contextPath }/noticeDetailView?no=${notice.noticeNo}"
 											class="link-primary text-dark fw-medium d-block">${notice.noticeTitle}</a>
 										</td>
 										<td class="text-center fw-medium">${notice.memId}(관리자)</td>

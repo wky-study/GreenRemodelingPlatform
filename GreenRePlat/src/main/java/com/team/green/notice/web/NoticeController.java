@@ -46,7 +46,7 @@ public class NoticeController {
 	    return "notice/noticeView";
 	}
 	
-	@RequestMapping("/noticeDeatilView")
+	@RequestMapping("/noticeDetailView")
 	public String noticeDetailView(int no, Model model) {
 		System.out.println("클릭한 게시글 번호" + no);
 		

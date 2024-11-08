@@ -15,7 +15,7 @@ public interface INoticeDAO {
 	int getNoticeCount(SearchVO search);
 	
 	// 리뷰 게시글 한개 조회 하기
-	NoticeDTO getnotice(int no);
+	NoticeDTO getNotice(int no);
 	
 	// 리뷰 게시글 작성하기
 	int writeNotice(NoticeDTO notice);
