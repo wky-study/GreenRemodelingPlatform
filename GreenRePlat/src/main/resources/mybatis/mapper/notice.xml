@@ -1,21 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.green.notice.dao.INoticeDAO">
+    
+    <sql id="noticeSearch">
+        <if test="searchWord != null">
+            <choose>
+                <when test="searchOption == 'title'">AND a.notice_title LIKE '%' || #{searchWord} || '%'</when>
+                <when test="searchOption == 'content'">AND a.notice_content LIKE '%' || #{searchWord} || '%'</when>
+                <when test="searchOption == 'name'">AND b.mem_name = #{searchWord} </when>
+            </choose>
+        </if>
+    </sql>
 
-	<select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">
-		SELECT
-			  a.notice_no
-			, a.notice_title
-			, a.mem_id
-			, b.mem_nick
-			, a.notice_content
-			, TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date	
-			, a.notice_count
-		FROM notice a, members b
-		WHERE 1=1
-			AND a.mem_id = b.mem_id
-			AND a.del_yn = 'N'
-	
-	</select>
-	
+    <select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">
+        SELECT
+              a.notice_no
+            , a.notice_title
+            , a.mem_id
+            , a.notice_content
+            , TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date    
+            , a.notice_count
+        FROM notice a
+        LEFT JOIN members b ON a.mem_id = b.mem_id
+        WHERE a.del_yn = 'N'
+        <include refid="noticeSearch"/>
+        ORDER BY notice_no DESC
+    </select>
+
+    <insert id="writeNotice" parameterType="com.team.green.notice.dto.NoticeDTO">
+        INSERT INTO notice (
+              notice_no
+            , notice_title
+            , mem_id
+            , notice_content
+            , notice_date
+            , del_yn
+        ) VALUES (
+              (SELECT COUNT(*)+1 FROM notice)
+            , #{noticeTitle}
+            , #{memId}
+            , #{noticeContent}
+            , SYSDATE
+            , 'N'
+        )
+    </insert>
+
+    <select id="getNoticeCount" resultType="int" parameterType="com.team.green.common.vo.SearchVO">
+        SELECT COUNT(*)
+        FROM notice a
+        LEFT JOIN members b ON a.mem_id = b.mem_id
+        WHERE a.del_yn = 'N'
+        <include refid="noticeSearch"/>
+    </select>
+
+    <update id="updateNotice" parameterType="com.team.green.notice.dto.NoticeDTO">
+        UPDATE notice 
+        SET
+              notice_title = #{noticeTitle}
+            , notice_content = #{noticeContent}
+        WHERE notice_no = #{noticeNo}
+    </update>
+
+    <update id="deleteNotice">
+        UPDATE notice
+        SET del_yn = 'Y'
+        WHERE 1=1 
+        	AND mem_id = #{memId}
+    </update>
 </mapper>
