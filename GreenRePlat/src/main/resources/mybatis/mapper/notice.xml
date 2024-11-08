@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.green.notice.dao.INoticeDAO">
-    
+ 
     <sql id="noticeSearch">
         <if test="searchWord != null">
             <choose>
@@ -12,6 +12,7 @@
         </if>
     </sql>
 
+    <!-- 글 목록 불러오기 -->
     <select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">
         SELECT
               a.notice_no
@@ -27,6 +28,7 @@
         ORDER BY notice_no DESC
     </select>
 
+    <!-- 글작성 코드 -->
     <insert id="writeNotice" parameterType="com.team.green.notice.dto.NoticeDTO">
         INSERT INTO notice (
               notice_no
@@ -44,7 +46,30 @@
             , 'N'
         )
     </insert>
+    
+    <!-- 게시글 불러오기 -->
+    <select id="getNotice" resultType="com.team.green.notice.dto.NoticeDTO" parameterType="int">
+    SELECT
+        a.notice_no,
+        a.notice_title,
+        a.mem_id,
+        a.notice_content,
+        TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date,
+        a.notice_count
+    FROM notice a
+    WHERE a.notice_no = #{no}
+	</select>
+    
+    <!-- 게시글 조회수 업데이트 -->
+    <update id="noticeCountUp" parameterType="int">
+        UPDATE notice
+        SET 
+            notice_count = notice_count + 1
+        WHERE 1=1
+            AND notice_no = #{no}
+    </update>
 
+    <!-- 게시판 총 갯수 가져오기 -->
     <select id="getNoticeCount" resultType="int" parameterType="com.team.green.common.vo.SearchVO">
         SELECT COUNT(*)
         FROM notice a
