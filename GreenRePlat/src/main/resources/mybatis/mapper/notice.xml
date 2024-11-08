@@ -61,7 +61,7 @@
         WHERE notice_no = #{noticeNo}
     </update>
 
-    <update id="deleteNotice">
+    <update id="noticeDeleteDo">
         UPDATE notice
         SET del_yn = 'Y'
         WHERE 1=1 
