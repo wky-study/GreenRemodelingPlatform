@@ -76,6 +76,11 @@ public class ReviewController {
 		
 		return review;
 	}
+	      
+	
+	
+	
+	
 	
 	@RequestMapping("/reviewWriteView")
 	public String reviewWriteView(HttpSession session) {
