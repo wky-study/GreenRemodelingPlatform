@@ -20,7 +20,7 @@
 	<%@include file="/WEB-INF/inc/header.jsp"%>
 
 	<div class="container-fluid">
-		<div class="col-lg-8">
+		<div class="col">
 			<div class="card">
 				<div class="card-body">
 					<!-- 제목과 글쓰기 버튼 -->
@@ -41,12 +41,13 @@
 								</tr>
 							</thead>
 							<tbody class="table-group-divider">
-								<c:forEach items="${keynotice}" var="notice">
+								<c:forEach items="${keyNotice}" var="notice">
 									<tr>
 										<th scope="row" class="ps-0 fw-medium"><span
 											class="table-link1 text-truncate d-block">${notice.noticeNo}</span>
 										</th>
-										<td><a href="${pageContext.request.contextPath }/noticeDetailView?no=${notice.noticeNo}"
+										<td><a
+											href="${pageContext.request.contextPath }/noticeDetailView?no=${notice.noticeNo}"
 											class="link-primary text-dark fw-medium d-block">${notice.noticeTitle}</a>
 										</td>
 										<td class="text-center fw-medium">${notice.memId}(관리자)</td>
@@ -54,15 +55,12 @@
 
 										<!-- 로그인된 사용자 ID가 글 작성자 ID와 같을 때만 삭제 버튼 표시 -->
 										<c:if test="${loggedInUserId == notice.memId}">
-											<td>
-												<form
-													action="${pageContext.request.contextPath}/noticeDeleteDo"
-													method="post">
-													<input type="hidden" name="noticeNo"
-														value="${notice.noticeNo}" />
-													<button type="submit" class="btn btn-danger btn-sm">삭제</button>
-												</form>
-											</td>
+										    <td>
+										        <form action="${pageContext.request.contextPath}/noticeDeleteDo" method="post">
+										            <input type="hidden" name="noticeNo" value="${notice.noticeNo}" />
+										            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+										        </form>
+										    </td>
 										</c:if>
 									</tr>
 								</c:forEach>
