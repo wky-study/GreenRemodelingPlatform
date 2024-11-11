@@ -34,7 +34,7 @@ public class ReplyService {
 	}
 	
 	// ¥Ò±€ ªË¡¶
-	public int deleteReply(int replyNo) {
+	public int deleteReply(String replyNo) {
 		int result = dao.deleteReply(replyNo);
 		return result;
 	}

@@ -3,6 +3,8 @@ package com.team.green.order.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import org.springframework.http.HttpHeaders;
 
+import com.team.green.member.dto.MemberDTO;
 import com.team.green.order.dto.ApproveResponseDTO;
 import com.team.green.order.dto.ReadyResponseDTO;
 
@@ -23,15 +26,14 @@ public class KakaoPayService {
     private static final Logger log = LoggerFactory.getLogger(KakaoPayService.class);
     
     // 카카오페이 결제창 연결
-    public ReadyResponseDTO payReady(String name, int totalPrice, String contextPath) {
+    public ReadyResponseDTO payReady(String name, int totalPrice, String memId, HttpSession session) {
     	
-    	System.out.println("pryReady 들어옴");
-    	System.out.println(contextPath);
+    	String partnerOrderId = (String)session.getAttribute("partnerOrderId");
     	
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");                                    // 가맹점 코드(테스트용)
-        parameters.put("partner_order_id", "1234567890");                       // 주문번호
-        parameters.put("partner_user_id", "roommake");                          // 회원 아이디
+        parameters.put("partner_order_id", partnerOrderId);                     // 주문번호 
+        parameters.put("partner_user_id", memId);                          		// 회원 아이디
         parameters.put("item_name", name);                                      // 상품명
         parameters.put("quantity", "1");                                        // 상품 수량
         parameters.put("total_amount", String.valueOf(totalPrice));             // 상품 총액
@@ -40,8 +42,6 @@ public class KakaoPayService {
         parameters.put("cancel_url", "http://localhost:9090/green/pay/cancel");      // 결제 취소 시 URL
         parameters.put("fail_url", "http://localhost:9090/green/pay/fail");          // 결제 실패 시 URL
         
-        System.out.println("pryReady 중간");
-
         // HttpEntity : HTTP 요청 또는 응답에 해당하는 Http Header와 Http Body를 포함하는 클래스
         HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
 
@@ -52,6 +52,9 @@ public class KakaoPayService {
         String url = "https://open-api.kakaopay.com/online/v1/payment/ready";
         
         System.out.println("url 요청 전" + requestEntity);
+        
+        // 주문번호를 세션에 저장
+        session.setAttribute("partnerOrderId", partnerOrderId);
         
         // RestTemplate의 postForEntity : POST 요청을 보내고 ResponseEntity로 결과를 반환받는 메소드
         ResponseEntity<ReadyResponseDTO> responseEntity = template.postForEntity(url, requestEntity, ReadyResponseDTO.class);
@@ -65,13 +68,19 @@ public class KakaoPayService {
     // 카카오페이 결제 승인
     // 사용자가 결제 수단을 선택하고 비밀번호를 입력해 결제 인증을 완료한 뒤,
     // 최종적으로 결제 완료 처리를 하는 단계
-    public ApproveResponseDTO payApprove(String tid, String pgToken) {
+    public ApproveResponseDTO payApprove(String tid, String pgToken, HttpSession session) {
     	
+        MemberDTO member = (MemberDTO)session.getAttribute("memInfo");
+        System.out.println(member);
+        String memId = member.getMemId();
+    	
+        String partnerOrderId = (String)session.getAttribute("partnerOrderId");
+        
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");              // 가맹점 코드(테스트용)
         parameters.put("tid", tid);                       // 결제 고유번호
-        parameters.put("partner_order_id", "1234567890"); // 주문번호
-        parameters.put("partner_user_id", "roommake");    // 회원 아이디
+        parameters.put("partner_order_id", partnerOrderId); // 주문번호
+        parameters.put("partner_user_id", memId);    		// 회원 아이디
         parameters.put("pg_token", pgToken);              // 결제승인 요청을 인증하는 토큰
         
         System.out.println("최종 승인 들어옴");
@@ -82,7 +91,7 @@ public class KakaoPayService {
         String url = "https://open-api.kakaopay.com/online/v1/payment/approve";
         ApproveResponseDTO approveResponse = template.postForObject(url, requestEntity, ApproveResponseDTO.class);
         log.info("결제승인 응답객체: " + approveResponse);
-
+        
         return approveResponse;
     }
     
