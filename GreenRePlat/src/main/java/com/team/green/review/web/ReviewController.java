@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.common.exception.BizNotFoundException;
 import com.team.green.common.vo.SearchVO;
+import com.team.green.member.dto.MemberDTO;
+import com.team.green.reply.dto.ReplyDTO;
+import com.team.green.reply.service.ReplyService;
 import com.team.green.review.dto.ReviewDTO;
 import com.team.green.review.service.ReviewService;
 
@@ -33,6 +36,9 @@ public class ReviewController {
 	
 	@Autowired
 	ReviewService reviewService;
+	
+	@Autowired
+	ReplyService replyService;
 
 	// 리뷰목록 페이지
 	@RequestMapping("/reviewView")
@@ -76,9 +82,9 @@ public class ReviewController {
 		
 		System.out.println(session.getAttribute("login"));
 		
-//		if(session.getAttribute("login") == null) {
-//			return "redirect:/loginView";
-//		}
+		if(session.getAttribute("login") == null) {
+			return "redirect:/loginView";
+		}
 		
 		return "review/reviewWriteView";
 	}
@@ -87,14 +93,14 @@ public class ReviewController {
 	@PostMapping("/reviewWriteDo")
 	public String reviewWriteDo(ReviewDTO review, String imgFileName, HttpSession session) {
 		
-//		MemberDTO login= (MemberDTO)session.getAttribute("login");
-//		
-//		review.setMemId(login.getMemId());
-//		review.setMemName(login.getMemName());
-//		review.setReviewPath(imgFileName);
-//		System.out.println(review);
-//		
-//		reviewService.writeReview(review);
+		MemberDTO login= (MemberDTO)session.getAttribute("login");
+		
+		review.setMemId(login.getMemId());
+		review.setMemName(login.getMemName());
+		review.setReviewPath(imgFileName);
+		System.out.println(review);
+		
+		reviewService.writeReview(review);
 
 		
 		return "redirect:reviewView";
@@ -103,8 +109,13 @@ public class ReviewController {
 	
 	// 리뷰 글 상세 페이지
 	@RequestMapping("/reviewDetailView")
-	public String reviewDetailView(int no, Model model) {
+	public String reviewDetailView(ReplyDTO reply, Model model, int no) {
+		
 		System.out.println("클릭한 게시글 번호" + no);
+		
+		reply.setReviewNo(no);
+		
+		System.out.println(reply);
 		
 		// 조회수 기능 추가 할거
 		reviewService.reviewCountUp(no);
@@ -133,14 +144,14 @@ public class ReviewController {
 		
 		model.addAttribute("keyReview", review);
 		
-//		// 댓글 목록 가져오기
-//		List<ReplyDTO> replyList = replyService.getReplyList(no);
-//		model.addAttribute("keyReplyList",replyList);	
-//		
-//		
-//		// 게시글 댓글 수 가져오기
-//		int replyCount = replyService.replyCount(no);
-//		model.addAttribute("keyReplyCount", replyCount);
+		// 댓글 목록 가져오기
+		List<ReplyDTO> replyList = replyService.getReplyList(reply);
+		model.addAttribute("keyReplyList",replyList);	
+		
+		
+		// 게시글 댓글 수 가져오기
+		int replyCount = replyService.replyCount(no);
+		model.addAttribute("keyReplyCount", replyCount);
 		
 		
 		return "review/reviewDetailView";

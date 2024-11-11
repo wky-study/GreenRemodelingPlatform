@@ -41,7 +41,7 @@
 								src="${ProductDTO.prodImageSrc}"
 								class="card-img-top" >
 							<div class="card-body">
-								<h5 class="card-title">${ProductDTO.prodModal}</h5>
+								<h5 class="card-title">${ProductDTO.prodModel}</h5>
 								<p class="card-text">${ProductDTO.prodName}</p>
 								<span class="fw-bold">${ProductDTO.prodPrice}원</span>
 							</div>

@@ -16,5 +16,7 @@ public interface IProductDAO {
 	// 글 총 갯수 가져오기
 	int getProductCount(SearchVO search);
 	
+	// 제품 한개 조회 하기
+	ProductDTO getProduct(int no);
 	
 }

@@ -4,7 +4,7 @@ public class ProductDTO {
 	
 	private int prodNo;						/*  번호 */
 	private String prodCompany;				/*  업체명 */
-	private String prodModal;				/*  모델명 */
+	private String prodModel;				/*  모델명 */
 	private String prodManufacturer;		/*  제조원 */
 	private String prodEfficiency;			/*  에너지효율등급 */
 	private String prodImageSrc;			/*  이미지경로 */
@@ -15,11 +15,11 @@ public class ProductDTO {
 	public ProductDTO() {
 	}
 
-	public ProductDTO(int prodNo, String prodCompany, String prodModal, String prodManufacturer,
-			String prodEfficiency, String prodImageSrc, String prodName, String prodPrice, String prodCategory) {
+	public ProductDTO(int prodNo, String prodCompany, String prodModel, String prodManufacturer, String prodEfficiency,
+			String prodImageSrc, String prodName, String prodPrice, String prodCategory) {
 		this.prodNo = prodNo;
 		this.prodCompany = prodCompany;
-		this.prodModal = prodModal;
+		this.prodModel = prodModel;
 		this.prodManufacturer = prodManufacturer;
 		this.prodEfficiency = prodEfficiency;
 		this.prodImageSrc = prodImageSrc;
@@ -30,7 +30,7 @@ public class ProductDTO {
 
 	@Override
 	public String toString() {
-		return "ProductDTO [prodNo=" + prodNo + ", prodCompany=" + prodCompany + ", prodModal=" + prodModal
+		return "ProductDTO [prodNo=" + prodNo + ", prodCompany=" + prodCompany + ", prodModel=" + prodModel
 				+ ", prodManufacturer=" + prodManufacturer + ", prodEfficiency=" + prodEfficiency + ", prodImageSrc="
 				+ prodImageSrc + ", prodName=" + prodName + ", prodPrice=" + prodPrice + ", prodCategory="
 				+ prodCategory + "]";
@@ -52,12 +52,12 @@ public class ProductDTO {
 		this.prodCompany = prodCompany;
 	}
 
-	public String getProdModal() {
-		return prodModal;
+	public String getProdModel() {
+		return prodModel;
 	}
 
-	public void setProdModal(String prodModal) {
-		this.prodModal = prodModal;
+	public void setProdModel(String prodModel) {
+		this.prodModel = prodModel;
 	}
 
 	public String getProdManufacturer() {
@@ -107,7 +107,6 @@ public class ProductDTO {
 	public void setProdCategory(String prodCategory) {
 		this.prodCategory = prodCategory;
 	}
-	
 	
 	
 }
