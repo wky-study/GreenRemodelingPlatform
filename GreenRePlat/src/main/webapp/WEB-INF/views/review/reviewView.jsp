@@ -77,7 +77,6 @@
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 					    	</c:if>
-			    	
 
 					    </li>
 				    

@@ -77,19 +77,21 @@
         WHERE a.del_yn = 'N'
         <include refid="noticeSearch"/>
     </select>
-
+	
+	<!-- 글 수정 -->
     <update id="updateNotice" parameterType="com.team.green.notice.dto.NoticeDTO">
         UPDATE notice 
         SET
               notice_title = #{noticeTitle}
             , notice_content = #{noticeContent}
-        WHERE notice_no = #{noticeNo}
+       WHERE 1=1
+		    AND notice_no = #{noticeNo}	
     </update>
 
-    <update id="noticeDeleteDo">
+    <update id="noticeDeleteDo" parameterType="Integer">
         UPDATE notice
         SET del_yn = 'Y'
-        WHERE 1=1 
-        	AND mem_id = #{memId}
+        WHERE 1=1
+        	AND notice_no = #{noticeNo}
     </update>
 </mapper>
