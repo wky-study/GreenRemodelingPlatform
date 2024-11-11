@@ -21,7 +21,7 @@ public interface IReplyDAO {
 	List<ReplyDTO> getReplyList(ReplyDTO reply);
 	
 	// 댓글 삭제 처리 (UPDATE)
-	int deleteReply(int replyNo);
+	int deleteReply(String replyNo);
 	
 	// 해당 게시글 댓글 개수 가져오기
 	int replyCount(int replyNo);

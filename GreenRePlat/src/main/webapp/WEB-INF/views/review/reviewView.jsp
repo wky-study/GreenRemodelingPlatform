@@ -240,7 +240,7 @@
 		<!-- 글 작성 script -->
 	<script type="text/javascript">
 	
-		let v_id = '${sessionScope.login.memId}';
+		let v_id = '${sessionScope.memInfo.memId}';
 		
 		document.getElementById("writeBtn").addEventListener("click", ()=>{
 			
