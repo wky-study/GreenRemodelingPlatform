@@ -44,6 +44,22 @@
 		<include refid="productSearch"/>
 	</select>
 	
+		<!-- 제품 한개 조회 하기 -->
+	<select id="getProduct" parameterType="int" resultType="com.team.green.product.dto.ProductDTO">
+		SELECT 
+		      prod_no
+		    , prod_name 
+		    , prod_model
+		    , prod_company
+		    , prod_manufacturer
+		    , prod_efficiency
+		    , prod_image_src
+		    , prod_price
+		    , prod_type
+		FROM product
+		WHERE 1=1
+		    AND prod_no = #{no}		
+	</select>
 
 
 
