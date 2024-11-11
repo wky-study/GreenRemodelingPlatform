@@ -20,7 +20,7 @@
 	<%@include file="/WEB-INF/inc/header.jsp"%>
 
 	<div class="container-fluid">
-		<div class="col-lg-8">
+		<div class="col">
 			<div class="card">
 				<div class="card-body">
 					<!-- 제목과 글쓰기 버튼 -->
@@ -46,7 +46,8 @@
 										<th scope="row" class="ps-0 fw-medium"><span
 											class="table-link1 text-truncate d-block">${notice.noticeNo}</span>
 										</th>
-										<td><a href="${pageContext.request.contextPath }/noticeDetailView?no=${notice.noticeNo}"
+										<td><a
+											href="${pageContext.request.contextPath }/noticeDetailView?no=${notice.noticeNo}"
 											class="link-primary text-dark fw-medium d-block">${notice.noticeTitle}</a>
 										</td>
 										<td class="text-center fw-medium">${notice.memId}(관리자)</td>
