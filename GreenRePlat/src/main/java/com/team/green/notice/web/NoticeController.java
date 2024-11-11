@@ -158,11 +158,8 @@ public class NoticeController {
 	
 	// 글 삭제
 	@PostMapping("/noticeDeleteDo")
-	public String noticeDeleteDo(@RequestParam int noticeNo) { // 'noticeNo' 파라미터를 @RequestParam으로 받음
-//	    if (noticeNo == null) {
-//	        // 'noticeNo' 파라미터가 없을 경우 처리할 코드
-//	        return "redirect:/noticeView"; // 예시: 홈으로 리디렉션
-//	    }
+	public String noticeDeleteDo(@RequestParam int noticeNo) { 
+		// 'noticeNo' 파라미터를 @RequestParam으로 받음
 	    System.out.println("삭제할 글 번호: " + noticeNo);
 
 	    noticeService.noticeDeleteDo(noticeNo);
