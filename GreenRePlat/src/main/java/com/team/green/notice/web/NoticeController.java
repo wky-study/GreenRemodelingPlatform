@@ -9,18 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team.green.common.exception.BizNotFoundException;
 import com.team.green.notice.dto.NoticeDTO;
 import com.team.green.common.vo.SearchVO;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.notice.service.NoticeService;
+import com.team.green.reply.dto.ReplyDTO;
+import com.team.green.reply.service.ReplyService;
 
 @Controller
 public class NoticeController {
 	
 	@Autowired
 	NoticeService noticeService;
+	
+	@Autowired
+	ReplyService replyService;
 	
 	@RequestMapping("/noticeView")
 	public String noticeView(Model model, SearchVO search, HttpSession session) {
@@ -34,7 +40,7 @@ public class NoticeController {
 	    System.out.println(notice);
 	    System.out.println(search);
 	    
-	    model.addAttribute("keynotice", notice);
+	    model.addAttribute("keyNotice", notice);
 	    model.addAttribute("keySearch", search);
 
 	    // 세션에 로그인된 사용자 정보가 있는 경우 ID를 모델에 추가
@@ -47,7 +53,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeDetailView")
-	public String noticeDetailView(int no, Model model) {
+	public String noticeDetailView(ReplyDTO reply, int no, Model model) {
 		System.out.println("클릭한 게시글 번호" + no);
 		
 		// 조회수 기능 추가 할거
@@ -75,22 +81,48 @@ public class NoticeController {
 		
 		System.out.println(notice);
 		
-		model.addAttribute("keynotice", notice);
+		model.addAttribute("keyNotice", notice);
 		
-//		// 댓글 목록 가져오기
-//		List<ReplyDTO> replyList = replyService.getReplyList(no);
-//		model.addAttribute("keyReplyList",replyList);	
-//		
-//		
-//		// 게시글 댓글 수 가져오기
-//		int replyCount = replyService.replyCount(no);
-//		model.addAttribute("keyReplyCount", replyCount);
+		// 댓글 목록 가져오기
+		List<ReplyDTO> replyList = replyService.getReplyList(reply);
+		model.addAttribute("keyReplyList",replyList);	
+		
+		
+		// 게시글 댓글 수 가져오기
+		int replyCount = replyService.replyCount(no);
+		model.addAttribute("keyReplyCount", replyCount);
 		
 		
 		return "notice/noticeDetailView";
 	}
-
-
+	
+	// 리뷰게시판 글 수정 화면
+		@PostMapping("/noticeEditView")
+		public String noticeEditView(int no, Model model) {
+			
+			try {
+				NoticeDTO notice = noticeService.getNotice(no);
+				model.addAttribute("keyNotice", notice);
+			} catch (BizNotFoundException e) {
+				e.printStackTrace();
+				return "errPage";
+			}
+			
+			return "notice/noticeEditView";
+		}
+		
+		// 자유게시판 글 수정 등록
+		@PostMapping("/noticeEditDo")
+		public String noticeEditDo(NoticeDTO notice) {
+			
+			System.out.println(notice);
+			
+			noticeService.updateNotice(notice);
+			
+			return "redirect:/noticeDetailView?no=" + notice.getNoticeNo();
+			
+		}
+	
 	
 	@RequestMapping("/noticeWriteView")
 	public String noticeWriteView(HttpSession session) {
@@ -126,12 +158,20 @@ public class NoticeController {
 	
 	// 글 삭제
 	@PostMapping("/noticeDeleteDo")
-	public String noticeDeleteDo(int no) {
-		
-		noticeService.noticeDeleteDo(no);
-		
-		return "redirect:/noticeView";
+	public String noticeDeleteDo(@RequestParam int noticeNo) { // 'noticeNo' 파라미터를 @RequestParam으로 받음
+//	    if (noticeNo == null) {
+//	        // 'noticeNo' 파라미터가 없을 경우 처리할 코드
+//	        return "redirect:/noticeView"; // 예시: 홈으로 리디렉션
+//	    }
+	    System.out.println("삭제할 글 번호: " + noticeNo);
+
+	    noticeService.noticeDeleteDo(noticeNo);
+
+	    return "redirect:/noticeView";
 	}
+
+
+
 	
 	
 
