@@ -38,7 +38,7 @@
 									</div>
 									<div class="mb-4">
 										<label for="exampleInputPassword1" class="form-label">비밀번호</label>
-										<input type="password" class="form-control" name = "pw"
+										<input type="password" class="form-control" name = "inputPw"
 											id="exampleInputPassword1">
 									</div>
 									<div class="mb-4">

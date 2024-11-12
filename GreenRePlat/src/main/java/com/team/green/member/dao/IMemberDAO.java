@@ -8,5 +8,6 @@ import com.team.green.member.dto.MemberDTO;
 public interface IMemberDAO {
 	int registMember(MemberDTO member);			//	회원가입
 	MemberDTO loginMember(MemberDTO member);	//	로그인
+	int updateMember(MemberDTO member);	//	회원정보수정
 
 }
