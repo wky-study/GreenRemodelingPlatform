@@ -28,4 +28,10 @@ public class ProductService {
 		return result;
 	};
 	
+	// 제품 한개 가져오기
+	public ProductDTO getProduct(int no) {
+		ProductDTO result = dao.getProduct(no);
+		return result;
+	}
+	
 }

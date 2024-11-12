@@ -1,21 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.green.notice.dao.INoticeDAO">
+ 
+    <sql id="noticeSearch">
+        <if test="searchWord != null">
+            <choose>
+                <when test="searchOption == 'title'">AND a.notice_title LIKE '%' || #{searchWord} || '%'</when>
+                <when test="searchOption == 'content'">AND a.notice_content LIKE '%' || #{searchWord} || '%'</when>
+                <when test="searchOption == 'name'">AND b.mem_name = #{searchWord} </when>
+            </choose>
+        </if>
+    </sql>
 
-	<select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">
-		SELECT
-			  a.notice_no
-			, a.notice_title
-			, a.mem_id
-			, b.mem_nick
-			, a.notice_content
-			, TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date	
-			, a.notice_count
-		FROM notice a, members b
-		WHERE 1=1
-			AND a.mem_id = b.mem_id
-			AND a.del_yn = 'N'
-	
+    <!-- 글 목록 불러오기 -->
+    <select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">
+        SELECT
+              a.notice_no
+            , a.notice_title
+            , a.mem_id
+            , a.notice_content
+            , TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date    
+            , a.notice_count
+        FROM notice a
+        LEFT JOIN members b ON a.mem_id = b.mem_id
+        WHERE a.del_yn = 'N'
+        <include refid="noticeSearch"/>
+        ORDER BY notice_no DESC
+    </select>
+
+    <!-- 글작성 코드 -->
+    <insert id="writeNotice" parameterType="com.team.green.notice.dto.NoticeDTO">
+        INSERT INTO notice (
+              notice_no
+            , notice_title
+            , mem_id
+            , notice_content
+            , notice_date
+            , del_yn
+        ) VALUES (
+              (SELECT COUNT(*)+1 FROM notice)
+            , #{noticeTitle}
+            , #{memId}
+            , #{noticeContent}
+            , SYSDATE
+            , 'N'
+        )
+    </insert>
+    
+    <!-- 게시글 불러오기 -->
+    <select id="getNotice" resultType="com.team.green.notice.dto.NoticeDTO" parameterType="int">
+    SELECT
+        a.notice_no,
+        a.notice_title,
+        a.mem_id,
+        a.notice_content,
+        TO_CHAR(a.notice_date, 'YYYY-MM-DD HH24:MI') AS notice_date,
+        a.notice_count
+    FROM notice a
+    WHERE a.notice_no = #{no}
 	</select>
+    
+    <!-- 게시글 조회수 업데이트 -->
+    <update id="noticeCountUp" parameterType="int">
+        UPDATE notice
+        SET 
+            notice_count = notice_count + 1
+        WHERE 1=1
+            AND notice_no = #{no}
+    </update>
+
+    <!-- 게시판 총 갯수 가져오기 -->
+    <select id="getNoticeCount" resultType="int" parameterType="com.team.green.common.vo.SearchVO">
+        SELECT COUNT(*)
+        FROM notice a
+        LEFT JOIN members b ON a.mem_id = b.mem_id
+        WHERE a.del_yn = 'N'
+        <include refid="noticeSearch"/>
+    </select>
 	
+	<!-- 글 수정 -->
+    <update id="updateNotice" parameterType="com.team.green.notice.dto.NoticeDTO">
+        UPDATE notice 
+        SET
+              notice_title = #{noticeTitle}
+            , notice_content = #{noticeContent}
+       WHERE 1=1
+		    AND notice_no = #{noticeNo}	
+    </update>
+
+    <update id="noticeDeleteDo" parameterType="Integer">
+        UPDATE notice
+        SET del_yn = 'Y'
+        WHERE 1=1
+        	AND notice_no = #{noticeNo}
+    </update>
 </mapper>

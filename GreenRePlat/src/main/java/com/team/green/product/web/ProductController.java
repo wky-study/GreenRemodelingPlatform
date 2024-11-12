@@ -37,5 +37,30 @@ public class ProductController {
 		
 		return "product/productView";
 	}
+    
+	// 제품 글 상세 페이지
+	@RequestMapping("/productDetailView")
+	public String reviewDetailView(Model model, int no) {
+		
+		System.out.println("클릭한 게시글 번호" + no);
+		
+		ProductDTO product = null;
+		product = productService.getProduct(no);
+		
+		System.out.println(product);
+		
+		model.addAttribute("keyProduct", product);
+		
+		
+		return "product/productDetailView";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
