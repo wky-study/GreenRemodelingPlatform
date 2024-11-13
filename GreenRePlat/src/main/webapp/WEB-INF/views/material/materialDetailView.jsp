@@ -78,8 +78,8 @@
 							<i class="far fa-check-circle text-primary me-3"></i>수량 <input
 								type="number" id="quantity" value="1" min="1"
 								onchange="updateTotalPrice(10000)"
-								style="width: 60px; margin-left: 10px;">
-								<a class="badge text-bg-light text-dark">수량을선택해주세요</a>
+								style="width: 60px; margin-left: 10px;"> <a
+								class="badge text-bg-light text-dark">수량을선택해주세요</a>
 						</h5>
 
 						<h5 class="mb-3">
@@ -88,13 +88,9 @@
 						</h5>
 
 						<!-- 구매/견적/장바구니 버튼 -->
-						<a class="btn btn-primary py-3 px-5 mt-3" href="">바로 구매하기</a> <a
-							class="btn btn-primary py-3 px-5 mt-3" href="">견적서 담기</a> <a
-							class="btn btn-primary py-3 px-5 mt-3" href="">장바구니담기</a>
+						<a class="btn btn-primary py-3 px-5 mt-3" href="">견적서 담기</a>
 					</div>
 				</div>
-
-
 
 			</div>
 		</div>
