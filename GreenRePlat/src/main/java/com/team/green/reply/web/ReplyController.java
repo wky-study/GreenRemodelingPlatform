@@ -35,12 +35,12 @@ public class ReplyController {
 
 	@ResponseBody
 	@PostMapping("/delReplyDo")
-	public String delReplyDo(int reply) {
+	public String delReplyDo(String replyNo) {
 		
-		System.out.println(reply);
+		System.out.println(replyNo);
 		String resp = "success";
 		
-		int cnt = replyService.deleteReply(reply);
+		int cnt = replyService.deleteReply(replyNo);
 		
 		
 		if(cnt == 0) {

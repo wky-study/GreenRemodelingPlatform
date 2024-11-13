@@ -6,6 +6,9 @@
 	href="${pageContext.request.contextPath}/assets/images/logos/seodashlogo.png" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/styles.min.css" />
+	
+
+
 
 
 <!--  Body Wrapper -->
@@ -177,46 +180,129 @@
 						class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
 						href="javascript:void(0)"> <i class="ti ti-menu-2"></i>
 					</a></li>
-					<li class="nav-item"><a class="nav-link nav-icon-hover"
-						href="javascript:void(0)"> <i class="ti ti-bell-ringing"></i>
-							<div class="notification bg-primary rounded-circle"></div>
-					</a></li>
+					
 				</ul>
 				<div class="navbar-collapse justify-content-end px-0" id="navbarNav">
 					<ul
 						class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-						<a href="#" target="_blank" class="btn btn-primary me-2"><span
-							class="d-none d-md-block">Check Pro Version</span> <span
-							class="d-block d-md-none">Pro</span></a>
-						<a href="#" target="_blank" class="btn btn-success"><span
-							class="d-none d-md-block">Download Free </span> <span
-							class="d-block d-md-none">Free</span></a>
-						<li class="nav-item dropdown"><a
-							class="nav-link nav-icon-hover" href="javascript:void(0)"
-							id="drop2" data-bs-toggle="dropdown" aria-expanded="false"> <img
-								src="${pageContext.request.contextPath}/assets/images/profile/user-1.jpg"
-								alt="" width="35" height="35" class="rounded-circle">
-						</a>
-							<div
-								class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
-								aria-labelledby="drop2">
-								<div class="message-body">
-									<a href="javascript:void(0)"
-										class="d-flex align-items-center gap-2 dropdown-item"> <i
-										class="ti ti-user fs-6"></i>
-										<p class="mb-0 fs-3">My Profile</p>
-									</a> <a href="javascript:void(0)"
-										class="d-flex align-items-center gap-2 dropdown-item"> <i
-										class="ti ti-mail fs-6"></i>
-										<p class="mb-0 fs-3">My Account</p>
-									</a> <a href="javascript:void(0)"
-										class="d-flex align-items-center gap-2 dropdown-item"> <i
-										class="ti ti-list-check fs-6"></i>
-										<p class="mb-0 fs-3">My Task</p>
-									</a> <a href="${pageContext.request.contextPath}/logoutDo"
-										class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-								</div>
-							</div></li>
+						
+						<li class="nav-item dropdown nav-icon-hover-bg rounded-circle">
+                <a class="nav-link position-relative" href="javascript:void(0)" id="drop3" aria-expanded="false">
+                  <iconify-icon icon="solar:widget-add-bold-duotone" class="fs-6"></iconify-icon>
+                </a>
+                <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up pb-0"
+                  aria-labelledby="drop3">
+                  <!--  Shortcuts -->
+                  <div class="d-flex align-items-center py-3 px-7 gap-6">
+                    <h3 class="mb-0 fs-5">Shortcuts</h3>
+                  </div>
+
+                  <div class="row gx-0">
+                    <div class="col-6">
+                      <a href="${pageContext.request.contextPath}/main/app-calendar.html"
+                        class="dropdown-item px-7 py-6 d-flex flex-column gap-2 border-top border-end justify-content-center text-center">
+                        <div
+                          class="bg-success-subtle rounded-3 m-auto round d-flex align-items-center justify-content-center">
+                          <iconify-icon icon="solar:calendar-mark-bold-duotone"
+                            class="fs-7 text-success"></iconify-icon>
+                        </div>
+                        <h6 class="mb-0">Calendar</h6>
+                        <span class="d-block text-body-color fs-11">Get dates</span>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="${pageContext.request.contextPath}/main/app-invoice.html"
+                        class="dropdown-item px-7 border-top py-6 d-flex flex-column gap-2 justify-content-center text-center">
+                        <div
+                          class="bg-secondary-subtle rounded-3 m-auto round d-flex align-items-center justify-content-center">
+                          <iconify-icon icon="solar:checklist-minimalistic-bold-duotone"
+                            class="fs-7 text-secondary"></iconify-icon>
+                        </div>
+
+                        <h6 class="mb-0">Invoice</h6>
+                        <span class="d-block text-body-color fs-11">Get latest invoice</span>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="${pageContext.request.contextPath}/main/app-kanban.html"
+                        class="dropdown-item px-7 border-top border-bottom border-end py-6 d-flex flex-column gap-2 justify-content-center text-center">
+                        <div
+                          class="bg-primary-subtle rounded-3 m-auto round d-flex align-items-center justify-content-center">
+                          <iconify-icon icon="solar:chat-square-call-bold-duotone"
+                            class="fs-7 text-primary"></iconify-icon>
+                        </div>
+                        <h6 class="mb-0">To-Do</h6>
+                        <span class="d-block text-body-color fs-11">New Tasks</span>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="${pageContext.request.contextPath}/main/app-chat.html"
+                        class="dropdown-item px-7 border-top border-bottom py-6 d-flex flex-column gap-2 justify-content-center text-center">
+                        <div
+                          class="bg-danger-subtle rounded-3 m-auto round d-flex align-items-center justify-content-center">
+                          <iconify-icon icon="solar:chat-square-call-bold-duotone"
+                            class="fs-7 text-danger"></iconify-icon>
+                        </div>
+                        <h6 class="mb-0">Chat</h6>
+                        <span class="d-block text-body-color fs-11">New messages</span>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="${pageContext.request.contextPath}/main/app-notes.html"
+                        class="dropdown-item px-7 border-end py-6 d-flex flex-column gap-2 justify-content-center text-center">
+                        <div
+                          class="bg-info-subtle rounded-3 m-auto round d-flex align-items-center justify-content-center">
+                          <iconify-icon icon="solar:phone-calling-rounded-bold-duotone"
+                            class="fs-7 text-info"></iconify-icon>
+                        </div>
+                        <h6 class="mb-0">Notes</h6>
+                        <span class="d-block text-body-color fs-11">2 New Notes</span>
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="${pageContext.request.contextPath}/main/blog-posts.html"
+                        class="dropdown-item px-7 py-6 d-flex flex-column gap-2 justify-content-center text-center">
+                        <div
+                          class="bg-warning-subtle rounded-3 m-auto round d-flex align-items-center justify-content-center">
+                          <iconify-icon icon="solar:shield-user-bold-duotone" class="fs-7 text-warning"></iconify-icon>
+                        </div>
+                        <h6 class="mb-0">Blog</h6>
+                        <span class="d-block text-body-color fs-11">More information</span>
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                  </svg> </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-user fs-6"></i>
+                      <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-mail fs-6"></i>
+                      <p class="mb-0 fs-3">My Account</p>
+                    </a>
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-list-check fs-6"></i>
+                      <p class="mb-0 fs-3">My Task</p>
+                    </a>
+                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                  </div>
+                </div>
+              </li>
 					</ul>
 				</div>
 			</nav>

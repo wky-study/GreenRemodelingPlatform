@@ -98,19 +98,31 @@
 	
 	let v_name = "${keyProduct.prodName}";
 	let v_price = "${keyProduct.prodPrice}";
+	let v_memId = "${sessionScope.memInfo.memId}";
 	v_price = parseInt(v_price.replace(/,/g, ''));
 	
 	console.log(v_price);
 	
+
+	
      // 카카오페이 결제 팝업창 연결
     $(function() {
         $("#payBtn").click(function(e) {
+        	
+        	let v_orderNo = 'ORD' + new Date().getTime(); // 예: 'ORD' + 현재 시간(ms)
             // 아래 데이터 외에도 필요한 데이터를 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨
             let data = {
                 name: v_name,    // 카카오페이에 보낼 대표 상품명
-                totalPrice: v_price // 총 결제금액
+                totalPrice: v_price,  // 총 결제금액
+                memId: v_memId,
+                partnerOrderId: v_orderNo
             };
           
+        	if(!v_memId){
+        		alert("로그인 후 이용해주세요.");
+        		location.href = '${pageContext.request.contextPath}/loginView'
+        	}
+            
             $.ajax({
                 type: 'POST',
                 url: '${pageContext.request.contextPath}/pay/ready',

@@ -55,7 +55,6 @@
 		    AND a.mem_id = b.mem_id
 		    AND a.del_yn = 'N'
 		    AND a.review_no = #{reviewNo}
-		    AND a.table_name = #{tableName}
 		    ORDER BY a.reply_date ASC
 	</select>
 	
