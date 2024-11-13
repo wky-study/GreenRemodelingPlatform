@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 		</div>
+	</div>
+		
+		<!-- 사이드바 js -->
 		<script
 			src="${pageContext.request.contextPath}/assets/libs/jquery/dist/jquery.min.js"></script>
 		<script
@@ -35,4 +38,3 @@
 	        });
 	      });
 		</script>
-	</div>
