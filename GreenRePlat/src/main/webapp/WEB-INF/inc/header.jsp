@@ -39,6 +39,9 @@
 					<li class="nav-small-cap"><i
 						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
 						class="hide-menu">우리쓰는것들</span></li>
+						
+					<!-- 우리메뉴 시작 -->
+						
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/" aria-expanded="false">
 							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
@@ -87,6 +90,46 @@
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
 						</span> <span class="hide-menu">장바구니</span>
 					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/settingView"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">회원수정</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/createEstimation"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">견적서 첫페이지</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/goEst2"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">견적서 2페이지</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/goEst3"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">견적서 3페이지</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/goEst4"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">견적서 4페이지</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/goEstFinal"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">견적서 마지막</span>
+					</a></li>
+										
+					<!-- 여기까지 우리메뉴 -->
+					
+					
 					<li class="nav-small-cap"><i
 						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
 						class="hide-menu">Home</span></li>
