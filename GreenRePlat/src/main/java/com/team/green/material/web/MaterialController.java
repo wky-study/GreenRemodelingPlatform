@@ -20,10 +20,10 @@ import com.team.green.material.service.MaterialService;
 public class MaterialController {
 	
 	/*자재목록페이지*/
-    @RequestMapping("/materialListView")
+    @RequestMapping("/materialView")
 	public String materialListView() {
 		
-		return "material/materialListView";
+		return "material/materialView";
 	}
 	
     /*자재상세페이지*/

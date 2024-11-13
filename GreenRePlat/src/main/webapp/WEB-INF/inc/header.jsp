@@ -79,6 +79,12 @@
 						</span> <span class="hide-menu">reviewView</span>
 					</a></li>
 					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/materialView"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">materialView</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/planView" aria-expanded="false">
 							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
 									class="fs-6"></iconify-icon>
