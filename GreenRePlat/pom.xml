@@ -15,17 +15,6 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	
-	<!-- spire pdf 용 라이브러리 -->
-	<repositories>
-		<!-- spire repository -->
-		<repository>
-			<id>com.e-iceblue</id>
-			<name>e-iceblue</name>
-			<url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>
-		</repository>
-	</repositories>	
-	
-	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -180,13 +169,6 @@
 			<version>5.3.0</version>
 		</dependency>
 		
-		<!-- spire pdf -->
-		<dependency>
-			<groupId>e-iceblue</groupId>
-			<artifactId>spire.pdf.free</artifactId>
-			<version>9.12.3</version>
-		</dependency>
-
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
