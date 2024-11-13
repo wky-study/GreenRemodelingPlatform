@@ -50,7 +50,7 @@
 					</div>
 					<div class="d-flex justify-content-end">
 						<c:if
-							test="${ sessionScope.login.memId == keyReview.memId && sessionScope.login.memId != null}">
+							test="${ sessionScope.memInfo.memId == keyReview.memId && sessionScope.memInfo.memId != null}">
 							<form action="${pageContext.request.contextPath }/reviewEditView"
 								method="POST">
 								<input type="hidden" value="${keyReview.reviewNo}" name="no">
@@ -59,7 +59,7 @@
 						</c:if>
 
 						<c:if
-							test="${ sessionScope.login.memId == keyReview.memId && sessionScope.login.memId != null || sessionScope.login.memAdmin == '0'}">
+							test="${ sessionScope.memInfo.memId == keyReview.memId && sessionScope.memInfo.memId != null}">
 							<form id="delForm"
 								action="${pageContext.request.contextPath }/reviewDeleteDo"
 								method="POST">
@@ -103,7 +103,7 @@
 							<form id="replyForm" class="row"
 								action="${pageContext.request.contextPath }/replyWriteDo"
 								method="POST">
-								<input type="hidden" name="memId" value="${sessionScope.login.memId }">
+								<input type="hidden" name="memId" value="${sessionScope.memInfo.memId }">
 								<input type="hidden" name="reviewNo" value="${keyReview.reviewNo }">
 								<div class="col-10">
 									<input id="replyInput" class="form-control" type="text" name="replyContent">
@@ -125,7 +125,7 @@
 									</div>
 									<div class="col-9">
 										<div>
-											<h4>${replyDTO.memName }</h4>
+											<h4>${replyDTO.memId }</h4>
 										</div>
 										<div>
 											<span>${replyDTO.replyContent }</span>
@@ -133,8 +133,7 @@
 
 										<div class="d-flex ">
 											<div>
-												<span class="my-span">${replyDTO.replyDate }</span> <span
-													id="" class="my-span">답글달기</span>
+												<span class="my-span">${replyDTO.replyDate }</span>
 											</div>
 										</div>
 									</div>
@@ -142,7 +141,7 @@
 									<div class="col-1"></div>
 
 									<c:if
-										test="${sessionScope.login.memId == replyDTO.memId && sessionScope.login.memId != null}">
+										test="${sessionScope.memInfo.memId == replyDTO.memId && sessionScope.memInfo.memId != null}">
 										<div class="col-1">
 											<span class="my-span" onclick="f_delete()">삭제</span>
 										</div>
@@ -173,14 +172,9 @@
 
 
 	<script type="text/javascript">
-		// 페이지 벗어나기 직전에 스크롤을 최상단에 올리는 코드 넣기
-		window.onload = function() {
-			setTimeout(function() {
-				scrollTo(0, 0);
-			}, 100);
-		};
+
+	let v_name = '${sessionScope.memInfo.memId}';
 		
-		let v_name = '${sessionScope.login.memName}';
 		/* 댓글 입력 창 클릭 이벤트 */
 		document.getElementById("replyInput").addEventListener("click", ()=>{
 			
@@ -234,20 +228,19 @@
 				v_reply += '<input type="hidden" value="' + resp['replyNo'] + '">';
 				v_reply += '<div class="col-1"><img class="my-profile-img" src="${pageContext.request.contextPath }/resources/images/profileImg.jpg"> </div>';
 				v_reply += ' <div class="col-9">';
-				v_reply += " <div><h4> " + resp['memName'] + "</h4></div>" ;
+				v_reply += " <div><h4> " + resp['memId'] + "</h4></div>" ;
 				v_reply += "<div><span>" + resp['replyContent'] + "</span></div>";
 				v_reply += '<div class="d-flex ">';
 				v_reply += ' <div>'; 
 				v_reply += '<span class="my-span">' + resp["replyDate"] + '</span>'; 
-				v_reply += '<span id="" class="my-span">답글달기</span>'; 
 				v_reply += '</div>'; 
 				v_reply += '</div>'; 
 				v_reply += '</div>'; 
 				v_reply += '<div class="col-1"></div>'; 
 				
-				console.log("${sessionScope.login.memId}");
+				console.log("${sessionScope.memInfo.memId}");
 				
-				let v_memId = "${sessionScope.login.memId}";
+				let v_memId = "${sessionScope.memInfo.memId}";
 				
 				if(v_memId){
 					v_reply += '<div class="col-1">';
@@ -280,6 +273,7 @@
 			let v_parent = event.target.parentElement.parentElement;
 			
 			let v_replyNo = event.target.parentElement.parentElement.children[0].value;
+			console.log('번호 '+ v_replyNo);
 			
 			// AJAX 통신으로 해당 replyNo에 대한 UPDATE문 실행
 			let v_ajax = new XMLHttpRequest();
@@ -302,7 +296,7 @@
 				}
 				
 			}
-			
+			console.log(v_data);
 			// send 시 데이터를 보낸다.
 			v_ajax.send(v_data);
 			//event.target.parentElement.parentElement.remove();

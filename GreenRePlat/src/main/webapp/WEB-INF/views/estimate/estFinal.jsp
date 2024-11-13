@@ -6,15 +6,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지</title>
-
+<title>견적서 입력</title>
 </head>
 
 <body>
-
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 	<!--  Header End -->
-	<!-- Layout wrapper -->
 
 	<!-- Content wrapper -->
 	<div class="container-fluid">
@@ -68,8 +65,10 @@
 								action="${pageContext.request.contextPath}/updateAccount"
 								method="POST">
 								<div class="row">
-									<input name="memId" value="${sessionScope.memInfo.memId}"
-										/ hidden>
+									<div class="mb-3 col-md-6">
+										<input class="form-control" type="hidden" id="firstName"
+											name="memId" value="${sessionScope.memInfo.memId}" />
+									</div>
 									<div class="mb-3 col-md-6">
 										<label for="firstName" class="form-label">비밀번호</label> <input
 											class="form-control" type="password" id="firstName"
@@ -143,10 +142,9 @@
 										</select>
 									</div>
 								</div>
-								<div class="mt-2 d-flex justify-content-end">
+								<div class="mt-2">
 									<button type="submit" class="btn btn-primary me-2">회원정보
 										수정</button>
-									<button type="reset" class="btn me-2 btn-outline-secondary">초기화</button>
 									<button type="reset" class="btn btn-outline-secondary">취소</button>
 								</div>
 							</form>

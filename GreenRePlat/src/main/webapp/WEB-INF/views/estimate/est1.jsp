@@ -6,36 +6,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지</title>
-
+<title>견적서 입력</title>
 </head>
 
 <body>
-
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 	<!--  Header End -->
-	<!-- Layout wrapper -->
 
 	<!-- Content wrapper -->
 	<div class="container-fluid">
 		<!-- Content -->
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">설정 /</span> 회원정보
+				<span class="text-muted fw-light">견적서 생성 /</span> 기본정보 입력
 			</h4>
 			<div class="row">
 				<div class="col-md-12">
-					<ul class="nav nav-pills flex-column flex-md-row mb-3">
-						<li class="nav-item"><a class="nav-link active"
-							href="javascript:void(0);"><i class="bx bx-user me-1"></i>
-								회원정보</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="pages-account-settings-notifications.html"><i
-								class="bx bx-bell me-1"></i> 마이 프로젝트</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="pages-account-settings-connections.html"><i
-								class="bx bx-link-alt me-1"></i> 주문 내역</a></li>
-					</ul>
+					<%@ include file="/WEB-INF/inc/estmenu.jsp"%>
 					<div class="card mb-4">
 						<h5 class="card-header">프로필 이미지</h5>
 						<!-- Account -->
@@ -68,8 +55,10 @@
 								action="${pageContext.request.contextPath}/updateAccount"
 								method="POST">
 								<div class="row">
-									<input name="memId" value="${sessionScope.memInfo.memId}"
-										/ hidden>
+									<div class="mb-3 col-md-6">
+										<input class="form-control" type="hidden" id="firstName"
+											name="memId" value="${sessionScope.memInfo.memId}" />
+									</div>
 									<div class="mb-3 col-md-6">
 										<label for="firstName" class="form-label">비밀번호</label> <input
 											class="form-control" type="password" id="firstName"
@@ -144,36 +133,12 @@
 									</div>
 								</div>
 								<div class="mt-2 d-flex justify-content-end">
-									<button type="submit" class="btn btn-primary me-2">회원정보
-										수정</button>
-									<button type="reset" class="btn me-2 btn-outline-secondary">초기화</button>
-									<button type="reset" class="btn btn-outline-secondary">취소</button>
+									<button type="submit" class="btn btn-primary me-2">임시저장</button>
+									<button type="submit" class="btn btn-primary me-2">다음 단계로</button>
 								</div>
 							</form>
 						</div>
 						<!-- /Account -->
-					</div>
-					<div class="card">
-						<h5 class="card-header">회원 탈퇴</h5>
-						<div class="card-body">
-							<div class="mb-3 col-12 mb-0">
-								<div class="alert alert-warning">
-									<h6 class="alert-heading fw-bold mb-1">정말 탈퇴하시겠습니까?</h6>
-									<p class="mb-0">탈퇴시 정보가 복구되지 않습니다</p>
-								</div>
-							</div>
-							<form id="formAccountDeactivation" action="" method="POST"
-								onsubmit="return false">
-								<div class="form-check mb-3">
-									<input class="form-check-input" type="checkbox"
-										name="accountActivation" id="accountActivation" /> <label
-										class="form-check-label" for="accountActivation">회원
-										탈퇴에 동의합니다</label>
-								</div>
-								<button type="submit" class="btn btn-danger deactivate-account">회원
-									탈퇴</button>
-							</form>
-						</div>
 					</div>
 				</div>
 			</div>

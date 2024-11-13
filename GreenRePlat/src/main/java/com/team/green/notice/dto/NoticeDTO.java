@@ -48,10 +48,10 @@ public class NoticeDTO {
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
-	public String getNoticewContent() {
+	public String getNoticeContent() {
 		return noticeContent;
 	}
-	public void setNoticewContent(String noticewContent) {
+	public void setNoticeContent(String noticewContent) {
 		this.noticeContent = noticewContent;
 	}
 	public String getNoticeDate() {
