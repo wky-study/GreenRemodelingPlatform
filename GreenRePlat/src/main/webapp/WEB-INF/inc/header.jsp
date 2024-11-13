@@ -76,6 +76,13 @@
 						</span> <span class="hide-menu">reviewView</span>
 					</a></li>
 					
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/planView" aria-expanded="false">
+							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
+									class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">planView</span>
+					</a></li>
+					
 					
 					<li class="nav-small-cap"><i
 						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
