@@ -10,49 +10,20 @@
 <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
 
 
-  <style>
-    .fc .fc-toolbar {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-    }
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/libs/simplebar/dist/simplebar.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css" />
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
 
-    .fc .fc-button-group {
-      display: inline-flex;
-      position: relative;
-      vertical-align: middle;
-    }
+<style>
+  .fc .fc-daygrid-day-frame:hover {
+    cursor: pointer;
+  }
+  .body-wrapper {
+  padding: 0px;
+  }
 
-    .calendar-day {
-      flex: 0 0 14.28%;
-      height: 200px;
-      font-size: larger;
-      margin: 0;
-      padding: 4px;
-      cursor: pointer;
 
-    }
-
-    .calendar-day:hover {
-      background-color: #d0d5d8;
-      color: rgba(255, 255, 255, 0.788);
-      border-left: 2px solid white;
-      
-    }
-
-    .calendar-head {
-      flex: 0 0 14.28%;
-      height: 56px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #4c5f6470;
-      color: #242c33;
-      border-left: 2px solid white;
-
-    }
-  </style>
-
+</style>
 </head>
 
 <body>
@@ -61,22 +32,22 @@
 
 	<!--  Header End -->
 	
-	      <!-- calendar overview -->
-      <div class="container-fluid">
-      </div>
-      <div class="card-body calender-sidebar app-calendar">
-        <div id="calendar" class="fc fc-media-screen fc-direction-ltr fc-theme-standard" style="height: 1052px;">
-          <div class="fc-header-toolbar fc-toolbar fc-toolbar-ltr" style="padding: 30px 70px 30px 70px;">
-      
+      <!-- calendar overview -->
+
+      <div class="card-body calender-sidebar app-calendar" style="padding: 100px 200px 30px 150px;" >
+        <div id="calendar" class="fc fc-media-screen fc-direction-ltr fc-theme-standard" style="height: 1052px; ">
+          <div class="fc-header-toolbar fc-toolbar fc-toolbar-ltr" style="">
+
             <div class="fc-toolbar-chunk">
-      
-      
-              <button type="button" title="Add Event" aria-pressed="false" class="btn btn-primary m-1">Add
+
+
+              <button type="button" title="Add Event" aria-pressed="false" class="btn btn-primary m-1" id="addEvent">Add
                 Event</button>
             </div>
-      
+
             <div class="fc-toolbar-chunk" style="display: flex; justify-content: center; align-items: center;">
-              <button type="button" id="prevMonth" title="Previous month" aria-pressed="false" class="btn btn-light m-1">
+              <button type="button" id="prevMonth" title="Previous month" aria-pressed="false"
+                class="btn btn-light m-1">
                 <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
@@ -84,9 +55,9 @@
                     <path d="M15 6l-6 6l6 6"></path>
                   </svg></span>
               </button>
-      
-              <h2 class="fc-toolbar-title" style="margin: 0px; padding: 10px;" id="calendarMonth"></h2>
-      
+
+              <h2 class="fc-toolbar-title" id="calendarMonth"></h2>
+
               <button type="button" id="nextMonth" title="Next month" aria-pressed="false" class="btn btn-light m-1">
                 <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -96,7 +67,7 @@
                   </svg></span>
               </button>
             </div>
-      
+
             <div class="fc-toolbar-chunk">
               <div class="fc-button-group">
                 <button type="button" title="month view" aria-pressed="true" class="btn btn-dark m-1">month</button>
@@ -105,70 +76,104 @@
               </div>
             </div>
           </div>
-          <div class="fc-dayGridMonth-view fc-view fc-daygrid" style="padding: 30px 70px 30px 70px;">
+          <div class="fc-dayGridMonth-view fc-view fc-daygrid" >
             <div class="d-flex justify-content-between">
-              <div class="calendar-head">Sun</div>
-              <div class="calendar-head">Mon</div>
-              <div class="calendar-head">Tue</div>
-              <div class="calendar-head">Wed</div>
-              <div class="calendar-head">Thu</div>
-              <div class="calendar-head">Fri</div>
-              <div class="calendar-head">Sat</div>
             </div>
             <div id="calendarDates" class="d-flex flex-wrap">
               <!-- Dates will be injected here -->
+
             </div>
           </div>
         </div>
-      
+
+      </div>
+
+
+      <!-- BEGIN MODAL -->
+      <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="eventModalLabel">Add / Edit Event</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <!-- Event Title Input -->
+                <div class="col-md-12">
+                  <label class="form-label" for="event-title">Event Title</label>
+                  <input id="event-title" type="text" class="form-control" placeholder="Enter event title" />
+                </div>
+
+                <!-- Event Color Selection -->
+                <div class="col-md-12 mt-4">
+                  <label class="form-label">Event Color</label>
+                  <div class="d-flex">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="event-level" value="Danger" id="modalDanger" />
+                      <label class="form-check-label" for="modalDanger">Danger</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="event-level" value="Success"
+                        id="modalSuccess" />
+                      <label class="form-check-label" for="modalSuccess">Success</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="event-level" value="Primary"
+                        id="modalPrimary" />
+                      <label class="form-check-label" for="modalPrimary">Primary</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="event-level" value="Warning"
+                        id="modalWarning" />
+                      <label class="form-check-label" for="modalWarning">Warning</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Event Start Date -->
+                <div class="col-md-6 mt-4">
+                  <label class="form-label" for="event-start-date">Enter Start Date</label>
+                  <input id="event-start-date" type="date" class="form-control" />
+                </div>
+
+                <!-- Event End Date -->
+                <div class="col-md-6 mt-4">
+                  <label class="form-label" for="event-end-date">Enter End Date</label>
+                  <input id="event-end-date" type="date" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- Close Button -->
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+              <!-- Update Event Button -->
+              <button type="button" class="btn btn-warning btn-update-event" data-fc-event-public-id="">
+                Update changes
+              </button>
+
+              <!-- Add Event Button -->
+              <button type="button" class="btn btn-success btn-add-event">
+                Add Event
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL -->
+        </div>
       </div>
 
 
 <%@ include file="/WEB-INF/inc/footer.jsp" %>
 
-<script>
-const calendarDates = document.getElementById('calendarDates');
-const calendarMonth = document.getElementById('calendarMonth');
-let currentDate = new Date();
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/js/apps/calendar-init.js"></script>
 
-function renderCalendar(date) {
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const firstDayOfMonth = new Date(year, month, 1).getDay();
-  const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
-
-  calendarMonth.innerText = date.toLocaleString('default', { month: 'long' }) + year;
-  calendarDates.innerHTML = '';
-
-  for (let i = 0; i < firstDayOfMonth; i++) {
-    calendarDates.innerHTML += '<div class="calendar-day"></div>';
-  }
-
-  for (let i = 1; i <= lastDateOfMonth; i++) {
-    const day = document.createElement('div');
-    day.classList.add('calendar-day');
-    day.textContent = i;
-    day.addEventListener('click', function () {
-      document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
-      day.classList.add('selected');
-      alert(`Selected Date: ${year}-${month + 1}-${i}`);
-    });
-    calendarDates.appendChild(day);
-  }
-}
-
-document.getElementById('prevMonth').addEventListener('click', function () {
-  currentDate.setMonth(currentDate.getMonth() - 1);
-  renderCalendar(currentDate);
-});
-
-document.getElementById('nextMonth').addEventListener('click', function () {
-  currentDate.setMonth(currentDate.getMonth() + 1);
-  renderCalendar(currentDate);
-});
-
-renderCalendar(currentDate);
-</script>
 
 </body>
 
