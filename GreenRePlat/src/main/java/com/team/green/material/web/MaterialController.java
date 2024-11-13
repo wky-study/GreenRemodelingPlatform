@@ -20,10 +20,10 @@ import com.team.green.material.service.MaterialService;
 public class MaterialController {
 	
 	
-    @RequestMapping("/materialView")
+    @RequestMapping("/materialDetailView")
 	public String materialView() {
 		
-		return "material/materialView";
+		return "material/materialDetailView";
 	}
 	
 }
