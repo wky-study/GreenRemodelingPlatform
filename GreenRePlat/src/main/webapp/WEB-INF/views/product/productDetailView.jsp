@@ -76,7 +76,7 @@
 								<h4>가격 : ${keyProduct.prodPrice}</h4>
 							</div>
 							<div class="d-flex">
-								<button class="btn btn-outline-dark py-3 px-5 mt-3 me-3" >장바구니</button>
+								<button class="btn btn-outline-dark py-3 px-5 mt-3 me-3" id="cartBtn" >장바구니</button>
 								<button class="btn btn-dark py-3 px-5 mt-3" id="payBtn" >구매하기</button>
 							</div>
 						</div>
@@ -111,17 +111,19 @@
         	
         	let v_orderNo = 'ORD' + new Date().getTime(); // 예: 'ORD' + 현재 시간(ms)
             // 아래 데이터 외에도 필요한 데이터를 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨
-            let data = {
+            let data = [{
                 name: v_name,    // 카카오페이에 보낼 대표 상품명
                 totalPrice: v_price,  // 총 결제금액
                 memId: v_memId,
                 partnerOrderId: v_orderNo
-            };
+            }];
           
         	if(!v_memId){
         		alert("로그인 후 이용해주세요.");
         		location.href = '${pageContext.request.contextPath}/loginView'
         	}
+        	
+        	console.log(data);
             
             $.ajax({
                 type: 'POST',
@@ -136,13 +138,48 @@
         });
     }); 
 	
-    function onPaymentComplete() {
-        alert("결제가 완료되었습니다.");
-        
-        location.href = '${pageContext.request.contextPath}/paymentDone';
-    }
     
      
+    // 장바구니 버튼 클릭시 
+    document.getElementById("cartBtn").addEventListener("click", ()=>{
+    	
+    	if(!v_memId){
+    		alert("로그인 후 이용해주세요.");
+    		location.href = '${pageContext.request.contextPath}/loginView'
+    	}else{
+    		alert("장바구니에 담겼습니다.");
+    		
+    		let v_prodNo = "${keyProduct.prodNo}";
+    		
+    		let v_quantity = 1; 
+    		
+            // 장바구니 정보 설정
+            const cartData = {
+                memId: v_memId, // 사용자 아이디 (로그인된 사용자 ID)
+                prodNo: v_prodNo, // 상품 번호
+                quantity: v_quantity // 상품 수량
+            };
+    		
+            let v_url = '${pageContext.request.contextPath}/addToCart';
+            
+    		$.ajax({
+    			type : "POST",
+    			url : v_url,
+    			data : cartData,
+    			success : function(resp){
+    				console.log(resp);	  //JSON 객체 (jQuery에서 자동으로 parse 해줌)
+    			}
+    		});
+    		
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    })
      
 	
 	</script>
