@@ -46,7 +46,8 @@
 									id="uploadedAvatar" />
 								<div class="button-wrapper">
 									<label for="upload" class="btn btn-primary me-2 mb-4"
-										tabindex="0"> <span class="d-none d-sm-block">업로드</span> <i class="bx bx-upload d-block d-sm-none"></i> <input
+										tabindex="0"> <span class="d-none d-sm-block">업로드</span>
+										<i class="bx bx-upload d-block d-sm-none"></i> <input
 										type="file" id="upload" class="account-file-input" hidden
 										accept="image/png, image/jpeg" />
 									</label>
@@ -56,19 +57,25 @@
 											class="d-none d-sm-block">초기화</span>
 									</button>
 
-									<p class="text-muted mb-0">800KB 이하의 JPG, GIF 또는 PNG 파일만 가능합니다</p>
+									<p class="text-muted mb-0">800KB 이하의 JPG, GIF 또는 PNG 파일만
+										가능합니다</p>
 								</div>
 							</div>
 						</div>
 						<hr class="my-0" />
 						<div class="card-body">
-							<form id="formAccountSettings" action = "" method="POST"
-								onsubmit="return false">
+							<form id="formAccountSettings"
+								action="${pageContext.request.contextPath}/updateAccount"
+								method="POST">
 								<div class="row">
+									<div class="mb-3 col-md-6"><input
+											class="form-control" type="hidden" id="firstName"
+											name="memId"value="${sessionScope.memInfo.memId}"/>
+									</div>
 									<div class="mb-3 col-md-6">
 										<label for="firstName" class="form-label">비밀번호</label> <input
 											class="form-control" type="password" id="firstName"
-											name="firstName" value="John" autofocus />
+											name="memPw" value="John" autofocus />
 									</div>
 									<div class="mb-3 col-md-6">
 										<label for="lastName" class="form-label">비밀번호 확인</label> <input
@@ -82,15 +89,15 @@
 											placeholder="john.doe@example.com" />
 									</div>
 									<div class="mb-3 col-md-6">
-										<label for="organization" class="form-label">닉네임</label>
-										<input type="text" class="form-control" id="organization"
-											name="organization" value="ThemeSelection" />
+										<label for="organization" class="form-label">닉네임</label> <input
+											type="text" class="form-control" id="organization"
+											name="memNick" value="ThemeSelection" />
 									</div>
 									<div class="mb-3 col-md-6">
 										<label class="form-label" for="phoneNumber">전화번호</label>
 										<div class="input-group input-group-merge">
 											<span class="input-group-text">US (+1)</span> <input
-												type="text" id="phoneNumber" name="phoneNumber"
+												type="text" id="phoneNumber" name="memPhone"
 												class="form-control" placeholder="202 555 0111" />
 										</div>
 									</div>
@@ -139,7 +146,8 @@
 									</div>
 								</div>
 								<div class="mt-2">
-									<button type="submit" class="btn btn-primary me-2">회원정보 수정</button>
+									<button type="submit" class="btn btn-primary me-2">회원정보
+										수정</button>
 									<button type="reset" class="btn btn-outline-secondary">취소</button>
 								</div>
 							</form>
@@ -155,13 +163,16 @@
 									<p class="mb-0">탈퇴시 정보가 복구되지 않습니다</p>
 								</div>
 							</div>
-							<form id="formAccountDeactivation" action = "" method = "POST" onsubmit="return false">
+							<form id="formAccountDeactivation" action="" method="POST"
+								onsubmit="return false">
 								<div class="form-check mb-3">
 									<input class="form-check-input" type="checkbox"
 										name="accountActivation" id="accountActivation" /> <label
-										class="form-check-label" for="accountActivation">회원 탈퇴에 동의합니다</label>
+										class="form-check-label" for="accountActivation">회원
+										탈퇴에 동의합니다</label>
 								</div>
-								<button type="submit" class="btn btn-danger deactivate-account">회원 탈퇴</button>
+								<button type="submit" class="btn btn-danger deactivate-account">회원
+									탈퇴</button>
 							</form>
 						</div>
 					</div>

@@ -53,4 +53,24 @@
 		AND MEM_PW = #{memPw}
 </select>
 
+<update id = "updateMember" parameterType = "com.team.green.member.dto.MemberDTO">
+	UPDATE members
+	SET
+		MEM_NAME = #{memName}
+		,MEM_PW = #{memPw}
+		,MEM_ADDRESS = #{memAddress}
+		,MEM_PHONE = #{memPhone}
+		,MEM_NICK = #{memNick}
+		,MEM_TYPE = #{memType}
+		,MEM_IMG = #{memImg}
+		,COM_CEO = #{comCeo}
+		,COM_BRC = #{comBrc}
+		,COM_MA_NM = #{comMaNm}
+		,COM_MA_PN = #{comMaPn}
+		,MEM_HP = #{memHp}
+	WHERE 1=1
+		AND MEM_ID = #{memId}	
+</update>
+
+
 </mapper>

@@ -44,7 +44,7 @@
 		<include refid="productSearch"/>
 	</select>
 	
-		<!-- 제품 한개 조회 하기 -->
+	<!-- 제품 한개 조회 하기 -->
 	<select id="getProduct" parameterType="int" resultType="com.team.green.product.dto.ProductDTO">
 		SELECT 
 		      prod_no

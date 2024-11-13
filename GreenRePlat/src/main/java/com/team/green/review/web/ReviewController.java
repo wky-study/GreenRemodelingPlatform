@@ -85,9 +85,9 @@ public class ReviewController {
 	@RequestMapping("/reviewWriteView")
 	public String reviewWriteView(HttpSession session) {
 		
-		System.out.println(session.getAttribute("login"));
+		System.out.println(session.getAttribute("memInfo"));
 		
-		if(session.getAttribute("login") == null) {
+		if(session.getAttribute("memInfo") == null) {
 			return "redirect:/loginView";
 		}
 		
@@ -98,7 +98,7 @@ public class ReviewController {
 	@PostMapping("/reviewWriteDo")
 	public String reviewWriteDo(ReviewDTO review, String imgFileName, HttpSession session) {
 		
-		MemberDTO login= (MemberDTO)session.getAttribute("login");
+		MemberDTO login= (MemberDTO)session.getAttribute("memInfo");
 		
 		review.setMemId(login.getMemId());
 		review.setMemName(login.getMemName());

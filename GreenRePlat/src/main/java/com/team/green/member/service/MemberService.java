@@ -25,5 +25,13 @@ public class MemberService {
 		MemberDTO result = dao.loginMember(member);
 		return result;
 	}
+	
+	/*	회원정보수정(일반회원)
+	 * 
+	 */
+	public int updateMember(MemberDTO member) {
+		int result = dao.updateMember(member);
+		return result;
+	}
 
 }
