@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <style>
 .img-border {
@@ -198,7 +198,7 @@
 			</div>
 		</div>
 	</div>
-
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 
 	<!-- 스크립트들 -->
@@ -214,8 +214,6 @@
 
 	<!-- Template Javascript -->
 	<script src="${pageContext.request.contextPath}/assets/js/material.js"></script>
-
-	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<script>
 		// 수량 변경 시 총 가격을 업데이트하는 함수
