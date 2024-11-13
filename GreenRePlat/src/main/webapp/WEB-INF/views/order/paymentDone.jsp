@@ -84,7 +84,7 @@
             // window.open()을 사용하여 새 창 열기
           /*   window.open(url, windowName, windowSize); */
             
-            openCenteredWindow( url, 'ReceiptWindow', 600, 500);
+            openCenteredWindow( url, windowName, 600, 500);
 
         }
         
