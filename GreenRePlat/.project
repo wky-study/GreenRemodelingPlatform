@@ -44,21 +44,4 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/webapp/resources/assets/js/material.js</name>
-			<type>1</type>
-			<location>D:/study_SPRING/sts-workspace/GRPproject/js/material.js</location>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/assets/libs/animate</name>
-			<type>2</type>
-			<location>D:/study_SPRING/sts-workspace/GRPproject/lib/animate</location>
-		</link>
-		<link>
-			<name>src/main/webapp/resources/assets/libs/wow</name>
-			<type>2</type>
-			<location>D:/study_SPRING/sts-workspace/GRPproject/lib/wow</location>
-		</link>
-	</linkedResources>
 </projectDescription>
