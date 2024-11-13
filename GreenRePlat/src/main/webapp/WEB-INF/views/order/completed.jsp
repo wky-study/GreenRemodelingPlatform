@@ -2,8 +2,12 @@
 <html>
 <head>
     <script type="text/javascript">
-        window.opener.onPaymentComplete()  // 부모 창 함수 실행
         window.close();  // 현재 창을 닫기
+        
+        // 부모 창에서 처리할 작업 (부모 창으로 페이지 변경)
+        if (window.opener) {
+            window.opener.location.href = '${pageContext.request.contextPath}/paymentDone';  // 부모 창에서 리디렉션
+        }
     </script>
 </head>
 <body>

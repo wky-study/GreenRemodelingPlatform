@@ -1,12 +1,16 @@
 package com.team.green.order.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,33 +18,40 @@ import org.springframework.web.client.RestTemplate;
 
 import org.springframework.http.HttpHeaders;
 
+import com.team.green.cart.service.CartService;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.order.dto.ApproveResponseDTO;
+import com.team.green.order.dto.PaymentDTO;
 import com.team.green.order.dto.ReadyResponseDTO;
 
 @Service
 public class KakaoPayService {
-
+	
+	@Autowired
+	OrderService orderService;
+	
+	@Autowired
+	CartService cartService;
 	
     // Logger 객체 선언
     private static final Logger log = LoggerFactory.getLogger(KakaoPayService.class);
     
     // 카카오페이 결제창 연결
-    public ReadyResponseDTO payReady(String name, int totalPrice, String memId, HttpSession session) {
+    public ReadyResponseDTO payReady(String name, int totalPrice, String memId, int quantity ,HttpSession session) {
     	
-    	String partnerOrderId = (String)session.getAttribute("partnerOrderId");
-    	
+    	String representativeOrderId = (String) session.getAttribute("representativeOrderId");
+
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");                                    // 가맹점 코드(테스트용)
-        parameters.put("partner_order_id", partnerOrderId);                     // 주문번호 
+        parameters.put("partner_order_id", representativeOrderId);              // 대표 주문번호 
         parameters.put("partner_user_id", memId);                          		// 회원 아이디
         parameters.put("item_name", name);                                      // 상품명
-        parameters.put("quantity", "1");                                        // 상품 수량
+        parameters.put("quantity", String.valueOf(quantity));                   // 상품 수량
         parameters.put("total_amount", String.valueOf(totalPrice));             // 상품 총액
         parameters.put("tax_free_amount", "0");                                 // 상품 비과세 금액
-        parameters.put("approval_url", "http://localhost:9090/green/pay/completed"); // 결제 성공 시 URL
-        parameters.put("cancel_url", "http://localhost:9090/green/pay/cancel");      // 결제 취소 시 URL
-        parameters.put("fail_url", "http://localhost:9090/green/pay/fail");          // 결제 실패 시 URL
+        parameters.put("approval_url", "http://localhost:9090/green/order/completed"); // 결제 성공 시 URL
+        parameters.put("cancel_url", "http://localhost:9090/green/order/cancel");      // 결제 취소 시 URL
+        parameters.put("fail_url", "http://localhost:9090/green/order/fail");          // 결제 실패 시 URL
         
         // HttpEntity : HTTP 요청 또는 응답에 해당하는 Http Header와 Http Body를 포함하는 클래스
         HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
@@ -52,9 +63,6 @@ public class KakaoPayService {
         String url = "https://open-api.kakaopay.com/online/v1/payment/ready";
         
         System.out.println("url 요청 전" + requestEntity);
-        
-        // 주문번호를 세션에 저장
-        session.setAttribute("partnerOrderId", partnerOrderId);
         
         // RestTemplate의 postForEntity : POST 요청을 보내고 ResponseEntity로 결과를 반환받는 메소드
         ResponseEntity<ReadyResponseDTO> responseEntity = template.postForEntity(url, requestEntity, ReadyResponseDTO.class);
@@ -74,16 +82,18 @@ public class KakaoPayService {
         System.out.println(member);
         String memId = member.getMemId();
     	
-        String partnerOrderId = (String)session.getAttribute("partnerOrderId");
+    	String representativeOrderId = (String) session.getAttribute("representativeOrderId");
         
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");              // 가맹점 코드(테스트용)
         parameters.put("tid", tid);                       // 결제 고유번호
-        parameters.put("partner_order_id", partnerOrderId); // 주문번호
+        parameters.put("partner_order_id", representativeOrderId); // 대표 주문번호
         parameters.put("partner_user_id", memId);    		// 회원 아이디
         parameters.put("pg_token", pgToken);              // 결제승인 요청을 인증하는 토큰
         
         System.out.println("최종 승인 들어옴");
+        
+        System.out.println(pgToken);
         
         HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
 
@@ -92,6 +102,50 @@ public class KakaoPayService {
         ApproveResponseDTO approveResponse = template.postForObject(url, requestEntity, ApproveResponseDTO.class);
         log.info("결제승인 응답객체: " + approveResponse);
         
+        // 결제완료 시 cart 정보 삭제하기
+        List<String> cartIds = (List<String>) session.getAttribute("cartIds");
+	    for(int i = 0; i < cartIds.size(); i++) {
+	    	cartService.delCartList(memId, cartIds.get(i));  
+	    }
+	    session.removeAttribute("cartIds");  // "cartIds"라는 이름의 세션 속성 제거
+	    
+        // DB에 저장
+	    // DB for문 돌릴 리스트 생성
+        List<PaymentDTO> paymentList = new ArrayList<>();
+        
+        int quantity = (int)session.getAttribute("quantity"); // 주문 수량
+        String name = (String)session.getAttribute("name"); // 상품이름 (대표)
+    	int totalPrice = (int)session.getAttribute("totalPrice");
+    	System.out.println("전체 금액: "+ totalPrice);
+
+    	// 각각 주문번호
+    	List<String> partnerOrderIds = (List<String>) session.getAttribute("partnerOrderIds");
+    	
+    	// 각각 가격 integer => String 변경
+    	List<Integer> prodPrices = (List<Integer>) session.getAttribute("prodPrices");
+    	List<String> prodPricesStr = prodPrices.stream().map(String::valueOf).collect(Collectors.toList());
+    	// 각각 장바구니 고유번호
+    	
+    	// 반복으로 DB에 저장
+    	for(int i = 0; i < partnerOrderIds.size(); i++) {
+    		
+    		PaymentDTO payment = new PaymentDTO(); 
+    		
+    		payment.setTid(tid);
+    		payment.setPartnerOrderId(partnerOrderIds.get(i));
+    		payment.setMemId(memId); 
+    		payment.setProdName(name); 
+    		payment.setProdPrice(prodPricesStr.get(i));
+    		payment.setPgToken(pgToken);
+    		payment.setTotalPrice(totalPrice);
+    		payment.setCartId(cartIds.get(i));
+    		payment.setRepresentativeOrderId(representativeOrderId);
+    		
+    		int tp = orderService.insertOrder(payment);
+    		System.out.println(tp);
+    	}
+    	
+    	
         return approveResponse;
     }
     

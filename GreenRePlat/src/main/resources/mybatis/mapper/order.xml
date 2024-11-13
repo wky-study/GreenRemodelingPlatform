@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.order.dao.IOrderDAO">
+		
+	<!-- 리뷰게시판 댓글 작성 -->
+	<insert id="insertOrder" parameterType="com.team.green.order.dto.PaymentDTO">
+		INSERT INTO payment (
+		    tid, 
+		    partner_order_id, 
+		    mem_id, 
+		    prod_name, 
+		    prod_price, 
+		    pg_token,
+		    total_price, 
+		    cart_id, 
+		    representative_order_id,
+		    payment_date
+		) VALUES (
+		    #{tid}, 
+		    #{partnerOrderId}, 
+		    #{memId}, 
+		    #{prodName}, 
+		    #{prodPrice}, 
+		    #{pgToken}, 
+		    #{totalPrice}, 
+		    #{cartId},
+		    #{representativeOrderId},
+		    SYSDATE
+		)
+	</insert>
+	
+
+
+
+</mapper>

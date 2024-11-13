@@ -12,11 +12,13 @@ public class ProductDTO {
 	private String prodPrice;				/*  가격 */
 	private String prodCategory;			/*  분류 */
 	
+	private String cartId;					/* 장바구니 고유번호 (DB엔 없음) */
+	
 	public ProductDTO() {
 	}
 
 	public ProductDTO(int prodNo, String prodCompany, String prodModel, String prodManufacturer, String prodEfficiency,
-			String prodImageSrc, String prodName, String prodPrice, String prodCategory) {
+			String prodImageSrc, String prodName, String prodPrice, String prodCategory, String cartId) {
 		this.prodNo = prodNo;
 		this.prodCompany = prodCompany;
 		this.prodModel = prodModel;
@@ -26,6 +28,7 @@ public class ProductDTO {
 		this.prodName = prodName;
 		this.prodPrice = prodPrice;
 		this.prodCategory = prodCategory;
+		this.cartId = cartId;
 	}
 
 	@Override
@@ -33,7 +36,7 @@ public class ProductDTO {
 		return "ProductDTO [prodNo=" + prodNo + ", prodCompany=" + prodCompany + ", prodModel=" + prodModel
 				+ ", prodManufacturer=" + prodManufacturer + ", prodEfficiency=" + prodEfficiency + ", prodImageSrc="
 				+ prodImageSrc + ", prodName=" + prodName + ", prodPrice=" + prodPrice + ", prodCategory="
-				+ prodCategory + "]";
+				+ prodCategory + ", cartId=" + cartId + "]";
 	}
 
 	public int getProdNo() {
@@ -107,6 +110,14 @@ public class ProductDTO {
 	public void setProdCategory(String prodCategory) {
 		this.prodCategory = prodCategory;
 	}
-	
+
+	public String getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(String cartId) {
+		this.cartId = cartId;
+	}
+
 	
 }
