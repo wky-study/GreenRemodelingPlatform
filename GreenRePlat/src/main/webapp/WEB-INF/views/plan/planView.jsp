@@ -34,8 +34,10 @@
     }
 
     .calendar-day:hover {
-      background-color: #37444e3d;
+      background-color: #d0d5d8;
       color: rgba(255, 255, 255, 0.788);
+      border-left: 2px solid white;
+      
     }
 
     .calendar-head {
@@ -124,7 +126,6 @@
 
 <%@ include file="/WEB-INF/inc/footer.jsp" %>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const calendarDates = document.getElementById('calendarDates');
 const calendarMonth = document.getElementById('calendarMonth');
