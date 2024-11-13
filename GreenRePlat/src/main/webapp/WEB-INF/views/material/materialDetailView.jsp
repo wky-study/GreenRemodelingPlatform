@@ -35,7 +35,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>자재페이지</title>
+<title>자재상세페이지</title>
 
 <!-- Libraries Stylesheet -->
 <link
@@ -48,7 +48,7 @@
 
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 
-	<!-- About Start -->
+	<!-- 자재상세페이지 자재사진 -->
 	<div class="container-fluid mb-5">
 		<div class="container-xxl py-5">
 			<div class="container">
@@ -61,7 +61,7 @@
 						</div>
 					</div>
 
-					<!-- 제품 상세 정보 -->
+					<!-- 자재 상세 정보 -->
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>자재타입
@@ -87,7 +87,7 @@
 								id="totalPrice">10,000</span>원
 						</h5>
 
-						<!-- 구매/견적/장바구니 버튼 -->
+						<!-- 견적버튼 -->
 						<a class="btn btn-primary py-3 px-5 mt-3" href="">견적서 담기</a>
 					</div>
 				</div>
@@ -96,9 +96,9 @@
 		</div>
 
 	</div>
-	<!-- About End -->
 
-	<!-- Facts Start -->
+
+	<!-- 자재상페이지 자재크기 -->
 	<div class="container-xxl bg-primary facts my-5 py-5 wow fadeInUp"
 		data-wow-delay="0.1s">
 		<div class="container py-5">
@@ -120,11 +120,11 @@
 									<tbody class="table-group-divider">
 										<tr>
 											<th scope="row" class="ps-0 fw-medium"><span
-												class="table-link1 text-truncate d-block"></span>30</th>
+												class="table-link1 text-truncate d-block"></span></th>
 											<td><a href="javascript:void(0)"
-												class="link-primary text-dark fw-medium d-block">30</a></td>
+												class="link-primary text-dark fw-medium d-block"></a></td>
 											<td class="text-center fw-medium"></td>
-											<td class="text-center fw-medium">3600</td>
+											<td class="text-center fw-medium"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -148,7 +148,7 @@
 
 	<div class="card-body" style="text-align: center;">
 
-		<!-- 상품 상세설명 -->
+		<!-- 자재상세페이지 자재상세설명 -->
 		<div class="container">
 			<div class="card-body">
 				<h1>상품 상세설명</h1>
@@ -199,9 +199,9 @@
 		</div>
 	</div>
 
-	<!-- Facts End -->
 
-	<!-- Back to Top -->
+
+	<!-- 스크립트들 -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
 
