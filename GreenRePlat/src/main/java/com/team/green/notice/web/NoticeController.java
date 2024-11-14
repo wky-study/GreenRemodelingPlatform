@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,9 @@ import com.team.green.reply.service.ReplyService;
 
 @Controller
 public class NoticeController {
+	
+	@Value("#{util['file.attach.path']}")
+	String attachPath;
 	
 	@Autowired
 	NoticeService noticeService;
@@ -167,6 +171,7 @@ public class NoticeController {
 	 	System.out.println("파일"+noFile);
 	 		
 	 	// 첨부된 파일이 존재할 시 파일을 로컬에 저장하고 DB에 저장된 파일의 정보를 전달함
+	 	// 첨부파일이 있을 때 실행되야함
 	 	if(noFile != null && noFile.length > 0 && !noFile[0].isEmpty()) {
 	 		System.out.println("파일 개수: " + noFile.length);
 	 		
