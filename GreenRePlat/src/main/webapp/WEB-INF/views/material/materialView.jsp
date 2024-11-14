@@ -6,6 +6,14 @@
 <html lang="ko">
 
 <style>
+.badge-ma {
+	position: absolute;
+	width: 80%;
+	height: 30px;
+	magin-bottom: 50%;
+	text-align: right;
+}
+
 .img-border {
 	position: relative;
 	height: 100%;
@@ -80,9 +88,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -92,9 +100,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -104,9 +112,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -116,9 +124,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -128,9 +136,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -140,9 +148,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -152,9 +160,9 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
@@ -164,36 +172,14 @@
 							<div class="img-border">
 								<img class="img-fluid"
 									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
+									alt="" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">소송건조
+									다루끼(A급) 30x30x3600</h4>
 							</div>
 						</a>
 					</div>
 
-					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-						<a href="${pageContext.request.contextPath}/materialDetailView">
-							<div class="img-border">
-								<img class="img-fluid"
-									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
-							</div>
-						</a>
-					</div>
 
-					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-						<a href="${pageContext.request.contextPath}/materialDetailView">
-							<div class="img-border">
-								<img class="img-fluid"
-									src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-									alt="" /> <span
-									class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">
-									소송건조 다루끼(A급) 30x30x3600</span>
-							</div>
-						</a>
-					</div>
 
 				</div>
 			</div>
@@ -218,8 +204,6 @@
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/assets/libs/wow/wow.min.js"></script>
 

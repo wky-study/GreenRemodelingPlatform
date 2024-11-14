@@ -8,6 +8,5 @@ import com.team.green.material.dto.MaterialDTO;
 
 @Mapper
 public interface IMaterialDAO {
-
-	
+	List<MaterialDTO> getMaterialList();
 }
