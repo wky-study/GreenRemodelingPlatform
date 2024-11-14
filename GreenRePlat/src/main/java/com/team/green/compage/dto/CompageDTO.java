@@ -1,39 +1,41 @@
 package com.team.green.compage.dto;
 
+import java.util.Date;
+
 public class CompageDTO {
-	private int reviewNo;				/* 리뷰 게시글 번호 */
+
+	private int cpNo;				/* 리뷰 게시글 번호 */
 	private String memId;				/* 작성자 아이디 */
 	private String memName;				/* 작성자 이름 */
-	private String reviewTitle;			/* 리뷰 게시글 제목 */
-	private String reviewContent;		/* 리뷰 게시글 내용 */
-	private String reviewDate;			/* 작성일 */
-	private String reviewPath;			/* 파일경로 */
+	private String cpTitle;			/* 리뷰 게시글 제목 */
+	private String cpContent;		/* 리뷰 게시글 내용 */
+	private Date cpDate;			/* 작성일 */
+	private String cpPath;			/* 파일경로 */
 	private String delYn;				/* 삭제 여부 */
-	private int reviewCount;			/* 게시글 조회수 */
-	
+	private int cpCount;			/* 게시글 조회수 */
+
 	public CompageDTO() {
 	}
 
-	public CompageDTO(int reviewNo, String memId, String memName, String reviewTitle, String reviewContent,
-			String reviewDate, String reviewPath, String delYn, int reviewCount) {
-		super();
-		this.reviewNo = reviewNo;
+	public CompageDTO(int cpNo, String memId, String memName, String cpTitle, String cpContent, Date cpDate,
+			String cpPath, String delYn, int cpCount) {
+		this.cpNo = cpNo;
 		this.memId = memId;
 		this.memName = memName;
-		this.reviewTitle = reviewTitle;
-		this.reviewContent = reviewContent;
-		this.reviewDate = reviewDate;
-		this.reviewPath = reviewPath;
+		this.cpTitle = cpTitle;
+		this.cpContent = cpContent;
+		this.cpDate = cpDate;
+		this.cpPath = cpPath;
 		this.delYn = delYn;
-		this.reviewCount = reviewCount;
+		this.cpCount = cpCount;
 	}
 
-	public int getReviewNo() {
-		return reviewNo;
+	public int getCpNo() {
+		return cpNo;
 	}
 
-	public void setReviewNo(int reviewNo) {
-		this.reviewNo = reviewNo;
+	public void setCpNo(int cpNo) {
+		this.cpNo = cpNo;
 	}
 
 	public String getMemId() {
@@ -52,36 +54,36 @@ public class CompageDTO {
 		this.memName = memName;
 	}
 
-	public String getReviewTitle() {
-		return reviewTitle;
+	public String getCpTitle() {
+		return cpTitle;
 	}
 
-	public void setReviewTitle(String reviewTitle) {
-		this.reviewTitle = reviewTitle;
+	public void setCpTitle(String cpTitle) {
+		this.cpTitle = cpTitle;
 	}
 
-	public String getReviewContent() {
-		return reviewContent;
+	public String getCpContent() {
+		return cpContent;
 	}
 
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
+	public void setCpContent(String cpContent) {
+		this.cpContent = cpContent;
 	}
 
-	public String getReviewDate() {
-		return reviewDate;
+	public Date getCpDate() {
+		return cpDate;
 	}
 
-	public void setReviewDate(String reviewDate) {
-		this.reviewDate = reviewDate;
+	public void setCpDate(Date cpDate) {
+		this.cpDate = cpDate;
 	}
 
-	public String getReviewPath() {
-		return reviewPath;
+	public String getCpPath() {
+		return cpPath;
 	}
 
-	public void setReviewPath(String reviewPath) {
-		this.reviewPath = reviewPath;
+	public void setCpPath(String cpPath) {
+		this.cpPath = cpPath;
 	}
 
 	public String getDelYn() {
@@ -92,19 +94,19 @@ public class CompageDTO {
 		this.delYn = delYn;
 	}
 
-	public int getReviewCount() {
-		return reviewCount;
+	public int getCpCount() {
+		return cpCount;
 	}
 
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
+	public void setCpCount(int cpCount) {
+		this.cpCount = cpCount;
 	}
 
 	@Override
 	public String toString() {
-		return "CompageDTO [reviewNo=" + reviewNo + ", memId=" + memId + ", memName=" + memName + ", reviewTitle="
-				+ reviewTitle + ", reviewContent=" + reviewContent + ", reviewDate=" + reviewDate + ", reviewPath="
-				+ reviewPath + ", delYn=" + delYn + ", reviewCount=" + reviewCount + "]";
+		return "CompageDTO [cpNo=" + cpNo + ", memId=" + memId + ", memName=" + memName + ", cpTitle=" + cpTitle
+				+ ", cpContent=" + cpContent + ", cpDate=" + cpDate + ", cpPath=" + cpPath + ", delYn=" + delYn
+				+ ", cpCount=" + cpCount + "]";
 	}
 	
 }

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="utf-8">
@@ -37,20 +37,18 @@
 				<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">
 					<!-- 카드 그리기 -->
 					
-					<c:forEach items="${keyReview}" var="ReviewDTO">
-						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/reviewDetailView?no=${ReviewDTO.reviewNo}"'>
+					<c:forEach items="${keyCp}" var="ReviewDTO">
+						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/compageDetailView?no=${ReviewDTO.cpNo}"'>
 							<img
-								src="${pageContext.request.contextPath }/displayImage?fileName=${ReviewDTO.reviewPath}"
+								src="${pageContext.request.contextPath }/displayImage?fileName=${ReviewDTO.cpPath}"
 								class="card-img-top" >
 							<div class="card-body">
-								<h5 class="card-title">${ReviewDTO.reviewTitle}</h5>
+								<h5 class="card-title">${ReviewDTO.cpTitle}</h5>
 								<p class="card-text">${ReviewDTO.memName}</p>
-								<span class="fw-bold">${ReviewDTO.reviewDate}</span>
+								<span class="fw-bold">${ReviewDTO.cpDate}</span>
 							</div>
 						</div>
-					</c:forEach>
-					
-					
+					</c:forEach>					
 				</div>
 			</div>
 
@@ -58,8 +56,7 @@
 			<div class="d-flex justify-content-center">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
-				  
-				  
+				  				  
 				  	<!-- 검색중이면 검색옵션과 검색어를 유지하면서 페이징 처리 -->
 					<!-- 검색중이지 않으면 검색 옵션과 검색어가 주소창에 나타나지 않게 하기 -->
 					<!-- searchWord가 null이면 a태그의 href에서 searchOption 과 searchWord 떼어내기 -->
@@ -68,12 +65,12 @@
 					    <li class="page-item ${keySearch.firstPage == 1 ? 'disabled' : '' }">
 
 					    	<c:if test="${keySearch.searchWord != null}">
-						      <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Previous">
+						      <a class="page-link" href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Previous">
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 					    	</c:if>
 					    	<c:if test="${keySearch.searchWord == null}">
-						      <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Previous">
+						      <a class="page-link" href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Previous">
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 					    	</c:if>
@@ -87,10 +84,10 @@
 					    <c:forEach begin="${keySearch.firstPage }" end="${keySearch.lastPage }" var="num">
 							    <li class="page-item ${keySearch.pageNo == num ? 'active' : '' } ">
 							    	<c:if test="${keySearch.searchWord != null}">
-									    <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
+									    <a class="page-link" href="${pageContext.request.contextPath }/compageView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
 							    	</c:if>						    
 							    	<c:if test="${keySearch.searchWord == null}">
-									    <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
+									    <a class="page-link" href="${pageContext.request.contextPath }/compageView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
 							    	</c:if>						    
 							    </li>
 					    </c:forEach>
@@ -99,18 +96,17 @@
 				    <!-- 마지막 페이지 도달 시 disabled 추가 -->
 					    <li class="page-item ${keySearch.pageNo == keySearch.finalPage ? 'disabled' : ''  }">
 						    <c:if test="${keySearch.searchWord == null}">
-						     <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Next">
+						     <a class="page-link" href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Next">
 						    	 <span aria-hidden="true">&raquo;</span>
 						     </a>
 						    </c:if>
 						    <c:if test="${keySearch.searchWord != null}">
-						     <a class="page-link" href="${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Next">
+						     <a class="page-link" href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Next">
 						    	 <span aria-hidden="true">&raquo;</span>
 						     </a>
 						    </c:if>
 					    </li>
 
-				    
 				  </ul>
 				</nav>
 			</div>		
@@ -120,11 +116,10 @@
 				<button id="writeBtn" class="btn btn-outline-secondary" >글쓰기</button>
 			</div>
 			
-			
-						
+	
 			<!-- 검색기능 -->
 			<div class="d-flex justify-content-center mb-3">
-				<form class="d-flex" action="${pageContext.request.contextPath }/reviewView" method="GET" >
+				<form class="d-flex" action="${pageContext.request.contextPath }/compageView" method="GET" >
 					<select class="form-select me-1" name="searchOption">
 						<option value="title" selected>제목</option>
 						<option value="content">내용</option>
@@ -152,7 +147,7 @@
 
 	<script type="text/javascript">
 	    window.onload = function() {
-	        const baseUrl = "${pageContext.request.contextPath}/reviewView";
+	        const baseUrl = "${pageContext.request.contextPath}/compageView";
 	        // 주소창의 URL을 기본 URL로 설정
 	        window.history.replaceState({}, '', baseUrl);
 	    };	
@@ -167,7 +162,7 @@
 		console.log(event.target);
 		console.log(event.target.value);
 		
-		let v_url = "${pageContext.request.contextPath}/reviewView";
+		let v_url = "${pageContext.request.contextPath}/compageView";
 		let v_query = "?rowSizePerPage=" + event.target.value;
 			v_query += "&pageNo=${keySearch.pageNo}";
 		
@@ -193,15 +188,15 @@
 	     
 	     if(v_searchWord == "" ){
 	    	 if(v_lastPage % 10 != 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage}";
 	    	 }else if(v_lastPage % 10 == 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1}";
 	    	 }
 	     }else if(v_searchWord != ""){
 	    	 if(v_lastPage % 10 != 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
 	    	 }else if(v_lastPage % 10 == 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/reviewView?pageNo=${keySearch.lastPage + 1}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
+	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
 	    	 }
 	     }
 		
@@ -244,10 +239,10 @@
 		
 		document.getElementById("writeBtn").addEventListener("click", ()=>{
 			
-			location.href = '${pageContext.request.contextPath }/reviewWriteView';
+			location.href = '${pageContext.request.contextPath }/compageWriteView';
 			
 			if(v_id){
-				location.href = '${pageContext.request.contextPath }/reviewWriteView';
+				location.href = '${pageContext.request.contextPath }/compageWriteView';
 			}
 			else{
 				alert("로그인 후 글쓰기가 가능합니다.");

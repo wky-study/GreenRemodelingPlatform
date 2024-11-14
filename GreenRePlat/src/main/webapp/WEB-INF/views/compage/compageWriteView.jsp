@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="utf-8">
@@ -44,21 +44,21 @@
 
 					<input type="file" id="inputImg" accept="image/*" hidden="true" onchange="f_sandImg()">
 					
-					<form id="reviewWriteForm" action="${pageContext.request.contextPath }/reviewWriteDo" method="POST" enctype="multipart/form-data">
+					<form id="reviewWriteForm" action="${pageContext.request.contextPath }/compageWriteDo" method="POST" enctype="multipart/form-data">
 					
 						<div class="mb-3">
-							<input class="form-control" id="inputId" type="text" name="reviewTitle" placeholder="제목을 입력해주세요."/>
+							<input class="form-control" id="inputId" type="text" name="compageTitle" placeholder="제목을 입력해주세요."/>
 						</div>
 						
 						<div class="mb-3">
 						
 							<button class="d-none" onclick="f_imgWidth(this)" id="imgBtn">입력</button>
 							
-							<textarea id="smartEditor" class="form-control"  rows="10" name="reviewContent"></textarea>
+							<textarea id="smartEditor" class="form-control"  rows="10" name="compageContent"></textarea>
 						</div>		
 						
 						<div class="d-flex justify-content-end">
-							<a class="btn btn-secondary me-2" href="${pageContext.request.contextPath }/reviewView">취소</a>
+							<a class="btn btn-secondary me-2" href="${pageContext.request.contextPath }/compageView">취소</a>
 							
 							<!-- form 태그의 submit 역할을 함 -> type=submit 넣어주기 -->
 							<button id="writeBtn" class="btn btn-primary" type="button">등록</button>

@@ -34,24 +34,23 @@ public class CompageController {
 
 	// 리뷰목록 페이지
 	@RequestMapping("/compageView")
-	public String reviewView(Model model, SearchVO search) {
+	public String compageView(Model model, SearchVO search) {
 		
-		int reviewCount = cpgSvc.getReviewCount(search);
+		int cpCnt = cpgSvc.getCpCount(search);
 		
-		System.out.println(reviewCount);
+		System.out.println(cpCnt);
 		
-		search.setReviewCount(reviewCount);
+		search.setReviewCount(cpCnt);
 		search.reviewSetting();
 		
-		List<CompageDTO> review = cpgSvc.getReviewList(search);
+		List<CompageDTO> cp = cpgSvc.getCpList(search);
 		
-		System.out.println(review);
+		System.out.println(cp);
 		System.out.println(search);
 		
-		model.addAttribute("keyReview", review);
+		model.addAttribute("keyReview", cp);
 		model.addAttribute("keySearch", search);
-
-		
+	
 		return "compage/compageView";
 	}
 	
@@ -64,13 +63,13 @@ public class CompageController {
 		
 		search.setting();
 		
-		List<CompageDTO> review = cpgSvc.getReviewList(search);
+		List<CompageDTO> review = cpgSvc.getCpList(search);
 		
 		return review;
 	}
 	
 	@RequestMapping("/compageWriteView")
-	public String reviewWriteView(HttpSession session) {
+	public String compageWriteView(HttpSession session) {
 		
 		System.out.println(session.getAttribute("memInfo"));
 		
@@ -83,25 +82,24 @@ public class CompageController {
 	
 	// 리뷰 글 작성 클릭
 	@PostMapping("/compageWriteDo")
-	public String reviewWriteDo(CompageDTO review, String imgFileName, HttpSession session) {
+	public String reviewWriteDo(CompageDTO cp, String imgFileName, HttpSession session) {
 		
-		MemberDTO login= (MemberDTO)session.getAttribute("memInfo");
+		MemberDTO memInfo= (MemberDTO)session.getAttribute("memInfo");
 		
-		review.setMemId(login.getMemId());
-		review.setMemName(login.getMemName());
-		review.setReviewPath(imgFileName);
-		System.out.println(review);
+		cp.setMemId(memInfo.getMemId());
+		cp.setMemName(memInfo.getMemName());
+		cp.setCpPath(imgFileName);
+		System.out.println(cp);
 		
-		cpgSvc.writeReview(review);
+		cpgSvc.writeCp(cp);
 
-		
 		return "redirect:compageView";
 	}
 	
 	
 	// 리뷰 글 상세 페이지
 	@RequestMapping("/compageDetailView")
-	public String reviewDetailView(ReplyDTO reply, Model model, int no) {
+	public String compageDetailView(ReplyDTO reply, Model model, int no) {
 		
 		System.out.println("클릭한 게시글 번호" + no);
 		
@@ -110,13 +108,13 @@ public class CompageController {
 		System.out.println(reply);
 		
 		// 조회수 기능 추가 할거
-		cpgSvc.reviewCountUp(no);
+		cpgSvc.cpCountUp(no);
 		
 		System.out.println("조회수 끝");
 		
-		CompageDTO review = null;
+		CompageDTO cp = null;
 		try {
-			review = cpgSvc.getReview(no);
+			cp = cpgSvc.getCp(no);
 			
 		} catch (BizNotFoundException e) {
 			e.printStackTrace();
@@ -132,9 +130,9 @@ public class CompageController {
 			
 		}
 		
-		System.out.println(review);
+		System.out.println(cp);
 		
-		model.addAttribute("keyReview", review);
+		model.addAttribute("keyCp", cp);
 		
 		// 댓글 목록 가져오기
 		List<ReplyDTO> replyList = replyService.getReplyList(reply);
@@ -151,11 +149,11 @@ public class CompageController {
 	
 	// 리뷰게시판 글 수정 화면
 	@PostMapping("/compageEditView")
-	public String reviewEditView(int no, Model model) {
+	public String compageEditView(int no, Model model) {
 		
 		try {
-			CompageDTO review = cpgSvc.getReview(no);
-			model.addAttribute("keyReview", review);
+			CompageDTO cp = cpgSvc.getCp(no);
+			model.addAttribute("keyCp", cp);
 		} catch (BizNotFoundException e) {
 			e.printStackTrace();
 			return "errPage";
@@ -166,20 +164,20 @@ public class CompageController {
 	
 	// 자유게시판 글 수정 등록
 	@PostMapping("/compageEditDo")
-	public String reviewEditDo(CompageDTO review) {
+	public String reviewEditDo(CompageDTO cp) {
 		
-		System.out.println(review);
+		System.out.println(cp);
 		
-		cpgSvc.updateReview(review);
+		cpgSvc.updateCp(cp);
 		
-		return "redirect:/compageDetailView?no=" + review.getReviewNo();	
+		return "redirect:/compageDetailView?no=" + cp.getCpNo();	
 	}
 	
 	// 자유게시판 글 삭제
 	@PostMapping("/compageDeleteDo")
-	public String reviewDeleteDo(int no) {
+	public String compageDeleteDo(int no) {
 		
-		cpgSvc.deleteReview(no);
+		cpgSvc.deleteCp(no);
 		
 		return "redirect:/compageView";	
 	}

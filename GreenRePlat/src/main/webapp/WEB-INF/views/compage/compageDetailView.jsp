@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="utf-8">
@@ -45,25 +45,25 @@
 				<!-- 바디 부분 -->
 				<div class="d-block">
 					<div class="d-flex justify-content-between">
-						<h1>${keyReview.reviewTitle }</h1>
-						<span>${keyReview.reviewDate }</span>
+						<h1>${keyCp.cpTitle }</h1>
+						<span>${keyCp.cpDate }</span>
 					</div>
 					<div class="d-flex justify-content-end">
 						<c:if
-							test="${ sessionScope.memInfo.memId == keyReview.memId && sessionScope.memInfo.memId != null}">
-							<form action="${pageContext.request.contextPath }/reviewEditView"
+							test="${ sessionScope.memInfo.memId == keyCp.memId && sessionScope.memInfo.memId != null}">
+							<form action="${pageContext.request.contextPath }/compageEditView"
 								method="POST">
-								<input type="hidden" value="${keyReview.reviewNo}" name="no">
+								<input type="hidden" value="${keyCp.cpNo}" name="no">
 								<button class="btn btn-warning" type="submit">수정</button>
 							</form>
 						</c:if>
 
 						<c:if
-							test="${ sessionScope.memInfo.memId == keyReview.memId && sessionScope.memInfo.memId != null}">
+							test="${ sessionScope.memInfo.memId == keyCp.memId && sessionScope.memInfo.memId != null}">
 							<form id="delForm"
 								action="${pageContext.request.contextPath }/reviewDeleteDo"
 								method="POST">
-								<input type="hidden" value="${keyReview.reviewNo}" name="no">
+								<input type="hidden" value="${keyCp.cpNo}" name="no">
 								<button id="delBtn" class="btn btn-danger ms-2" type="button">삭제</button>
 							</form>
 
@@ -75,19 +75,19 @@
 						<h4 class="my-h4">
 							<img class="my-profile-img"
 								src="${pageContext.request.contextPath }/resources/images/profileImg.jpg">
-							${keyReview.memName}
+							${keyCp.memName}
 						</h4>
 					</div>
 
 					<!-- 내용 부분 -->
-					<div class="mt-5 mb-5">${keyReview.reviewContent}</div>
+					<div class="mt-5 mb-5">${keyCp.cpContent}</div>
 
 					<!-- 내용 끝  -->
 					<div class="mb-5">
 						<div class="d-flex justify-content-between mt-3">
 							<div>
 								<span class="my-span">좋아요 : 0</span> <span class="my-span">조회수
-									: ${keyReview.reviewCount} </span>
+									: ${keyCp.cpCount} </span>
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 								action="${pageContext.request.contextPath }/replyWriteDo"
 								method="POST">
 								<input type="hidden" name="memId" value="${sessionScope.memInfo.memId }">
-								<input type="hidden" name="reviewNo" value="${keyReview.reviewNo }">
+								<input type="hidden" name="reviewNo" value="${keyCp.cpNo }">
 								<div class="col-10">
 									<input id="replyInput" class="form-control" type="text" name="replyContent">
 								</div>
