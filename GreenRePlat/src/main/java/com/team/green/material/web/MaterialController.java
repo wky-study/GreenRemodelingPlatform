@@ -26,9 +26,9 @@ public class MaterialController {
 	/*자재목록페이지*/
     @RequestMapping("/materialView")
 	public String materialListView(Model model) {
-    	/*
+    	
     	List<MaterialDTO> materialList = materialService.getMaterialList();
-    	*/
+    	
     	model.addAttribute("materialList, materialList");
 		
 		return "material/materialView";
