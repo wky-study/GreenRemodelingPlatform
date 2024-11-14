@@ -52,7 +52,7 @@
 						
 						<div class="mb-3">
 							<label for="formFileMultiple" class="form-label">파일 첨부</label>
-							<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
+							<input class="form-control" name="noFile" type="file" id="formFileMultiple" multiple>
 						</div>
 						
 						<div class="mb-3">

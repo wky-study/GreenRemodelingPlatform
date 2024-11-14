@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -43,43 +44,35 @@ public class AttachController {
 	
 	// fileDownload?fileName=qeqwe26-11weqe1-123qewqe-eqwe124
 	// 파일 다운로드
-	@RequestMapping("/fileDownload")
-	public void fileDownload(String fileName, String originName,HttpServletResponse response) {
+	@RequestMapping("/filedownload")
+	public void fileDownload(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
-		System.out.println(fileName);
-		System.out.println(originName);
+		// 로컬에 저장된 파일이름과 파일첨부 당시 원본 파일 이름 받아옴
+		String fileName = request.getParameter("fileName");
+		String fileOriName = request.getParameter("fileOriName");
 		
-		// 해당 파일의 풀경로 생성
-		// C:\\upload\\qeqwe26-11weqe1-123qewqe-eqwe124
-		String atchFilePath = attachPath + File.separatorChar + fileName;
+		// 로컬에 저장된 파일을 File 객체로 매칭
+		File downloadFile = new File(attachPath + File.separatorChar + fileName);
+				
+		// 해당 파일의 데이터를 읽어서 byte 배열로 리턴
+		byte[] fileByte = FileUtils.readFileToByteArray(downloadFile);
 		
-		// 해당 파일에 대한 File 객체 생성
-		File downloadFile = new File(atchFilePath);
+		// 응답 데이터로 넘겨줄 준비
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
 		
-		// File 객체로부터 해당 파일의 내용을 읽어서 byte 배열로 리턴
-		// (FileUtils를 쓰면 편함. pom.xml에 common-io에 대한 dependency 추가)
-		try {
-			byte[] byteData = FileUtils.readFileToByteArray(downloadFile);
-			
-			// 응답 데이터(response)로 byteData를 넘겨줄 준비
-			response.setContentType("application/octet-stream");
-			response.setContentLength(byteData.length);
-			
-			// 사용자가 파일을 다운받을 때의 파일명 설정
-			response.setHeader("Content-Disposition"
-								, "attachment; fileName=\"" + URLEncoder.encode(originName, "UTF-8") + "\";");
-			response.setHeader("Content-Transfer-Encoding", "binary");
-			
-			// 응답 데이터로 파일 전송
-			response.getOutputStream().write(byteData);
-			response.getOutputStream().flush();
-			response.getOutputStream().close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// 원본 파일명으로 다운받아지도록 함
+		response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileOriName, "UTF-8") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		
+		// 응답 데이터로 파일 전송
+		response.getOutputStream().write(fileByte);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
 		
 	}
+	
+
 	
 	// 파일 업로드
 	@ResponseBody
