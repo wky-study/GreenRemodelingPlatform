@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.chat.dao.IRoomDAO">
+		<select id="getRoomList" resultType="com.team.green.chat.dto.RoomDTO">
+		SELECT
+			a.room_no
+			, a.room_name
+			, a.mem_id
+			, b.mem_nick
+			, a.reg_date
+			, a.del_yn
+		FROM 
+			rooms a, members b
+		WHERE
+			a.mem_id = b.mem_id
+		ORDER BY 1 DESC
+	</select>
+</mapper>

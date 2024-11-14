@@ -132,6 +132,13 @@
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
 						</span> <span class="hide-menu">견적서 마지막</span>
 					</a></li>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/chatListView"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">채팅방 리스트</span>
+					</a></li>
 										
 					<!-- 여기까지 우리메뉴 -->
 					

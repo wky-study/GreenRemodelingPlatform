@@ -27,6 +27,8 @@
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- sockis를 이용한 소켓통신을 위해 servlet내부와 filter 태그 내부에 async-supported = true 추가 -->
+		<async-supported>true</async-supported>
 
 		<!-- 첨부파일에 대한 설정 추가 -->
 		<multipart-config>
@@ -44,8 +46,8 @@
 	<!-- 한글 인코딩 필터 적용 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
