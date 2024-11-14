@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.team.green.attach.dao.IAttachDAO;
 import com.team.green.attach.dto.AttachDTO;
 
-
 @Service
 public class AttachService {
 
@@ -22,10 +21,9 @@ public class AttachService {
 		return result;
 	};
 	
-	public List<AttachDTO> getAttachList(int boardNo){
-		List<AttachDTO> result = dao.getAttachList(boardNo);
+	public List<AttachDTO> getAttachList(int noticeNo){
+		List<AttachDTO> result = dao.getAttachList(noticeNo);
 		return result;
-		
 	};
 	
 }

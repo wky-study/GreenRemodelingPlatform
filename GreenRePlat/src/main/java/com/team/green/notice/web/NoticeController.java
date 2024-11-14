@@ -1,5 +1,6 @@
 package com.team.green.notice.web;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,9 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.team.green.attach.dto.AttachDTO;
+import com.team.green.attach.service.AttachService;
 import com.team.green.common.exception.BizNotFoundException;
 import com.team.green.notice.dto.NoticeDTO;
+import com.team.green.common.vo.FileUploadVO;
 import com.team.green.common.vo.SearchVO;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.notice.service.NoticeService;
@@ -27,6 +32,12 @@ public class NoticeController {
 	
 	@Autowired
 	ReplyService replyService;
+	
+	@Autowired
+	AttachService attachService;
+	
+	@Autowired
+	FileUploadVO fileUpload;
 	
 	@RequestMapping("/noticeView")
 	public String noticeView(Model model, SearchVO search, HttpSession session) {
@@ -85,12 +96,15 @@ public class NoticeController {
 		
 		// 댓글 목록 가져오기
 		List<ReplyDTO> replyList = replyService.getReplyList(reply);
-		model.addAttribute("keyReplyList",replyList);	
-		
+		model.addAttribute("keyReplyList",replyList);
 		
 		// 게시글 댓글 수 가져오기
 		int replyCount = replyService.replyCount(no);
 		model.addAttribute("keyReplyCount", replyCount);
+		
+		// 해당 게시글의 첨부파일 가져오기
+		List<AttachDTO> attachList = attachService.getAttachList(no);
+		model.addAttribute("attachList", attachList);
 		
 		
 		return "notice/noticeDetailView";
@@ -134,28 +148,54 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/noticeWriteDo")
-	public String noticeWriteDo(NoticeDTO notice, HttpSession session) {
-		System.out.println(notice);
-		
-		// 세션에 담긴 회원 정보 확인
-		MemberDTO login = (MemberDTO) session.getAttribute("login");
-		
-		// 로그인 정보가 없을 경우 memId에 null 값을 설정 - 작업용으로 해둔 코드
-		if (login == null) {
-			notice.setMemId(null);
-		} else {
-			String memId = login.getMemId();
-			notice.setMemId(memId);
-		}
+	public String noticeWriteDo(NoticeDTO notice, HttpSession session, MultipartFile[] noFile) {
+	    System.out.println(notice);
 
-		System.out.println(notice);
-		
-		// 공지사항 등록
-		noticeService.writeNotice(notice);
-		
-		return "redirect:/noticeView";
+	    // 세션에 담긴 회원 정보 확인
+	    MemberDTO login = (MemberDTO) session.getAttribute("login");
+
+	    // 로그인 정보가 없을 경우 memId에 null 값을 설정 - 작업용으로 해둔 코드
+	 	if (login == null) {
+	 		notice.setMemId(null);
+	 	} else {
+	 		String memId = login.getMemId();
+	 		notice.setMemId(memId);
+	 	}
+	 	
+	 	int atchNoticeNo = noticeService.getNoticeNo();
+	 	
+	 	System.out.println("파일"+noFile);
+	 		
+	 	// 첨부된 파일이 존재할 시 파일을 로컬에 저장하고 DB에 저장된 파일의 정보를 전달함
+	 	if(noFile != null && noFile.length > 0 && !noFile[0].isEmpty()) {
+	 		System.out.println("파일 개수: " + noFile.length);
+	 		
+	 		try {
+	 			List<AttachDTO> attachList = fileUpload.saveFiles(noFile);
+	 			if(!attachList.isEmpty()) {
+	 				for(AttachDTO attach : attachList) {
+	 					attach.setAtchNoticeNo(atchNoticeNo);
+	 					attachService.insertAttach(attach);
+	 				}
+	 			}
+	 		} catch(IOException e) {
+	 			e.printStackTrace();
+	 			System.out.println("업로드안됨");
+	 			return "notice/noticeView";
+	 		}
+	 	}
+	 		
+	 		
+	 		
+
+	    // 공지사항 등록
+	    noticeService.writeNotice(notice); // 공지사항 등록 서비스 호출
+
+	    
+
+	    return "redirect:/noticeView"; // 공지사항 목록으로 리다이렉트
 	}
-	
+
 	// 글 삭제
 	@PostMapping("/noticeDeleteDo")
 	public String noticeDeleteDo(@RequestParam int noticeNo) { 

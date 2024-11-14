@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리뷰 게시판</title>
+<title>공지 게시판</title>
 
 
 <!-- 네이버 스마트 에디터 js파일 불러오기 -->
@@ -48,6 +48,11 @@
 					
 						<div class="mb-3">
 							<input class="form-control" id="inputId" type="text" name="noticeTitle" placeholder="제목을 입력해주세요."/>
+						</div>
+						
+						<div class="mb-3">
+							<label for="formFileMultiple" class="form-label">파일 첨부</label>
+							<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
 						</div>
 						
 						<div class="mb-3">

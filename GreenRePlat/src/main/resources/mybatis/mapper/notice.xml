@@ -11,6 +11,14 @@
             </choose>
         </if>
     </sql>
+    
+    <!-- 첨부파일을 포함한 notice글 저장시 noticeNo미리 확인 -->
+    <select id="getNoticeNo" resultType="int">
+    	SELECT
+    		COUNT(*) + 1
+    	FROM
+    		notice
+    </select>
 
     <!-- 글 목록 불러오기 -->
     <select id="getNoticeList" resultType="com.team.green.notice.dto.NoticeDTO">

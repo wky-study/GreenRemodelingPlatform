@@ -25,10 +25,8 @@
 		<property name="configLocation" value="/WEB-INF/classes/mybatis/mybatis-config.xml"></property>
 	</bean>
 
-	<mybatis-spring:scan
-		base-package="com.team.green"
-		annotation="org.apache.ibatis.annotations.Mapper" />
-	<util:properties id="util"
-		location="/WEB-INF/classes/spring/appconfig.properties"></util:properties>
+	<mybatis-spring:scan base-package="com.team.green" annotation="org.apache.ibatis.annotations.Mapper" />
+		
+	<util:properties id="util" location="/WEB-INF/classes/spring/appconfig.properties"></util:properties>
 
 </beans>

@@ -31,5 +31,9 @@ public interface INoticeDAO {
 	
 	// 탈퇴 회원 아이디 null 값 변경
 	int noMemIdNotice(String memId);
+	
+	// 게시글 번호 조회
+	int getNoticeNo();
+	
 
 }

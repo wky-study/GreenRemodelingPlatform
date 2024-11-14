@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.team.green.attach.dto.AttachDTO;
+import com.team.green.attach.service.AttachService;
 import com.team.green.common.vo.FileUploadVO;
-
 
 
 
@@ -33,6 +33,9 @@ public class AttachController {
 
 	@Value("#{util['file.attach.path']}")
 	String attachPath;
+	
+	@Autowired
+	AttachService attachService;
 	
 	@Autowired
 	FileUploadVO fileUpload;
