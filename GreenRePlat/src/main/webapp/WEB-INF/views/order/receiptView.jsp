@@ -26,17 +26,25 @@
 
 <body>
 
-	<div class="container">
+	<div class="container" id="print-content">
 		<div class="w-100 ">
 			<div class="d-flex justify-content-center mt-5 mb-5 border-bottom">
 				<h2>구매 영수증</h2>
 			</div>
 			<div class="d-flex justify-content-between mt-5">
 				<div>
+					<span class="fw-bold">대표 주문번호</span>
+				</div>
+				<div>
+					<span>${keyPayment.representativeOrderId}</span>
+				</div>
+			</div>
+			<div class="d-flex justify-content-between mt-5">
+				<div>
 					<span class="fw-bold">주문번호</span>
 				</div>
 				<div>
-					<span>202402121231</span>
+					<span>${keyPayment.partnerOrderId}</span>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between mt-5">
@@ -44,7 +52,7 @@
 					<span class="fw-bold">거래일시</span>
 				</div>
 				<div>
-					<span>2024.11.13 12:08:00</span>
+					<span>${keyPayment.paymentDate}</span>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between mt-5">
@@ -52,7 +60,7 @@
 					<span class="fw-bold">상품명</span>
 				</div>
 				<div>
-					<span>상품이름</span>
+					<span>${keyPayment.prodName}</span>
 				</div>
 			</div>
 			<div class="d-flex justify-content-between mt-5">
@@ -60,14 +68,122 @@
 					<span class="fw-bold">가격</span>
 				</div>
 				<div>
-					<span>10000</span>
+					<span>${keyPayment.prodPrice} 원</span>
+				</div>
+			</div>
+			<div class="d-flex justify-content-between mt-5">
+				<div>
+					<span class="fw-bold">구매자</span>
+				</div>
+				<div>
+					<span>${keyPayment.memId}</span>
 				</div>
 			</div>
 		</div>
-
+	</div>
+	
+	<div class="container">
+		<div class="w-100">
+			<div class="d-flex justify-content-between mt-5">
+				<div>
+					<button type="button" class="btn btn-link"  onclick="showPrint()">PDF 미리보기</button>
+				</div>
+				<div>
+					<button type="button" class="btn btn-link" onclick="showPrint2()">PDF로 다운로드</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
+	
+	<!--  html2canvas CDN 링크 -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<!-- jspdf CDN 링크 -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <!-- JavaScript function for PDF generation -->
+    <script>
+    
+	    window.onload = function() {
+	        const baseUrl = "${pageContext.request.contextPath}/receiptView";
+	        // 주소창의 URL을 기본 URL로 설정
+	        window.history.replaceState({}, '', baseUrl);
+	    };	
+	
+    
+        function showPrint() {
+            const { jsPDF } = window.jspdf;
+            
+            html2canvas(document.querySelector('#print-content'), {
+                scale: 2 // 해상도 조정
+            }).then(function (canvas) {
+                let imgData = canvas.toDataURL('image/png');
+                let imgWidth = 120;
+                let pageHeight = imgWidth * 1.414;
+                let imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let margin = 45;
+                let doc = new jsPDF('p', 'mm');
+                let position = 10;
+
+                window.scrollTo(0, 0);
+
+                // 첫 페이지 출력
+                doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                // 한 페이지 이상일 경우 루프 돌면서 출력
+                while (heightLeft >= 20) {
+                    position = heightLeft - imgHeight - 20;
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                // PDF를 새탭으로 열기
+                window.open(doc.output('bloburl'));
+                
+                // PDF를 바로 다운로드
+                // doc.save('sample.pdf');
+            });
+        }
+        
+        function showPrint2() {
+            const { jsPDF } = window.jspdf;
+            
+            html2canvas(document.querySelector('#print-content'), {
+                scale: 2 // 해상도 조정
+            }).then(function (canvas) {
+                let imgData = canvas.toDataURL('image/png');
+                let imgWidth = 120;
+                let pageHeight = imgWidth * 1.414;
+                let imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let margin = 45;
+                let doc = new jsPDF('p', 'mm');
+                let position = 10;
+
+                window.scrollTo(0, 0);
+
+                // 첫 페이지 출력
+                doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                // 한 페이지 이상일 경우 루프 돌면서 출력
+                while (heightLeft >= 20) {
+                    position = heightLeft - imgHeight - 20;
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+				
+                let v_name = "${keyPayment.prodName}";
+                
+                // PDF를 바로 다운로드
+                doc.save( v_name +'_영수증.pdf');
+            });
+        }
+    </script>
 
 
 

@@ -124,7 +124,10 @@ public class KakaoPayService {
     	// 각각 가격 integer => String 변경
     	List<Integer> prodPrices = (List<Integer>) session.getAttribute("prodPrices");
     	List<String> prodPricesStr = prodPrices.stream().map(String::valueOf).collect(Collectors.toList());
-    	// 각각 장바구니 고유번호
+    	
+    	// 각각 img src
+    	List<String> prodImageSrcs = (List<String>) session.getAttribute("prodImageSrcs");
+    	
     	
     	// 반복으로 DB에 저장
     	for(int i = 0; i < partnerOrderIds.size(); i++) {
@@ -140,6 +143,7 @@ public class KakaoPayService {
     		payment.setTotalPrice(totalPrice);
     		payment.setCartId(cartIds.get(i));
     		payment.setRepresentativeOrderId(representativeOrderId);
+    		payment.setProdImageSrc(prodImageSrcs.get(i));
     		
     		int tp = orderService.insertOrder(payment);
     		System.out.println(tp);
