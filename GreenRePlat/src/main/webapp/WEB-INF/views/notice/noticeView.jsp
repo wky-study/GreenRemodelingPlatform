@@ -102,9 +102,28 @@
 						</ul>
 					</nav>
 				</div>
+						
+		<!-- 검색기능 -->
+			<div class="d-flex justify-content-center mb-3">
+				<form class="d-flex" action="${pageContext.request.contextPath }/noticeView" method="GET" >
+					<select class="form-select me-1" name="searchOption">
+						<option value="title" selected>제목</option>
+						<option value="content">내용</option>
+						<option value="name">작성자</option>
+					</select>
+
+					<input class="form-control me-1" type="text" name="searchWord">
+					<button class="btn btn-outline-primary" type="submit">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+						  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+						</svg>
+					</button>
+				</form>
+			</div>
 				<!-- 페이징 끝 -->
 			</div>
 		</div>
+			
 	</div>
 
 	<%@include file="/WEB-INF/inc/footer.jsp"%>

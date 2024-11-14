@@ -36,6 +36,7 @@
 						<h1>${keyNotice.noticeTitle }</h1>
 						<span>${keyNotice.noticeDate }</span>
 					</div>
+					
 					<div class="d-flex justify-content-end">
 
 							<form action="${pageContext.request.contextPath }/noticeEditView"
@@ -60,6 +61,15 @@
 								src="${pageContext.request.contextPath }/resources/images/profileImg.jpg">
 							${keyNotice.memId}
 						</h4>
+					</div>
+					<div class="mb-3 d-flex">
+						<c:forEach items="${attachList }" var="attach">
+							<div>
+								<a href="<c:url value="/filedownload?fileName=${attach.atchFileName }&fileOriName=${attach.atchOriginalName }" />">
+								${attach.atchOriginalName } (${attach.atchFancySize })
+								</a>
+							</div>
+						</c:forEach>
 					</div>
 
 					<!-- 내용 부분 -->
