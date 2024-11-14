@@ -9,23 +9,26 @@ public class OrderCreateFormDTO {
     private int quantity;
     private String partnerOrderId;
     private String cartId;              // 장바구니 번호
+    private String prodImageSrc; 	// 이미지 src
 
     public OrderCreateFormDTO() {}
 
 	public OrderCreateFormDTO(String name, int totalPrice, String mamId, int quantity, String partnerOrderId,
-			String cartId) {
+			String cartId, String prodImageSrc) {
 		this.name = name;
 		this.totalPrice = totalPrice;
 		this.mamId = mamId;
 		this.quantity = quantity;
 		this.partnerOrderId = partnerOrderId;
 		this.cartId = cartId;
+		this.prodImageSrc = prodImageSrc;
 	}
 
 	@Override
 	public String toString() {
 		return "OrderCreateFormDTO [name=" + name + ", totalPrice=" + totalPrice + ", mamId=" + mamId + ", quantity="
-				+ quantity + ", partnerOrderId=" + partnerOrderId + ", cartId=" + cartId + "]";
+				+ quantity + ", partnerOrderId=" + partnerOrderId + ", cartId=" + cartId + ", prodImageSrc="
+				+ prodImageSrc + "]";
 	}
 
 	public String getName() {
@@ -75,6 +78,16 @@ public class OrderCreateFormDTO {
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
+
+	public String getProdImageSrc() {
+		return prodImageSrc;
+	}
+
+	public void setProdImageSrc(String prodImageSrc) {
+		this.prodImageSrc = prodImageSrc;
+	}
+
+
 
 
 
