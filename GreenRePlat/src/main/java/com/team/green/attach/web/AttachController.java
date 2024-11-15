@@ -102,6 +102,7 @@ public class AttachController {
 	public ResponseEntity<byte[]> displayImage(String fileName) {
 		
 		// 요청시 넘어온 fileName을 이용하여 실제 저장된 이미지 파일을 읽어오기
+		System.out.println(fileName);
 		
 		// 이미지 파일의 풀경로 세팅 (C:\\upload\\7fe29986-7fa8-4ff8-80dc-6eda1cd44150)
 		String imgPath = attachPath + File.separatorChar + fileName;

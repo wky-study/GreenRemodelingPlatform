@@ -19,4 +19,10 @@ public interface IProductDAO {
 	// 제품 한개 조회 하기
 	ProductDTO getProduct(int no);
 	
+	// 파일첨부용 조회
+	int getProdNo();
+	
+	// 제품 등록
+	int writeProduct(ProductDTO product);
+	
 }

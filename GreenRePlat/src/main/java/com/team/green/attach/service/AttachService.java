@@ -21,9 +21,21 @@ public class AttachService {
 		return result;
 	};
 	
-	public List<AttachDTO> getAttachList(int noticeNo){
-		List<AttachDTO> result = dao.getAttachList(noticeNo);
+	public List<AttachDTO> getAttachList(int atchNoticeNo){
+		List<AttachDTO> result = dao.getAttachList(atchNoticeNo);
 		return result;
 	};
+	
+	public int insertProdAttach(AttachDTO attach) {
+		int result = dao.insertProdAttach(attach);
+		return result;
+	};
+	
+	public List<AttachDTO> getProdAttachList(int prodNo){
+		List<AttachDTO> result = dao.getProdAttachList(prodNo);
+		return result;
+	};
+	
+	
 	
 }

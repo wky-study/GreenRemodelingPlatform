@@ -34,4 +34,15 @@ public class ProductService {
 		return result;
 	}
 	
+	// 파일첨부용 조회
+	public int getProdNo() {
+		int result = dao.getProdNo();
+		return result;
+	};
+	
+	// 제품 등록
+	public int writeProduct(ProductDTO product) {
+		int result = dao.writeProduct(product);
+		return result;
+	};
 }
