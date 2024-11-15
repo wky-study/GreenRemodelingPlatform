@@ -25,4 +25,7 @@ public interface IProductDAO {
 	// 力前 殿废
 	int writeProduct(ProductDTO product);
 	
+	// 力前 昏力
+	int deleteProd(int no);
+	
 }
