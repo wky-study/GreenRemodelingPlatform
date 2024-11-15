@@ -27,7 +27,7 @@
 					<div class="header-row">
 						<h5 class="card-title">채팅방</h5>
 						<button class="btn btn-primary"
-							onclick="location.href='${pageContext.request.contextPath}/noticeWriteView'">방 만들기</button>
+							onclick="location.href='${pageContext.request.contextPath}/roomCreateView'">방 만들기</button>
 					</div>
 
 					<div class="table-responsive">
@@ -47,7 +47,7 @@
 											class="table-link1 text-truncate d-block">${room.roomNo}</span>
 										</th>
 										<td><a
-											href="${pageContext.request.contextPath }/roomView?no=${room.roomNo}"
+											href="${pageContext.request.contextPath }/chatView?no=${room.roomNo}"
 											class="link-primary text-dark fw-medium d-block">${room.roomName}</a>
 										</td>
 										<td class="text-center fw-medium">${room.memNick}(방장)</td>
