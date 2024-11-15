@@ -48,8 +48,19 @@
 				<div class="container">
 				
 					<div class="card-body">
+					
+						<form action="${pageContext.request.contextPath }/addExcel" method="POST" enctype="multipart/form-data" id="excelForm">
+							<div class="mb-3">
+								<label for="exampleInputtext1" class="form-label">Excel로 추가하기</label> 
+								<input type="file" class="form-control"  name = "file" accept=".xlsx" >
+							</div>					
+							<div class="mb-3 d-flex justify-content-end">
+								<button id="downloadBtn" class="btn btn-outline-success me-3" type="button">Excel 양식</button>
+								<button class="btn btn-outline-success" id="excelBtn" type="button" onclick="validateAndSubmit()">Excel로 등록</button>
+							</div>					
+						</form>
+						
 						<form id="reviewWriteForm" action="${pageContext.request.contextPath }/productWriteDo" method="POST" enctype="multipart/form-data">
-
 							<div class="mb-3">
 								<label for="exampleInputtext1" class="form-label">제품명</label> 
 								<input type="text" class="form-control"  name = "prodName" aria-describedby="textHelp">
@@ -122,6 +133,46 @@
 
 	<script type="text/javascript">
 	
+	
+	/* 엑셀 양식 다운로드 */
+	   document.getElementById('downloadBtn').addEventListener('click', function() {
+		   
+	        var xhr = new XMLHttpRequest();
+	        xhr.open('GET', '${pageContext.request.contextPath}/downloadProdExcel', true);
+	        xhr.responseType = 'blob'; // 응답을 blob(파일) 형태로 받음
+	        xhr.onload = function() {
+	            if (xhr.status === 200) {
+	                var blob = xhr.response;
+	                var link = document.createElement('a');
+	                link.href = URL.createObjectURL(blob);
+	                link.download = '제품등록_양식.xlsx';  // 다운로드할 파일명 설정
+	                link.click(); // 파일 다운로드 트리거
+	            }
+	        };
+	        xhr.send();
+	    });		
+	
+	
+	   function validateAndSubmit() {
+		    var fileInput = document.querySelector('input[name="file"]');
+		    var file = fileInput.files[0];  // 선택한 파일
+
+		    // 파일이 선택되지 않은 경우
+		    if (!file) {
+		        alert("엑셀 파일을 선택해주세요.");
+		        return;  // 폼 제출을 중단
+		    }
+
+		    // 파일 확장자가 .xlsx가 아닌 경우
+		    var fileName = file.name;
+		    if (!fileName.endsWith(".xlsx")) {
+		        alert("엑셀 파일(.xlsx)만 업로드 가능합니다.");
+		        return;  // 폼 제출을 중단
+		    }
+
+		    // 파일이 유효하면 폼 제출
+		    document.getElementById("excelForm").submit(); // 폼 제출
+		}
 	
 	</script>
 	

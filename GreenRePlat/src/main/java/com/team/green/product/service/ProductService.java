@@ -45,4 +45,11 @@ public class ProductService {
 		int result = dao.writeProduct(product);
 		return result;
 	};
+	
+	// 제품 삭제
+	public int deleteProd(int no) {
+		int result = dao.deleteProd(no);
+		return result;
+	};
+	
 }

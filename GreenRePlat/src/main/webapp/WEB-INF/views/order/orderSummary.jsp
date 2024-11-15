@@ -120,7 +120,7 @@
 	                var blob = xhr.response;
 	                var link = document.createElement('a');
 	                link.href = URL.createObjectURL(blob);
-	                link.download = 'boardlist.xlsx';  // 다운로드할 파일명 설정
+	                link.download = 'order_list.xlsx';  // 다운로드할 파일명 설정
 	                link.click(); // 파일 다운로드 트리거
 	            }
 	        };

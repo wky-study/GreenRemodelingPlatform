@@ -95,5 +95,12 @@
     
     </insert>
     
-	
+    
+    <!-- 제품 삭제 -->
+    <delete id="deleteProd">
+    	DELETE FROM product 
+		WHERE 1=1
+		    AND prod_no = #{no}
+    </delete>
+    
 </mapper>
