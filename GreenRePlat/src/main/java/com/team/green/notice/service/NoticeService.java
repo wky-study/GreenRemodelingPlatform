@@ -59,4 +59,8 @@ public class NoticeService {
 	public int noMemIdNotice(String memId) {
 		return dao.noMemIdNotice(memId);
 	}
+	
+	public int getNoticeNo() {
+		return dao.getNoticeNo();
+	}
 }

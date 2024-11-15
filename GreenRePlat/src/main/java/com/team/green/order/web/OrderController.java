@@ -50,6 +50,9 @@ public class OrderController {
         // 주문 번호를 담을 리스트
         List<String> partnerOrderIds = new ArrayList<>();
         
+        // 이미지 src 를 담을 리스트
+        List<String> prodImageSrcs = new ArrayList<>();
+        
         // 가격을 담을 리스트
         List<Integer> prodPrices = new ArrayList<>();
         
@@ -78,6 +81,9 @@ public class OrderController {
             String v_orderNo = "ORD" + new Date().getTime() + (i + 1);  // 타임스탬프 + 인덱스를 기반으로 주문번호 생성
             partnerOrderIds.add(v_orderNo);  // 주문 번호 리스트에 추가
             
+            // 이미지 src 담기
+            prodImageSrcs.add(orderCreateForm.getProdImageSrc());
+            
             // 가격 담기
             prodPrices.add(orderCreateForm.getTotalPrice());
             
@@ -103,6 +109,7 @@ public class OrderController {
         session.setAttribute("name", name);  // 상품명 (대표)
         session.setAttribute("prodPrices", prodPrices);  // 각각 가격 리스트
         session.setAttribute("cartIds", cartIds);  // 장바구니 고유번호 리스트
+        session.setAttribute("prodImageSrcs", prodImageSrcs);  // 이미지 src 리스트
         int quantity = totalQuantity;
         
         // 카카오 결제 준비하기

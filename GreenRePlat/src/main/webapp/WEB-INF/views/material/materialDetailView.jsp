@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <style>
 .img-border {
@@ -55,22 +55,31 @@
 				<div class="row g-5">
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
 						<div class="img-border">
-							<img class="img-fluid"
-								src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-								alt="" />
+							<img class="img-fluid" src="${MaterialDTO.itemImg}" alt="" />
 						</div>
 					</div>
 
 					<!-- 자재 상세 정보 -->
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
 						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>자재타입
+							<i class="far fa-check-circle text-primary me-3"></i>자재이름 :
+							${MaterialDTO.itemName}
 						</h5>
 						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>모델명
+							<i class="far fa-check-circle text-primary me-3"></i>모델명 :
+							${MaterialDTO.itemModel}
 						</h5>
 						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>제조사
+							<i class="far fa-check-circle text-primary me-3"></i>제조사 :
+							${MaterialDTO.itemBrand}
+						</h5>
+						<h5 class="mb-3">
+							<i class="far fa-check-circle text-primary me-3"></i>자재크기 :
+							${MaterialDTO.itemSize}
+						</h5>
+						<h5 class="mb-3">
+							<i class="far fa-check-circle text-primary me-3"></i>에너지효율등급 :
+							${MaterialDTO.itemEffiLevel}
 						</h5>
 
 						<!-- 수량 선택 및 가격 표시 -->
@@ -82,11 +91,6 @@
 								class="badge text-bg-light text-dark">수량을선택해주세요</a>
 						</h5>
 
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>가격 <span
-								id="totalPrice">10,000</span>원
-						</h5>
-
 						<!-- 견적버튼 -->
 						<a class="btn btn-primary py-3 px-5 mt-3" href="">견적서 담기</a>
 					</div>
@@ -95,55 +99,6 @@
 			</div>
 		</div>
 
-	</div>
-
-
-	<!-- 자재상페이지 자재크기 -->
-	<div class="container-xxl bg-primary facts my-5 py-5 wow fadeInUp"
-		data-wow-delay="0.1s">
-		<div class="container py-5">
-			<div class="row g-4">
-				<div class="col-lg-8">
-					<div class="card">
-						<div class="card-body">
-							<h1 style="text-align: center;">자재크기</h1>
-							<div class="table-responsive">
-								<table class="table text-nowrap align-middle mb-0">
-									<thead>
-										<tr class="border-2 border-bottom border-primary border-0">
-											<th scope="col" class="ps-0">가로</th>
-											<th scope="col">세로</th>
-											<th scope="col" class="text-center">높이</th>
-											<th scope="col" class="text-center">넓이</th>
-										</tr>
-									</thead>
-									<tbody class="table-group-divider">
-										<tr>
-											<th scope="row" class="ps-0 fw-medium"><span
-												class="table-link1 text-truncate d-block"></span></th>
-											<td><a href="javascript:void(0)"
-												class="link-primary text-dark fw-medium d-block"></a></td>
-											<td class="text-center fw-medium"></td>
-											<td class="text-center fw-medium"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="card overflow-hidden hover-img">
-						<div class="position-relative">
-							<a href="javascript:void(0)"> <img
-								src="${pageContext.request.contextPath}/assets/images/material/에너지효율등급.jpg"
-								class="card-img-top" alt="">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<div class="card-body" style="text-align: center;">
@@ -198,7 +153,7 @@
 			</div>
 		</div>
 	</div>
-
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 
 	<!-- 스크립트들 -->
@@ -208,29 +163,11 @@
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script
 		src="${pageContext.request.contextPath}/assets/libs/wow/wow.min.js"></script>
 
 	<!-- Template Javascript -->
 	<script src="${pageContext.request.contextPath}/assets/js/material.js"></script>
 
-	<%@ include file="/WEB-INF/inc/footer.jsp"%>
-
-	<script>
-		// 수량 변경 시 총 가격을 업데이트하는 함수
-		function updateTotalPrice(unitPrice) {
-			// 수량 값을 가져와 숫자로 변환
-			const quantity = parseInt(document.getElementById("quantity").value);
-
-			// 총 가격 계산
-			const totalPrice = unitPrice * quantity;
-
-			// 총 가격을 화면에 표시
-			document.getElementById("totalPrice").innerText = totalPrice
-					.toLocaleString();
-		}
-	</script>
 </body>
 
 </html>

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.green.order.dao.IOrderDAO">
 		
-	<!-- 리뷰게시판 댓글 작성 -->
 	<insert id="insertOrder" parameterType="com.team.green.order.dto.PaymentDTO">
 		INSERT INTO payment (
 		    tid, 
@@ -14,6 +13,7 @@
 		    total_price, 
 		    cart_id, 
 		    representative_order_id,
+		    prod_image_src,
 		    payment_date
 		) VALUES (
 		    #{tid}, 
@@ -25,11 +25,56 @@
 		    #{totalPrice}, 
 		    #{cartId},
 		    #{representativeOrderId},
+		    #{prodImageSrc},
 		    SYSDATE
 		)
 	</insert>
 	
+	<select id="getOrderList" resultType="com.team.green.order.dto.PaymentDTO" parameterType="com.team.green.order.dto.PaymentDTO">
+	
+		SELECT 
+		    tid, 
+		    representative_order_id, 
+		    partner_order_id, 
+		    mem_id, 
+		    cart_id, 
+		    prod_name, 
+		    prod_price, 
+		    total_price, 
+		    pg_token,
+		    prod_image_src,
+		    TO_CHAR(payment_date,'YYYY-MM-DD HH24:MI:SS') AS payment_date
+		FROM 
+		    payment
+		WHERE 
+		    mem_id = #{memId}
+		ORDER BY 
+    		payment_date DESC
+	
+	</select>
 
+
+	<select id="getReceipt" resultType="com.team.green.order.dto.PaymentDTO" parameterType="String">
+
+		SELECT 
+		    tid, 
+		    representative_order_id, 
+		    partner_order_id, 
+		    mem_id, 
+		    cart_id, 
+		    prod_name, 
+		    prod_price, 
+		    total_price, 
+		    pg_token,
+		    TO_CHAR(payment_date,'YYYY-MM-DD HH24:MI:SS') AS payment_date
+		FROM 
+		    payment
+		WHERE 1=1
+		    AND partner_order_id = #{partnerOrderId}	
+		ORDER BY 
+		    payment_date DESC	
+	
+	</select>
 
 
 </mapper>

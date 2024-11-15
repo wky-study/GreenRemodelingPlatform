@@ -62,7 +62,7 @@
 							    <tr>
 							      <th scope="row">
 									<div class="form-check">
-                      					<input class="form-check-input" type="checkbox" onclick="f_check(this, '${ProductDTO.cartId}', '${ProductDTO.prodName}', '${ProductDTO.prodPrice}')">
+                      					<input class="form-check-input" type="checkbox" onclick="f_check(this, '${ProductDTO.cartId}', '${ProductDTO.prodName}', '${ProductDTO.prodPrice}', '${ProductDTO.prodImageSrc}')">
 									</div>					      	
 							      </th>
 							      <td><img class="my-img" src="${ProductDTO.prodImageSrc}"></td>
@@ -114,12 +114,13 @@
     let v_count = 0;
 
     // 선택된 체크박스의 값 가져오기
-    function f_check(checkbox, cartId, prodName, prodPrice) {
+    function f_check(checkbox, cartId, prodName, prodPrice, prodImageSrc) {
       if (checkbox.checked) {
         console.log(cartId);
         console.log(prodPrice);
+        console.log(prodImageSrc);
         // 체크된 항목의 정보를 객체로 저장
-        selectedItems.push({ cartId, prodName, prodPrice, quantity: 1 }); // 수량은 기본 1로 설정
+        selectedItems.push({ cartId, prodName, prodPrice, quantity: 1, prodImageSrc }); // 수량은 기본 1로 설정
       } else {
         // 체크 해제된 항목은 배열에서 제거
         selectedItems = selectedItems.filter(item => item.cartId !== cartId);
@@ -155,6 +156,7 @@
 
       const cartData = {
         cartId: selectedItems.map(item => item.cartId), // 선택된 상품들의 cartId
+        prodImageSrc: selectedItems.map(item => item.prodImageSrc), // 선택된 상품들의 prodImageSrc
         memId: v_memId // 로그인된 사용자 ID
       };
 
@@ -192,6 +194,7 @@
           memId: v_memId,        // 회원 아이디
           quantity: item.quantity,  // 수량
           cartId: item.cartId,		//  장바구니 고유번호
+          prodImageSrc: item.prodImageSrc, // 이미지 src
         };
       });
 

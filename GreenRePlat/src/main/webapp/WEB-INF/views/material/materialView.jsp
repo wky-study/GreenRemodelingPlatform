@@ -3,9 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <style>
+.badge-ma {
+	position: absolute;
+	width: 90%;
+	height: 30px;
+	magin-bottom: 50%;
+	text-align: right;
+}
+
 .img-border {
 	position: relative;
 	height: 100%;
@@ -48,52 +56,66 @@
 
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 
-	<!-- 자재목록페이지 자재사진 -->
+	<!-- 자재목록페이지  -->
 	<div class="container-fluid mb-5">
+
+		<!-- 자재 목록데이터 불러오기 -->
+		<!--  
+					<c:forEach items="${keyMaterial}" var="MaterialDTO">
+						<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+							<a href="${pageContext.request.contextPath}/materialDetailView">
+								<div class="img-border">
+									<img class="img-fluid" src="${MaterialDTO.itemImg}" />
+									<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
+										${MaterialDTO.itemName}</h4>
+								</div>
+							</a>
+						</div>
+					</c:forEach>
+					-->
+
+		<!-- 자재사진과 모델명 시작 -->
 		<div class="container-xxl py-5">
 			<div class="container">
 				<div class="row g-5">
-					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-						<div class="img-border">
-							<img class="img-fluid"
-								src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg"
-								alt="" />
+					<c:forEach items="${keymaterial}" var="ProductDTO">
+						<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+							<a href="${pageContext.request.contextPath}/materialDetailView">
+								<div class="img-border">
+									<img class="img-fluid" src="${MaterialDTO.itemImg}" />
+									<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
+										${MaterialDTO.itemName}</h4>
+								</div>
+							</a>
 						</div>
-					</div>
-
-					<!-- 제품 상세 정보 -->
-					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>자재타입
-						</h5>
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>모델명
-						</h5>
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>제조사
-						</h5>
-
-						<!-- 수량 선택 및 가격 표시 -->
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>수량 <input
-								type="number" id="quantity" value="1" min="1"
-								onchange="updateTotalPrice(10000)"
-								style="width: 60px; margin-left: 10px;"> <a
-								class="badge text-bg-light text-dark">수량을선택해주세요</a>
-						</h5>
-
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>가격 <span
-								id="totalPrice">10,000</span>원
-						</h5>
-
-						<!--  -->
-						<a class="btn btn-primary py-3 px-5 mt-3" href="">견적서 담기</a>
-					</div>
-					
+					</c:forEach>
 				</div>
 			</div>
 		</div>
+
+		<!-- 자재검색기능 -->
+		<div class="d-flex justify-content-center">
+			<form class="d-flex"
+				action="${pageContext.request.contextPath }/materialView"
+				method="GET">
+				<select class="form-select me-1" name="searchOption">
+					<option value="name" selected>자재이름</option>
+					<option value="brand">제조사</option>
+					<option value="type">자재타입</option>
+				</select> <input class="form-control me-1" type="text" name="searchWord">
+				<button class="btn btn-outline-primary" type="submit">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						fill="currentColor" class="bi bi-seach" viewBox="0 0 16 16">
+				<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+				</svg>
+				</button>
+			</form>
+		</div>
+
+
+		<!-- 자재 페이징 -->
+
+
 	</div>
 
 
@@ -101,21 +123,25 @@
 
 
 
-	<!-- Back to Top -->
+
+
+
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+
+
+	<!-- 스크립트들 -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
 		class="bi bi-arrow-up"></i></a>
 
 	<!-- JavaScript Libraries -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script
 		src="${pageContext.request.contextPath}/assets/libs/wow/wow.min.js"></script>
 
 	<!-- Template Javascript -->
 	<script src="${pageContext.request.contextPath}/assets/js/material.js"></script>
 
-	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+
 
 	</script>
 </body>

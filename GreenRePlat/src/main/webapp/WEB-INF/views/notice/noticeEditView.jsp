@@ -49,6 +49,11 @@
 					<div class="mb-3">
 						<input class="form-control" id="inputId" type="text" name="noticeTitle" placeholder="제목을 입력해주세요." value="${keyNotice.noticeTitle}"/>
 					</div>
+					
+					<div class="mb-3">
+							<label for="formFileMultiple" class="form-label">파일 첨부</label>
+							<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
+						</div>
 	
 					<div class="mb-3">
 						<textarea id="smartEditor" class="form-control"  rows="10" name="noticeContent" >${keyNotice.noticeContent}</textarea>

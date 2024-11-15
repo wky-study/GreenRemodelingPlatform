@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.chat.dao.IChatLogDAO">
+	<select id="getChatList" resultType="com.team.green.chat.dto.ChatLogDTO">
+		SELECT
+			a.chat_no
+			, a.mem_id
+			, b.mem_nick
+			, a.room_no
+			, a.chat_msg
+			, TO_CHAR(a.send_date, 'RR/MM/DD HH:MI') AS send_date
+		FROM
+			chatlog a, members b
+		WHERE 1=1
+			AND a.mem_id = b.mem_id
+			AND room_no = #{roomNo}
+		ORDER BY 1
+	</select>
+
+</mapper>
