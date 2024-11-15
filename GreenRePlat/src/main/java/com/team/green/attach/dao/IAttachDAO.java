@@ -13,4 +13,8 @@ public interface IAttachDAO {
 	
 	List<AttachDTO> getAttachList(int noticeNo);
 	
+	int insertProdAttach(AttachDTO attach);
+	
+	List<AttachDTO> getProdAttachList(int prodNo);
+	
 }

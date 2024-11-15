@@ -60,7 +60,40 @@
 		WHERE 1=1
 		    AND prod_no = #{no}		
 	</select>
+	
+    <select id="getProdNo" resultType="int">
+	   	SELECT 
+	   		COUNT(*) + 1
+	   	FROM
+	   		product
+    </select>
+    
+    <!-- 제품 등록 -->
+    <insert id="writeProduct" parameterType="com.team.green.product.dto.ProductDTO">
 
-
-
+		INSERT INTO product(
+			 prod_no
+		   , prod_company
+		   , prod_model
+		   , prod_manufacturer
+		   , prod_efficiency
+		   , prod_image_src
+		   , prod_name
+		   , prod_price
+		   , prod_type
+		) VALUES(
+			  (SELECT COUNT(*)+1 FROM product)
+			, #{prodCompany}
+			, #{prodModel}
+			, #{prodManufacturer}
+			, #{prodEfficiency}
+			, #{prodImageSrc}
+			, #{prodName}
+			, #{prodPrice}
+			, #{prodType}
+		)    
+    
+    </insert>
+    
+	
 </mapper>
