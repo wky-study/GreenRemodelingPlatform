@@ -257,15 +257,14 @@
 							id="drop3" aria-expanded="false"> <iconify-icon
 									icon="solar:widget-add-bold-duotone" class="fs-6"></iconify-icon>
 						</a>
-							<div
-								class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up pb-0"
-								aria-labelledby="drop3">
+							<div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up pb-0" style="top: 50px; width: 300px;" 
+							 aria-labelledby="drop3">
 								<!--  Shortcuts -->
 								<div class="d-flex align-items-center py-3 px-7 gap-6">
 									<h3 class="mb-0 fs-5">Shortcuts</h3>
 								</div>
 
-								<div class="row gx-0">
+								<div class="row gx-0 shortcut">
 									<div class="col-6">
 										<a
 											href="${pageContext.request.contextPath}/main/app-calendar.html"
@@ -366,7 +365,7 @@
                   </svg>
 						</a>
 							<div
-								class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+								class="dropdown-menu content-ff dropdown-menu-end dropdown-menu-animate-up "
 								aria-labelledby="drop2">
 								<div class="message-body">
 									<a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item"> <i class="ti ti-user fs-6"></i> <p class="mb-0 fs-3">My Profile</p> </a>

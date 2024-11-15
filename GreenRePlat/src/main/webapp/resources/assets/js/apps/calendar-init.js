@@ -45,42 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
     center: "title",
     right: "dayGridMonth,timeGridWeek,timeGridDay",
   };
-  var calendarEventsList = [
-    {
-      id: 1,
-      title: "GreenRePlat PJ",
-      start: "2024-11-02",
-      end: "2024-11-20",
-      extendedProps: { calendar: "Success" },
-    },
-    {
-      id: 2,
-      title: "프로젝트 2차 멘토링",
-      start: "2024-11-18",
-      extendedProps: { calendar: "Danger" },
-    },
-    {
-      groupId: "999",
-      id: 3,
-      title: "Meeting #5",
-      start: `${newDate.getFullYear()}-${getDynamicMonth()}-09T16:00:00`,
-      extendedProps: { calendar: "Primary" },
-    },
-    {
-      groupId: "999",
-      id: 4,
-      title: "Submission #1",
-      start: `${newDate.getFullYear()}-${getDynamicMonth()}-16T16:00:00`,
-      extendedProps: { calendar: "Warning" },
-    },
-    {
-      id: 5,
-      title: "예비군",
-      start: "2024-11-29",
-      extendedProps: {calendar: "Primary"}
-    }
 
-  ];
+  var calendarEventsList = [];
+  
+  function updateJsCalendarEventsList(cal){
+    calendarEventsList = cal;
+  }
+
   /*=====================*/
   // Calendar Select fn.
   /*=====================*/
@@ -222,10 +193,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     myModal.hide();
   });
+  
   /*=====================*/
   // Calendar Init
   /*=====================*/
   calendar.render();
+  
   var myModal = new bootstrap.Modal(document.getElementById("eventModal"));
   var modalToggle = document.querySelector(".fc-addEventButton-button ");
   document

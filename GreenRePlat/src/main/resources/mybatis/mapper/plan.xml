@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.green.plan.dao.IPlanDAO">
+	<select id="getPlanList" resultType="com.team.green.plan.dto.PlanDTO" parameterType="com.team.green.member.dto.MemberDTO">
+	
+        SELECT
+            QUO_ID,
+            EST_ID,
+            COM_ID,
+			QUO_SDATE,
+	        QUO_EDATE,
+	        QUO_MDATE,
+            QUO_OPEN,
+            MEM_ID
+        FROM
+            quotation
+        WHERE
+            (MEM_ID = #{memId} OR COM_ID = #{memId})   <!-- memId가 estId 또는 comId와 일치하는 데이터를 조회 -->
+        ORDER BY
+            QUO_SDATE
+		
+	</select>
+</mapper>
