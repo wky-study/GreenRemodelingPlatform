@@ -41,11 +41,21 @@
 
 <select id = "loginMember" parameterType = "com.team.green.member.dto.MemberDTO" resultType = "com.team.green.member.dto.MemberDTO">
 	SELECT
-		MEM_ID
+		MEM_NAME
+		,MEM_ID
 		,MEM_PW
+		,MEM_RN
+		,MEM_ADDRESS
+		,MEM_PHONE
 		,MEM_NICK
 		,MEM_TYPE
 		,MEM_IMG
+		,COM_CEO
+		,COM_BRC
+		,COM_MA_NM
+		,COM_MA_PN
+		,MEM_HP
+		,MEM_DATE
 	FROM
 		MEMBERS
 	WHERE 1=1

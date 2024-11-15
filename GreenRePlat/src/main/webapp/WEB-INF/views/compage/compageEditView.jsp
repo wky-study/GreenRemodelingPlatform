@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="utf-8">
@@ -44,18 +44,18 @@
 
 				<input type="file" id="inputImg" accept="image/*" hidden="true" onchange="f_sandImg()">
 				
-				<form id="reviewWriteForm" action="${pageContext.request.contextPath }/reviewEditDo" method="POST" enctype="multipart/form-data">
+				<form id="reviewWriteForm" action="${pageContext.request.contextPath }/compageEditDo" method="POST" enctype="multipart/form-data">
 				
 					<div class="mb-3">
-						<input class="form-control" id="inputId" type="text" name="reviewTitle" placeholder="제목을 입력해주세요." value="${keyReview.reviewTitle}"/>
+						<input class="form-control" id="inputId" type="text" name="cpTitle" placeholder="제목을 입력해주세요." value="${keyCp.reviewTitle}"/>
 					</div>
 	
 					<div class="mb-3">
-						<textarea id="smartEditor" class="form-control"  rows="10" name="reviewContent" >${keyReview.reviewContent}</textarea>
+						<textarea id="smartEditor" class="form-control"  rows="10" name="cpContent" >${keyCp.cpContent}</textarea>
 					</div>					
 					
 					<div class="d-flex justify-content-end">
-						<a class="btn btn-secondary me-2" href="${pageContext.request.contextPath }/reviewDetailView?no=${keyReview.reviewNo}">취소</a>
+						<a class="btn btn-secondary me-2" href="${pageContext.request.contextPath }/compageDetailView?no=${keyCp.cpNo}">취소</a>
 						
 						<!-- form 태그의 submit 역할을 함 -> type=submit 넣어주기 -->
 						<button id="writeBtn" class="btn btn-primary" type="button">수정</button>
@@ -63,7 +63,7 @@
 					
 					<input type="text" id="imageFileName" name="imgFileName" hidden="true" >
 					
-					<input type="hidden" name="reviewNo" value="${keyReview.reviewNo }">
+					<input type="hidden" name="cpNo" value="${keyCp.cpNo }">
 					
 				</form>
 								
