@@ -33,10 +33,11 @@ public class RoomController {
 	@RequestMapping("/roomCreateView")
 	public String roomCreateView(Model model, HttpSession session) {
 		
-		MemberDTO login = (MemberDTO) session.getAttribute("login");
+		MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
+		System.out.println("로그인 되어있음?" + login);
 		
-		if(login == null) {
-			return "member/loginView";
+		if(session.getAttribute("memInfo") == null) {
+			return "redirect:/loginView";
 		}
 		
 		return "chat/roomCreateView";
@@ -45,21 +46,22 @@ public class RoomController {
 	// 채팅방 생성
 	@RequestMapping("/roomCreateDo")
 	public String roomCreateDo(RoomDTO room, HttpSession session) {
-		
-		System.out.println(room);
-		
-		MemberDTO login = (MemberDTO)session.getAttribute("login");
-		
-		if(login == null) {
-			return "redirect:/loginView";
-		}
-		
-		room.setMemId(login.getMemId());
-		room.setMemNick(login.getMemNick());
-		
-		roomService.createRoom(room);
-		
-		return "redirect:/chatListView";
+
+	    MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
+
+	    // 로그인 여부 확인 후 임의의 값 설정
+	    if (login == null) {
+	        room.setMemId("testId");   // 임의로 설정할 memId 값
+	        room.setMemNick("임시닉네임"); // 임의로 설정할 memNick 값
+	    } else {
+	        room.setMemId(login.getMemId());
+	        room.setMemNick(login.getMemNick());
+	    }
+
+	    roomService.createRoom(room);
+	    System.out.println("방 생성 완료");
+
+	    return "redirect:/chatListView";
 	}
 	
 	

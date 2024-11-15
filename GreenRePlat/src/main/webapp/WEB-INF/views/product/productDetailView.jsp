@@ -25,13 +25,12 @@
 	.img-fluid {
 		width: 100%;
 }
-
-	.img-border {
-		height: 100%;
-		min-height: 400px;
-	}
-	
-
+  .carousel-image {
+    width: 100%;         
+    height: 500px;           
+    object-fit: cover;     
+    object-position: center; 
+  }
 	
 </style>
 
@@ -42,17 +41,52 @@
 
 	<div class="container-fluid">
 		<div class="card">
-		
-		
+
 			<div class="container-xxl py-5">
 				<div class="container">
-					<div class="d-flex">
+				
+					<form action="${pageContext.request.contextPath }/prodDeleteDo" method="POST" id="delForm">							
+						<div class="d-flex justify-content-end">
+							<input type="hidden" value="${keyProduct.prodNo}" name="no">
+							<button class="btn btn-outline-danger py-3 px-5 mt-3 me-3"  type="button" id="delBtn" >삭제</button>
+						</div>
+					</form>						
+				
+					<div class="d-flex justify-content-around">
 
-						<div class="col-lg-6 wow fadeInUp border-end" data-wow-delay="0.5s"
-							style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-							<div class="img-border">
-								<img class="img-fluid" src="${keyProduct.prodImageSrc}">
-							</div>
+						<div class="col-lg-6 wow fadeInUp border-end" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+							
+							<div id="carouselExampleFade" class="carousel slide carousel-fade">
+							
+							  <div class="carousel-inner">
+							  
+							    <div class="carousel-item active">
+							      <img src="${keyProduct.prodImageSrc}" class="carousel-image" >
+							    </div>
+							    
+							    <!-- 이미지 여러개일때 그릴곳 -->
+								<c:forEach items="${keyAtchList}" var="AttachDTO">
+								    <div class="carousel-item">
+								      <img src="${pageContext.request.contextPath }/displayImage?fileName=${AttachDTO.atchFileName} " class="carousel-image" >
+								    </div>							    
+							    </c:forEach>
+
+							    
+							  </div>
+							  
+							  <c:if test="${keyAtchList.size() != 0}">
+								  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+								    <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+								    <span class="visually-hidden">Previous</span>
+								  </button>
+								  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+								    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								    <span class="visually-hidden">Next</span>
+								  </button>
+							  </c:if>
+							  
+							</div>								
+							
 						</div>
 	
 						<div class="d-flex flex-column justify-content-between ms-3" data-wow-delay="0.1s"
@@ -173,14 +207,20 @@
     		
     		
     	}
-    	
-    	
-    	
-    	
-    	
-    	
     })
-     
+    
+    
+	/* 게시글 삭제 경고 창 */
+	let v_delForm = document.getElementById("delForm");
+	
+	if(document.getElementById("delBtn")){
+		document.getElementById("delBtn").addEventListener("click", ()=>{
+			/*  삭제 확인 메시지를 띄움 */
+			if(confirm("정말로 삭제하시겠습니까?")){
+				v_delForm.submit();  // submit 버튼을 누른것과 동일
+			};
+		})
+	}	    
 	
 	</script>
 	

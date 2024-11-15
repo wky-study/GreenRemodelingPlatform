@@ -43,11 +43,11 @@ public class ChatLogDTO {
 		this.memId = memId;
 	}
 
-	public String getmemNick() {
+	public String getMemNick() {
 		return memNick;
 	}
 
-	public void setmemNick(String memNick) {
+	public void setMemNick(String memNick) {
 		this.memNick = memNick;
 	}
 

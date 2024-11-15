@@ -39,10 +39,10 @@
 						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/productDetailView?no=${ProductDTO.prodNo}"'>
 							<img
 								src="${ProductDTO.prodImageSrc}"
-								class="card-img-top" >
+								class="card-img-top" style="height: 200.59px;" >
 							<div class="card-body">
-								<h5 class="card-title">${ProductDTO.prodModel}</h5>
-								<p class="card-text">${ProductDTO.prodName}</p>
+								<h5 class="card-title">${ProductDTO.prodName}</h5>
+								<p class="card-text">${ProductDTO.prodModel}</p>
 								<span class="fw-bold">${ProductDTO.prodPrice}원</span>
 							</div>
 						</div>

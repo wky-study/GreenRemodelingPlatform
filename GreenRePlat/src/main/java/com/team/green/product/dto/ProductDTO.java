@@ -10,7 +10,7 @@ public class ProductDTO {
 	private String prodImageSrc;			/*  이미지경로 */
 	private String prodName;				/*  제품명 */
 	private String prodPrice;				/*  가격 */
-	private String prodCategory;			/*  분류 */
+	private String prodType;				/*  분류 */
 	
 	private String cartId;					/* 장바구니 고유번호 (DB엔 없음) */
 	
@@ -18,7 +18,7 @@ public class ProductDTO {
 	}
 
 	public ProductDTO(int prodNo, String prodCompany, String prodModel, String prodManufacturer, String prodEfficiency,
-			String prodImageSrc, String prodName, String prodPrice, String prodCategory, String cartId) {
+			String prodImageSrc, String prodName, String prodPrice, String prodType, String cartId) {
 		this.prodNo = prodNo;
 		this.prodCompany = prodCompany;
 		this.prodModel = prodModel;
@@ -27,7 +27,7 @@ public class ProductDTO {
 		this.prodImageSrc = prodImageSrc;
 		this.prodName = prodName;
 		this.prodPrice = prodPrice;
-		this.prodCategory = prodCategory;
+		this.prodType = prodType;
 		this.cartId = cartId;
 	}
 
@@ -35,8 +35,8 @@ public class ProductDTO {
 	public String toString() {
 		return "ProductDTO [prodNo=" + prodNo + ", prodCompany=" + prodCompany + ", prodModel=" + prodModel
 				+ ", prodManufacturer=" + prodManufacturer + ", prodEfficiency=" + prodEfficiency + ", prodImageSrc="
-				+ prodImageSrc + ", prodName=" + prodName + ", prodPrice=" + prodPrice + ", prodCategory="
-				+ prodCategory + ", cartId=" + cartId + "]";
+				+ prodImageSrc + ", prodName=" + prodName + ", prodPrice=" + prodPrice + ", prodType=" + prodType
+				+ ", cartId=" + cartId + "]";
 	}
 
 	public int getProdNo() {
@@ -103,12 +103,12 @@ public class ProductDTO {
 		this.prodPrice = prodPrice;
 	}
 
-	public String getProdCategory() {
-		return prodCategory;
+	public String getProdType() {
+		return prodType;
 	}
 
-	public void setProdCategory(String prodCategory) {
-		this.prodCategory = prodCategory;
+	public void setProdType(String prodType) {
+		this.prodType = prodType;
 	}
 
 	public String getCartId() {
@@ -118,6 +118,7 @@ public class ProductDTO {
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
+
 
 	
 }
