@@ -99,14 +99,13 @@ public class ChatLogController {
 
 	    // 2. 텍스트 파일 생성
 	    StringBuilder sb = new StringBuilder();
-//	    sb.append("보낸 날짜\t보낸 사람\t닉네임\t메시지\n"); // 헤더 추가
+	    // sb.append("보낸 날짜\t보낸 사람\t닉네임\t메시지\n"); // 헤더 추가
 
 	    // 채팅 내역 데이터를 텍스트에 추가
 	    for (ChatLogDTO chatLog : chatLogs) {
 	        sb.append("[")
 	          .append(chatLog.getSendDate()).append("]\n")
-//	          .append(chatLog.getMemId()).append("\t")
-	          .append(chatLog.getMemNick()).append(" 님이 보낸 내용: ")
+	          .append(chatLog.getMemNick()).append("(").append(chatLog.getMemId()).append(")").append(" 님이 보낸 내용: ")
 	          .append(chatLog.getChatMsg()).append("\n");
 	    }
 
@@ -130,7 +129,8 @@ public class ChatLogController {
 
 	    // 파일 이름 설정 (UTF-8 인코딩을 통해 한글 처리)
 	    String downloadFileName = URLEncoder.encode(memNick + "님 과의 채팅.txt", StandardCharsets.UTF_8.toString());
-	    downloadFileName = downloadFileName.replace("+", "%20"); // 공백을 %20으로 변환
+	    // 파일이름에 +가 붙어나와서 공백으로 변경
+	    downloadFileName = downloadFileName.replace("+", "%20"); 
 
 	    return ResponseEntity.ok()
 	            .contentLength(tmpFile.length())
