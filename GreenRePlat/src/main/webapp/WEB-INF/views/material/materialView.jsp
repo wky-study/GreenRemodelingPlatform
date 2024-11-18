@@ -193,9 +193,6 @@
 	<!-- Template Javascript -->
 	<script src="${pageContext.request.contextPath}/assets/js/material.js"></script>
 
-
-
-	</script>
 </body>
 
 </html>
