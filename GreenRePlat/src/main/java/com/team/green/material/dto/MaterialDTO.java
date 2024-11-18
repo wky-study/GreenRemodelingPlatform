@@ -8,15 +8,21 @@ public class MaterialDTO {
 	private String itemBrand;						/*  제조사 */
 	private String itemImg;							/*  자재이미지 */
 	private String itemEffiLevel;					/*  에너지 효율 등급 */
-	private String itemEffiStat;					/*  에너지 효율 수치 */
 	private String itemType;						/*  자재타입 */
 	private String itemSize;						/*  자재크기 */
 	
 	public MaterialDTO() {
 	}
 
+	@Override
+	public String toString() {
+		return "MaterialDTO [itemName=" + itemName + ", itemId=" + itemId + ", itemModel=" + itemModel + ", itemBrand="
+				+ itemBrand + ", itemImg=" + itemImg + ", itemEffiLevel=" + itemEffiLevel + ", itemType=" + itemType
+				+ ", itemSize=" + itemSize + "]";
+	}
+
 	public MaterialDTO(String itemName, String itemId, String itemModel, String itemBrand, String itemImg,
-			String itemEffiLevel, String itemEffiStat, String itemType, String itemSize) {
+			String itemEffiLevel, String itemType, String itemSize) {
 		super();
 		this.itemName = itemName;
 		this.itemId = itemId;
@@ -24,16 +30,8 @@ public class MaterialDTO {
 		this.itemBrand = itemBrand;
 		this.itemImg = itemImg;
 		this.itemEffiLevel = itemEffiLevel;
-		this.itemEffiStat = itemEffiStat;
 		this.itemType = itemType;
 		this.itemSize = itemSize;
-	}
-
-	@Override
-	public String toString() {
-		return "MaterialDTO [itemName=" + itemName + ", itemId=" + itemId + ", itemModel=" + itemModel + ", itemBrand="
-				+ itemBrand + ", itemImg=" + itemImg + ", itemEffiLevel=" + itemEffiLevel + ", itemEffiStat="
-				+ itemEffiStat + ", itemType=" + itemType + ", itemSize=" + itemSize + "]";
 	}
 
 	public String getItemName() {
@@ -84,14 +82,6 @@ public class MaterialDTO {
 		this.itemEffiLevel = itemEffiLevel;
 	}
 
-	public String getItemEffiStat() {
-		return itemEffiStat;
-	}
-
-	public void setItemEffiStat(String itemEffiStat) {
-		this.itemEffiStat = itemEffiStat;
-	}
-
 	public String getItemType() {
 		return itemType;
 	}
@@ -107,5 +97,6 @@ public class MaterialDTO {
 	public void setItemSize(String itemSize) {
 		this.itemSize = itemSize;
 	}
-
+	
+	
 }
