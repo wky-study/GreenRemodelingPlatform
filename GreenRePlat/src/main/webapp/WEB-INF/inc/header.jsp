@@ -39,9 +39,9 @@
 					<li class="nav-small-cap"><i
 						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
 						class="hide-menu">우리쓰는것들</span></li>
-						
+
 					<!-- 우리메뉴 시작 -->
-						
+
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/" aria-expanded="false">
 							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
@@ -85,10 +85,16 @@
 						</span> <span class="hide-menu">materialView</span>
 					</a></li>
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/planView" aria-expanded="false">
-							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
-									class="fs-6"></iconify-icon>
+						href="${pageContext.request.contextPath}/planView"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
 						</span> <span class="hide-menu">planView</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/compageView"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">compageView</span>
 					</a></li>
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/cartView"
@@ -132,17 +138,18 @@
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
 						</span> <span class="hide-menu">견적서 마지막</span>
 					</a></li>
-					</a></li>
+					</a>
+					</li>
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/chatListView"
 						aria-expanded="false"> <span> <iconify-icon
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
 						</span> <span class="hide-menu">채팅방 리스트</span>
 					</a></li>
-										
+
 					<!-- 여기까지 우리메뉴 -->
-					
-					
+
+
 					<li class="nav-small-cap"><i
 						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
 						class="hide-menu">Home</span></li>
@@ -257,8 +264,9 @@
 							id="drop3" aria-expanded="false"> <iconify-icon
 									icon="solar:widget-add-bold-duotone" class="fs-6"></iconify-icon>
 						</a>
-							<div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up pb-0" style="top: 50px; width: 300px;" 
-							 aria-labelledby="drop3">
+							<div
+								class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up pb-0"
+								style="top: 50px; width: 300px;" aria-labelledby="drop3">
 								<!--  Shortcuts -->
 								<div class="d-flex align-items-center py-3 px-7 gap-6">
 									<h3 class="mb-0 fs-5">Shortcuts</h3>
@@ -368,11 +376,15 @@
 								class="dropdown-menu content-ff dropdown-menu-end dropdown-menu-animate-up "
 								aria-labelledby="drop2">
 								<div class="message-body">
-									<a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item"> <i class="ti ti-user fs-6"></i> <p class="mb-0 fs-3">My Profile</p> </a>
-									 
-									<a href="${pageContext.request.contextPath}/cartView" class="d-flex align-items-center gap-2 dropdown-item"> <i class="ti ti-user fs-6"></i> <p class="mb-0 fs-3">My Cart</p> </a>
-									 
 									<a href="javascript:void(0)"
+										class="d-flex align-items-center gap-2 dropdown-item"> <i
+										class="ti ti-user fs-6"></i>
+										<p class="mb-0 fs-3">My Profile</p>
+									</a> <a href="${pageContext.request.contextPath}/cartView"
+										class="d-flex align-items-center gap-2 dropdown-item"> <i
+										class="ti ti-user fs-6"></i>
+										<p class="mb-0 fs-3">My Cart</p>
+									</a> <a href="javascript:void(0)"
 										class="d-flex align-items-center gap-2 dropdown-item"> <i
 										class="ti ti-mail fs-6"></i>
 										<p class="mb-0 fs-3">My Account</p>
