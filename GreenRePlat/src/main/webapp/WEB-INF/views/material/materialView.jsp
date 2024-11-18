@@ -64,7 +64,7 @@
 			<div class="container">
 				<div class="row g-5">
 					<c:forEach items="${keymaterial}" var="MaterialDTO">
-						<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
 							<a href="${pageContext.request.contextPath}/materialDetailView">
 								<div class="img-border">
 									<img class="img-fluid" src="${MaterialDTO.itemImg}" />
@@ -164,8 +164,6 @@
 
 			</div>
 		</div>
-
-
 
 
 	</div>

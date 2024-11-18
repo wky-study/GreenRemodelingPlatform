@@ -76,113 +76,116 @@
 		</div>
 	</div>
 
-	<!-- About Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-5">
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-						style="min-height: 400px">
-						<img class="position-absolute w-100 h-100"
-							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-							alt="" style="object-fit: cover" />
-						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-							style="width: 200px; height: 200px">
-							<div
-								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-								<h1 class="text-white">시공사례</h1>
-							</div>
-						</div>
-					</div>
-				</div>
 
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-						style="min-height: 400px">
-						<img class="position-absolute w-100 h-100"
-							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-							alt="" style="object-fit: cover" />
-						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-							style="width: 200px; height: 200px">
-							<div
-								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-								<h1 class="text-white">시공사례</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-						style="min-height: 400px">
-						<img class="position-absolute w-100 h-100"
-							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-							alt="" style="object-fit: cover" />
-						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-							style="width: 200px; height: 200px">
-							<div
-								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-								<h1 class="text-white">시공사례</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-						style="min-height: 400px">
-						<img class="position-absolute w-100 h-100"
-							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-							alt="" style="object-fit: cover" />
-						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-							style="width: 200px; height: 200px">
-							<div
-								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-								<h1 class="text-white">시공사례</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-						style="min-height: 400px">
-						<img class="position-absolute w-100 h-100"
-							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-							alt="" style="object-fit: cover" />
-						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-							style="width: 200px; height: 200px">
-							<div
-								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-								<h1 class="text-white">시공사례</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-						style="min-height: 400px">
-						<img class="position-absolute w-100 h-100"
-							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-							alt="" style="object-fit: cover" />
-						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-							style="width: 200px; height: 200px">
-							<div
-								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-								<h1 class="text-white">시공사례</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- About End -->
 
 	<div class="container-fluid">
 		<div class="card">
+
+			<!-- About Start -->
+			<div class="container-xxl py-5">
+				<div class="container">
+					<div class="row g-5">
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+								style="min-height: 400px">
+								<img class="position-absolute w-100 h-100"
+									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+									alt="" style="object-fit: cover" />
+								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+									style="width: 120px; height: 120px">
+									<div
+										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+										<h1 class="text-white">시공사례</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+								style="min-height: 400px">
+								<img class="position-absolute w-100 h-100"
+									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+									alt="" style="object-fit: cover" />
+								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+									style="width: 120px; height: 120px">
+									<div
+										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+										<h1 class="text-white">시공사례</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+								style="min-height: 400px">
+								<img class="position-absolute w-100 h-100"
+									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+									alt="" style="object-fit: cover" />
+								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+									style="width: 120px; height: 120px">
+									<div
+										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+										<h1 class="text-white">시공사례</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+								style="min-height: 400px">
+								<img class="position-absolute w-100 h-100"
+									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+									alt="" style="object-fit: cover" />
+								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+									style="width: 120px; height: 120px">
+									<div
+										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+										<h1 class="text-white">시공사례</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+								style="min-height: 400px">
+								<img class="position-absolute w-100 h-100"
+									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+									alt="" style="object-fit: cover" />
+								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+									style="width: 120px; height: 120px">
+									<div
+										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+										<h1 class="text-white">시공사례</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+								style="min-height: 400px">
+								<img class="position-absolute w-100 h-100"
+									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+									alt="" style="object-fit: cover" />
+								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+									style="width: 120px; height: 120px">
+									<div
+										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+										<h1 class="text-white">시공사례</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- About End -->
+
 			<div class="card-body">
 				<div
 					class="col-md-4 d-flex my-card-box w-100 justify-content-between">
@@ -297,10 +300,6 @@
 			</div>
 
 		</div>
-
-
-
-
 
 	</div>
 
