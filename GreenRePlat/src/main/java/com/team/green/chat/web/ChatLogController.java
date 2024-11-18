@@ -1,16 +1,36 @@
 package com.team.green.chat.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -71,7 +91,54 @@ public class ChatLogController {
 	    // 상대방에게 전달
 	    return chat;
 	}
+	
+	@GetMapping("/downloadChatLog")
+	public ResponseEntity<InputStreamResource> downloadChatLog(int no) throws IOException {
+	    // 1. DB에서 채팅 데이터 가져오기
+	    List<ChatLogDTO> chatLogs = chatService.getChatList(no);
 
-	
-	
+	    // 2. 텍스트 파일 생성
+	    StringBuilder sb = new StringBuilder();
+//	    sb.append("보낸 날짜\t보낸 사람\t닉네임\t메시지\n"); // 헤더 추가
+
+	    // 채팅 내역 데이터를 텍스트에 추가
+	    for (ChatLogDTO chatLog : chatLogs) {
+	        sb.append("[")
+	          .append(chatLog.getSendDate()).append("]\n")
+//	          .append(chatLog.getMemId()).append("\t")
+	          .append(chatLog.getMemNick()).append(" 님이 보낸 내용: ")
+	          .append(chatLog.getChatMsg()).append("\n");
+	    }
+
+	    // 첫 번째 채팅 내역에서 memNick 추출 (파일 이름에 사용)
+	    String memNick = chatLogs.get(0).getMemNick(); // 첫 번째 채팅 로그의 닉네임
+
+	    // 3. 텍스트 파일을 생성하여 임시 파일에 기록
+	    File tmpFile = File.createTempFile("ChatLog_", ".txt");
+	    try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(tmpFile), StandardCharsets.UTF_8)) {
+	        writer.write(sb.toString());
+	    }
+
+	    // 4. 클라이언트에게 파일 반환
+	    InputStreamResource resource = new InputStreamResource(new FileInputStream(tmpFile) {
+	        @Override
+	        public void close() throws IOException {
+	            super.close();
+	            tmpFile.delete(); // 파일 사용 후 삭제
+	        }
+	    });
+
+	    // 파일 이름 설정 (UTF-8 인코딩을 통해 한글 처리)
+	    String downloadFileName = URLEncoder.encode(memNick + "님 과의 채팅.txt", StandardCharsets.UTF_8.toString());
+	    downloadFileName = downloadFileName.replace("+", "%20"); // 공백을 %20으로 변환
+
+	    return ResponseEntity.ok()
+	            .contentLength(tmpFile.length())
+	            .contentType(MediaType.TEXT_PLAIN)
+	            .header("Content-Disposition", "attachment;filename=" + downloadFileName)
+	            .body(resource);
+	}
+
+
+
 }
