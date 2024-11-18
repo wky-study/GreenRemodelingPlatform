@@ -51,7 +51,7 @@ public class MemberController {
 	@PostMapping("/registDo")
 	public String registMember(HttpServletRequest req) {
 		String memName, memId, memPw, memRn, memAddress, memPhone, memNick, memType, memImg, comCeo, comBrc, comMaNm,
-				comMaPn, memHp;
+				comMaPn, memHp, memEmail;
 		Timestamp memDate;
 
 		memName = req.getParameter("inputName");
@@ -68,6 +68,7 @@ public class MemberController {
 		comMaNm = req.getParameter("inputMaNm");
 		comMaPn = req.getParameter("inputMaPn");
 		memHp = req.getParameter("inputHp");
+		memEmail = req.getParameter("inputEmail");
 		
 		/*
 		 * 	각종 validation 작업할것
@@ -76,13 +77,13 @@ public class MemberController {
 		try {
 			memDate = new Timestamp(new Date().getTime());
 			MemberDTO member = new MemberDTO(memName, memId, memPw, memRn, memAddress, memPhone, memNick, memType,
-					memImg, comCeo, comBrc, comMaNm, comMaPn, memHp, memDate);
+					memImg, comCeo, comBrc, comMaNm, comMaPn, memHp, memDate, memEmail);
 			System.out.println("registMemberInfo: " + member);
 			memSvc.registMember(member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "member/registView";
+		return "member/loginView";
 	}
 
 	/*

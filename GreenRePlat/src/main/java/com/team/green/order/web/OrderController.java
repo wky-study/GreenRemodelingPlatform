@@ -1,18 +1,20 @@
 package com.team.green.order.web;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +33,10 @@ public class OrderController {
 	
 	@Autowired
     KakaoPayService kakaoPayService;
-    
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
     // Logger 객체 선언
     private static final Logger log = LoggerFactory.getLogger(KakaoPayService.class);
 	
@@ -58,7 +63,10 @@ public class OrderController {
         
         // 장바구니 고유번호 리스트
         List<String> cartIds = new ArrayList<>();
-
+        
+        // 상품 이름 담을 리스트
+        List<String> prodName = new ArrayList<>();
+        
         // 대표 주문 번호 생성 (하나의 주문을 식별할 수 있는 고유 번호)
         String representativeOrderId = "REP" + new Date().getTime();  // 타임스탬프 기반으로 대표 주문번호 생성
         log.info("대표 주문 번호: " + representativeOrderId);
@@ -90,6 +98,9 @@ public class OrderController {
             // 장바구니 고유번호 담기
             cartIds.add(orderCreateForm.getCartId());
             
+            // 상품이름 담기
+            prodName.add(orderCreateForm.getName());
+            
             // 로그 출력
             log.info("주문 상품 이름: " + orderCreateForm.getName());
             log.info("주문 금액: " + orderCreateForm.getTotalPrice());
@@ -110,6 +121,7 @@ public class OrderController {
         session.setAttribute("prodPrices", prodPrices);  // 각각 가격 리스트
         session.setAttribute("cartIds", cartIds);  // 장바구니 고유번호 리스트
         session.setAttribute("prodImageSrcs", prodImageSrcs);  // 이미지 src 리스트
+        session.setAttribute("prodName", prodName);
         int quantity = totalQuantity;
         
         // 카카오 결제 준비하기
@@ -138,6 +150,86 @@ public class OrderController {
         // 카카오 결제 승인 요청
         ApproveResponseDTO approveResponse = kakaoPayService.payApprove(tid, pgToken, session);
 
+        System.out.println("완료하고 최종 리턴 전");
+        
+        // 결제가 완료되었으므로 주문 완료 페이지로 리다이렉트
+        return "order/completed";
+    }
+    
+
+    @RequestMapping("/paymentDone")
+    public String paymentDone(HttpSession session) {
+    	
+        MemberDTO member = (MemberDTO)session.getAttribute("memInfo");
+        String memName = member.getMemName();
+        String memEmail = member.getMemEmail();
+    	
+    	if(session.getAttribute("memInfo") == null) {
+    		return "redirect:/loginView";
+    	};
+    	
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+		    MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+		    
+	        Date now = new Date();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
+	        String formattedDate = sdf.format(now);
+	        
+	    	int totalPrice = (int)session.getAttribute("totalPrice"); // 전체 금액
+	    	List<String> nameList = (List)session.getAttribute("prodName");	// 각각 상품명
+	    	List<Integer> prodPrices = (List)session.getAttribute("prodPrices"); // 각각 가격
+	    	
+	    	System.out.println(nameList.size()); 
+	    	
+	    	String price = "";
+	    	
+	        // 내용 
+	        String emailContent = "<html><body style='font-family: Arial, sans-serif; color: #333;'>"
+	        	    + "<div style='max-width: 800px; margin: 0 auto; padding: 20px; border: 1px solid #e1e1e1; border-radius: 8px; background-color: #f9f9f9;'>"
+	        	    + "<h2 style='text-align: center; color: #4CAF50;'>주문하신 상품의 결제가 완료되었습니다!</h2>"
+	        	    + "<p style='font-size: 16px; color: #555;'>" + memName + " 고객님, <strong>주문일자: " + formattedDate + "</strong></p>"
+	        	    + "<p style='font-size: 16px; color: #555;'>주문하신 상품에 대한 결제가 성공적으로 완료되었습니다. 자세한 내용은 아래를 확인해 주세요.</p>"
+	        	    + "<table style='width: 100%; border-collapse: collapse; margin-top: 20px;'>"
+	        	    + "<thead>"
+	        	    + "<tr style='background-color: #f2f2f2;'>"
+	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>상품명</th>"
+	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>가격</th>"
+	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>수량</th>"
+	        	    + "</tr>"
+	        	    + "</thead>"
+	        	    + "<tbody>";
+	   for(int i = 0; i < nameList.size(); i++) {
+	        price = prodPrices.get(i) + "";
+		   emailContent += "<tr>"
+		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>" + nameList.get(i) +"</td>"
+		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>" + price + "원</td>"
+		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>1개</td>"
+		        	    + "</tr>"
+		        	    + "<tr>";		   
+	   }
+	   emailContent += "</tbody>"
+	        	    + "</table>"
+	        	    + "<p style='font-size: 16px; color: #555; margin-top: 20px;'>주문 내용 확인을 원하시면 언제든지 웹사이트를 방문해 주세요.</p>"
+	        	    + "<div style='text-align: center; margin-top: 30px;'>"
+	        	    + "<a href='http://localhost:9090/green/' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>웹사이트 방문</a>"
+	        	    + "</div>"
+	        	    + "</div>"
+	        	    + "</body></html>";
+	        
+		    messageHelper.setFrom("ecobuiltest@gmail.com"); // 보내는사람 이메일 여기선 google 메일서버 사용하는 아이디를 작성하면됨
+		    messageHelper.setTo(memEmail); // 받는사람 이메일
+		    messageHelper.setSubject(formattedDate + " 주문하신 상품의 결제가 완료되었습니다."); // 메일제목
+		    messageHelper.setText(emailContent, true); // 메일 내용
+		    
+		    mailSender.send(mimeMessage);
+		    
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	
         // 결제 완료 후 세션에서 partnerOrderId 제거
         session.removeAttribute("partnerOrderId");
         session.removeAttribute("representativeOrderId");
@@ -146,16 +238,7 @@ public class OrderController {
         session.removeAttribute("name");
         session.removeAttribute("prodPrices");
         session.removeAttribute("cartIds");
-        
-        System.out.println("완료하고 최종 리턴 전");
-        
-        // 결제가 완료되었으므로 주문 완료 페이지로 리다이렉트
-        return "order/completed";
-    }
-    
-    @RequestMapping("/paymentDone")
-    public String paymentDone() {
-    	System.out.println("완료");
+    	
     	return "order/paymentDone";
     };
     

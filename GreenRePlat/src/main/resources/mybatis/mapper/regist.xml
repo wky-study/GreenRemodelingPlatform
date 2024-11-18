@@ -19,6 +19,7 @@
 		,COM_MA_NM
 		,COM_MA_PN
 		,MEM_HP
+		,mem_email
 		,MEM_DATE
 	) VALUES(
 		#{memName}
@@ -35,6 +36,7 @@
 		,#{comMaNm}
 		,#{comMaPn}
 		,#{memHp}
+		,#{memEmail}
 		,#{memDate}
 	)
 </insert>
@@ -55,6 +57,7 @@
 		,COM_MA_NM
 		,COM_MA_PN
 		,MEM_HP
+		,mem_email
 		,MEM_DATE
 	FROM
 		MEMBERS
@@ -78,6 +81,7 @@
 		,COM_MA_NM = #{comMaNm}
 		,COM_MA_PN = #{comMaPn}
 		,MEM_HP = #{memHp}
+		,mem_email = #{memEmail}
 	WHERE 1=1
 		AND MEM_ID = #{memId}	
 </update>

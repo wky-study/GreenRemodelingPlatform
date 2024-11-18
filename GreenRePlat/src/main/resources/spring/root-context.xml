@@ -29,4 +29,25 @@
 		
 	<util:properties id="util" location="/WEB-INF/classes/spring/appconfig.properties"></util:properties>
 
+	<!-- gmail설정 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="ecobuiltest" />
+		<property name="password" value="qmnj yjac osmi whra" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtps.ssl.checkserveridentity">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtps.ssl.trust">*</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop> <!-- TLS 버전 명시 -->
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+			</props>
+		</property>
+	</bean>
+
+
 </beans>
