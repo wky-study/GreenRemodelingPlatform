@@ -82,5 +82,10 @@
 		WHERE prod_no = #{prodNo}	
 	</select>
 
+	<delete id="delAttach">
+		DELETE FROM attach
+		WHERE 1=1 
+		    AND prod_no = #{no}		
+	</delete>
 
 </mapper>

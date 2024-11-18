@@ -36,6 +36,11 @@ public class AttachService {
 		return result;
 	};
 	
+	public int delAttach(int no) {
+		int result = dao.delAttach(no);
+		return result;
+	};
+	
 	
 	
 }

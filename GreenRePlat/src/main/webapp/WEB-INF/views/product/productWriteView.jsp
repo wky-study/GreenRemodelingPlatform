@@ -89,7 +89,7 @@
 								<label for="exampleInputtext1" class="form-label">상품 분류</label> 
 							</div>
 							<div class="mb-3">
-								<select class="form-select me-1" name="searchOption">
+								<select class="form-select me-1" name="prodType">
 									<option value="가정용가스보일러" selected>가정용가스보일러</option>
 									<option value="김치냉장고">김치냉장고</option>
 									<option value="공기청정기">공기청정기</option>
@@ -100,7 +100,7 @@
 									<option value="상업용냉장고">상업용냉장고</option>
 									<option value="의류건조기">의류건조기</option>
 									<option value="일반세탁기">일반세탁기</option>
-									<option value="전깁바솥">전기밥솥</option>
+									<option value="전깁밥솥">전기밥솥</option>
 									<option value="진공청소기">진공청소기</option>
 								</select>
 							</div>

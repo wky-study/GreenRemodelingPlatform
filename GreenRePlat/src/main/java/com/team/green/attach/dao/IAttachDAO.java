@@ -17,4 +17,6 @@ public interface IAttachDAO {
 	
 	List<AttachDTO> getProdAttachList(int prodNo);
 	
+	int delAttach(int no);
+	
 }
