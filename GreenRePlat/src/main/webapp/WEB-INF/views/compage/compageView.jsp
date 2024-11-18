@@ -21,7 +21,6 @@
 
 
 <style>
-
 .my-card-box {
 	flex-wrap: wrap;
 }
@@ -38,49 +37,152 @@
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 
 
-	<div class="container-fluid">
-	
-		<!-- 시공사진 슬라이드 -->
-		<div class="col-lg-8">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title d-flex align-items-center gap-2 mb-4">
-						시공사례</h5>
-					<div id="carouselExampleControls"
-						class="carousel slide carousel-dark" data-bs-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item">
-								<img
-									src="${pageContext.request.contextPath}/assets/images/material/오늘의집01.png"
-									class="d-block w-100" alt="seodash-img">
-							</div>
-							<div class="carousel-item active">
-								<img
-									src="${pageContext.request.contextPath}/assets/images/material/오늘의집02.png"
-									class="d-block w-100" alt="seodash-img">
-							</div>
-							<div class="carousel-item">
-								<img
-									src="${pageContext.request.contextPath}/assets/images/material/오늘의집03.png"
-									class="d-block w-100" alt="seodash-img">
-							</div>
+	<!-- 사진슬라이드 -->
+	<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+		<div id="header-carousel" class="carousel slide"
+			data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="w-100"
+						src="${pageContext.request.contextPath }/assets/images/material/오늘의집01.jpg"
+						alt="Image" />
+					<div class="carousel-caption">
+						<div class="container">
+							<div class="row justify-content-center"></div>
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleControls"
-							role="button" data-bs-slide="prev"> <span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="visually-hidden">Previous</span>
-						</a> <a class="carousel-control-next" href="#carouselExampleControls"
-							role="button" data-bs-slide="next"> <span
-							class="carousel-control-next-icon" aria-hidden="true"></span> <span
-							class="visually-hidden">Next</span>
-						</a>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="w-100"
+						src="${pageContext.request.contextPath }/assets/images/material/오늘의집02.jpg"
+						alt="Image" />
+					<div class="carousel-caption">
+						<div class="container">
+							<div class="row justify-content-center"></div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
 		</div>
+	</div>
 
+	<!-- About Start -->
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+						style="min-height: 400px">
+						<img class="position-absolute w-100 h-100"
+							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+							alt="" style="object-fit: cover" />
+						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+							style="width: 200px; height: 200px">
+							<div
+								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+								<h1 class="text-white">시공사례</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+						style="min-height: 400px">
+						<img class="position-absolute w-100 h-100"
+							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+							alt="" style="object-fit: cover" />
+						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+							style="width: 200px; height: 200px">
+							<div
+								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+								<h1 class="text-white">시공사례</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+						style="min-height: 400px">
+						<img class="position-absolute w-100 h-100"
+							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+							alt="" style="object-fit: cover" />
+						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+							style="width: 200px; height: 200px">
+							<div
+								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+								<h1 class="text-white">시공사례</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+						style="min-height: 400px">
+						<img class="position-absolute w-100 h-100"
+							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+							alt="" style="object-fit: cover" />
+						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+							style="width: 200px; height: 200px">
+							<div
+								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+								<h1 class="text-white">시공사례</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+						style="min-height: 400px">
+						<img class="position-absolute w-100 h-100"
+							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+							alt="" style="object-fit: cover" />
+						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+							style="width: 200px; height: 200px">
+							<div
+								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+								<h1 class="text-white">시공사례</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
+						style="min-height: 400px">
+						<img class="position-absolute w-100 h-100"
+							src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+							alt="" style="object-fit: cover" />
+						<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
+							style="width: 200px; height: 200px">
+							<div
+								class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
+								<h1 class="text-white">시공사례</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- About End -->
+
+	<div class="container-fluid">
 		<div class="card">
-
 			<div class="card-body">
 				<div
 					class="col-md-4 d-flex my-card-box w-100 justify-content-between">
@@ -319,7 +421,10 @@
 		src="${pageContext.request.contextPath }/assets/libs/owlcarousel/owl.carousel.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath }/assets/libs/js/lightbox.min.js"></script>
-		
+
+	<!-- Template Javascript -->
+	<script src="${pageContext.request.contextPath }/assets/js/material.js"></script>
+
 </body>
 
 </html>
