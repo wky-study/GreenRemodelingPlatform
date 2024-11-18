@@ -26,9 +26,11 @@
 		        prod_name,
 		        prod_price,
 		        prod_type,
+		        del_yn,
 		        ROW_NUMBER() OVER (ORDER BY prod_no DESC) AS rnum  
 		    FROM product
 		    WHERE 1=1
+		    	AND del_yn = 'N'
 		    <include refid="productSearch"/>
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
@@ -81,6 +83,7 @@
 		   , prod_name
 		   , prod_price
 		   , prod_type
+		   , del_yn
 		) VALUES(
 			  (SELECT COUNT(*)+1 FROM product)
 			, #{prodCompany}
@@ -91,6 +94,7 @@
 			, #{prodName}
 			, #{prodPrice}
 			, #{prodType}
+			, 'N'
 		)    
     
     </insert>
@@ -98,7 +102,8 @@
     
     <!-- 제품 삭제 -->
     <delete id="deleteProd">
-    	DELETE FROM product 
+		UPDATE product
+		SET del_yn = 'Y'
 		WHERE 1=1
 		    AND prod_no = #{no}
     </delete>

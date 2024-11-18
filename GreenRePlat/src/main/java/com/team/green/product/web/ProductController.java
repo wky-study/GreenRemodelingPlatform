@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -285,10 +286,21 @@ public class ProductController {
             return ResponseEntity.ok() //
                     .contentLength(tmpFile.length()) //
                     .contentType(MediaType.APPLICATION_OCTET_STREAM) //
-                    .header("Content-Disposition", "attachment;filename=제품등록_양식.xlsx") //
+                    .header("Content-Disposition", 
+                            "attachment; filename*=UTF-8''" + URLEncoder.encode("제품등록_양식.xlsx", "UTF-8"))
                     .body(new InputStreamResource(res));
  
         }
     }
+    
+    @RequestMapping("/ocrTest")
+	public String ocrTest() {
+    	
+
+		
+		return "product/ocrTest";
+	}
+    
+    
 	
 }
