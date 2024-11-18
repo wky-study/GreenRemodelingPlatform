@@ -27,7 +27,7 @@ public class MaterialService {
 		return result;
 	};
 	
-	// 제품 한개 가져오기
+	// 자재 한개 가져오기
 	public MaterialDTO getMaterial(int id) {
 		MaterialDTO result = dao.getMaterial(id);
 		return result;
