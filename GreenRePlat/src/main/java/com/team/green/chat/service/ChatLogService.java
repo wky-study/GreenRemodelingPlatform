@@ -24,4 +24,6 @@ public class ChatLogService {
 		return result;
 	}
 	
+	
+	
 }

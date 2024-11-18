@@ -29,7 +29,6 @@ public class RoomService {
 		return result;
 	};
 	
-	
 	public int deleteRoom(int roomNo) {
 		int result = dao.deleteRoom(roomNo);
 		return result;

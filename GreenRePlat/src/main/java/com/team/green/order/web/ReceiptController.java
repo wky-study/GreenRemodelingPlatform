@@ -73,7 +73,7 @@ public class ReceiptController {
 	// 주문내역 엑셀 다운로드
 
     Logger logger = LoggerFactory.getLogger(ReceiptController.class);
- 
+
     @GetMapping("/downloadExcel")
     public ResponseEntity<InputStreamResource> downloadExcel(HttpServletResponse response, HttpSession session) throws IOException {
  
@@ -88,7 +88,7 @@ public class ReceiptController {
             font.setColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
             font.setFontHeightInPoints((short) 13);
             headStyle.setFont(font);
- 
+
             Row headerRow = sheet.createRow(rowNo++);
             headerRow.createCell(0).setCellValue("결제 고유번호");
             headerRow.createCell(1).setCellValue("대표 주문번호");

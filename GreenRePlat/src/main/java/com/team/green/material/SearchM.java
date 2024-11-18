@@ -29,7 +29,7 @@ public class SearchM {
 
 	@Override
 	public String toString() {
-		return "SearchM [seachWord=" + searchWord + ", seachOption=" + searchOption + ", pageNo=" + pageNo
+		return "SearchM [searchWord=" + searchWord + ", searchOption=" + searchOption + ", pageNo=" + pageNo
 				+ ", rowSizePerPage=" + rowSizePerPage + ", materialCount=" + materialCount + ", start=" + start
 				+ ", end=" + end + ", firstPage=" + firstPage + ", lastPage=" + lastPage + ", finalPage=" + finalPage
 				+ "]";
@@ -75,11 +75,11 @@ public class SearchM {
 		
 	}
 
-	public String getSeachWord() {
+	public String getSearchWord() {
 		return searchWord;
 	}
 
-	public void setSeachWord(String searchWord) {
+	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
 

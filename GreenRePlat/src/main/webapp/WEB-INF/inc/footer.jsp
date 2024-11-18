@@ -29,6 +29,8 @@
 	          e.preventDefault();
 	          $('.content-dd').toggleClass('show'); // 드롭다운 보이기/숨기기 전환
 	        });
+	        
+
 
 	        // 드롭다운 외부를 클릭했을 때 닫기
 	        $(document).on('click', function (e) {

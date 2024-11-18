@@ -23,7 +23,6 @@
 		  	  , item_brand
 		  	  , item_img
 		  	  , item_effi_level
-		  	  , item_effi_stat
 		  	  , item_type
 		  	  , item_size
 		      , ROW_NUMBER() OVER (ORDER BY item_id DESC) AS rnum  
@@ -53,7 +52,6 @@
 		  , item_brand
 		  , item_img
 		  , item_effi_level
-		  , item_effi_stat
 		  , item_type
 		  , item_size
 		FROM material
