@@ -56,7 +56,7 @@
 			<div class="d-flex justify-content-center">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination">
-				  
+				   
 				  
 				  	<!-- 검색중이면 검색옵션과 검색어를 유지하면서 페이징 처리 -->
 					<!-- 검색중이지 않으면 검색 옵션과 검색어가 주소창에 나타나지 않게 하기 -->
