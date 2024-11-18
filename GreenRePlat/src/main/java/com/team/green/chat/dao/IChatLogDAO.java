@@ -13,6 +13,7 @@ public interface IChatLogDAO {
 	
 	// 채팅내역 DB에 저장
 	public int insertChat(ChatLogDTO chatLog);
+	
 
 }
 

@@ -54,6 +54,9 @@ li {
 					<div class="chatWrap">
 						<div class="main_tit">
 							<h1>방 정보: [ ${room.roomNo}번방 ${room.roomName } ]</h1>
+							<button type="button" id="downloadBtn" class="btn btn-primary float-right">
+            				채팅내역 다운로드
+       						 </button>
 						</div>
 						<div class="content chatcontent border border-secondary"
 							data-room-no="${room.roomNo}">
@@ -177,13 +180,11 @@ li {
 								var message = messageInput.val();
 
 								if (message == "") {
-									alert("문제있음")
+									alert("메세지를 입력해 주세요")
 									return false;
 								}
 
-								console
-										.log(
-												"보낸 메세지:",
+								console.log("보낸 메세지:",
 												{
 													chatMsg : message,
 													memId : "${sessionScope.memInfo.memId}",
@@ -194,12 +195,7 @@ li {
 								// 실질적으로 메시지 전달하는 시점과 그 데이터
 								// WebSocketConfig에 의해 /app 을 인식하여 ChatLogController의 /hello/{roomNo} 로 요청을 보낸다.
 								// 이후 ChatLogController 에서 아래의 /subscribe/chat/{roomNo} 주소로 응답을 보낸다.
-								client
-										.send(
-												'/app/hello/' + roomNo,
-												{},
-												JSON
-														.stringify({
+								client.send('/app/hello/' + roomNo,	{}, JSON.stringify({
 															chatMsg : message,
 															memId : "${sessionScope.memInfo.memId }",
 															memNick : "${sessionScope.memInfo.memNick }",
@@ -210,8 +206,7 @@ li {
 							}
 
 							// 연결이 맺어지면 실행
-							client
-									.connect(
+							client.connect(
 											{},
 											function() {
 												// 상대방이 보낸 메세지 전달 받을 때마다 실행         
@@ -269,6 +264,13 @@ li {
 							}
 
 						});
+		// 다운로드 버튼 클릭 이벤트
+		$('#downloadBtn').click(function () {
+		    var roomNo = "${room.roomNo}";
+		    // 다운로드 요청
+		    window.location.href = "${pageContext.request.contextPath}/downloadChatLog?no=" + roomNo;
+		});
+
 	</script>
 </body>
 </html>
