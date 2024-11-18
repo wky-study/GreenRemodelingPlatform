@@ -20,13 +20,14 @@ public class MemberDTO {
 	private String comMaPn;		//	없음		담당자번호
 	private String memHp;		//	HP주소		HP주소
 	private Date memDate;		//	가입일
-
+	private String memEmail;		//	이메일 		이메일
+	
 	public MemberDTO() {
 	}
 
 	public MemberDTO(String memName, String memId, String memPw, String memRn, String memAddress, String memPhone,
 			String memNick, String memType, String memImg, String comCeo, String comBrc, String comMaNm, String comMaPn,
-			String memHp, Date memDate) {
+			String memHp, Date memDate, String memEmail) {
 		this.memName = memName;
 		this.memId = memId;
 		this.memPw = memPw;
@@ -42,14 +43,7 @@ public class MemberDTO {
 		this.comMaPn = comMaPn;
 		this.memHp = memHp;
 		this.memDate = memDate;
-	}
-
-	@Override
-	public String toString() {
-		return "MemberDTO [memName=" + memName + ", memId=" + memId + ", memPw=" + memPw + ", memRn=" + memRn
-				+ ", memAddress=" + memAddress + ", memPhone=" + memPhone + ", memNick=" + memNick + ", memType="
-				+ memType + ", memImg=" + memImg + ", comCeo=" + comCeo + ", comBrc=" + comBrc + ", comMaNm=" + comMaNm
-				+ ", comMaPn=" + comMaPn + ", memHp=" + memHp + ", memDate=" + memDate + "]";
+		this.memEmail = memEmail;
 	}
 
 	public String getMemName() {
@@ -171,6 +165,25 @@ public class MemberDTO {
 	public void setMemDate(Date memDate) {
 		this.memDate = memDate;
 	}
+
+	public String getMemEmail() {
+		return memEmail;
+	}
+
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberDTO [memName=" + memName + ", memId=" + memId + ", memPw=" + memPw + ", memRn=" + memRn
+				+ ", memAddress=" + memAddress + ", memPhone=" + memPhone + ", memNick=" + memNick + ", memType="
+				+ memType + ", memImg=" + memImg + ", comCeo=" + comCeo + ", comBrc=" + comBrc + ", comMaNm=" + comMaNm
+				+ ", comMaPn=" + comMaPn + ", memHp=" + memHp + ", memDate=" + memDate + ", memEmail=" + memEmail
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+
 	
 	
 
