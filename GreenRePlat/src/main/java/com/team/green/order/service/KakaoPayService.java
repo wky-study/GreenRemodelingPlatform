@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -153,11 +154,12 @@ public class KakaoPayService {
         return approveResponse;
     }
     
+    @Value("${kakao.pay.auth}")
+    private String auth;
+    
     // 카카오페이 측에 요청 시 헤더부에 필요한 값
     private HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        
-        String auth = "DEV84E409C34F42CB1E9F4933512B9BB08846910";
         
         headers.set("Authorization", "DEV_SECRET_KEY " + auth);
         headers.set("Content-type", "application/json");

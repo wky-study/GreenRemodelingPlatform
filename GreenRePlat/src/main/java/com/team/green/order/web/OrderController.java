@@ -178,6 +178,7 @@ public class OrderController {
 	        
 	    	int totalPrice = (int)session.getAttribute("totalPrice"); // 전체 금액
 	    	List<String> nameList = (List)session.getAttribute("prodName");	// 각각 상품명
+	    	List<String> partnerOrderIds = (List)session.getAttribute("partnerOrderIds");	// 각각 주문번호
 	    	List<Integer> prodPrices = (List)session.getAttribute("prodPrices"); // 각각 가격
 	    	
 	    	System.out.println(nameList.size()); 
@@ -193,6 +194,7 @@ public class OrderController {
 	        	    + "<table style='width: 100%; border-collapse: collapse; margin-top: 20px;'>"
 	        	    + "<thead>"
 	        	    + "<tr style='background-color: #f2f2f2;'>"
+	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>주문번호</th>"
 	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>상품명</th>"
 	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>가격</th>"
 	        	    + "<th style='padding: 8px; text-align: left; border-bottom: 1px solid #ddd;'>수량</th>"
@@ -202,6 +204,7 @@ public class OrderController {
 	   for(int i = 0; i < nameList.size(); i++) {
 	        price = prodPrices.get(i) + "";
 		   emailContent += "<tr>"
+		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>" + partnerOrderIds.get(i) +"</td>"
 		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>" + nameList.get(i) +"</td>"
 		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>" + price + "원</td>"
 		        	    + "<td style='padding: 8px; border-bottom: 1px solid #ddd;'>1개</td>"
@@ -220,7 +223,7 @@ public class OrderController {
 		    messageHelper.setFrom("ecobuiltest@gmail.com"); // 보내는사람 이메일 여기선 google 메일서버 사용하는 아이디를 작성하면됨
 		    messageHelper.setTo(memEmail); // 받는사람 이메일
 		    messageHelper.setSubject(formattedDate + " 주문하신 상품의 결제가 완료되었습니다."); // 메일제목
-		    messageHelper.setText(emailContent, true); // 메일 내용
+		    messageHelper.setText(emailContent, true); // 메일 내용 
 		    
 		    mailSender.send(mimeMessage);
 		    
@@ -230,7 +233,7 @@ public class OrderController {
 		}
     	
     	
-        // 결제 완료 후 세션에서 partnerOrderId 제거
+        // 메일 발송 후 세션에서 제거
         session.removeAttribute("partnerOrderId");
         session.removeAttribute("representativeOrderId");
         session.removeAttribute("totalPrice");
