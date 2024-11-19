@@ -45,13 +45,13 @@
 								<button class="btn btn-warning" type="submit">수정</button>
 							</form>
 
-						<c:if test="${ sessionScope.login.memId == keyNotice.memId && sessionScope.login.memId != null || sessionScope.login.memAdmin == '0'}">
+					<%-- <c:if test="${ sessionScope.memInfo.memId == keyNotice.memId && sessionScope.memInfo.memId != null || sessionScope.memInfo.memAdmin == '0'}"> --%>
 							<form id="delForm" action="${pageContext.request.contextPath }/noticeDeleteDo" method="POST">
 								<input type="hidden" value="${keyNotice.noticeNo}" name="no">
 								<button id="delBtn" class="btn btn-danger ms-2" type="button">삭제</button>
 							</form>
-
-						</c:if>
+					<%-- </c:if> --%>
+					
 					</div>
 
 					<div
@@ -96,7 +96,7 @@
 							<form id="replyForm" class="row"
 								action="${pageContext.request.contextPath }/replyWriteDo"
 								method="POST">
-								<input type="hidden" name="memId" value="${sessionScope.login.memId }">
+								<input type="hidden" name="memId" value="${sessionScope.memInfo.memId }">
 								<input type="hidden" name="noticeNo" value="${keyNotice.noticeNo }">
 								<div class="col-10">
 									<input id="replyInput" class="form-control" type="text" name="replyContent">
@@ -170,7 +170,7 @@
 			}, 100);
 		};
 		
-		let v_name = '${sessionScope.login.memName}';
+		let v_name = '${sessionScope.memInfo.memId}';
 		/* 댓글 입력 창 클릭 이벤트 */
 		document.getElementById("replyInput").addEventListener("click", ()=>{
 			

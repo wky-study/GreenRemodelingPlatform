@@ -103,6 +103,18 @@
 						</span> <span class="hide-menu">장바구니</span>
 					</a></li>
 					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/orderSummary"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">주문내역</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="${pageContext.request.contextPath}/productWriteView"
+						aria-expanded="false"> <span> <iconify-icon
+									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+						</span> <span class="hide-menu">제품 등록</span>
+					</a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/settingView"
 						aria-expanded="false"> <span> <iconify-icon
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
