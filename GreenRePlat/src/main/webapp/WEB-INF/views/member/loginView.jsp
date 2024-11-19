@@ -68,6 +68,7 @@
 											href="${pageContext.request.contextPath}/registView">회원가입</a>
 									</div>
 								</form>
+								
 							</div>
 						</div>
 					</div>
@@ -90,5 +91,6 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
+
 
 </html>
