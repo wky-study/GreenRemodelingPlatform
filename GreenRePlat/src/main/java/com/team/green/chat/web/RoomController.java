@@ -22,7 +22,6 @@ public class RoomController {
 	
 	@Autowired
 	MemberService memberService;
-	
 
 	// 채팅방 목록 화면
 	@RequestMapping("/chatListView")
@@ -89,7 +88,8 @@ public class RoomController {
 	        room.setMemId(login.getMemId());
 	        room.setMemNick(login.getMemNick());
 	        room.setPartMem(partMem);  // 신청받은 멤버 ID
-	        room.setRoomName(login.getMemNick() + "님" + partMem + "님의 채팅방");
+	        String man = memberService.searchMember(partMem).getMemNick();
+	        room.setRoomName(login.getMemNick() + "님 " + man + "님의 채팅방");
 
 	        // 방 생성 호출
 	        roomService.createRoom(room);

@@ -8,6 +8,13 @@ import com.team.green.member.dto.MemberDTO;
 
 @Mapper
 public interface IMemberDAO {
+
+	int registMember(MemberDTO member);			//	ȸ������
+	MemberDTO loginMember(MemberDTO member);	//	�α���
+	int updateMember(MemberDTO member);	//	ȸ����������
+	MemberDTO searchMember(String member);	//	ȸ���˻�
+	// ��� ��� ��������
+
 	int registMember(MemberDTO member);			//	회원가입
 	MemberDTO loginMember(MemberDTO member);	//	로그인
 	int updateMember(MemberDTO member);	//	회원정보수정
@@ -17,6 +24,7 @@ public interface IMemberDAO {
 
 	
 	// 멤버 목록 가져오기
+
 	public List<MemberDTO> getMemList();
 
 
