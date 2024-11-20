@@ -6,10 +6,10 @@ public class MaterialDTO {
 	private String itemId;							/*  자재id */
 	private String itemModel;						/*  모델명 */
 	private String itemBrand;						/*  제조사 */
-	private String itemImg;							/*  자재이미지 */
 	private String itemEffiLevel;					/*  에너지 효율 등급 */
 	private String itemType;						/*  자재타입 */
 	private String itemSize;						/*  자재크기 */
+	private String itemImg;							/*  자재이미지 */
 	
 	public MaterialDTO() {
 	}
@@ -17,21 +17,21 @@ public class MaterialDTO {
 	@Override
 	public String toString() {
 		return "MaterialDTO [itemName=" + itemName + ", itemId=" + itemId + ", itemModel=" + itemModel + ", itemBrand="
-				+ itemBrand + ", itemImg=" + itemImg + ", itemEffiLevel=" + itemEffiLevel + ", itemType=" + itemType
-				+ ", itemSize=" + itemSize + "]";
+				+ itemBrand + ", itemEffiLevel=" + itemEffiLevel + ", itemType=" + itemType + ", itemSize=" + itemSize
+				+ ", itemImg=" + itemImg + "]";
 	}
 
-	public MaterialDTO(String itemName, String itemId, String itemModel, String itemBrand, String itemImg,
-			String itemEffiLevel, String itemType, String itemSize) {
+	public MaterialDTO(String itemName, String itemId, String itemModel, String itemBrand, String itemEffiLevel,
+			String itemType, String itemSize, String itemImg) {
 		super();
 		this.itemName = itemName;
 		this.itemId = itemId;
 		this.itemModel = itemModel;
 		this.itemBrand = itemBrand;
-		this.itemImg = itemImg;
 		this.itemEffiLevel = itemEffiLevel;
 		this.itemType = itemType;
 		this.itemSize = itemSize;
+		this.itemImg = itemImg;
 	}
 
 	public String getItemName() {
@@ -66,14 +66,6 @@ public class MaterialDTO {
 		this.itemBrand = itemBrand;
 	}
 
-	public String getItemImg() {
-		return itemImg;
-	}
-
-	public void setItemImg(String itemImg) {
-		this.itemImg = itemImg;
-	}
-
 	public String getItemEffiLevel() {
 		return itemEffiLevel;
 	}
@@ -97,6 +89,13 @@ public class MaterialDTO {
 	public void setItemSize(String itemSize) {
 		this.itemSize = itemSize;
 	}
-	
+
+	public String getItemImg() {
+		return itemImg;
+	}
+
+	public void setItemImg(String itemImg) {
+		this.itemImg = itemImg;
+	}
 	
 }
