@@ -13,31 +13,21 @@ public class MemberService {
 	
 	@Autowired
 	IMemberDAO dao;
-	/*	회원가입
-	 * 
-	 */
 	public int registMember(MemberDTO member) {
 		int result = dao.registMember(member);
 		return result;
 	}
-	/*	로그인
-	 * 
-	 */
 	public MemberDTO loginMember(MemberDTO member) {
 		MemberDTO result = dao.loginMember(member);
 		return result;
 	}
 	
-	/*	회원정보수정(일반회원)
-	 * 
-	 */
 	public int updateMember(MemberDTO member) {
 		int result = dao.updateMember(member);
 		return result;
 	}
 	
 
-	// 소셜 로그인 가입 확인용
 	public String getMember(String memId) {
 		String result = dao.getMember(memId);
 		return result;
