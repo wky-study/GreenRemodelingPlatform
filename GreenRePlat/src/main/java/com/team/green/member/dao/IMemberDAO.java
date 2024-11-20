@@ -9,17 +9,13 @@ import com.team.green.member.dto.MemberDTO;
 @Mapper
 public interface IMemberDAO {
 
-	int registMember(MemberDTO member);			//	ȸ������
-	MemberDTO loginMember(MemberDTO member);	//	�α���
-	int updateMember(MemberDTO member);	//	ȸ����������
-	MemberDTO searchMember(String member);	//	ȸ���˻�
-	// ��� ��� ��������
+	int registMember(MemberDTO member);
+	MemberDTO loginMember(MemberDTO member);
+	int updateMember(MemberDTO member);
+	MemberDTO searchMember(String member);
 
-	int registMember(MemberDTO member);			//	회원가입
-	MemberDTO loginMember(MemberDTO member);	//	로그인
-	int updateMember(MemberDTO member);	//	회원정보수정
 
-	String getMember(String memId); // 소셜 로그인용 가입榮쩝 확인
+	String getMember(String memId);
 	MemberDTO socialLoginMember(String memId); 
 
 	
