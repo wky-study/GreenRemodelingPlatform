@@ -11,7 +11,7 @@ public interface IMemberDAO {
 	int registMember(MemberDTO member);			//	회원가입
 	MemberDTO loginMember(MemberDTO member);	//	로그인
 	int updateMember(MemberDTO member);	//	회원정보수정
-	
+	MemberDTO searchMember(String member);	//	회원검색
 	// 멤버 목록 가져오기
 	public List<MemberDTO> getMemList();
 

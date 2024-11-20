@@ -40,5 +40,9 @@ public class MemberService {
 		List<MemberDTO> result = dao.getMemList();
 		return result;
 	}
+	public MemberDTO searchMember(String member) {
+		MemberDTO result = dao.searchMember(member);
+		return result;
+	}
 
 }
