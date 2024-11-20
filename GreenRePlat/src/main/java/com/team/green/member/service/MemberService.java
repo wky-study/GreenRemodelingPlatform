@@ -33,5 +33,16 @@ public class MemberService {
 		int result = dao.updateMember(member);
 		return result;
 	}
-
+	
+	// 소셜 로그인 가입 확인용
+	public String getMember(String memId) {
+		String result = dao.getMember(memId);
+		return result;
+	};
+	
+	public MemberDTO socialLoginMember(String memId) {
+		MemberDTO result = dao.socialLoginMember(memId);
+		return result;
+	}; 
+	
 }
