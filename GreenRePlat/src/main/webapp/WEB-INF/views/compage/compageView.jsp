@@ -11,11 +11,11 @@
 
 <!-- Libraries Stylesheet -->
 <link
-	href="${pageContext.request.contextPath }/assets/libs/animate/animate.min.css" />
+	href="${pageContext.request.contextPath }/assets/libs/animate/animate.min.css"
+	rel="stylesheet" />
 <link
-	href="${pageContext.request.contextPath }/assets/libs/lightbox/css/lightbox.min.css" />
-<link
-	href="${pageContext.request.contextPath }/assets/libs/owlcarousel/assets/owl.carousel.min.css" />
+	href="${pageContext.request.contextPath }/assets/libs/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet" />
 
 </head>
 
@@ -29,7 +29,42 @@
 	width: calc(100%/ 5 + 2px);
 	cursor: pointer;
 }
+
+.badge-ma {
+	position: absolute;
+	width: 90%;
+	height: 30px;
+	magin-bottom: 50%;
+	text-align: right;
+}
+
+.img-border {
+	position: relative;
+	height: 100%;
+	min-height: 400px;
+}
+
+.img-border::before {
+	position: absolute;
+	content: "";
+	top: 3rem;
+	left: 0;
+	right: 3rem;
+	bottom: 0;
+	border: 5px solid #2952ff;
+}
+
+.img-border img {
+	position: absolute;
+	top: 0;
+	left: 3rem;
+	width: calc(100% - 3rem);
+	height: calc(100% - 3rem);
+	object-fit: cover;
+}
 </style>
+
+
 
 
 <body>
@@ -77,114 +112,30 @@
 	</div>
 
 
-
+	<!-- 시공사례목록 -->
 	<div class="container-fluid">
 		<div class="card">
-
-			<!-- About Start -->
 			<div class="container-xxl py-5">
 				<div class="container">
 					<div class="row g-5">
-						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-								style="min-height: 400px">
-								<img class="position-absolute w-100 h-100"
-									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-									alt="" style="object-fit: cover" />
-								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-									style="width: 120px; height: 120px">
-									<div
-										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-										<h1 class="text-white">시공사례</h1>
-									</div>
+					<!-- 목록그리기 -->
+						<c:forEach items="${keyCp}" var="CompageDTO">
+							<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+								<div class="img-border"
+									onclick='window.location.href ="${pageContext.request.contextPath}/compageDetailView"'>
+									<img class="img-fluid"
+										src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg" />
+									<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
+										시공업체,시공주소</h4>
 								</div>
 							</div>
-						</div>
-
-						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-								style="min-height: 400px">
-								<img class="position-absolute w-100 h-100"
-									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-									alt="" style="object-fit: cover" />
-								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-									style="width: 120px; height: 120px">
-									<div
-										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-										<h1 class="text-white">시공사례</h1>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-								style="min-height: 400px">
-								<img class="position-absolute w-100 h-100"
-									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-									alt="" style="object-fit: cover" />
-								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-									style="width: 120px; height: 120px">
-									<div
-										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-										<h1 class="text-white">시공사례</h1>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-								style="min-height: 400px">
-								<img class="position-absolute w-100 h-100"
-									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-									alt="" style="object-fit: cover" />
-								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-									style="width: 120px; height: 120px">
-									<div
-										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-										<h1 class="text-white">시공사례</h1>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-								style="min-height: 400px">
-								<img class="position-absolute w-100 h-100"
-									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-									alt="" style="object-fit: cover" />
-								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-									style="width: 120px; height: 120px">
-									<div
-										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-										<h1 class="text-white">시공사례</h1>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-							<div class="position-relative overflow-hidden ps-5 pt-5 h-100"
-								style="min-height: 400px">
-								<img class="position-absolute w-100 h-100"
-									src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
-									alt="" style="object-fit: cover" />
-								<div class="position-absolute top-0 start-0 bg-white pe-3 pb-3"
-									style="width: 120px; height: 120px">
-									<div
-										class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
-										<h1 class="text-white">시공사례</h1>
-									</div>
-								</div>
-							</div>
-						</div>
-
+						</c:forEach>
 					</div>
 				</div>
 			</div>
-			<!-- About End -->
+
+
+
 
 			<div class="card-body">
 				<div

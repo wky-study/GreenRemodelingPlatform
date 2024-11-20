@@ -13,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.team.green.attach.dto.AttachDTO;
 import com.team.green.material.SearchM;
 import com.team.green.material.dto.MaterialDTO;
 import com.team.green.material.service.MaterialService;
+import com.team.green.product.dto.ProductDTO;
 
 @Controller
 public class MaterialController {
@@ -45,9 +47,18 @@ public class MaterialController {
 		return "material/materialView";
 	}
 
-	/* 자재상세페이지 */
+	// 제품 글 상세 페이지
 	@RequestMapping("/materialDetailView")
-	public String materialDetailView() {
+	public String materialDetailView(Model model, int id) {
+
+		System.out.println("클릭한 게시글 번호" + id);
+
+		MaterialDTO material = null;
+		material = materialService.getMaterial(id);
+
+		System.out.println(material);
+
+		model.addAttribute("keyMaterial", material);
 
 		return "material/materialDetailView";
 	}
