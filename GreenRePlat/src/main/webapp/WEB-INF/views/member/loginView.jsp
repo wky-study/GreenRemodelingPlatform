@@ -68,13 +68,13 @@
 											href="${pageContext.request.contextPath}/registView">회원가입</a>
 									</div>
 									
-<!-- 									<div class="d-flex align-items-center justify-content-center">
-										<a class="text-primary fw-bold ms-2"
-											href="https://kauth.kakao.com/oauth/authorize?client_id=171fb9566372cf9d17d200f53126c029&redirect_uri=http://localhost:9090/green/member/kakaoLogin&response_type=code">카카오로그인</a>
-									</div> -->
-									
 									
 								</form>
+								<div class="d-flex align-items-center justify-content-center">
+									<a class="text-primary fw-bold ms-2"
+										href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pq95RcUR8Axo8_g97G8i&state=STATE_STRING&redirect_uri=http://localhost:9090/green/naverlogin" target="_blank">
+										<img style="width: 45px;" src="${pageContext.request.contextPath}/resources/images/btnG_아이콘사각.png"></a>
+								</div>
 								
 							</div>
 						</div>

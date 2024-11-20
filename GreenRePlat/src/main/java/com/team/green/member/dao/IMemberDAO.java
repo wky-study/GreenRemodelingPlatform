@@ -8,11 +8,24 @@ import com.team.green.member.dto.MemberDTO;
 
 @Mapper
 public interface IMemberDAO {
-	int registMember(MemberDTO member);			//	È¸¿ø°¡ÀÔ
-	MemberDTO loginMember(MemberDTO member);	//	·Î±×ÀÎ
-	int updateMember(MemberDTO member);	//	È¸¿øÁ¤º¸¼öÁ¤
-	MemberDTO searchMember(String member);	//	È¸¿ø°Ë»ö
-	// ¸â¹ö ¸ñ·Ï °¡Á®¿À±â
+
+	int registMember(MemberDTO member);			//	È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	MemberDTO loginMember(MemberDTO member);	//	ï¿½Î±ï¿½ï¿½ï¿½
+	int updateMember(MemberDTO member);	//	È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	MemberDTO searchMember(String member);	//	È¸ï¿½ï¿½ï¿½Ë»ï¿½
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+	int registMember(MemberDTO member);			//	íšŒì›ê°€ì…
+	MemberDTO loginMember(MemberDTO member);	//	ë¡œê·¸ì¸
+	int updateMember(MemberDTO member);	//	íšŒì›ì •ë³´ìˆ˜ì •
+
+	String getMember(String memId); // ì†Œì…œ ë¡œê·¸ì¸ìš© ê°€ì…Â‰æ¦®ì© í™•ì¸
+	MemberDTO socialLoginMember(String memId); 
+
+	
+	// ë©¤ë²„ ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
+
 	public List<MemberDTO> getMemList();
+
 
 }

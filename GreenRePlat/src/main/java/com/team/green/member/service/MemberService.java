@@ -13,14 +13,14 @@ public class MemberService {
 	
 	@Autowired
 	IMemberDAO dao;
-	/*	È¸¿ø°¡ÀÔ
+	/*	íšŒì›ê°€ì…
 	 * 
 	 */
 	public int registMember(MemberDTO member) {
 		int result = dao.registMember(member);
 		return result;
 	}
-	/*	·Î±×ÀÎ
+	/*	ë¡œê·¸ì¸
 	 * 
 	 */
 	public MemberDTO loginMember(MemberDTO member) {
@@ -28,7 +28,7 @@ public class MemberService {
 		return result;
 	}
 	
-	/*	È¸¿øÁ¤º¸¼öÁ¤(ÀÏ¹İÈ¸¿ø)
+	/*	íšŒì›ì •ë³´ìˆ˜ì •(ì¼ë°˜íšŒì›)
 	 * 
 	 */
 	public int updateMember(MemberDTO member) {
@@ -36,6 +36,19 @@ public class MemberService {
 		return result;
 	}
 	
+
+	// ì†Œì…œ ë¡œê·¸ì¸ ê°€ì… í™•ì¸ìš©
+	public String getMember(String memId) {
+		String result = dao.getMember(memId);
+		return result;
+	};
+	
+	public MemberDTO socialLoginMember(String memId) {
+		MemberDTO result = dao.socialLoginMember(memId);
+		return result;
+	}; 
+	
+
 	public List<MemberDTO> getMemList(){
 		List<MemberDTO> result = dao.getMemList();
 		return result;
@@ -44,5 +57,6 @@ public class MemberService {
 		MemberDTO result = dao.searchMember(member);
 		return result;
 	}
+
 
 }

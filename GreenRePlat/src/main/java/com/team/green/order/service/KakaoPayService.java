@@ -154,7 +154,7 @@ public class KakaoPayService {
         return approveResponse;
     }
     
-    @Value("${kakao.pay.auth}")
+    @Value("#{util['kakao.pay.auth']}")
     private String auth;
     
     // 카카오페이 측에 요청 시 헤더부에 필요한 값

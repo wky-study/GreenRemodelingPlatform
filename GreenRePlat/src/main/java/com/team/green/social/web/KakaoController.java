@@ -1,4 +1,4 @@
-package com.team.green.kakao.web;
+package com.team.green.social.web;
 
 import java.util.HashMap;
 
@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.team.green.kakao.service.KakaoService;
+import com.team.green.social.service.KakaoService;
+
 
 
 @Controller
