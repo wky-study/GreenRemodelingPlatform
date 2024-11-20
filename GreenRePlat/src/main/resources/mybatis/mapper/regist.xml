@@ -86,5 +86,8 @@
 		AND MEM_ID = #{memId}	
 </update>
 
+	<select id="getMemList" resultType="com.team.green.member.dto.MemberDTO">
+		SELECT * FROM members
+	</select>
 
 </mapper>

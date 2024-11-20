@@ -1,5 +1,7 @@
 package com.team.green.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,11 @@ public class MemberService {
 	 */
 	public int updateMember(MemberDTO member) {
 		int result = dao.updateMember(member);
+		return result;
+	}
+	
+	public List<MemberDTO> getMemList(){
+		List<MemberDTO> result = dao.getMemList();
 		return result;
 	}
 
