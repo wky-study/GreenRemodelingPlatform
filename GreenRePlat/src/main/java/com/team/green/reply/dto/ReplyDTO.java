@@ -6,6 +6,7 @@ public class ReplyDTO {
 	private int articleNo;					/* 게시글 번호 */
 	private int reviewNo;					/* 리뷰 게시글 번호 */
 	private String memId;					/* 작성자 이름 */
+	private String memNick;					/* 작성자 닉네임 */
 	private String replyContent;			/* 댓글 내용 */
 	private String replyDate;				/* 댓글 작성일 */
 	private String delYn;					/* 삭제 여부 */
@@ -16,24 +17,25 @@ public class ReplyDTO {
 	}
 
 
-	public ReplyDTO(String replyNo, int articleNo, int reviewNo, String memId, String replyContent, String replyDate,
-			String delYn, String tableName) {
+	@Override
+	public String toString() {
+		return "ReplyDTO [replyNo=" + replyNo + ", articleNo=" + articleNo + ", reviewNo=" + reviewNo + ", memId="
+				+ memId + ", memNick=" + memNick + ", replyContent=" + replyContent + ", replyDate=" + replyDate
+				+ ", delYn=" + delYn + ", tableName=" + tableName + "]";
+	}
+
+
+	public ReplyDTO(String replyNo, int articleNo, int reviewNo, String memId, String memNick, String replyContent,
+			String replyDate, String delYn, String tableName) {
 		this.replyNo = replyNo;
 		this.articleNo = articleNo;
 		this.reviewNo = reviewNo;
 		this.memId = memId;
+		this.memNick = memNick;
 		this.replyContent = replyContent;
 		this.replyDate = replyDate;
 		this.delYn = delYn;
 		this.tableName = tableName;
-	}
-
-
-	@Override
-	public String toString() {
-		return "ReplyDTO [replyNo=" + replyNo + ", articleNo=" + articleNo + ", reviewNo=" + reviewNo + ", memId="
-				+ memId + ", replyContent=" + replyContent + ", replyDate=" + replyDate + ", delYn=" + delYn
-				+ ", tableName=" + tableName + "]";
 	}
 
 
@@ -77,6 +79,16 @@ public class ReplyDTO {
 	}
 
 
+	public String getMemNick() {
+		return memNick;
+	}
+
+
+	public void setMemNick(String memNick) {
+		this.memNick = memNick;
+	}
+
+
 	public String getReplyContent() {
 		return replyContent;
 	}
@@ -115,7 +127,8 @@ public class ReplyDTO {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
-	
+
+
 	
 	
 	

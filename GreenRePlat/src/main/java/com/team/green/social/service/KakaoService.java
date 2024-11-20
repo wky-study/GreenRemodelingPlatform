@@ -1,4 +1,4 @@
-package com.team.green.kakao.service;
+package com.team.green.social.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

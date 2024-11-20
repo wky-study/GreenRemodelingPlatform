@@ -86,7 +86,7 @@
 					<div class="mb-5">
 						<div class="d-flex justify-content-between mt-3">
 							<div>
-								<span class="my-span">좋아요 : 0</span> <span class="my-span">조회수
+								<span class="my-span">조회수
 									: ${keyReview.reviewCount} </span>
 							</div>
 						</div>
@@ -125,7 +125,7 @@
 									</div>
 									<div class="col-9">
 										<div>
-											<h4>${replyDTO.memId }</h4>
+											<h4>${replyDTO.memNick }</h4>
 										</div>
 										<div>
 											<span>${replyDTO.replyContent }</span>
@@ -228,7 +228,7 @@
 				v_reply += '<input type="hidden" value="' + resp['replyNo'] + '">';
 				v_reply += '<div class="col-1"><img class="my-profile-img" src="${pageContext.request.contextPath }/resources/images/profileImg.jpg"> </div>';
 				v_reply += ' <div class="col-9">';
-				v_reply += " <div><h4> " + resp['memId'] + "</h4></div>" ;
+				v_reply += " <div><h4> " + resp['memNick'] + "</h4></div>" ;
 				v_reply += "<div><span>" + resp['replyContent'] + "</span></div>";
 				v_reply += '<div class="d-flex ">';
 				v_reply += ' <div>'; 
