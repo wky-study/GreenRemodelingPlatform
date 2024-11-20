@@ -17,6 +17,6 @@ public interface IMaterialDAO {
 	int getMaterialCount(SearchM search);
 	
 	// 자재 한개 조회 하기
-	MaterialDTO getMaterial(int id);
+	MaterialDTO getMaterial(int no);
 	
 }

@@ -63,18 +63,16 @@
 		<div class="container-xxl py-5">
 			<div class="container">
 				<div class="row g-5">
-
-					<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-						<c:forEach items="${keyMaterial}" var="MaterialDTO">
+					<c:forEach items="${keyMaterial}" var="MaterialDTO">
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
 							<div class="img-border"
 								onclick='window.location.href = "${pageContext.request.contextPath}/materialDetailView?no=${MaterialDTO.itemId}"'>
 								<img class="img-fluid" src="${MaterialDTO.itemImg}" />
 								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
 									${MaterialDTO.itemName}</h4>
 							</div>
-						</c:forEach>
-					</div>
-
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 
