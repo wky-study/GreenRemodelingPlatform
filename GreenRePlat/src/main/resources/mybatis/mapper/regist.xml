@@ -121,7 +121,6 @@
 		AND MEM_ID = #{memId}
 
 </select>
-=======
 	<select id="getMemList" resultType="com.team.green.member.dto.MemberDTO">
 		SELECT * FROM members
 	</select>
