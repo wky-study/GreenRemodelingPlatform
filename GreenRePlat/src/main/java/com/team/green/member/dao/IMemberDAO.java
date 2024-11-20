@@ -1,14 +1,23 @@
 package com.team.green.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.team.green.member.dto.MemberDTO;
 
 @Mapper
 public interface IMemberDAO {
-	int registMember(MemberDTO member);			//	È¸¿ø°¡ÀÔ
-	MemberDTO loginMember(MemberDTO member);	//	·Î±×ÀÎ
-	int updateMember(MemberDTO member);	//	È¸¿øÁ¤º¸¼öÁ¤
-	String getMember(String memId); // ¼Ò¼È ·Î±×ÀÎ¿ë °¡ÀÔ‰ç´ÂÁö È®ÀÎ
+	int registMember(MemberDTO member);			//	íšŒì›ê°€ì…
+	MemberDTO loginMember(MemberDTO member);	//	ë¡œê·¸ì¸
+	int updateMember(MemberDTO member);	//	íšŒì›ì •ë³´ìˆ˜ì •
+
+	String getMember(String memId); // ì†Œì…œ ë¡œê·¸ì¸ìš© ê°€ì…Â‰æ¦®ì© í™•ì¸
 	MemberDTO socialLoginMember(String memId); 
+
+	
+	// ë©¤ë²„ ëª©ë¡ ê°€ì ¸ì˜¤ê¸°
+	public List<MemberDTO> getMemList();
+
+
 }
