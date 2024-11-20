@@ -40,7 +40,7 @@ public class MaterialController {
 		System.out.println(search);
 		System.out.println(materialList);
 
-		model.addAttribute("keymaterial, materialList");
+		model.addAttribute("keyMaterial, materialList");
 
 		model.addAttribute("keySearch", search);
 
