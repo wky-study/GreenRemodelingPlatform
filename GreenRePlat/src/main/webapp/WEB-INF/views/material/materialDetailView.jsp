@@ -101,58 +101,6 @@
 
 	</div>
 
-	<div class="card-body" style="text-align: center;">
-
-		<!-- 자재상세페이지 자재상세설명 -->
-		<div class="container">
-			<div class="card-body">
-				<h1>상품 상세설명</h1>
-
-				<h5>소송건조 다루끼(A급)</h5>
-				<br>
-				<h5>30x30x3600</h5>
-				<br> <img
-					src="${pageContext.request.contextPath}/assets/images/material/자재사진01.jpg">
-				<br>
-				<h5>각목, 각재, 다루끼 등 다양하게 불리고 있으며 현장에서는 다루끼라고 많이 부르고 있습니다.</h5>
-				<br>
-				<h5>다루끼는 두꺼운 제재목을 두께 방향으로 분할하여 만든 제재목입니다</h5>
-				<br>
-				<h5>​현재 국내에서 유통되는 다루끼는 미송, 소송, 뉴송, 유럽산 스프러스 크게 4가지로 분류되며</h5>
-				<br>
-				<h5>가장 널리 이용되고 있는 각재는 소송각재 입니다.</h5>
-				<br> <img
-					src="${pageContext.request.contextPath}/assets/images/material/자재사진02.jpg"
-					class="card-img-top"> <br> <img
-					src="${pageContext.request.contextPath}/assets/images/material/자재사진03.jpg"
-					class="card-img-top"> <br>
-				<h1>특징 및 장점</h1>
-				<br>
-				<h5>소송은 러시아산 소나무로 미송보다 색상이 밝고 옹이가 적어 강도저하가 적습니다.</h5>
-				<br>
-				<h5>​소송다루끼의 용도는 목질이 연하고 부드러워 인테리어재, 펄프재, 선박재로 자주 사용되며 바닥과 내벽의
-					합판이나 마루를 시공할 때 또는 천정 공사를 할 때 프레임용으로 많이 사용됩니다</h5>
-				<br>
-				<h1>목재 전국 유통</h1>
-				<br>
-				<h5>전국에 위치한 창고에서 당일 출고 가능합니다</h5>
-				<br> <img
-					src="${pageContext.request.contextPath}/assets/images/material/유통사진01.jpg">
-				<br>
-				<h1>구매안내</h1>
-				<br> <img
-					src="${pageContext.request.contextPath}/assets/images/material/구매안내.jpg">
-				<br>
-				<h1>운임표</h1>
-				<br> <img
-					src="${pageContext.request.contextPath}/assets/images/material/운임표.jpg">
-				<br>
-
-
-
-			</div>
-		</div>
-	</div>
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 
