@@ -8,7 +8,7 @@ import com.team.green.member.dto.MemberDTO;
 
 @Mapper
 public interface IMemberDAO {
-	
+
 	int registMember(MemberDTO member);
 	MemberDTO loginMember(MemberDTO member);
 	int updateMember(MemberDTO member);

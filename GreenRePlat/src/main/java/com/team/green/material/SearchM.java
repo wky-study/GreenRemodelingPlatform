@@ -35,11 +35,11 @@ public class SearchM {
 				+ "]";
 	}
 
-	public SearchM(String seachWord, String seachOption, int pageNo, int rowSizePerPage, int materialCount, int start,
+	public SearchM(String searchWord, String searchOption, int pageNo, int rowSizePerPage, int materialCount, int start,
 			int end, int firstPage, int lastPage, int finalPage) {
 		super();
-		this.searchWord = seachWord;
-		this.searchOption = seachOption;
+		this.searchWord = searchWord;
+		this.searchOption = searchOption;
 		this.pageNo = pageNo;
 		this.rowSizePerPage = rowSizePerPage;
 		this.materialCount = materialCount;
@@ -83,12 +83,12 @@ public class SearchM {
 		this.searchWord = searchWord;
 	}
 
-	public String getSeachOption() {
+	public String getSearchOption() {
 		return searchOption;
 	}
 
-	public void setSeachOption(String seachOption) {
-		this.searchOption = seachOption;
+	public void setSearchOption(String searchOption) {
+		this.searchOption = searchOption;
 	}
 
 	public int getPageNo() {

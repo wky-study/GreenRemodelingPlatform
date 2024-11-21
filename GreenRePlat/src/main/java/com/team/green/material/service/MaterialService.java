@@ -28,8 +28,8 @@ public class MaterialService {
 	};
 	
 	// 자재 한개 가져오기
-	public MaterialDTO getMaterial(int id) {
-		MaterialDTO result = dao.getMaterial(id);
+	public MaterialDTO getMaterial(int no) {
+		MaterialDTO result = dao.getMaterial(no);
 		return result;
 	}
 }

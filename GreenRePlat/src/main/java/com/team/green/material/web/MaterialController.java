@@ -1,21 +1,17 @@
 package com.team.green.material.web;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team.green.material.SearchM;
 import com.team.green.material.dto.MaterialDTO;
 import com.team.green.material.service.MaterialService;
+
 
 @Controller
 public class MaterialController {
@@ -38,16 +34,25 @@ public class MaterialController {
 		System.out.println(search);
 		System.out.println(materialList);
 
-		model.addAttribute("keymaterial, materialList");
-
 		model.addAttribute("keySearch", search);
+		
+		model.addAttribute("keyMaterial", materialList);
 
 		return "material/materialView";
 	}
 
-	/* 자재상세페이지 */
+	// 제품 글 상세 페이지
 	@RequestMapping("/materialDetailView")
-	public String materialDetailView() {
+	public String materialDetailView(Model model, int no) {
+
+		System.out.println("클릭한 게시글 번호" + no);
+
+		MaterialDTO material = null;
+		material = materialService.getMaterial(no);
+
+		System.out.println(material);
+
+		model.addAttribute("keyMaterial", material);
 
 		return "material/materialDetailView";
 	}
