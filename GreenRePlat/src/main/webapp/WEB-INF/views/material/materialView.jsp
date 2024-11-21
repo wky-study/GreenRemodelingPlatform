@@ -18,6 +18,7 @@
 	position: relative;
 	height: 100%;
 	min-height: 400px;
+	cursor:pointer;
 }
 
 .img-border::before {
