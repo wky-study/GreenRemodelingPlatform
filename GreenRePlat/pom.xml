@@ -44,48 +44,66 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<!-- Logging -->
+		
+		<!-- logback-classic : logback을 사용하는 경우 필요 -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.5.6</version>
+		    <scope>compile</scope>
 		</dependency>
+		
+		<!-- logback-core : logback을 사용하는 경우 필요 -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-core</artifactId>
+		    <version>1.5.6</version>
+		    <scope>compile</scope>
 		</dependency>
+		
+		<!-- log4j 의존성 제거 (logback을 사용할 경우 불필요) -->
+		<!-- <dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.15</version>
+		    <scope>runtime</scope>
+		</dependency> -->
+		
+		<!-- slf4j-log4j12 의존성 제거 (logback 사용시 필요없음) -->
+		<!-- <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>${org.slf4j-version}</version>
+		    <scope>runtime</scope>
+		</dependency> -->
+		
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-core</artifactId>
+		    <version>${org.springframework-version}</version> <!-- 최신 버전으로 변경 가능 -->
+		</dependency>		
+		
+		<!-- 자동 로그용 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>runtime</scope>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>${org.springframework-version}</version>
 		</dependency>
+
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-aspects</artifactId>
+	        <version>${org.springframework-version}</version> <!-- 사용 중인 Spring 버전에 맞춰서 변경 -->
+	    </dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.9.7</version>
+		</dependency>
+	
 
 		<!-- @Inject -->
 		<dependency>
@@ -205,10 +223,23 @@
 	    <dependency>
 	        <groupId>org.projectlombok</groupId>
 	        <artifactId>lombok</artifactId>
-	        <version>1.18.26</version> <!-- 최신 버전을 사용하세요 -->
-	        <scope>provided</scope>
+	        <version>1.18.36</version> <!-- 최신 버전을 사용하세요 -->
 	    </dependency>
 
+	    <dependency>
+	        <groupId>net.logstash.logback</groupId>
+	        <artifactId>logstash-logback-encoder</artifactId>
+	        <version>7.4</version>
+	    </dependency>
+
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.5.6</version>
+		</dependency>
+		
+	    
 
 		<!-- Test -->
 		<dependency>

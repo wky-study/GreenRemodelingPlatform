@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
+import com.team.green.review.web.ReviewController;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class MemberController {
 
@@ -95,19 +99,24 @@ public class MemberController {
 		MemberDTO memInfo = memSvc.loginMember(member);
 		if(memInfo != null) {
 			System.out.println("로그인성공: "+memInfo);
+            log.info("로그인 성공: {}", memInfo);
 		}
 		else {
 			System.out.println("로그인실패");
+            log.warn("로그인 실패: {}", member.getMemId());
+
 		}
 		session.setAttribute("memInfo", memInfo);
 		if (rememberId) {
 			Cookie cookie = new Cookie("rememberId", member.getMemId());
 			resp.addCookie(cookie);
+            log.info("아이디 기억 설정: {}", member.getMemId());
 
 		} else {
 			Cookie cookie = new Cookie("rememberId", "");
 			cookie.setMaxAge(0);
 			resp.addCookie(cookie);
+            log.info("아이디 기억 해제: {}", member.getMemId());
 		}
 		return "redirect:/";
 	}
