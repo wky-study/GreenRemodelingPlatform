@@ -19,7 +19,6 @@ public interface IMemberDAO {
 	MemberDTO socialLoginMember(String memId); 
 
 	
-	// 멤버 목록 가져오기
 
 	public List<MemberDTO> getMemList();
 
