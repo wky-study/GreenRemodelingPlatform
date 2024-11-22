@@ -159,13 +159,13 @@
               <div class="col-md-12 mt-6">
                 <div>
                   <label class="form-label">Contents</label>
-                  <input id="event-end-date" type="text" class="form-control" />
+                  <input id="" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-12 mt-6">
                 <div>
                   <label class="form-label">Images</label>
-                  <input id="event-end-date" type="text" class="form-control" />
+                  <input id="" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -177,6 +177,10 @@
               <button type="button" class="btn btn-success btn-update-event" data-fc-event-public-id="">
                 Update changes
               </button>
+              <button type="button" class="btn btn-danger btn-update-event" data-fc-event-public-id="">
+                Delete event
+              </button>
+              
 
               <!-- Add Event Button -->
               <button type="button" class="btn btn-primary btn-add-event">
@@ -255,7 +259,8 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
     	
     calendarEventsList.push(data);
 	</c:forEach>
-    
+	console.log(calendarEventsList); 
+
 
 
     // Calendar Select fn.
