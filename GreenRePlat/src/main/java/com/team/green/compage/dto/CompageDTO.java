@@ -6,27 +6,35 @@ public class CompageDTO {
 
 	private int cpNo;				/* 리뷰 게시글 번호 */
 	private String memId;				/* 작성자 아이디 */
-	private String memName;				/* 작성자 이름 */
-	private String cpTitle;			/* 리뷰 게시글 제목 */
-	private String cpContent;		/* 리뷰 게시글 내용 */
+	private String cpTitle;			/* 기업로고사진 */
+	private String cpContent;		/* 포트폴리오내용 */
 	private Date cpDate;			/* 작성일 */
-	private String cpPath;			/* 파일경로 */
 	private String delYn;				/* 삭제 여부 */
+	private String cpPath;			/* 파일경로 */
+	private String memName;				/* 기업명 */
 	private int cpCount;			/* 게시글 조회수 */
 
 	public CompageDTO() {
 	}
 
-	public CompageDTO(int cpNo, String memId, String memName, String cpTitle, String cpContent, Date cpDate,
-			String cpPath, String delYn, int cpCount) {
+	@Override
+	public String toString() {
+		return "CompageDTO [cpNo=" + cpNo + ", memId=" + memId + ", cpTitle=" + cpTitle + ", cpContent=" + cpContent
+				+ ", cpDate=" + cpDate + ", delYn=" + delYn + ", cpPath=" + cpPath + ", memName=" + memName
+				+ ", cpCount=" + cpCount + "]";
+	}
+
+	public CompageDTO(int cpNo, String memId, String cpTitle, String cpContent, Date cpDate, String delYn,
+			String cpPath, String memName, int cpCount) {
+		super();
 		this.cpNo = cpNo;
 		this.memId = memId;
-		this.memName = memName;
 		this.cpTitle = cpTitle;
 		this.cpContent = cpContent;
 		this.cpDate = cpDate;
-		this.cpPath = cpPath;
 		this.delYn = delYn;
+		this.cpPath = cpPath;
+		this.memName = memName;
 		this.cpCount = cpCount;
 	}
 
@@ -44,14 +52,6 @@ public class CompageDTO {
 
 	public void setMemId(String memId) {
 		this.memId = memId;
-	}
-
-	public String getMemName() {
-		return memName;
-	}
-
-	public void setMemName(String memName) {
-		this.memName = memName;
 	}
 
 	public String getCpTitle() {
@@ -78,6 +78,14 @@ public class CompageDTO {
 		this.cpDate = cpDate;
 	}
 
+	public String getDelYn() {
+		return delYn;
+	}
+
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
+
 	public String getCpPath() {
 		return cpPath;
 	}
@@ -86,12 +94,12 @@ public class CompageDTO {
 		this.cpPath = cpPath;
 	}
 
-	public String getDelYn() {
-		return delYn;
+	public String getMemName() {
+		return memName;
 	}
 
-	public void setDelYn(String delYn) {
-		this.delYn = delYn;
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 
 	public int getCpCount() {
@@ -102,11 +110,5 @@ public class CompageDTO {
 		this.cpCount = cpCount;
 	}
 
-	@Override
-	public String toString() {
-		return "CompageDTO [cpNo=" + cpNo + ", memId=" + memId + ", memName=" + memName + ", cpTitle=" + cpTitle
-				+ ", cpContent=" + cpContent + ", cpDate=" + cpDate + ", cpPath=" + cpPath + ", delYn=" + delYn
-				+ ", cpCount=" + cpCount + "]";
-	}
 	
 }

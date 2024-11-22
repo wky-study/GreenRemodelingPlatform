@@ -37,6 +37,45 @@
 
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 
+	<!-- 사진슬라이드 -->
+	<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+		<div id="header-carousel" class="carousel slide"
+			data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="w-100"
+						src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg"
+						alt="Image" />
+					<div class="carousel-caption">
+						<div class="container">
+							<div class="row justify-content-center"></div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="w-100"
+						src="${pageContext.request.contextPath }/assets/images/material/오늘의집02.jpg"
+						alt="Image" />
+					<div class="carousel-caption">
+						<div class="container">
+							<div class="row justify-content-center"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#header-carousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</div>
+
 	<div class="container-fluid">
 		<div class="card">
 
@@ -51,7 +90,8 @@
 					<div class="d-flex justify-content-end">
 						<c:if
 							test="${ sessionScope.memInfo.memId == keyCp.memId && sessionScope.memInfo.memId != null}">
-							<form action="${pageContext.request.contextPath }/compageEditView"
+							<form
+								action="${pageContext.request.contextPath }/compageEditView"
 								method="POST">
 								<input type="hidden" value="${keyCp.cpNo}" name="no">
 								<button class="btn btn-warning" type="submit">수정</button>
@@ -103,13 +143,16 @@
 							<form id="replyForm" class="row"
 								action="${pageContext.request.contextPath }/replyWriteDo"
 								method="POST">
-								<input type="hidden" name="memId" value="${sessionScope.memInfo.memId }">
-								<input type="hidden" name="reviewNo" value="${keyCp.cpNo }">
+								<input type="hidden" name="memId"
+									value="${sessionScope.memInfo.memId }"> <input
+									type="hidden" name="reviewNo" value="${keyCp.cpNo }">
 								<div class="col-10">
-									<input id="replyInput" class="form-control" type="text" name="replyContent">
+									<input id="replyInput" class="form-control" type="text"
+										name="replyContent">
 								</div>
-								<button id="replyBtn" class="btn btn-primary col-2" style="padding: 0px" type="button" >등록</button>
-								<input type="hidden" name="tableName" id="tableName" >
+								<button id="replyBtn" class="btn btn-primary col-2"
+									style="padding: 0px" type="button">등록</button>
+								<input type="hidden" name="tableName" id="tableName">
 							</form>
 						</div>
 
