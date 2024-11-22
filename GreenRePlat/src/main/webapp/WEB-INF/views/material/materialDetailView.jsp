@@ -55,7 +55,7 @@
 				<div class="row g-5">
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
 						<div class="img-border">
-							<img class="img-fluid" src="${MaterialDTO.itemImg}" alt="" />
+							<img class="img-fluid" src="${keyMaterial.itemImg}" alt="" />
 						</div>
 					</div>
 
@@ -63,23 +63,23 @@
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>자재이름 :
-							${MaterialDTO.itemName}
+							${keyMaterial.itemName}
 						</h5>
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>모델명 :
-							${MaterialDTO.itemModel}
+							${keyMaterial.itemModel}
 						</h5>
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>제조사 :
-							${MaterialDTO.itemBrand}
+							${keyMaterial.itemBrand}
 						</h5>
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>자재크기 :
-							${MaterialDTO.itemSize}
+							${keyMaterial.itemSize}
 						</h5>
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>에너지효율등급 :
-							${MaterialDTO.itemEffiLevel}
+							${keyMaterial.itemEffiLevel}등급
 						</h5>
 
 						<!-- 수량 선택 및 가격 표시 -->
