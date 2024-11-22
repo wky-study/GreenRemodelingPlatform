@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.common.exception.BizNotFoundException;
-import com.team.green.common.vo.SearchVO;
 import com.team.green.compage.dto.CompageDTO;
 import com.team.green.compage.service.CompageService;
+import com.team.green.material.SearchM;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.reply.dto.ReplyDTO;
 import com.team.green.reply.service.ReplyService;
@@ -34,21 +34,21 @@ public class CompageController {
 
 	// 리뷰목록 페이지
 	@RequestMapping("/compageView")
-	public String compageView(Model model, SearchVO search) {
+	public String compageView(Model model, SearchM search) {
 		
 		int cpCnt = cpgSvc.getCpCount(search);
 		
 		System.out.println(cpCnt);
 		
-		search.setReviewCount(cpCnt);
-		search.reviewSetting();
+		search.setCpCount(cpCnt);
+		search.cpgSetting();
 		
 		List<CompageDTO> cp = cpgSvc.getCpList(search);
 		
 		System.out.println(cp);
 		System.out.println(search);
 		
-		model.addAttribute("keyReview", cp);
+		model.addAttribute("keyCp", cp);
 		model.addAttribute("keySearch", search);
 	
 		return "compage/compageView";
@@ -57,7 +57,7 @@ public class CompageController {
 	// 리뷰 게시글 추가로 가져오기
 	@ResponseBody
 	@PostMapping("/loadMoreDOcomPage")
-	public List<CompageDTO> loadMoreDO(SearchVO search) {
+	public List<CompageDTO> loadMoreDO(SearchM search) {
 		
 		System.out.println(search);
 		

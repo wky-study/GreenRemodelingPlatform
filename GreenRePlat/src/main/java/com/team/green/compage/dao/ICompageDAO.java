@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.team.green.common.vo.SearchVO;
 import com.team.green.compage.dto.CompageDTO;
+import com.team.green.material.SearchM;
 
 @Mapper
 public interface ICompageDAO {
-	// 리뷰 게시판 글 목록 가져오기
-		List<CompageDTO> getCpList(SearchVO search);
+	
+		// 리뷰 게시판 글 목록 가져오기
+		List<CompageDTO> getCpList(SearchM search);
 		
 		// 리뷰 게시판 글 총 갯수 가져오기
-		int getCpCount(SearchVO search);
+		int getCpCount(SearchM search);
 		
 		// 리뷰 게시글 한개 조회 하기
 		CompageDTO getCp(int no);
