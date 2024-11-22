@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -21,13 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.common.exception.BizNotFoundException;
 import com.team.green.common.vo.SearchVO;
+import com.team.green.log.LoggingAspect;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.reply.dto.ReplyDTO;
 import com.team.green.reply.service.ReplyService;
 import com.team.green.review.dto.ReviewDTO;
 import com.team.green.review.service.ReviewService;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class ReviewController {
 
@@ -42,7 +47,18 @@ public class ReviewController {
 
 	// 리뷰목록 페이지
 	@RequestMapping("/reviewView")
-	public String reviewView(Model model, SearchVO search) {
+	public String reviewView(Model model, SearchVO search, HttpSession session, HttpServletRequest request) {
+		
+        // 로그인된 회원 정보 가져오기
+        MemberDTO memInfo = (MemberDTO) session.getAttribute("memInfo");
+
+        // 회원이 로그인한 상태라면
+        if (memInfo != null) {
+            // 로그 기록 (회원 ID, 페이지 접근 시간 기록)
+            log.info("회원 {}가 리뷰 목록 페이지에 접근했습니다.", memInfo.getMemId());
+        } else {
+            log.warn("로그인된 회원이 없이 리뷰 목록 페이지에 접근했습니다.");
+        }
 		
 		int reviewCount = reviewService.getReviewCount(search);
 		
