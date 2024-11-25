@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.team.green.chat.dto.RoomDTO;
-import com.team.green.member.dto.MemberDTO;
 
 
 
@@ -27,5 +26,11 @@ public interface IRoomDAO {
 	
 	// 채팅방 삭제하기
 	public int deleteRoom(int roomNo);
+	
+	// 채팅방 있는지 확인
+	RoomDTO findRoom(@Param("memId") String memId, @Param("partMem") String partMem);
+	
+	public int enterRoom(RoomDTO room);
+
 	
 }

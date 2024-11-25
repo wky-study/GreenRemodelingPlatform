@@ -23,7 +23,16 @@ public class ChatLogService {
 		int result = dao.insertChat(chatLog);
 		return result;
 	}
-	
-	
+	// 읽지 않은 메시지 수 가져오기
+    public int getUnreadChat(int roomNo, String memId) {
+    	int result = dao.getUnreadChat(roomNo, memId);
+        return result;
+    }
+
+    // 메시지 읽음 처리
+    public int readUpdate(int roomNo, String memId) {
+    	int result = dao.readUpdate(roomNo, memId);
+    	return result;
+    }
 	
 }

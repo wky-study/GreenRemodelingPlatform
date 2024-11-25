@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.team.green.chat.dao.IRoomDAO;
 import com.team.green.chat.dto.RoomDTO;
-import com.team.green.member.dto.MemberDTO;
 
 @Service
 public class RoomService {
@@ -50,4 +49,14 @@ public class RoomService {
 		int result = dao.deleteRoom(roomNo);
 		return result;
 	};
+	
+	public RoomDTO findRoom(String memId, String partMem) {
+	    return dao.findRoom(memId, partMem);
+	}
+	
+	public int enterRoom(RoomDTO room) {
+		int result = dao.enterRoom(room);
+		return result;
+	}
+
 }
