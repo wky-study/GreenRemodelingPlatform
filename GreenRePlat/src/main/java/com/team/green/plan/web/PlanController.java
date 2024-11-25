@@ -39,12 +39,23 @@ public class PlanController {
 		String memType = login.getMemType();
 		List<PlanDTO> planList = planService.getPlanList(login);
 
+		// planList 를 JSON String으로 변환해서 모델에 저장 (Gson 이용) "[{}, {}, {}]"
+		
+		
         model.addAttribute("planList", planList);
         
 
 		
 		
 		return "plan/planView";
+		
+	}
+	@PostMapping("/planEditDo")
+	public String planEditDo(PlanDTO plan) {
+		System.out.println(plan);
+		planService.editPlan(plan);
+		
+		return "redirect:/planView";
 		
 	}
 	

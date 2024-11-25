@@ -3,12 +3,12 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class PlanDTO {
-	private String quoId; // 견적서 ID 
+	private int quoId; // 견적서 ID 
 	private String estId; // 고객이 작성한 견적서 ID(고객ID)
 	private String comId; // 시공사 ID
-	private Timestamp quoSdate; // 공사 시작일
-	private Timestamp quoEdate; // 공사 종료일
-	private Timestamp quoMdate; // 견적서 수정한 날짜
+	private String quoSdate; // 공사 시작일
+	private String quoEdate; // 공사 종료일
+	private String quoMdate; // 견적서 수정한 날짜
 	private String quoOpen; // 견적서 확정 여부
 	private String memId; //멤버ID
 	private String quoContNo;
@@ -17,38 +17,14 @@ public class PlanDTO {
 	
 	public PlanDTO() {
 	}
-	
-
-	public PlanDTO(String quoId, String estId, String comId, Timestamp quoSdate, Timestamp quoEdate, Timestamp quoMdate,
-			String quoOpen, String memId, String quoContNo, String quoCont) {
-		super();
-		this.quoId = quoId;
-		this.estId = estId;
-		this.comId = comId;
-		this.quoSdate = quoSdate;
-		this.quoEdate = quoEdate;
-		this.quoMdate = quoMdate;
-		this.quoOpen = quoOpen;
-		this.memId = memId;
-		this.quoContNo = quoContNo;
-		this.quoCont = quoCont;
-	}
 
 
-	@Override
-	public String toString() {
-		return "PlanDTO [quoId=" + quoId + ", estId=" + estId + ", comId=" + comId + ", quoSdate=" + quoSdate
-				+ ", quoEdate=" + quoEdate + ", quoMdate=" + quoMdate + ", quoOpen=" + quoOpen + ", memId=" + memId
-				+ ", quoContNo=" + quoContNo + ", quoCont=" + quoCont + "]";
-	}
-
-
-	public String getQuoId() {
+	public int getQuoId() {
 		return quoId;
 	}
 
 
-	public void setQuoId(String quoId) {
+	public void setQuoId(int quoId) {
 		this.quoId = quoId;
 	}
 
@@ -73,32 +49,32 @@ public class PlanDTO {
 	}
 
 
-	public Timestamp getQuoSdate() {
+	public String getQuoSdate() {
 		return quoSdate;
 	}
 
 
-	public void setQuoSdate(Timestamp quoSdate) {
+	public void setQuoSdate(String quoSdate) {
 		this.quoSdate = quoSdate;
 	}
 
 
-	public Timestamp getQuoEdate() {
+	public String getQuoEdate() {
 		return quoEdate;
 	}
 
 
-	public void setQuoEdate(Timestamp quoEdate) {
+	public void setQuoEdate(String quoEdate) {
 		this.quoEdate = quoEdate;
 	}
 
 
-	public Timestamp getQuoMdate() {
+	public String getQuoMdate() {
 		return quoMdate;
 	}
 
 
-	public void setQuoMdate(Timestamp quoMdate) {
+	public void setQuoMdate(String quoMdate) {
 		this.quoMdate = quoMdate;
 	}
 
@@ -141,6 +117,34 @@ public class PlanDTO {
 	public void setQuoCont(String quoCont) {
 		this.quoCont = quoCont;
 	}
+
+
+	@Override
+	public String toString() {
+		return "PlanDTO [quoId=" + quoId + ", estId=" + estId + ", comId=" + comId + ", quoSdate=" + quoSdate
+				+ ", quoEdate=" + quoEdate + ", quoMdate=" + quoMdate + ", quoOpen=" + quoOpen + ", memId=" + memId
+				+ ", quoContNo=" + quoContNo + ", quoCont=" + quoCont + "]";
+	}
+
+
+	public PlanDTO(int quoId, String estId, String comId, String quoSdate, String quoEdate, String quoMdate,
+			String quoOpen, String memId, String quoContNo, String quoCont) {
+		super();
+		this.quoId = quoId;
+		this.estId = estId;
+		this.comId = comId;
+		this.quoSdate = quoSdate;
+		this.quoEdate = quoEdate;
+		this.quoMdate = quoMdate;
+		this.quoOpen = quoOpen;
+		this.memId = memId;
+		this.quoContNo = quoContNo;
+		this.quoCont = quoCont;
+	}
+
+
+	
+	
 
 	
 
