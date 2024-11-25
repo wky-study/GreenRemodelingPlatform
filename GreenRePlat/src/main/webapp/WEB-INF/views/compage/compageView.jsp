@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리뷰 게시판</title>
+<title>기업포트폴리오</title>
 
 <!-- Libraries Stylesheet -->
 <link
@@ -42,6 +42,7 @@
 	position: relative;
 	height: 100%;
 	min-height: 400px;
+	cursor:pointer;
 }
 
 .img-border::before {
@@ -60,7 +61,8 @@
 	left: 3rem;
 	width: calc(100% - 3rem);
 	height: calc(100% - 3rem);
-	object-fit: cover;
+	object-fit: scale-down;
+	background-color: white;
 }
 </style>
 
@@ -71,90 +73,23 @@
 
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 
-
-	<!-- 사진슬라이드 -->
-	<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
-		<div id="header-carousel" class="carousel slide"
-			data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img class="w-100"
-						src="${pageContext.request.contextPath }/assets/images/material/오늘의집01.jpg"
-						alt="Image" />
-					<div class="carousel-caption">
-						<div class="container">
-							<div class="row justify-content-center"></div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<img class="w-100"
-						src="${pageContext.request.contextPath }/assets/images/material/오늘의집02.jpg"
-						alt="Image" />
-					<div class="carousel-caption">
-						<div class="container">
-							<div class="row justify-content-center"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#header-carousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#header-carousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
-		</div>
-	</div>
-
-
-	<!-- 시공사례목록 -->
+	<!-- 목록그리기 -->
 	<div class="container-fluid">
-		<div class="card">
+	
 			<div class="container-xxl py-5">
 				<div class="container">
 					<div class="row g-5">
-					<!-- 목록그리기 -->
 						<c:forEach items="${keyCp}" var="CompageDTO">
 							<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-								<div class="img-border"
-									onclick='window.location.href ="${pageContext.request.contextPath}/compageDetailView"'>
-									<img class="img-fluid"
-										src="${pageContext.request.contextPath }/assets/images/material/오늘의집03.jpg" />
+								<div class="img-border" 
+									onclick='window.location ="${CompageDTO.cpContent}"'>
+									<img class="img-fluid" src="${CompageDTO.cpTitle}" />
 									<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
-										시공업체,시공주소</h4>
+										${CompageDTO.memName}</h4>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
-				</div>
-			</div>
-
-
-
-
-			<div class="card-body">
-				<div
-					class="col-md-4 d-flex my-card-box w-100 justify-content-between">
-					<!-- 카드 그리기 -->
-
-					<c:forEach items="${keyCp}" var="ReviewDTO">
-						<div class="card my-card shadow-sm"
-							onclick='window.location.href = "${pageContext.request.contextPath }/compageDetailView?no=${ReviewDTO.cpNo}"'>
-							<img
-								src="${pageContext.request.contextPath }/displayImage?fileName=${ReviewDTO.cpPath}"
-								class="card-img-top">
-							<div class="card-body">
-								<h5 class="card-title">${ReviewDTO.cpTitle}</h5>
-								<p class="card-text">${ReviewDTO.memName}</p>
-								<span class="fw-bold">${ReviewDTO.cpDate}</span>
-							</div>
-						</div>
-					</c:forEach>
 				</div>
 			</div>
 
@@ -186,8 +121,8 @@
 						</li>
 
 						<!-- 중간 페이지 번호 부분 -->
-						<!-- model에 keySearch 이름으로 searchVO를 담음 -->
-						<!-- searchVO 내 pageNo, firstPage, lastPage 채워져있음 -->
+						<!-- model에 keySearch 이름으로 searchM를 담음 -->
+						<!-- searchM 내 pageNo, firstPage, lastPage 채워져있음 -->
 
 						<c:forEach begin="${keySearch.firstPage }"
 							end="${keySearch.lastPage }" var="num">
@@ -224,21 +159,13 @@
 				</nav>
 			</div>
 
-			<!-- 글쓰기 버튼 -->
-			<div class="d-flex justify-content-end me-5 my-write-btn">
-				<button id="writeBtn" class="btn btn-outline-secondary">글쓰기</button>
-			</div>
-
-
 			<!-- 검색기능 -->
 			<div class="d-flex justify-content-center mb-3">
 				<form class="d-flex"
 					action="${pageContext.request.contextPath }/compageView"
 					method="GET">
 					<select class="form-select me-1" name="searchOption">
-						<option value="title" selected>제목</option>
-						<option value="content">내용</option>
-						<option value="name">작성자</option>
+						<option value="mem_name" selected>업체명</option>
 					</select> <input class="form-control me-1" type="text" name="searchWord">
 					<button class="btn btn-outline-primary" type="submit">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -249,8 +176,6 @@
 					</button>
 				</form>
 			</div>
-
-		</div>
 
 	</div>
 
@@ -340,27 +265,6 @@
 	});
 	
 	
-	
-	</script>
-
-	<!-- 글 작성 script -->
-	<script type="text/javascript">
-	
-		let v_id = '${sessionScope.memInfo.memId}';
-		
-		document.getElementById("writeBtn").addEventListener("click", ()=>{
-			
-			location.href = '${pageContext.request.contextPath }/compageWriteView';
-			
-			if(v_id){
-				location.href = '${pageContext.request.contextPath }/compageWriteView';
-			}
-			else{
-				alert("로그인 후 글쓰기가 가능합니다.");
-				location.href = '${pageContext.request.contextPath}/loginView';
-			} 
-			
-		})
 	</script>
 
 	<!-- JavaScript Libraries -->

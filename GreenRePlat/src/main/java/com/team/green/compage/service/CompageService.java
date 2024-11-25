@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.green.common.exception.BizNotFoundException;
-import com.team.green.common.vo.SearchVO;
 import com.team.green.compage.dao.ICompageDAO;
 import com.team.green.compage.dto.CompageDTO;
+import com.team.green.material.SearchM;
 
 @Service
 public class CompageService {
@@ -17,13 +17,13 @@ public class CompageService {
 	ICompageDAO dao;
 
 	// 글 목록 가져오기
-	public List<CompageDTO> getCpList(SearchVO search) {
+	public List<CompageDTO> getCpList(SearchM search) {
 		List<CompageDTO> result = dao.getCpList(search);
 		return result;
 	}
 
 	// 글 총 갯수 가져오기
-	public int getCpCount(SearchVO search) {
+	public int getCpCount(SearchM search) {
 		int result = dao.getCpCount(search);
 		return result;
 	}

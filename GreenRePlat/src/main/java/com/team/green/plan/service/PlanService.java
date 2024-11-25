@@ -21,6 +21,17 @@ public class PlanService {
     	
         return result;  // XML에서 정의된 쿼리 호출
     }
+    
+    public PlanDTO getPlan(int quoId) {
+    	PlanDTO result = dao.getPlan(quoId);
+    	return result;
+    	
+    }
+    
+    public int editPlan(PlanDTO plan) {
+    	int result = dao.editPlan(plan);
+    	return result;
+    }
 
 
 }

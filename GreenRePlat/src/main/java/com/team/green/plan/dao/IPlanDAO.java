@@ -8,5 +8,11 @@ import com.team.green.plan.dto.PlanDTO;
 public interface IPlanDAO {
 	
 	List<PlanDTO> getPlanList(MemberDTO member);
+	
+	int editPlan(PlanDTO plan);
+	
+	int writeContents(PlanDTO quoCont);
+	PlanDTO getPlan(int quoId);
+	
 
 }

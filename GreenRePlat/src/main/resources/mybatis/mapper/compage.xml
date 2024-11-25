@@ -5,11 +5,8 @@
 	<sql id="cpSearch">
 		<if test="searchWord != null">
 			<choose>
-				<when test="searchOption == 'title'">AND a.cp_title LIKE '%' || #{searchWord} || '%'
+				<when test="searchOption == 'mem_name'">AND a.mem_name LIKE '%' || #{searchWord} || '%'
 				</when>
-				<when test="searchOption == 'content'">AND a.cp_content LIKE '%' || #{searchWord} ||
-					'%'</when>
-				<when test="searchOption == 'name'">AND b.mem_name = #{searchWord} </when>
 			</choose>
 		</if>
 	</sql>
@@ -17,7 +14,7 @@
 	<!-- 리뷰 게시판 목록 불러오기 -->
 	<select id="getCpList"
 		resultType="com.team.green.compage.dto.CompageDTO"
-		parameterType="com.team.green.common.vo.SearchVO">
+		parameterType="com.team.green.material.SearchM">
 		SELECT * FROM (
 		SELECT
 		a.*
@@ -25,16 +22,17 @@
 		FROM (
 		SELECT
 		a.cp_no
-		, a.cp_title
 		, a.mem_id
-		, NVL(b.mem_name, '탈퇴한 회원') AS mem_name
+		, a.cp_title
 		, a.cp_content
-		, a.cp_path
 		, TO_CHAR(cp_date,'YYYY-MM-DD HH24:MI') AS cp_date
+		, a.cp_path
+		, a.mem_name
 		, a.cp_count
 		FROM compages a , members b
 		WHERE 1=1
-		AND a.mem_id = b.mem_id(+)
+		AND a.mem_id =
+		b.mem_id(+)
 		AND a.del_yn = 'N'
 		<include refid="cpSearch" />
 		ORDER BY cp_no DESC
@@ -45,7 +43,7 @@
 
 	<!-- 리뷰 게시판 총 갯수 가져오기 -->
 	<select id="getCpCount" resultType="int"
-		parameterType="com.team.green.common.vo.SearchVO">
+		parameterType="com.team.green.material.SearchM">
 		SELECT COUNT(*)
 		FROM compages a , members b
 		WHERE 1=1
@@ -61,10 +59,12 @@
 		a.cp_no
 		, a.cp_title
 		, a.mem_id
-		, NVL(b.mem_name, '탈퇴한 회원') AS mem_name
+		, NVL(b.mem_name, '탈퇴한
+		회원') AS mem_name
 		, a.cp_content
 		, a.cp_path
-		, TO_CHAR(cp_date,'YYYY-MM-DD HH24:MI:SS') AS cp_date
+		, TO_CHAR(cp_date,'YYYY-MM-DD
+		HH24:MI:SS') AS cp_date
 		, a.cp_count
 		FROM review a , members b
 		WHERE 1=1
@@ -81,17 +81,20 @@
 		, mem_id
 		, mem_name
 		, cp_title
-		, cp_content
+		,
+		cp_content
 		, cp_date
 		, del_yn
 		, cp_count
 		, cp_path
 		) VALUES(
-		(SELECT COUNT(*)+1 FROM compages)
+		(SELECT
+		COUNT(*)+1 FROM compages)
 		, #{memId}
 		, #{memName}
 		, #{cpTitle}
-		, #{cpContent}
+		,
+		#{cpContent}
 		, SYSDATE
 		, 'N'
 		, 0
@@ -104,7 +107,8 @@
 	<update id="cpCountUp" parameterType="int">
 		UPDATE compages
 		SET
-		cp_count = cp_count + 1
+		cp_count
+		= cp_count + 1
 		WHERE 1=1
 		AND cp_no = #{no}
 	</update>
@@ -115,7 +119,8 @@
 		UPDATE compages
 		SET
 		cp_title = #{cpTitle}
-		, cp_content = #{cpContent}
+		, cp_content =
+		#{cpContent}
 		WHERE 1=1
 		AND cp_no = #{cpNo}
 	</update>
@@ -126,7 +131,8 @@
 		SET
 		del_yn = 'Y'
 		WHERE 1=1
-		AND cp_no = #{cpNo}
+		AND cp_no =
+		#{cpNo}
 	</update>
 
 

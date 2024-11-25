@@ -34,7 +34,7 @@ public class OrderController {
 	@Autowired
     KakaoPayService kakaoPayService;
 	
-	@Autowired
+	@Autowired 
 	private JavaMailSender mailSender;
 	
     // Logger °´Ã¼ ¼±¾ð
