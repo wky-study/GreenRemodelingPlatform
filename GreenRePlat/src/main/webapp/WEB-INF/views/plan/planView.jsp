@@ -16,7 +16,10 @@
 
 <style>
 	/* 날짜단위 div */
-  .fc .fc-daygrid-day-frame {
+  .app-calendar .fc-theme-standard td {
+  pointer-events : none;
+  
+  
   }
   .body-wrapper {
   padding: 0px;
@@ -27,6 +30,7 @@
   }
   /* 이벤트바 div */
   .fc-daygrid-event-harness{
+  pointer-events : auto;
   }
 
   
@@ -53,8 +57,7 @@
             <div class="fc-toolbar-chunk">
 
 
-              <button type="button" title="Add Event" aria-pressed="false" class="btn btn-primary m-1" id="addEvent">Add
-                Event</button>
+             
             </div>
 
             <div class="fc-toolbar-chunk" style="display: flex; justify-content: center; align-items: center;">
@@ -102,6 +105,7 @@
 
 
       <!-- BEGIN MODAL -->
+      <form action='<c:url value="/planEditDo" />'  method="POST">
       <div class="modal fade" id="addEventsModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
           <div class="modal-content">
@@ -146,35 +150,32 @@
                 <!-- Event Start Date -->
                 <div class="col-md-6 mt-4">
                   <label class="form-label" for="event-start-date">Enter Start Date</label>
-                  <input id="event-start-date" type="date" class="form-control" />
+                  <input id="event-start-date" type="date" class="form-control" name="quoSdate" />
                 </div>
 
                 <!-- Event End Date -->
                 <div class="col-md-6 mt-4">
                   <label class="form-label" for="event-end-date">Enter End Date</label>
-                  <input id="event-end-date" type="date" class="form-control" />
+                  <input id="event-end-date" type="date" class="form-control"  name="quoEdate" />
                 </div>
               </div>
               <!-- 컨텐츠 첨부 -->
               <div class="col-md-12 mt-6">
                 <div>
                   <label class="form-label">Contents</label>
-                  <input id="" type="text" class="form-control" />
+                  <input id="" type="text" class="form-control" name="quoCont">
                 </div>
               </div>
-              <div class="col-md-12 mt-6">
-                <div>
-                  <label class="form-label">Images</label>
-                  <input id="" type="text" class="form-control" />
-                </div>
-              </div>
+				<input type="hidden" name="estId" value = "${plan.estId }">
+				
             </div>
             <div class="modal-footer">
               <!-- Close Button -->
               <button type="button" class="btn btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Close</button>
 
               <!-- Update Event Button -->
-              <button type="button" class="btn btn-success btn-update-event" data-fc-event-public-id="">
+              
+              <button type="submit" class="btn btn-success btn-update-event"  >
                 Update changes
               </button>
               <button type="button" class="btn btn-danger btn-update-event" data-fc-event-public-id="">
@@ -190,6 +191,7 @@
           </div>
         </div>
       </div>
+      </form>
       <!-- END MODAL -->
         </div>
       </div>
@@ -203,6 +205,10 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
  
+
+<script >
+
+</script>
 
 <script>
 console.log(document.getElementById('addEventsModal')); // DOM에 존재하는지 확인
@@ -248,16 +254,16 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
     };
 
     var calendarEventsList = [];
-    let data = {};
     
+    let data = {};
     <c:forEach var="plan" items="${planList}">
-    data.id = "${plan.quoId}"
-    data.title = "${plan.estId}"
-    data.start = "${plan.quoSdate}"
-    data.end = "${plan.quoEdate}"
-   	data.extendedProps = { calendar: "Primary" };
-    	
-    calendarEventsList.push(data);
+	    data = {};
+	    data.id = "${plan.quoId}"
+	    data.title = "${plan.estId}"
+	    data.start = "${plan.quoSdate}"
+	    data.end = "${plan.quoEdate}"
+	   	data.extendedProps = { calendar: "Primary" };
+	    calendarEventsList.push(data);
 	</c:forEach>
 	console.log(calendarEventsList); 
 

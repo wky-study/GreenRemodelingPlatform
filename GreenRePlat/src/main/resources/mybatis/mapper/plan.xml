@@ -20,4 +20,33 @@
             QUO_SDATE
 		
 	</select>
+	
+	<select id="getPlan" resultType="com.team.green.plan.dto.PlanDTO" parameterType="int">
+		SELECT
+			a.quo_id,
+			a.com_id,
+			a.mem_id,
+			b.mem_id
+		FROM
+			quotation a,
+			members b
+		WHERE 1=1
+			AND a.com_id = b.mem_id
+			AND a.quo_id = #{quoId}
+			
+		
+	</select>
+	
+	<update id="editPlan" parameterType="com.team.green.plan.dto.PlanDTO">
+	
+		UPDATE
+			quotation
+		SET
+			quo_sdate = #{quoSdate},
+			quo_edate = #{quoEdate},
+			quo_cont = #{quoCont}
+		WHERE 1=1
+			AND est_id = #{estId}
+	
+	</update>
 </mapper>

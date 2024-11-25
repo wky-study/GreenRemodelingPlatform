@@ -9,8 +9,10 @@ public interface IPlanDAO {
 	
 	List<PlanDTO> getPlanList(MemberDTO member);
 	
+	int editPlan(PlanDTO plan);
+	
 	int writeContents(PlanDTO quoCont);
-	PlanDTO getPlan(String quoContNo);
+	PlanDTO getPlan(int quoId);
 	
 
 }
