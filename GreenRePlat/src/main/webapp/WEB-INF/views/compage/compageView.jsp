@@ -61,7 +61,7 @@
 	left: 3rem;
 	width: calc(100% - 3rem);
 	height: calc(100% - 3rem);
-	object-fit: cover;
+	object-fit: scale-down;
 }
 </style>
 
