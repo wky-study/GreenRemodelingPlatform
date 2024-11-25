@@ -19,5 +19,4 @@ public interface IMemberDAO {
 
 	public List<MemberDTO> getMemList();
 
-
 }

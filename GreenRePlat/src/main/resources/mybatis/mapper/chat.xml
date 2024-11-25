@@ -9,12 +9,14 @@
 			, room_no
 			, chat_msg
 			, send_date
+			, read_yn
 		)VALUES(
 			chat_seq.NEXTVAL
 			, #{memId}
 			, #{roomNo}
 			, #{chatMsg}
 			, SYSDATE
+			,#{readYn}
 		)
 	</insert>
 
@@ -26,6 +28,7 @@
 			, a.room_no
 			, a.chat_msg
 			, TO_CHAR(a.send_date, 'RR/MM/DD HH:MI') AS send_date
+			, a.read_yn
 		FROM
 			chatlog a, members b
 		WHERE 1=1
@@ -33,5 +36,25 @@
 			AND room_no = #{roomNo}
 		ORDER BY 1
 	</select>
-
+	
+	<select id="getUnreadChat" resultType="int">
+	    SELECT 
+	        COUNT(*)
+	    FROM chatlog
+	    WHERE
+	        room_no = #{roomNo}
+	        AND mem_id != #{memId}
+	        AND read_yn = 'N'
+	</select>
+	
+	<update id="readUpdate">
+	    UPDATE chatlog
+	    SET read_yn = 'Y'
+	    WHERE 
+	        room_no = #{roomNo}
+	        AND mem_id != #{memId}
+	        AND read_yn = 'N'
+	</update>
+	
+	
 </mapper>

@@ -32,12 +32,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.chat.dto.ChatLogDTO;
 import com.team.green.chat.dto.RoomDTO;
 import com.team.green.chat.service.ChatLogService;
 import com.team.green.chat.service.RoomService;
+import com.team.green.member.dto.MemberDTO;
 
 @Controller
 public class ChatLogController {
@@ -50,18 +52,47 @@ public class ChatLogController {
 
 	// 채팅화면으로 이동
 	@RequestMapping("/chatView")
-	public String chat(Model model, int no) {
+	public String chat(Model model, int no, HttpSession session) {
+		
+		MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
+		String memId = login.getMemId();
 		
 		// 로그인 안했으면 로그인 화면으로 보내기
 		// servlet-context.xml 의 LoginCheckInterceptor 설정에 /chatView 주소 등록
 		
 		List<ChatLogDTO> chatList = chatService.getChatList(no);
 		RoomDTO room = roomService.getRoom(no);
+		System.out.println("방???:"+room);
+		room.setDelYn((((int)(room.getDelYn().charAt(0)-'0')+1))+"");
+		roomService.enterRoom(room);
+		
+		
+		// 메시지 읽음 처리
+	    int updatedRows = chatService.readUpdate(no, memId);
+	    System.out.println("읽은 메세지 수: " + updatedRows);
 		
 		model.addAttribute("room", room);
 		model.addAttribute("chatList", chatList);
 		
 		return "chat/chatView";
+	}
+	
+	@RequestMapping("/esc")
+	@ResponseBody
+	public void chat(@RequestParam("roomNo") int no) {
+		// 로그인 안했으면 로그인 화면으로 보내기
+		// servlet-context.xml 의 LoginCheckInterceptor 설정에 /chatView 주소 등록
+		RoomDTO room = roomService.getRoom(no);
+		
+		System.out.println("나감1"+room);
+		room.setDelYn((((int)(room.getDelYn().charAt(0)-'0')-1))+"");
+		roomService.enterRoom(room);
+		
+//		model.addAttribute("room", room);
+		
+		System.out.println("방 나감2 " + room);
+		
+//		return "chat/chatListView";
 	}
 	
 	// 해당 채팅방의 채팅 내역들 가져오기 (ajax 요청 응답)
@@ -77,19 +108,37 @@ public class ChatLogController {
 	@MessageMapping("/hello/{roomNo}")
 	@SendTo("/subscribe/chat/{roomNo}")
 	public ChatLogDTO broadcasting(ChatLogDTO chat) {
-	    
-	    // ChatLogDTO 필드 값 확인용
-	    System.out.println("방 번호: " + chat.getRoomNo());
+	    // 현재 방의 del_yn 값 조회
+	    RoomDTO room = roomService.getRoom(chat.getRoomNo());
+	    int delYn = Integer.parseInt(room.getDelYn());
 
-	    // 넘어온 채팅 문구(chat)를 DB에 저장
+	 // del_yn 값이 2 이상이면 "읽음"으로 설정
+	    String readYn = delYn >= 2 ? "Y" : "N"; 
+
+	    // 메시지에 readYn 값을 설정
+	    chat.setReadYn(readYn);
+
+	    // 채팅 저장
 	    chatService.insertChat(chat);
-	    
-	    // 상대방에게 전달될 chat 객체 내부에 현재 날짜를 채워주기
+
+	    // 전송 날짜 추가
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	    chat.setSendDate(sdf.format(new Date()));
-	    
-	    // 상대방에게 전달
+
+	    // 메시지 전송
 	    return chat;
+	}
+
+
+	@MessageMapping("/state/{roomNo}")
+	@SendTo("/subscribe/state/{roomNo}")
+	public String stateCheck(String memId) {
+	    
+	    // ChatLogDTO 필드 값 확인용
+	    System.out.println("상태보낸사람 " + memId);
+
+	    // 상대방에게 전달
+	    return memId;
 	}
 	
 	@GetMapping("/downloadChatLog")
@@ -99,7 +148,6 @@ public class ChatLogController {
 
 	    // 2. 텍스트 파일 생성
 	    StringBuilder sb = new StringBuilder();
-	    // sb.append("보낸 날짜\t보낸 사람\t닉네임\t메시지\n"); // 헤더 추가
 
 	    // 채팅 내역 데이터를 텍스트에 추가
 	    for (ChatLogDTO chatLog : chatLogs) {

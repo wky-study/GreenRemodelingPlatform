@@ -80,6 +80,12 @@
 	        (a.mem_id = #{memId} AND a.part_mem = #{partMem})
 	        OR (a.mem_id = #{partMem} AND a.part_mem = #{memId})
 	</select>
+	
+	<update id="enterRoom" parameterType="com.team.green.chat.dto.RoomDTO">
+		UPDATE rooms SET del_yn = #{delYn}
+	    WHERE 1=1
+	        and room_no = #{roomNo}
+	</update>
 
 	
 </mapper>

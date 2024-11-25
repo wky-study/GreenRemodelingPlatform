@@ -8,10 +8,10 @@ public class ChatLogDTO {
 	private int roomNo;			/* 채팅방의 번호 */
 	private String chatMsg;		/* 채팅 메시지 내용 */
 	private String sendDate;	/* 메시지 날짜 */
+	private String readYn;		/* 메시지 읽음 여부 */
 	
-	public ChatLogDTO() {}
-
-	public ChatLogDTO(int chatNo, String memId, String memNick, int roomNo, String chatMsg, String sendDate) {
+	public ChatLogDTO(int chatNo, String memId, String memNick, int roomNo, String chatMsg, String sendDate,
+			String readYn) {
 		super();
 		this.chatNo = chatNo;
 		this.memId = memId;
@@ -19,60 +19,59 @@ public class ChatLogDTO {
 		this.roomNo = roomNo;
 		this.chatMsg = chatMsg;
 		this.sendDate = sendDate;
+		this.readYn = readYn;
 	}
-
+	public ChatLogDTO() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "ChatLogDTO [chatNo=" + chatNo + ", memId=" + memId + ", memNick=" + memNick + ", roomNo=" + roomNo
-				+ ", chatMsg=" + chatMsg + ", sendDate=" + sendDate + "]";
+				+ ", chatMsg=" + chatMsg + ", sendDate=" + sendDate + ", readYn=" + readYn + "]";
 	}
-
 	public int getChatNo() {
 		return chatNo;
 	}
-
 	public void setChatNo(int chatNo) {
 		this.chatNo = chatNo;
 	}
-
 	public String getMemId() {
 		return memId;
 	}
-
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-
 	public String getMemNick() {
 		return memNick;
 	}
-
 	public void setMemNick(String memNick) {
 		this.memNick = memNick;
 	}
-
 	public int getRoomNo() {
 		return roomNo;
 	}
-
 	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
 	}
-
 	public String getChatMsg() {
 		return chatMsg;
 	}
-
 	public void setChatMsg(String chatMsg) {
 		this.chatMsg = chatMsg;
 	}
-
 	public String getSendDate() {
 		return sendDate;
 	}
-
 	public void setSendDate(String sendDate) {
 		this.sendDate = sendDate;
 	}
+	public String getReadYn() {
+		return readYn;
+	}
+	public void setReadYn(String readYn) {
+		this.readYn = readYn;
+	}
+	
+	
 	
 }

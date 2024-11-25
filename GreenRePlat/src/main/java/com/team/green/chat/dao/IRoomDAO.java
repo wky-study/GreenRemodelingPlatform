@@ -29,6 +29,8 @@ public interface IRoomDAO {
 	
 	// 채팅방 있는지 확인
 	RoomDTO findRoom(@Param("memId") String memId, @Param("partMem") String partMem);
+	
+	public int enterRoom(RoomDTO room);
 
 	
 }

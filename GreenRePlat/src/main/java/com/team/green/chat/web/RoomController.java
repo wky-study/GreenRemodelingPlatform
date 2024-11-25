@@ -1,6 +1,8 @@
 package com.team.green.chat.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.chat.dto.RoomDTO;
+import com.team.green.chat.service.ChatLogService;
 import com.team.green.chat.service.RoomService;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
@@ -22,6 +27,9 @@ public class RoomController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	ChatLogService chatLogService;
 
 	// 채팅방 목록 화면
 	@RequestMapping("/chatListView")
@@ -31,11 +39,21 @@ public class RoomController {
 		MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 		String memId = login.getMemId();
 		
+		
 		List<MemberDTO> memList = memberService.getMemList();
 		List<RoomDTO> roomList = roomService.getRoomList(memId);
-//		List<RoomDTO> roomList = roomService.getRoomList();
+		
+		// 각 채팅방 읽지않은 메세지 수 확인
+		Map<Integer, Integer> unreadCounts = new HashMap<>();
+		for (RoomDTO room : roomList) {
+            int unreadCount = chatLogService.getUnreadChat(room.getRoomNo(), memId);
+            unreadCounts.put(room.getRoomNo(), unreadCount); // 채팅방 번호를 키로 설정
+        }
+		System.out.println("새로운 메시지 방 번호 및 메시지 개수:" + unreadCounts);
+		
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("memList", memList);
+		model.addAttribute("unreadCounts", unreadCounts);
 		
 		return "chat/chatListView";
 	}
@@ -108,6 +126,18 @@ public class RoomController {
 
 	    return "redirect:/chatListView"; // 채팅방 목록 페이지로 이동
 	}
+	
+	@RequestMapping("/getDelYn")
+	@ResponseBody
+	public String getDelYn(@RequestParam("RoomNo") int no) {
+	    // roomNo를 이용해 RoomDTO를 가져옵니다.
+	    RoomDTO room = roomService.getRoom(no);
+	    System.out.println(room);
+	    
+	    // delYn 값을 반환합니다.
+	    return room.getDelYn();  // 예: "1", "2" 등의 값
+	}
+
 	
 	
 }
