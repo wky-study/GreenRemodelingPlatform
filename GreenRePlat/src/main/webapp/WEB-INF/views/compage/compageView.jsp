@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리뷰 게시판</title>
+<title>기업포트폴리오</title>
 
 <!-- Libraries Stylesheet -->
 <link
@@ -62,6 +62,7 @@
 	width: calc(100% - 3rem);
 	height: calc(100% - 3rem);
 	object-fit: scale-down;
+	background-color: white;
 }
 </style>
 
@@ -80,7 +81,7 @@
 					<div class="row g-5">
 						<c:forEach items="${keyCp}" var="CompageDTO">
 							<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-								<div class="img-border"
+								<div class="img-border" 
 									onclick='window.location ="${CompageDTO.cpContent}"'>
 									<img class="img-fluid" src="${CompageDTO.cpTitle}" />
 									<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
@@ -158,20 +159,13 @@
 				</nav>
 			</div>
 
-			<!-- 글쓰기 버튼 -->
-			<div class="d-flex justify-content-end me-5 my-write-btn">
-				<button id="writeBtn" class="btn btn-outline-secondary">글쓰기</button>
-			</div>
-
 			<!-- 검색기능 -->
 			<div class="d-flex justify-content-center mb-3">
 				<form class="d-flex"
 					action="${pageContext.request.contextPath }/compageView"
 					method="GET">
 					<select class="form-select me-1" name="searchOption">
-						<option value="title" selected>제목</option>
-						<option value="content">내용</option>
-						<option value="name">작성자</option>
+						<option value="mem_name" selected>업체명</option>
 					</select> <input class="form-control me-1" type="text" name="searchWord">
 					<button class="btn btn-outline-primary" type="submit">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -271,27 +265,6 @@
 	});
 	
 	
-	
-	</script>
-
-	<!-- 글 작성 script -->
-	<script type="text/javascript">
-	
-		let v_id = '${sessionScope.memInfo.memId}';
-		
-		document.getElementById("writeBtn").addEventListener("click", ()=>{
-			
-			location.href = '${pageContext.request.contextPath }/compageWriteView';
-			
-			if(v_id){
-				location.href = '${pageContext.request.contextPath }/compageWriteView';
-			}
-			else{
-				alert("로그인 후 글쓰기가 가능합니다.");
-				location.href = '${pageContext.request.contextPath}/loginView';
-			} 
-			
-		})
 	</script>
 
 	<!-- JavaScript Libraries -->
