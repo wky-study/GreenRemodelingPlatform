@@ -88,7 +88,7 @@
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
 						<div class="img-border">
 							<div class="wrap">
-								<img class="target" src="${keyMaterial.itemImg}" alt="" />
+								<img class="target" src="${keyMaterial.itemImg}" data-zoom="2" />
 							</div>
 						</div>
 					</div>
@@ -152,14 +152,20 @@
 
 	<!-- 이미지 돋보기 스크립트 -->
 	<script>
+	
+		var target = $('.target');
+		
+		var zoom = target.data('zoom');
+	
 		$('.wrap')
 			.on('mousemove', magnify)
 			.prepend("<div class='magnifier'></div>")
 			.children('.magnifier').css({
-				"background": "url('" + $(".target").attr("src") + "') no-repeat"
+				"background": "url('" + target.attr("src") + "') no-repeat",
+				"background-size": target.width() * zoom + "px " + target.height() * zoom+ "px"
 			});
 		
-		var target = $('.target');
+
 		var magnifier = $('.magnifier');
 		
 		function magnify(e) {
@@ -179,8 +185,8 @@
 			if (magnifier.is(":visible")) {
 				
 				// img.target 위에 위치한 마우스 위치를 기준으로 하여 본래 이미지 크기에 대한 마우스 좌표를 얻음
-				var rx = -(mouseX / target.width() * target[0].naturalWidth - magnifier.width() / 2);
-				var ry = -(mouseY / target.height() * target[0].naturalHeight - magnifier.height() / 2);
+				var rx = -(mouseX * zoom - magnifier.width() / 2);
+				var ry = -(mouseY * zoom - magnifier.height() / 2);
 				
 				// div.magnifier를 마우스 가운데 위치시키기 위해 width, height 절반을 차감
 				var px = mouseX - magnifier.width() / 2;
