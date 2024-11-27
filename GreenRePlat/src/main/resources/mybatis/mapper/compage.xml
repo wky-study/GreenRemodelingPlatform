@@ -11,7 +11,7 @@
 		</if>
 	</sql>
 
-	<!-- 리뷰 게시판 목록 불러오기 -->
+	<!-- 게시판 목록 불러오기 -->
 	<select id="getCpList"
 		resultType="com.team.green.compage.dto.CompageDTO"
 		parameterType="com.team.green.material.SearchM">
@@ -41,7 +41,7 @@
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 
-	<!-- 리뷰 게시판 총 갯수 가져오기 -->
+	<!-- 게시판 총 갯수 가져오기 -->
 	<select id="getCpCount" resultType="int"
 		parameterType="com.team.green.material.SearchM">
 		SELECT COUNT(*)
@@ -52,7 +52,7 @@
 		<include refid="cpSearch" />
 	</select>
 
-	<!-- 리뷰 게시글 한개 조회 하기 -->
+	<!-- 게시글 한개 조회 하기 -->
 	<select id="getCp" parameterType="int"
 		resultType="com.team.green.compage.dto.CompageDTO">
 		SELECT
@@ -73,10 +73,10 @@
 		AND cp_no = #{no}
 	</select>
 
-	<!-- 리뷰게시글 작성 -->
+	<!-- 게시글 작성 -->
 	<insert id="writeCp"
 		parameterType="com.team.green.compage.dto.CompageDTO">
-		INSERT INTO review(
+		INSERT INTO compages(
 		cp_no
 		, mem_id
 		, mem_name
@@ -93,8 +93,7 @@
 		, #{memId}
 		, #{memName}
 		, #{cpTitle}
-		,
-		#{cpContent}
+		, #{cpContent}
 		, SYSDATE
 		, 'N'
 		, 0
@@ -103,7 +102,7 @@
 	</insert>
 
 
-	<!-- 리뷰게시글 조회수 -->
+	<!-- 게시글 조회수 -->
 	<update id="cpCountUp" parameterType="int">
 		UPDATE compages
 		SET
@@ -113,7 +112,7 @@
 		AND cp_no = #{no}
 	</update>
 
-	<!-- 리뷰게시글 수정 -->
+	<!-- 게시글 수정 -->
 	<update id="updateCp"
 		parameterType="com.team.green.compage.dto.CompageDTO">
 		UPDATE compages
@@ -125,7 +124,7 @@
 		AND cp_no = #{cpNo}
 	</update>
 
-	<!-- 리뷰게시판 글 삭제 -->
+	<!-- 게시판 글 삭제 -->
 	<update id="deleteCp">
 		UPDATE compages
 		SET

@@ -10,25 +10,25 @@ import com.team.green.material.SearchM;
 @Mapper
 public interface ICompageDAO {
 	
-		// 리뷰 게시판 글 목록 가져오기
+		// 목록 가져오기
 		List<CompageDTO> getCpList(SearchM search);
 		
-		// 리뷰 게시판 글 총 갯수 가져오기
+		// 게시판 글 총 갯수 가져오기
 		int getCpCount(SearchM search);
 		
-		// 리뷰 게시글 한개 조회 하기
+		// 게시글 한개 조회 하기
 		CompageDTO getCp(int no);
 		
-		// 리뷰 게시글 작성하기
+		// 게시글 작성하기
 		int writeCp(CompageDTO cp);
 		
-		// 리뷰 게시글 조회수 업데이트
+		// 게시글 조회수 업데이트
 		int cpCountUp(int no);
 		
-		// 리뷰 게시글 수정
+		// 게시글 수정
 		int updateCp(CompageDTO cp);
 		
-		// 리뷰 게시글 삭제
+		// 게시글 삭제
 		int deleteCp(int cpNo);
 		
 }

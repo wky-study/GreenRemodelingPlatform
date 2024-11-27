@@ -45,20 +45,20 @@ public class CompageService {
 		return result;
 	}
 
-	// 리뷰게시글 조회수 업데이트
+	// 게시글 조회수 업데이트
 	public int cpCountUp(int no) {
 		int result = dao.cpCountUp(no);
 		return result;
 	}
 
-	// 리뷰게시글 수정
+	// 게시글 수정
 	public int updateCp(CompageDTO cp) {
 		int result = dao.updateCp(cp);
 		return result;
 
 	}
 
-	// 리뷰 게시글 삭제
+	// 게시글 삭제
 	public int deleteCp(int cpNo) {
 		int result = dao.deleteCp(cpNo);
 		return result;

@@ -7,29 +7,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리뷰 게시판</title>
+<title>기업포트폴리오 작성</title>
 
 
 <!-- 네이버 스마트 에디터 js파일 불러오기 -->
-<script src="${pageContext.request.contextPath }/nse/js/HuskyEZCreator.js"></script>
+<script
+	src="${pageContext.request.contextPath }/nse/js/HuskyEZCreator.js"></script>
 
 <!-- jquery (AJAX 통신) -->
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-	
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+
 
 </head>
 
 
 <style>
-	.my-card-box {
-		flex-wrap: wrap;
-	}
-	
-	.my-card {
-		width: calc(100% / 5 + 2px);
-		cursor:pointer;
-	}
-	
+.my-card-box {
+	flex-wrap: wrap;
+}
+
+.my-card {
+	width: calc(100%/ 5 + 2px);
+	cursor: pointer;
+}
+
+.img-fluid {
+	width: 100%;
+}
+
+.img-border {
+	height: 100%;
+	min-height: 400px;
+}
 </style>
 
 
@@ -39,45 +50,41 @@
 
 	<div class="container-fluid">
 		<div class="card">
-			
-			<div class="card-body">
 
-					<input type="file" id="inputImg" accept="image/*" hidden="true" onchange="f_sandImg()">
-					
-					<form id="reviewWriteForm" action="${pageContext.request.contextPath }/compageWriteDo" method="POST" enctype="multipart/form-data">
-					
-						<div class="mb-3">
-							<input class="form-control" id="inputId" type="text" name="compageTitle" placeholder="제목을 입력해주세요."/>
-						</div>
-						
-						<div class="mb-3">
-						
-							<button class="d-none" onclick="f_imgWidth(this)" id="imgBtn">입력</button>
+			<div class="container-xxl py-5">
+				<div class="container">
+
+					<div class="card-body">
+
+						<form id="compageWriteForm"
+							action="${pageContext.request.contextPath }/compageWriteDo"
+							method="POST" enctype="multipart/form-data">
+
+							<div class="mb-3">
+								<label>업체로고 링크주소</label><input class="form-control" id="inputId"
+									type="text" name="cpTitle" placeholder="업체로고링크를 넣어주세요." />
+							</div>
+
+							<div class="mb-3">
+								<label>포트폴리오 링크주소</label><input class="form-control" id="inputId"
+									type="text" name="cpTitle" placeholder="포트폴리오링크를 넣어주세요." />
+							</div>
+
+							<div class="d-flex justify-content-end">
+								<a class="btn btn-secondary me-2"
+									href="${pageContext.request.contextPath }/compageView">취소</a>
+
+								<!-- form 태그의 submit 역할을 함 -> type=submit 넣어주기 -->
+								<button id="writeBtn" class="btn btn-primary" type="button">등록</button>
+							</div>
 							
-							<textarea id="smartEditor" class="form-control"  rows="10" name="compageContent"></textarea>
-						</div>		
-						
-						<div class="d-flex justify-content-end">
-							<a class="btn btn-secondary me-2" href="${pageContext.request.contextPath }/compageView">취소</a>
-							
-							<!-- form 태그의 submit 역할을 함 -> type=submit 넣어주기 -->
-							<button id="writeBtn" class="btn btn-primary" type="button">등록</button>
-						</div>
-						
-						<input type="text" id="imageFileName" name="imgFileName" hidden="true" >
-						
-					</form>
-								
-					
-					
+						</form>
+
+
+					</div>
+				</div>
 			</div>
-
 		</div>
-
-
-
-
-
 	</div>
 
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
@@ -106,7 +113,7 @@
 			// 에디터에 작성된 내용(html태그 형태)을 숨겨진 textarea에 반영
 			oEditors.getById["smartEditor"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			document.getElementById("reviewWriteForm").submit();
+			document.getElementById("compageWriteForm").submit();
 		})
 		
 		// 이미지 첨부 받을 input 태그 객체 불러오기
@@ -183,9 +190,9 @@
 		
 		
 	</script>
-	
-	
-	
+
+
+
 
 </body>
 
