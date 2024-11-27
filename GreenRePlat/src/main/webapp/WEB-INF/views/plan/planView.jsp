@@ -159,7 +159,7 @@
                   <input id="event-end-date" type="date" class="form-control"  name="quoEdate" />
                 </div>
               </div>
-              <!-- 컨텐츠 첨부 -->
+              <!-- 컨텐츠 첨부 --> 
               <div class="col-md-12 mt-6">
                 <div>
                   <label class="form-label">Contents</label>
