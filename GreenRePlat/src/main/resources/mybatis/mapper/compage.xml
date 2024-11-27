@@ -5,11 +5,8 @@
 	<sql id="cpSearch">
 		<if test="searchWord != null">
 			<choose>
-				<when test="searchOption == 'title'">AND a.cp_title LIKE '%' || #{searchWord} || '%'
+				<when test="searchOption == 'mem_name'">AND a.mem_name LIKE '%' || #{searchWord} || '%'
 				</when>
-				<when test="searchOption == 'content'">AND a.cp_content LIKE '%' || #{searchWord} ||'%'
-				</when>
-				<when test="searchOption == 'name'">AND b.mem_name = #{searchWord} </when>
 			</choose>
 		</if>
 	</sql>
@@ -30,7 +27,7 @@
 		, a.cp_content
 		, TO_CHAR(cp_date,'YYYY-MM-DD HH24:MI') AS cp_date
 		, a.cp_path
-		, NVL(b.mem_name, '탈퇴한 회원') AS mem_name
+		, a.mem_name
 		, a.cp_count
 		FROM compages a , members b
 		WHERE 1=1

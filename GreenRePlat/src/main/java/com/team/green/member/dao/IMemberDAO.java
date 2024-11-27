@@ -14,13 +14,9 @@ public interface IMemberDAO {
 	int updateMember(MemberDTO member);
 	MemberDTO searchMember(String member);
 
-
 	String getMember(String memId);
 	MemberDTO socialLoginMember(String memId); 
 
-	
-
 	public List<MemberDTO> getMemList();
-
 
 }

@@ -1,6 +1,8 @@
 package com.team.green.chat.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.green.chat.dto.RoomDTO;
+import com.team.green.chat.service.ChatLogService;
 import com.team.green.chat.service.RoomService;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
@@ -22,6 +27,9 @@ public class RoomController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	ChatLogService chatLogService;
 
 	// 채팅방 목록 화면
 	@RequestMapping("/chatListView")
@@ -31,11 +39,21 @@ public class RoomController {
 		MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 		String memId = login.getMemId();
 		
+		
 		List<MemberDTO> memList = memberService.getMemList();
 		List<RoomDTO> roomList = roomService.getRoomList(memId);
-//		List<RoomDTO> roomList = roomService.getRoomList();
+		
+		// 각 채팅방 읽지않은 메세지 수 확인
+		Map<Integer, Integer> unreadCounts = new HashMap<>();
+		for (RoomDTO room : roomList) {
+            int unreadCount = chatLogService.getUnreadChat(room.getRoomNo(), memId);
+            unreadCounts.put(room.getRoomNo(), unreadCount); // 채팅방 번호를 키로 설정
+        }
+		System.out.println("새로운 메시지 방 번호 및 메시지 개수:" + unreadCounts);
+		
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("memList", memList);
+		model.addAttribute("unreadCounts", unreadCounts);
 		
 		return "chat/chatListView";
 	}
@@ -75,27 +93,51 @@ public class RoomController {
 	    return "redirect:/chatListView";
 	}
 	
-	 @RequestMapping("/requestChat")
-	    public String requestChat(String partMem, HttpSession session, Model model) {
-	        MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
-	        
-//	        if (login == null) {
-//	            return "redirect:/loginView";
-//	        }
+	@RequestMapping("/requestChat")
+	public String requestChat(String partMem, HttpSession session, Model model) {
+	    MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 
-	        // 방 생성 시, 신청받은 멤버의 ID를 partMem에 설정
-	        RoomDTO room = new RoomDTO();
-	        room.setMemId(login.getMemId());
-	        room.setMemNick(login.getMemNick());
-	        room.setPartMem(partMem);  // 신청받은 멤버 ID
-	        String man = memberService.searchMember(partMem).getMemNick();
-	        room.setRoomName(login.getMemNick() + "님 " + man + "님의 채팅방");
+//	    if (login == null) {
+//	        return "redirect:/loginView";
+//	    }
 
-	        // 방 생성 호출
-	        roomService.createRoom(room);
+	    // 로그인된 사용자 정보
+	    String memId = login.getMemId();
+	    String memNick = login.getMemNick();
 
-	        return "redirect:/chatListView";  // 방 리스트 페이지로 리다이렉트
+	    // 기존 방 존재 여부 확인
+	    RoomDTO existingRoom = roomService.findRoom(memId, partMem);
+
+	    if (existingRoom != null) {
+	        // 기존 채팅방이 존재하는 경우 해당 채팅방으로 이동
+	    	System.out.println("기존 방 번호 확인: " + existingRoom.getRoomNo());
+	        return "redirect:/chatView?no=" + existingRoom.getRoomNo();
 	    }
+
+	    // 기존 채팅방이 없는 경우 새로 생성
+	    String partMemNick = memberService.searchMember(partMem).getMemNick();
+	    RoomDTO room = new RoomDTO();
+	    room.setMemId(memId);
+	    room.setMemNick(memNick);
+	    room.setPartMem(partMem);
+	    room.setRoomName(memNick + "님과 " + partMemNick + "님의 채팅방");
+
+	    roomService.createRoom(room);
+
+	    return "redirect:/chatListView"; // 채팅방 목록 페이지로 이동
+	}
+	
+	@RequestMapping("/getDelYn")
+	@ResponseBody
+	public String getDelYn(@RequestParam("RoomNo") int no) {
+	    // roomNo를 이용해 RoomDTO를 가져옵니다.
+	    RoomDTO room = roomService.getRoom(no);
+	    System.out.println(room);
+	    
+	    // delYn 값을 반환합니다.
+	    return room.getDelYn();  // 예: "1", "2" 등의 값
+	}
+
 	
 	
 }

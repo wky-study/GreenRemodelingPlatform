@@ -37,7 +37,8 @@
 	left: 3rem;
 	width: calc(100% - 3rem);
 	height: calc(100% - 3rem);
-	object-fit: cover;
+	object-fit: scale-down;
+	background-color: white;
 }
 </style>
 
@@ -163,10 +164,7 @@
 					</button>
 				</form>
 			</div>
-
-
 		</div>
-
 
 	</div>
 
