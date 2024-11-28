@@ -82,10 +82,21 @@
 					<c:forEach items="${keyCp}" var="CompageDTO">
 						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
 							<div class="img-border"
-								onclick='window.location ="${CompageDTO.cpContent}"'>
+								onclick='window.location ="${CompageDTO.cpPath}"'>
 								<img class="img-fluid" src="${CompageDTO.cpTitle}" />
 								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
 									${CompageDTO.memName}</h4>
+								<c:if test="${loggedInUserId == CompageDTO.memId}">
+									<td>
+										<form
+											action="${pageContext.request.contextPath}/compageDeleteDo"
+											method="post">
+											<input type="hidden" name="compageNo"
+												value="${CompageDTO.cpNo}" />
+											<button type="submit" class="btn btn-danger btn-sm">삭제</button>
+										</form>
+									</td>
+								</c:if>
 							</div>
 						</div>
 					</c:forEach>
@@ -265,11 +276,6 @@
 		
 	})	
 	
-	document.getElementById("writeBtn").addEventListener("click", ()=>{
-		
-		document.getElementById("writeBtn").submit();
-		
-	});
 	
 	
 	</script>
@@ -277,21 +283,21 @@
 	<!-- 글 작성 script -->
 	<script type="text/javascript">
 	
-		let v_id = '${sessionScope.memInfo.memId}';
+		/* let v_id = '${sessionScope.memInfo.memId}';
 		
 		document.getElementById("writeBtn").addEventListener("click", ()=>{
 			
 			location.href = '${pageContext.request.contextPath }/compageWriteView';
 			
-			if(v_id){
+			 if(v_id){
 				location.href = '${pageContext.request.contextPath }/compageWriteView';
 			}
 			else{
 				alert("로그인 후 글쓰기가 가능합니다.");
 				location.href = '${pageContext.request.contextPath}/loginView';
-			} 
+			}  
 			
-		})
+		}) */
 	</script>
 
 	<!-- JavaScript Libraries -->

@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class CompageDTO {
 
-	private int cpNo;				/* 리뷰 게시글 번호 */
+	private int cpNo;				/* 게시글 번호 */
 	private String memId;				/* 작성자 아이디 */
-	private String cpTitle;			/* 기업로고사진 */
-	private String cpContent;		/* 포트폴리오내용 */
+	private String cpTitle;			/* mem_img */
+	private String cpContent;		/* (사용안함) */
 	private Date cpDate;			/* 작성일 */
 	private String delYn;				/* 삭제 여부 */
-	private String cpPath;			/* 파일경로 */
+	private String cpPath;			/* 포트폴리오경로 */
 	private String memName;				/* 기업명 */
 	private int cpCount;			/* 게시글 조회수 */
 

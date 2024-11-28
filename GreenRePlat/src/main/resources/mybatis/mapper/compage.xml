@@ -22,18 +22,21 @@
 		FROM (
 		SELECT
 		a.cp_no
-		, a.mem_id
+		, b.mem_id
 		, a.cp_title
 		, a.cp_content
-		, TO_CHAR(cp_date,'YYYY-MM-DD HH24:MI') AS cp_date
+		, TO_CHAR(a.cp_date,'YYYY-MM-DD HH24:MI:SS') AS
+		cp_date
 		, a.cp_path
-		, a.mem_name
+		, NVL(b.mem_name, '탈퇴한
+		회원') AS mem_name
 		, a.cp_count
 		FROM compages a , members b
 		WHERE 1=1
 		AND a.mem_id =
 		b.mem_id(+)
-		AND a.del_yn = 'N'
+		AND
+		a.del_yn = 'N'
 		<include refid="cpSearch" />
 		ORDER BY cp_no DESC
 		) a
@@ -79,25 +82,24 @@
 		INSERT INTO compages(
 		cp_no
 		, mem_id
-		, mem_name
 		, cp_title
-		,
-		cp_content
+		, cp_content
 		, cp_date
 		, del_yn
-		, cp_count
 		, cp_path
+		, mem_name
+		, cp_count
 		) VALUES(
 		(SELECT
 		COUNT(*)+1 FROM compages)
 		, #{memId}
-		, #{memName}
 		, #{cpTitle}
 		, #{cpContent}
 		, SYSDATE
 		, 'N'
-		, 0
 		, #{cpPath}
+		, #{memName}
+		, 0
 		)
 	</insert>
 
@@ -125,13 +127,13 @@
 	</update>
 
 	<!-- 게시판 글 삭제 -->
-	<update id="deleteCp">
+	<update id="deleteCp" parameterType="Integer">
 		UPDATE compages
 		SET
 		del_yn = 'Y'
 		WHERE 1=1
 		AND cp_no =
-		#{cpNo}
+		#{compageNo}
 	</update>
 
 

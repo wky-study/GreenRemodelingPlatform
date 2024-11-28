@@ -34,7 +34,8 @@ public class CompageController {
 
 	// 목록 페이지
 	@RequestMapping("/compageView")
-	public String compageView(Model model, SearchM search) {
+	public String compageView(Model model, SearchM search, HttpSession session) {
+		
 		
 		int cpCnt = cpgSvc.getCpCount(search);
 		
@@ -50,6 +51,12 @@ public class CompageController {
 		
 		model.addAttribute("keyCp", cp);
 		model.addAttribute("keySearch", search);
+		
+	    // 세션에 로그인된 사용자 정보가 있는 경우 ID를 모델에 추가
+	    MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
+	    if (login != null) {
+	        model.addAttribute("loggedInUserId", login.getMemId());
+	    }
 	
 		return "compage/compageView";
 	}
@@ -82,15 +89,15 @@ public class CompageController {
 	
 	// 글 작성 클릭
 	@PostMapping("/compageWriteDo")
-	public String compageWriteDo(CompageDTO cp, String imgFileName, HttpSession session) {
+	public String compageWriteDo(CompageDTO cp, HttpSession session) {
 		
 		// 세션에 담긴 회원이 아이디를 꺼낸 후 compage 객체의 필드변수에 추가
 		MemberDTO memInfo= (MemberDTO)session.getAttribute("memInfo");
 		
 		cp.setMemId(memInfo.getMemId());
 		cp.setMemName(memInfo.getMemName());
-		cp.setCpPath(imgFileName);
-		System.out.println(cp);
+		cp.setCpTitle(memInfo.getMemImg());
+		System.out.println("글장성 정보: "+ cp);
 		
 		cpgSvc.writeCp(cp);
 
@@ -176,9 +183,9 @@ public class CompageController {
 	
 	// 자유게시판 글 삭제
 	@PostMapping("/compageDeleteDo")
-	public String compageDeleteDo(int no) {
+	public String compageDeleteDo(int compageNo) {
 		
-		cpgSvc.deleteCp(no);
+		cpgSvc.deleteCp(compageNo);
 		
 		return "redirect:/compageView";	
 	}

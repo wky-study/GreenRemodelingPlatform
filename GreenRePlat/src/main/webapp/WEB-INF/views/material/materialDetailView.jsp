@@ -88,7 +88,7 @@
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
 						<div class="img-border">
 							<div class="wrap">
-								<img class="target" src="${keyMaterial.itemImg}" data-zoom="4" />
+								<img class="target" src="${keyMaterial.itemImg}" data-zoom="3" />
 							</div>
 						</div>
 					</div>
