@@ -42,7 +42,7 @@
 	position: relative;
 	height: 100%;
 	min-height: 400px;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .img-border::before {
@@ -75,107 +75,125 @@
 
 	<!-- 목록그리기 -->
 	<div class="container-fluid">
-	
-			<div class="container-xxl py-5">
-				<div class="container">
-					<div class="row g-5">
-						<c:forEach items="${keyCp}" var="CompageDTO">
-							<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-								<div class="img-border" 
-									onclick='window.location ="${CompageDTO.cpContent}"'>
-									<img class="img-fluid" src="${CompageDTO.cpTitle}" />
-									<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
-										${CompageDTO.memName}</h4>
-								</div>
+
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="row g-5">
+					<c:forEach items="${keyCp}" var="CompageDTO">
+						<div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="img-border"
+								onclick='window.location ="${CompageDTO.cpPath}"'>
+								<img class="img-fluid" src="${CompageDTO.cpTitle}" />
+								<h4 class="badge-ma text-bg-light text-dark bottom-0 end-0">
+									${CompageDTO.memName}</h4>
+								<c:if test="${loggedInUserId == CompageDTO.memId}">
+									<td>
+										<form
+											action="${pageContext.request.contextPath}/compageDeleteDo"
+											method="post">
+											<input type="hidden" name="compageNo"
+												value="${CompageDTO.cpNo}" />
+											<button type="submit" class="btn btn-danger btn-sm">삭제</button>
+										</form>
+									</td>
+								</c:if>
 							</div>
-						</c:forEach>
-					</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
+		</div>
 
-			<!-- 페이징 시작 -->
-			<div class="d-flex justify-content-center">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
+		<!-- 페이징 시작 -->
+		<div class="d-flex justify-content-center">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
 
-						<!-- 검색중이면 검색옵션과 검색어를 유지하면서 페이징 처리 -->
-						<!-- 검색중이지 않으면 검색 옵션과 검색어가 주소창에 나타나지 않게 하기 -->
-						<!-- searchWord가 null이면 a태그의 href에서 searchOption 과 searchWord 떼어내기 -->
+					<!-- 검색중이면 검색옵션과 검색어를 유지하면서 페이징 처리 -->
+					<!-- 검색중이지 않으면 검색 옵션과 검색어가 주소창에 나타나지 않게 하기 -->
+					<!-- searchWord가 null이면 a태그의 href에서 searchOption 과 searchWord 떼어내기 -->
 
-						<!-- 이전 페이지 -->
-						<li
-							class="page-item ${keySearch.firstPage == 1 ? 'disabled' : '' }">
+					<!-- 이전 페이지 -->
+					<li
+						class="page-item ${keySearch.firstPage == 1 ? 'disabled' : '' }">
 
+						<c:if test="${keySearch.searchWord != null}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+						</c:if> <c:if test="${keySearch.searchWord == null}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+						</c:if>
+
+					</li>
+
+					<!-- 중간 페이지 번호 부분 -->
+					<!-- model에 keySearch 이름으로 searchM를 담음 -->
+					<!-- searchM 내 pageNo, firstPage, lastPage 채워져있음 -->
+
+					<c:forEach begin="${keySearch.firstPage }"
+						end="${keySearch.lastPage }" var="num">
+						<li class="page-item ${keySearch.pageNo == num ? 'active' : '' } ">
 							<c:if test="${keySearch.searchWord != null}">
 								<a class="page-link"
-									href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a>
+									href="${pageContext.request.contextPath }/compageView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
 							</c:if> <c:if test="${keySearch.searchWord == null}">
 								<a class="page-link"
-									href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}"
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a>
-							</c:if>
-
-						</li>
-
-						<!-- 중간 페이지 번호 부분 -->
-						<!-- model에 keySearch 이름으로 searchM를 담음 -->
-						<!-- searchM 내 pageNo, firstPage, lastPage 채워져있음 -->
-
-						<c:forEach begin="${keySearch.firstPage }"
-							end="${keySearch.lastPage }" var="num">
-							<li
-								class="page-item ${keySearch.pageNo == num ? 'active' : '' } ">
-								<c:if test="${keySearch.searchWord != null}">
-									<a class="page-link"
-										href="${pageContext.request.contextPath }/compageView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
-								</c:if> <c:if test="${keySearch.searchWord == null}">
-									<a class="page-link"
-										href="${pageContext.request.contextPath }/compageView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
-								</c:if>
-							</li>
-						</c:forEach>
-
-						<!-- 다음 페이지 -->
-						<!-- 마지막 페이지 도달 시 disabled 추가 -->
-						<li
-							class="page-item ${keySearch.pageNo == keySearch.finalPage ? 'disabled' : ''  }">
-							<c:if test="${keySearch.searchWord == null}">
-								<a class="page-link"
-									href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a>
-							</c:if> <c:if test="${keySearch.searchWord != null}">
-								<a class="page-link"
-									href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-								</a>
+									href="${pageContext.request.contextPath }/compageView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
 							</c:if>
 						</li>
+					</c:forEach>
 
-					</ul>
-				</nav>
-			</div>
+					<!-- 다음 페이지 -->
+					<!-- 마지막 페이지 도달 시 disabled 추가 -->
+					<li
+						class="page-item ${keySearch.pageNo == keySearch.finalPage ? 'disabled' : ''  }">
+						<c:if test="${keySearch.searchWord == null}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a>
+						</c:if> <c:if test="${keySearch.searchWord != null}">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/compageView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a>
+						</c:if>
+					</li>
 
-			<!-- 검색기능 -->
-			<div class="d-flex justify-content-center mb-3">
-				<form class="d-flex"
-					action="${pageContext.request.contextPath }/compageView"
-					method="GET">
-					<select class="form-select me-1" name="searchOption">
-						<option value="mem_name" selected>업체명</option>
-					</select> <input class="form-control me-1" type="text" name="searchWord">
-					<button class="btn btn-outline-primary" type="submit">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-							fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+				</ul>
+			</nav>
+		</div>
+
+		<!-- 글쓰기 버튼 -->
+		<div class="d-flex justify-content-end me-5 my-write-btn">
+			<a href="${pageContext.request.contextPath }/compageWriteView">
+				<button id="writeBtn" class="btn btn-outline-secondary">기업포트폴리오
+					올리기</button>
+			</a>
+		</div>
+
+		<!-- 검색기능 -->
+		<div class="d-flex justify-content-center mb-3">
+			<form class="d-flex"
+				action="${pageContext.request.contextPath }/compageView"
+				method="GET">
+				<select class="form-select me-1" name="searchOption">
+					<option value="mem_name" selected>기업명</option>
+				</select> <input class="form-control me-1" type="text" name="searchWord">
+				<button class="btn btn-outline-primary" type="submit">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 						  <path
-								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
 						</svg>
-					</button>
-				</form>
-			</div>
+				</button>
+			</form>
+		</div>
 
 	</div>
 
@@ -258,13 +276,28 @@
 		
 	})	
 	
-	document.getElementById("writeBtn").addEventListener("click", ()=>{
-		
-		document.getElementById("writeBtn").submit();
-		
-	});
 	
 	
+	</script>
+
+	<!-- 글 작성 script -->
+	<script type="text/javascript">
+	
+		/* let v_id = '${sessionScope.memInfo.memId}';
+		
+		document.getElementById("writeBtn").addEventListener("click", ()=>{
+			
+			location.href = '${pageContext.request.contextPath }/compageWriteView';
+			
+			 if(v_id){
+				location.href = '${pageContext.request.contextPath }/compageWriteView';
+			}
+			else{
+				alert("로그인 후 글쓰기가 가능합니다.");
+				location.href = '${pageContext.request.contextPath}/loginView';
+			}  
+			
+		}) */
 	</script>
 
 	<!-- JavaScript Libraries -->

@@ -11,7 +11,7 @@
 		</if>
 	</sql>
 
-	<!-- 리뷰 게시판 목록 불러오기 -->
+	<!-- 게시판 목록 불러오기 -->
 	<select id="getCpList"
 		resultType="com.team.green.compage.dto.CompageDTO"
 		parameterType="com.team.green.material.SearchM">
@@ -22,18 +22,21 @@
 		FROM (
 		SELECT
 		a.cp_no
-		, a.mem_id
+		, b.mem_id
 		, a.cp_title
 		, a.cp_content
-		, TO_CHAR(cp_date,'YYYY-MM-DD HH24:MI') AS cp_date
+		, TO_CHAR(a.cp_date,'YYYY-MM-DD HH24:MI:SS') AS
+		cp_date
 		, a.cp_path
-		, a.mem_name
+		, NVL(b.mem_name, '탈퇴한
+		회원') AS mem_name
 		, a.cp_count
 		FROM compages a , members b
 		WHERE 1=1
 		AND a.mem_id =
 		b.mem_id(+)
-		AND a.del_yn = 'N'
+		AND
+		a.del_yn = 'N'
 		<include refid="cpSearch" />
 		ORDER BY cp_no DESC
 		) a
@@ -41,7 +44,7 @@
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 
-	<!-- 리뷰 게시판 총 갯수 가져오기 -->
+	<!-- 게시판 총 갯수 가져오기 -->
 	<select id="getCpCount" resultType="int"
 		parameterType="com.team.green.material.SearchM">
 		SELECT COUNT(*)
@@ -52,7 +55,7 @@
 		<include refid="cpSearch" />
 	</select>
 
-	<!-- 리뷰 게시글 한개 조회 하기 -->
+	<!-- 게시글 한개 조회 하기 -->
 	<select id="getCp" parameterType="int"
 		resultType="com.team.green.compage.dto.CompageDTO">
 		SELECT
@@ -73,37 +76,35 @@
 		AND cp_no = #{no}
 	</select>
 
-	<!-- 리뷰게시글 작성 -->
+	<!-- 게시글 작성 -->
 	<insert id="writeCp"
 		parameterType="com.team.green.compage.dto.CompageDTO">
-		INSERT INTO review(
+		INSERT INTO compages(
 		cp_no
 		, mem_id
-		, mem_name
 		, cp_title
-		,
-		cp_content
+		, cp_content
 		, cp_date
 		, del_yn
-		, cp_count
 		, cp_path
+		, mem_name
+		, cp_count
 		) VALUES(
 		(SELECT
 		COUNT(*)+1 FROM compages)
 		, #{memId}
-		, #{memName}
 		, #{cpTitle}
-		,
-		#{cpContent}
+		, #{cpContent}
 		, SYSDATE
 		, 'N'
-		, 0
 		, #{cpPath}
+		, #{memName}
+		, 0
 		)
 	</insert>
 
 
-	<!-- 리뷰게시글 조회수 -->
+	<!-- 게시글 조회수 -->
 	<update id="cpCountUp" parameterType="int">
 		UPDATE compages
 		SET
@@ -113,7 +114,7 @@
 		AND cp_no = #{no}
 	</update>
 
-	<!-- 리뷰게시글 수정 -->
+	<!-- 게시글 수정 -->
 	<update id="updateCp"
 		parameterType="com.team.green.compage.dto.CompageDTO">
 		UPDATE compages
@@ -125,14 +126,14 @@
 		AND cp_no = #{cpNo}
 	</update>
 
-	<!-- 리뷰게시판 글 삭제 -->
-	<update id="deleteCp">
+	<!-- 게시판 글 삭제 -->
+	<update id="deleteCp" parameterType="Integer">
 		UPDATE compages
 		SET
 		del_yn = 'Y'
 		WHERE 1=1
 		AND cp_no =
-		#{cpNo}
+		#{compageNo}
 	</update>
 
 
