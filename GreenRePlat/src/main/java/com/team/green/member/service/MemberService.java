@@ -47,6 +47,22 @@ public class MemberService {
 		MemberDTO result = dao.searchMember(member);
 		return result;
 	}
+	
+    // ID 중복 확인
+    public boolean checkIdDuplication(String memId) {
+        int count = dao.checkIdDuplication(memId);
+        return count == 0;  // 중복되지 않으면 true
+    }
 
+    // 닉네임 중복 확인
+    public boolean checkNickDuplication(String memNick) {
+        int count = dao.checkNickDuplication(memNick);
+        return count == 0;  // 중복되지 않으면 true
+    }
+    
+    // 비밀번호 확인
+    public boolean checkPasswordMatch(String memPw, String memRn) {
+        return memPw.equals(memRn);  // 비밀번호와 확인용 비밀번호가 같으면 true
+    }
 
 }
