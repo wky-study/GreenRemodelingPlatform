@@ -19,5 +19,9 @@ public interface IMaterialDAO {
 	// 자재 한개 조회 하기
 	MaterialDTO getMaterial(int no);
 	
+	// 견적서용 리스트
+	List<MaterialDTO> materialList(String itemList);
 	
+	// 자재 타입별 리스트
+	List<MaterialDTO> typeList();
 }

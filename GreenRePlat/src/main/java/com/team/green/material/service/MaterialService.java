@@ -33,4 +33,16 @@ public class MaterialService {
 		return result;
 	}
 	
+	// 견적서용 리스트
+	public List<MaterialDTO> materialList(String itemList){
+		List<MaterialDTO> result = dao.materialList(itemList);
+		return result;
+	};
+	
+	// 자재 타입별 리스트
+	public List<MaterialDTO> typeList(){
+		List<MaterialDTO> result = dao.typeList();
+		return result;
+	};
+	
 }

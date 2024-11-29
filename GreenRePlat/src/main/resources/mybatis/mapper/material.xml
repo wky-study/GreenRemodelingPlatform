@@ -59,4 +59,32 @@
 		    AND item_id = #{id}		
 	</select>
 
+	
+	<!-- 견적서용 -->
+	<!-- 목록 불러오기 -->
+	<select id="materialList" resultType="com.team.green.material.dto.MaterialDTO" parameterType="String">
+
+		    SELECT  
+				item_name
+		 	  , item_id
+		  	  , item_model
+		  	  , item_brand
+		  	  , item_img
+		  	  , item_effi_level
+		  	  , item_type
+		  	  , item_size
+		    FROM material
+		    WHERE 1=1
+		    	AND item_type = #{itemType}
+		
+	</select>
+	
+	<select id="typeList" resultType="com.team.green.material.dto.MaterialDTO">
+
+		SELECT DISTINCT item_type 
+		FROM material
+		ORDER BY item_type ASC
+	
+	</select>
+
 </mapper>

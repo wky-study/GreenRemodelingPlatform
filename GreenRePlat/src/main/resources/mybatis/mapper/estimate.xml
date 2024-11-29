@@ -2,4 +2,106 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.green.estimate.dao.IEstimateDAO">
 
+
+    <!-- 데이터 존재 여부 확인 -->
+    <select id="countEstimateByCriteria" resultType="int" parameterType="com.team.green.estimate.dto.EstimateDTO">
+        SELECT COUNT(*)
+        FROM ESTIMATE 
+        WHERE MEM_ID = #{memId}
+          AND EST_ADDRESS = #{estAddress}
+          AND est_submit = 'N'
+    </select>
+
+    <!-- 새로운 데이터 삽입 -->
+    <insert id="insertEstimate" parameterType="com.team.green.estimate.dto.EstimateDTO">
+		INSERT INTO ESTIMATE (
+		    EST_ID, 
+		    MEM_ID, 
+		    EST_ADDRESS, 
+		    EST_SDATE, 
+		    DONG_NM,  
+		    HO_NM,
+		    EST_INTERIOR_DESC,
+		    EST_SUBMIT,
+		    SIGUNGU_CD,   
+		    BJDONG_CD,     
+		    EST_AREA
+		) VALUES (
+		    (SELECT COALESCE(MAX(EST_ID), 0) + 1 FROM ESTIMATE), 
+		    #{memId}, 
+		    #{estAddress}, 
+		    #{estSdate}, 
+		    #{dongNm}, 
+		    #{hoNm},
+		    '',
+		    'N',
+		    #{sigunguCd},  
+		    #{bjdongCd},    
+		    ''
+		)
+    </insert>
+
+    <!-- 기존 데이터 업데이트 -->
+    <update id="updateEstimate" parameterType="com.team.green.estimate.dto.EstimateDTO">
+        UPDATE ESTIMATE
+        SET 
+            EST_SDATE = #{estSdate},
+            DONG_NM = #{dongNm}, 
+            HO_NM = #{hoNm}
+        WHERE MEM_ID = #{memId}
+        AND EST_ADDRESS = #{estAddress}
+    </update>
+
+	<!-- 임시견적서 한개 조회 -->
+	<select id="getEst" resultType="com.team.green.estimate.dto.EstimateDTO">
+		SELECT * 
+	    FROM estimate 
+	    WHERE est_id = #{estId}
+	</select>
+
+	<!-- 임시견적서 설명 및 파일 업데이트 -->
+    <update id="updateEst" parameterType="com.team.green.estimate.dto.EstimateDTO">
+        UPDATE ESTIMATE
+        SET 
+            est_interior_desc = #{estInteriorDesc}
+        WHERE MEM_ID = #{memId}
+        AND est_id = #{estId}
+    </update>
+
+	<!-- 임시견적서 리스트 가져오기 -->
+	<select id="getMemEstList" resultType="com.team.green.estimate.dto.EstimateDTO">
+		SELECT * 
+	    FROM estimate 
+	    WHERE mem_id = #{memId}	
+	    AND est_submit = 'N'
+	
+	</select>
+	
+	<!-- 생성할 estId 가져오기 -->
+	<select id="getEstId" resultType="int">
+	    SELECT COUNT(*) + 1
+	    FROM estimate
+	</select>
+	
+	<!-- 제출하기 클릭시 업데이트 -->
+    <update id="estSubmit" parameterType="com.team.green.estimate.dto.EstimateDTO">
+        UPDATE ESTIMATE
+        SET 
+            est_submit = 'Y',
+            est_area = #{estArea}
+        WHERE 1=1 
+        AND est_id = #{estId}
+    </update>
+
+
+	<!-- 제출 완료된 임시견적서 리스트 가져오기 -->
+	<select id="getMemSubList" resultType="com.team.green.estimate.dto.EstimateDTO">
+		SELECT * 
+	    FROM estimate  
+	    WHERE mem_id = #{memId}	
+	    AND est_submit = 'Y'
+	</select>
+
+
+
 </mapper>
