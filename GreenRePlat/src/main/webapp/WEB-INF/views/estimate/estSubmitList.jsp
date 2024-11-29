@@ -52,6 +52,8 @@
 								      <th scope="col">주소</th>
 								      <th scope="col" class="item-name">동</th>
 								      <th scope="col" class="item-name">호</th>
+								      <th scope="col" class="item-name">면적</th>
+								      <th scope="col" class="item-name">요청 시공일</th>
 								    </tr>
 								  </thead>
 								  
@@ -63,6 +65,8 @@
 										      <td>${EstimateDTO.estAddress}</td>
 										      <td>${EstimateDTO.dongNm}</td>
 										      <td>${EstimateDTO.hoNm}</td>
+										      <td>${EstimateDTO.estArea}</td>
+										      <td>${EstimateDTO.estSdate}</td>
 										    </tr>
 										</c:forEach>					    
 								    
