@@ -29,55 +29,66 @@
 									class="text-nowrap logo-img text-center d-block py-3 w-100">
 									<img src="../assets/images/logos/logo-light.svg" alt="">
 								</a>
+
+
 								<p class="text-center">회원가입</p>
-								<form action = "${pageContext.request.contextPath}/registDo" method = "POST">
+								<form action="${pageContext.request.contextPath}/registDo"
+									method="POST">
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">아이디</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "inputId"
-											aria-describedby="textHelp">
+										<label for="inputtext1" class="form-label">아이디</label> <input
+											type="text" class="form-control" id="inputtext1"
+											name="inputId" aria-describedby="textHelp">
 									</div>
 									<div class="mb-4">
-										<label for="exampleInputPassword1" class="form-label">비밀번호</label>
-										<input type="password" class="form-control" name = "inputPw"
-											id="exampleInputPassword1">
+										<label for="inputPassword1" class="form-label">비밀번호</label> <input
+											type="password" class="form-control" name="inputPw"
+											id="inputPassword1">
 									</div>
 									<div class="mb-4">
-										<label for="exampleInputPassword1" class="form-label">비밀번호확인</label>
+										<label for="inputPassword1" class="form-label">비밀번호확인</label>
 										<input type="password" class="form-control"
-											id="exampleInputPassword1">
+											id="inputPassword2">
 									</div>
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">이름</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "inputName"
-											aria-describedby="textHelp">
+										<label for="inputtext1" class="form-label">이름</label> <input
+											type="text" class="form-control" id="inputName"
+											name="inputName" aria-describedby="textHelp">
 									</div>
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">주민등록번호</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "inputRn"
-											aria-describedby="textHelp">
+										<label for="inputtext1" class="form-label">주민등록번호</label> <input
+											type="text" class="form-control" id="inputRn"
+											name="inputRn" aria-describedby="textHelp">
 									</div>
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">주소</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "inputAddress"
-											aria-describedby="textHelp">
+										<label for="inputtext1" class="form-label">주소</label> <input
+											type="text" class="form-control" id="postcode" placeholder="우편번호"> <input
+											type="button" class="btn btn-primary w-100 py-8 fs-4 mb-4" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+										<input type="text" id="roadAddress" placeholder="도로명주소">
+										<input type="text" id="jibunAddress" placeholder="지번주소">
+										<span id="guide" style="color: #999; display: none"></span> <input
+											type="text" id="detailAddress" placeholder="상세주소" oninput = "inputFullAddress()"> <input
+											type="text" id="extraAddress" placeholder="참고항목"><input
+											type="text" class="form-control" id="fullAddress"
+											name="inputAddress" aria-describedby="textHelp" hidden>
 									</div>
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">전화번호</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "inputPhone"
-											aria-describedby="textHelp">
+										<label for="inputtext1" class="form-label">전화번호</label> <input
+											type="text" class="form-control" id="inputPhone"
+											name="inputPhone" aria-describedby="textHelp">
 									</div>
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">닉네임</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "inputNick"
-											aria-describedby="textHelp">
+										<label for="inputtext1" class="form-label">닉네임</label> <input
+											type="text" class="form-control" id="inputNick"
+											name="inputNick" aria-describedby="textHelp">
 									</div>
 
 									<div class="mb-3">
-										<label for="exampleInputEmail1" class="form-label">이메일</label> <input type="email" class="form-control"
-											id="exampleInputEmail1" aria-describedby="emailHelp" name="inputEmail">
+										<label for="inputEmail1" class="form-label">이메일</label> <input
+											type="email" class="form-control" id="inputEmail"
+											aria-describedby="emailHelp" name="inputEmail">
 									</div>
-									<button 
-										class="btn btn-primary w-100 py-8 fs-4 mb-4" type = "submit">회원가입</button>
+									<button class="btn btn-primary w-100 py-8 fs-4 mb-4"
+										type="submit">회원가입</button>
 									<div class="d-flex align-items-center justify-content-center">
 										<p class="fs-4 mb-0 fw-bold">이미 회원이십니까?</p>
 										<a class="text-primary fw-bold ms-2"
@@ -105,6 +116,72 @@
 	<script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+
+
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+		function execDaumPostcode() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							var roadAddr = data.roadAddress; // 도로명 주소 변수
+							var extraRoadAddr = ''; // 참고 항목 변수
+
+							if (data.bname !== ''
+									&& /[동|로|가]$/g.test(data.bname)) {
+								extraRoadAddr += data.bname;
+							}
+
+							if (data.buildingName !== ''
+									&& data.apartment === 'Y') {
+								extraRoadAddr += (extraRoadAddr !== '' ? ', '
+										+ data.buildingName : data.buildingName);
+							}
+
+							if (extraRoadAddr !== '') {
+								extraRoadAddr = ' (' + extraRoadAddr + ')';
+							}
+
+							document.getElementById('postcode').value = data.zonecode;
+							document.getElementById("roadAddress").value = roadAddr;
+							document.getElementById("jibunAddress").value = data.jibunAddress;
+
+							if (roadAddr !== '') {
+								document.getElementById("extraAddress").value = extraRoadAddr;
+							} else {
+								document.getElementById("extraAddress").value = '';
+							}
+
+							var guideTextBox = document.getElementById("guide");
+
+							if (data.autoRoadAddress) {
+								var expRoadAddr = data.autoRoadAddress
+										+ extraRoadAddr;
+								guideTextBox.innerHTML = '(예상 도로명 주소 : '
+										+ expRoadAddr + ')';
+								guideTextBox.style.display = 'block';
+
+							} else if (data.autoJibunAddress) {
+								var expJibunAddr = data.autoJibunAddress;
+								guideTextBox.innerHTML = '(예상 지번 주소 : '
+										+ expJibunAddr + ')';
+								guideTextBox.style.display = 'block';
+							} else {
+								guideTextBox.innerHTML = '';
+								guideTextBox.style.display = 'none';
+							}
+							inputFullAddress();
+						}
+					}).open();
+
+		}
+		function inputFullAddress(){
+			var fullAddress = document.getElementById("fullAddress").value;
+			fullAddress = document.getElementById("roadAddress").value+" "+document.getElementById("detailAddress").value;
+		}
+	</script>
 </body>
 
 </html>

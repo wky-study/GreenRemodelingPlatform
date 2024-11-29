@@ -24,6 +24,16 @@ public class MemberController {
 
 	@Autowired
 	MemberService memSvc;
+	
+	/*
+	 * 약관페이지로 이동
+	 * 
+	 */
+	@RequestMapping("/tacView")
+	public String tacView() {
+		return "member/tacView";
+	}
+
 
 	/*
 	 * 회원가입화면으로 이동
