@@ -36,4 +36,6 @@ public interface IEstimateDAO {
 	// 제출 완료한 임시견적서 리스트
 	List<EstimateDTO> getMemSubList(String memId);
 	
+	// 제출 완료한 임시견적서 리스트 (기업 전용)
+	List<EstimateDTO> getComSubList();
 }

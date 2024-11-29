@@ -153,4 +153,7 @@ public class MemberController {
 		session.setAttribute("memInfo", memInfo);
 		return "redirect:/";
 	}
+	
+	
+	
 }

@@ -232,12 +232,28 @@ public class EstimateController {
 
 		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 
+		List<EstimateDTO> estList = null;
+		
 		if (member == null) {
 			return "redirect:/loginView";
 		} else {
 			String memId = member.getMemId();
+			// 0 = 관리자
+			// 1 = 일반
+			// 2 = 기업
+			String memType = member.getMemType();
 
-			List<EstimateDTO> estList = estSvc.getMemSubList(memId);
+			System.out.println(memType);
+			
+			if(memType.equals("2") || memType.equals("0")) {
+				estList = estSvc.getComSubList();
+				System.out.println("여기로옴");
+			}else {
+				estList = estSvc.getMemSubList(memId);
+			}
+
+			System.out.println(estList);
+			
 			model.addAttribute("keyEstList", estList);
 
 			return "estimate/estSubmitList";
