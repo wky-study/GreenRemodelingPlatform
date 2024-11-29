@@ -48,29 +48,27 @@ public class EstimateController {
 
 	@Autowired
 	BuildingInfoService buildingInfoService;
-	
-    @Autowired
-    KakaoAddressService kakaoAddressService;
-	
+
+	@Autowired
+	KakaoAddressService kakaoAddressService;
+
 	/*
 	 * Estimate 첫 페이지
 	 */
-	
+
 	@GetMapping("/estWrite")
 	public String estWrite() {
 
 		return "estimate/estWrite";
 	}
-	
-	
+
 	@RequestMapping("/est1")
-	public String est1(@RequestParam("estId")int estId, HttpSession session) {
+	public String est1(@RequestParam("estId") int estId, HttpSession session) {
 		System.out.println();
 		System.out.println(estId);
-		
+
 		EstimateDTO estimate = estSvc.getEst(estId);
 
-		
 		System.out.println(estimate);
 		session.removeAttribute("keyEst");
 		session.setAttribute("keyEst", estimate);
@@ -83,20 +81,20 @@ public class EstimateController {
 
 		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 		String memId = member.getMemId();
-		
+
 		System.out.println();
 		System.out.println(memId);
-		
+
 		int estId = estSvc.getEstId();
 		estimate.setEstId(estId);
-		
+
 		estimate.setMemId(memId);
 		System.out.println();
 		System.out.println("들어온 estimate : " + estimate);
 
 		session.removeAttribute("keyEst");
 		session.setAttribute("keyEst", estimate);
-		
+
 		// 기존에 같은 MEM_ID와 EST_ADDRESS를 가진 데이터가 있는지 체크
 		int cnt = estSvc.countEstimateByCriteria(estimate);
 
@@ -120,43 +118,41 @@ public class EstimateController {
 
 		return "estimate/est2"; // 자재 선택으로 이동
 	}
-	
+
 	@GetMapping("/est2")
 	public String est2Redirect(HttpSession session, String itemType, Model model) {
-	    // 세션에서 estimate 정보 가져오기
-	    EstimateDTO estimate = (EstimateDTO) session.getAttribute("keyEst");
+		// 세션에서 estimate 정보 가져오기
+		EstimateDTO estimate = (EstimateDTO) session.getAttribute("keyEst");
 
-	    // itemType 값이 null이 아니면 해당 값에 맞는 자재 목록을 불러옴
-	    if (itemType != null) {
-	        List<MaterialDTO> materialList = matSvc.materialList(itemType);
-	        List<MaterialDTO> typeList = matSvc.typeList();
+		// itemType 값이 null이 아니면 해당 값에 맞는 자재 목록을 불러옴
+		if (itemType != null) {
+			List<MaterialDTO> materialList = matSvc.materialList(itemType);
+			List<MaterialDTO> typeList = matSvc.typeList();
 
-	        model.addAttribute("keyMatList", materialList);
-	        model.addAttribute("keyTypeList", typeList);
-	    }
+			model.addAttribute("keyMatList", materialList);
+			model.addAttribute("keyTypeList", typeList);
+		}
 
-	    // 모델에 기존 estimate 정보도 담기
-	    model.addAttribute("keyEst", estimate);
+		// 모델에 기존 estimate 정보도 담기
+		model.addAttribute("keyEst", estimate);
 
-	    return "estimate/est2"; // 자재 선택 페이지로 이동
+		return "estimate/est2"; // 자재 선택 페이지로 이동
 	}
-	
 
 	@RequestMapping("/est3")
 	public String est3(HttpSession session, Model model) {
-		
-		EstimateDTO est = (EstimateDTO)session.getAttribute("keyEst");
-		
+
+		EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
+
 		System.out.println(est);
-		
+
 		List<AttachDTO> atchList = attachService.getEstAttachList(est.getEstId());
-		
+
 		System.out.println();
 		System.out.println(atchList);
-		
+
 		model.addAttribute("atchList", atchList);
-		
-		
+
 		return "estimate/est3";
 	}
 
@@ -164,10 +160,10 @@ public class EstimateController {
 	@PostMapping("/saveEstimate")
 	@ResponseBody
 	public ResponseEntity<String> saveEstimate(EstimateDTO estimate, HttpSession session, MultipartFile[] estFile) {
-		
+
 		try {
-			EstimateDTO est = (EstimateDTO)session.getAttribute("keyEst");
-			estimate.setEstId(est.getEstId()); 
+			EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
+			estimate.setEstId(est.getEstId());
 
 			System.out.println();
 			System.out.println(estimate);
@@ -175,9 +171,9 @@ public class EstimateController {
 			// 세션에 담긴 회원 정보 확인
 			MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 			String memId = member.getMemId();
-			
+
 			estimate.setMemId(memId);
-			
+
 			int estId = estimate.getEstId();
 
 			System.out.println("파일" + estFile.length);
@@ -192,123 +188,140 @@ public class EstimateController {
 					}
 				}
 			}
-			
+
 			estSvc.updateEst(estimate);
-			
+
 			estimate = estSvc.getEst(estId);
-			
+
 			session.removeAttribute("keyEst");
 			session.setAttribute("keyEst", estimate);
-			
 
-	        return ResponseEntity.ok()
-	                .header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
-	                .body("임시 저장 완료"); // 경로를 포함
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
-	                .body("임시 저장 실패");
+			return ResponseEntity.ok().header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
+					.body("임시 저장 완료"); // 경로를 포함
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
+					.body("임시 저장 실패");
 		}
 	}
-	
-	
-    // 파일 삭제 요청 처리
-    @PostMapping("/estFileDel")
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> deleteFile(@RequestBody Map<String, String> params) {
-        String atchFileName = params.get("atchFileName");
 
-        // 파일 삭제 서비스 호출
-        boolean isDeleted = attachService.estFileDel(atchFileName);
+	// 파일 삭제 요청 처리
+	@PostMapping("/estFileDel")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> deleteFile(@RequestBody Map<String, String> params) {
+		String atchFileName = params.get("atchFileName");
 
-        Map<String, Object> response = new HashMap<>();
-        if (isDeleted) {
-            response.put("success", true);
-            response.put("message", "파일이 삭제되었습니다.");
-        } else {
-            response.put("success", false);
-            response.put("message", "파일 삭제에 실패했습니다.");
-        }
+		// 파일 삭제 서비스 호출
+		boolean isDeleted = attachService.estFileDel(atchFileName);
 
-        return ResponseEntity.ok(response); // JSON 형태로 응답 반환
-    }
-	
-	
-	
-    @GetMapping("/est4")
-	public String est4(@RequestParam("estId")int estId, HttpSession session, Model model) {
-		
-    	MemberDTO member = (MemberDTO)session.getAttribute("memInfo");
+		Map<String, Object> response = new HashMap<>();
+		if (isDeleted) {
+			response.put("success", true);
+			response.put("message", "파일이 삭제되었습니다.");
+		} else {
+			response.put("success", false);
+			response.put("message", "파일 삭제에 실패했습니다.");
+		}
+
+		return ResponseEntity.ok(response); // JSON 형태로 응답 반환
+	}
+
+	@GetMapping("/estSubmitList")
+	public String estSubmitList(HttpSession session, Model model) {
+
+		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
+
+		if (member == null) {
+			return "redirect:/loginView";
+		} else {
+			String memId = member.getMemId();
+
+			List<EstimateDTO> estList = estSvc.getMemSubList(memId);
+			model.addAttribute("keyEstList", estList);
+
+			return "estimate/estSubmitList";
+		}
+	}
+
+	@GetMapping("/est4")
+	public String est4(@RequestParam("estId") int estId, HttpSession session, Model model) {
+
+		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 		String memId = member.getMemId();
-    	
-    	// 우선 제출한 est를 가져옴
-    	EstimateDTO est = (EstimateDTO)session.getAttribute("keyEst");
-    	System.out.println(est); // [estId=3, memId=qwer, estAddress=대전 서구 청사로 5, dongNm=101, hoNm=101, estSdate=2025-02-14, estInteriorDesc=아무거나, estSubmit=Y]
-    	
-    	String sigunguCd = est.getSigunguCd();
-    	String bjdongCd = est.getBjdongCd();
-    	
-        // 주소를 기반으로 카카오 API 호출
-        String address = est.getEstAddress();  // 예: "대전 서구 청사로 5"
-        
-        // 카카오 주소 서비스 호출하여 번지와 지번 정보를 받아옴
-        AddressVO addressVO = kakaoAddressService.getFormattedAddress(address);
-        System.out.println(addressVO);
-    	String bun = addressVO.getBunji();
-    	String ji = addressVO.getJibun();
-    	
-    	String dongNm = est.getDongNm();
-    	String hoNm = est.getHoNm();
-    	String estArea = "";
-        // 국토교통부 API 호출
-    	if(dongNm == null || dongNm.isEmpty()) {
-    		estArea = buildingInfoService.getBuildingArea(sigunguCd, bjdongCd, bun, ji, "", ""); // API 호출
-    	}else {
-    		estArea = buildingInfoService.getBuildingArea(sigunguCd, bjdongCd, bun, ji, dongNm + "동", hoNm +"호"); // API 호출
-    	}
-        System.out.println(estArea);
-        est.setEstArea(estArea);
-        System.out.println("DB 저장전 : " + est);
+
+		// 우선 제출한 est를 가져옴
+		EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
+		System.out.println(est); // [estId=3, memId=qwer, estAddress=대전 서구 청사로 5, dongNm=101, hoNm=101,
+									// estSdate=2025-02-14, estInteriorDesc=아무거나, estSubmit=Y]
+
+		String sigunguCd = est.getSigunguCd();
+		String bjdongCd = est.getBjdongCd();
+
+		// 주소를 기반으로 카카오 API 호출
+		String address = est.getEstAddress(); // 예: "대전 서구 청사로 5"
+
+		// 카카오 주소 서비스 호출하여 번지와 지번 정보를 받아옴
+		AddressVO addressVO = kakaoAddressService.getFormattedAddress(address);
+		System.out.println(addressVO);
+		String bun = addressVO.getBunji();
+		String ji = addressVO.getJibun();
+
+		String dongNm = est.getDongNm();
+		String hoNm = est.getHoNm();
+		String estArea = "";
+		// 국토교통부 API 호출
+		if (dongNm == null || dongNm.isEmpty()) {
+			estArea = buildingInfoService.getBuildingArea(sigunguCd, bjdongCd, bun, ji, "", ""); // API 호출
+		} else {
+			estArea = buildingInfoService.getBuildingArea(sigunguCd, bjdongCd, bun, ji, dongNm + "동", hoNm + "호"); // API
+																													// 호출
+		}
+		System.out.println(estArea);
+		est.setEstArea(estArea);
+		System.out.println("DB 저장전 : " + est);
 		// 제출하기 누르면 오는 페이지 제출된 프로젝트 리스트
-    	estSvc.estSubmit(est); 
-        
+		estSvc.estSubmit(est);
+
 		List<EstimateDTO> estList = estSvc.getMemSubList(memId);
 		model.addAttribute("keyEstList", estList);
-    	
-		
-		return "estimate/est4";
+
+		return "estimate/estSubmitList";
 	}
-	
-	@RequestMapping("/estListView")
+
+	@GetMapping("/estListView")
 	public String estListView(Model model, HttpSession session) {
-		// 작성중인 임시견적서 목록 
-		MemberDTO member = (MemberDTO)session.getAttribute("memInfo");
-		String memId = member.getMemId();
-		
-		List<EstimateDTO> estList = estSvc.getMemEstList(memId);
-		model.addAttribute("keyEstList", estList);
-		
-		return "estimate/estListView";
+
+		// 작성중인 임시견적서 목록
+		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
+		if (member == null) {
+			return "redirect:/loginView";
+		} else {
+			String memId = member.getMemId();
+
+			List<EstimateDTO> estList = estSvc.getMemEstList(memId);
+			model.addAttribute("keyEstList", estList);
+
+			return "estimate/estListView";
+		}
+
 	}
-	
+
 	@RequestMapping("/estDetailView")
-	public String estDetailView(@RequestParam("estId")int estId, HttpSession session) {
-		
+	public String estDetailView(@RequestParam("estId") int estId, HttpSession session) {
+
 		// 화면 만들어야함
-		
+
 		System.out.println();
 		System.out.println(estId);
-		
+
 		EstimateDTO estimate = estSvc.getEst(estId);
-		
+
 		System.out.println(estimate);
 		session.removeAttribute("keyEst");
 		session.setAttribute("keyEst", estimate);
-		
-		
+
 		return "estimate/estDetailView";
 	}
-	
-	
+
 }
