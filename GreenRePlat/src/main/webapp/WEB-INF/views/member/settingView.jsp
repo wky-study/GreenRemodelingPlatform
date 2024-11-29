@@ -30,7 +30,7 @@
 							href="javascript:void(0);"><i class="bx bx-user me-1"></i>
 								회원정보</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/estListView"><i
+							href=""><i
 								class="bx bx-bell me-1"></i> 마이 프로젝트</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="pages-account-settings-connections.html"><i
