@@ -8,6 +8,7 @@
         atch_no,
         atch_notice_no,
         prod_no,
+        est_id,
         atch_file_name,
         atch_original_name,
         atch_file_size,
@@ -18,6 +19,7 @@
         seq_attach.NEXTVAL,
         #{atchNoticeNo},  
         0,  
+        0,
         #{atchFileName},
         #{atchOriginalName},
         #{atchFileSize},
@@ -48,6 +50,7 @@
         atch_no,
         atch_notice_no,
         prod_no,
+        est_id,
         atch_file_name,
         atch_original_name,
         atch_file_size,
@@ -56,8 +59,9 @@
         atch_path
   	  ) VALUES (
         seq_attach.NEXTVAL,
-        '0',  
+        0,  
         #{prodNo},
+        0,
         #{atchFileName},
         #{atchOriginalName},
         #{atchFileSize},
@@ -87,5 +91,59 @@
 		WHERE 1=1 
 		    AND prod_no = #{no}		
 	</delete>
+
+
+	<!-- product 게시판용 -->
+	<insert id="insertEstAttach" parameterType="com.team.green.attach.dto.AttachDTO">
+    INSERT INTO attach (
+        atch_no,
+        atch_notice_no,
+        prod_no,
+        est_id,
+        atch_file_name,
+        atch_original_name,
+        atch_file_size, 
+        atch_fancy_size,
+        atch_content_type,
+        atch_path
+  	  ) VALUES (
+        seq_attach.NEXTVAL,
+        0,  
+        0,
+        #{estId},
+        #{atchFileName},
+        #{atchOriginalName},
+        #{atchFileSize},
+        #{atchFancySize},
+        #{atchContentType},
+        #{atchPath}
+   	  )
+	</insert>
+	
+		<!-- product 게시판용 -->
+	<select id="getEstAttachList" parameterType="int" resultType="com.team.green.attach.dto.AttachDTO">
+		SELECT
+		      atch_no  
+		    , est_id
+		    , atch_file_name 
+		    , atch_original_name 
+		    , atch_file_size 
+		    , atch_fancy_size
+		    , atch_content_type
+		    , atch_path 
+		FROM attach
+		WHERE est_id = #{estId}	
+	</select>
+
+	<!-- 임시견적서 -->
+	<delete id="estFileDel">
+	
+		DELETE FROM attach
+		WHERE 1=1
+		AND atch_file_name = #{atchFileName}
+		
+	
+	</delete>
+
 
 </mapper>

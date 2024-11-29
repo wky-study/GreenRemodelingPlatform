@@ -9,6 +9,28 @@
 <title>견적서 입력</title>
 </head>
 
+<style>
+	.my-card-box {
+		flex-wrap: wrap;
+	}
+	
+	.my-card {
+		width: 100%;
+		height: 500px;
+		overflow-y: auto;
+	}
+	.my-img{
+		height:30px;
+		
+	}
+	
+	.my-cursor{
+		cursor:pointer;
+	}
+	
+</style>
+
+
 <body>
 	<%@ include file="/WEB-INF/inc/header.jsp"%>
 	<!--  Header End -->
@@ -18,159 +40,97 @@
 		<!-- Content -->
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">설정 /</span> 회원정보
+				<span class="text-muted fw-light">견적서 생성 /</span> 자재
 			</h4>
 			<div class="row">
 				<div class="col-md-12">
-					<%@ include file="/WEB-INF/inc/estmenu.jsp"%>
 					<div class="card mb-4">
-						<h5 class="card-header">프로필 이미지</h5>
-						<!-- Account -->
-						<div class="card-body">
-							<div class="d-flex align-items-start align-items-sm-center gap-4">
-								<img src="../assets/img/avatars/1.png" alt="user-avatar"
-									class="d-block rounded" height="100" width="100"
-									id="uploadedAvatar" />
-								<div class="button-wrapper">
-									<label for="upload" class="btn btn-primary me-2 mb-4"
-										tabindex="0"> <span class="d-none d-sm-block">업로드</span>
-										<i class="bx bx-upload d-block d-sm-none"></i> <input
-										type="file" id="upload" class="account-file-input" hidden
-										accept="image/png, image/jpeg" />
-									</label>
-									<button type="button"
-										class="btn btn-outline-secondary account-image-reset mb-4">
-										<i class="bx bx-reset d-block d-sm-none"></i> <span
-											class="d-none d-sm-block">초기화</span>
-									</button>
-
-									<p class="text-muted mb-0">800KB 이하의 JPG, GIF 또는 PNG 파일만
-										가능합니다</p>
-								</div>
-							</div>
-						</div>
-						<hr class="my-0" />
-						<div class="card-body">
-							<form id="formAccountSettings"
-								action="${pageContext.request.contextPath}/updateAccount"
-								method="POST">
-								<div class="row">
-									<div class="mb-3 col-md-6">
-										<input class="form-control" type="hidden" id="firstName"
-											name="memId" value="${sessionScope.memInfo.memId}" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="firstName" class="form-label">비밀번호</label> <input
-											class="form-control" type="password" id="firstName"
-											name="memPw" value="John" autofocus />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="lastName" class="form-label">비밀번호 확인</label> <input
-											class="form-control" type="password" name="lastName"
-											id="lastName" value="Doe" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="email" class="form-label">이메일</label> <input
-											class="form-control" type="text" id="email" name="email"
-											value="john.doe@example.com"
-											placeholder="john.doe@example.com" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="organization" class="form-label">닉네임</label> <input
-											type="text" class="form-control" id="organization"
-											name="memNick" value="ThemeSelection" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="phoneNumber">전화번호</label>
-										<div class="input-group input-group-merge">
-											<span class="input-group-text">US (+1)</span> <input
-												type="text" id="phoneNumber" name="memPhone"
-												class="form-control" placeholder="202 555 0111" />
-										</div>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="address" class="form-label">주소</label> <input
-											type="text" class="form-control" id="address" name="address"
-											placeholder="Address" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="state" class="form-label">State</label> <input
-											class="form-control" type="text" id="state" name="state"
-											placeholder="California" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="zipCode" class="form-label">Zip Code</label> <input
-											type="text" class="form-control" id="zipCode" name="zipCode"
-											placeholder="231465" maxlength="6" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="country">Country</label> <select
-											id="country" class="select2 form-select">
-											<option value="">Select</option>
-											<option value="Australia">Australia</option>
-											<option value="Bangladesh">Bangladesh</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="language" class="form-label">Language</label> <select
-											id="language" class="select2 form-select">
-											<option value="">Select Language</option>
-											<option value="en">English</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="timeZones" class="form-label">Timezone</label> <select
-											id="timeZones" class="select2 form-select">
-											<option value="">Select Timezone</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="currency" class="form-label">Currency</label> <select
-											id="currency" class="select2 form-select">
-											<option value="">Select Currency</option>
-											<option value="usd">USD</option>
-										</select>
-									</div>
-								</div>
-								<div class="mt-2 d-flex justify-content-end">
-									<button type="submit" class="btn btn-primary me-2">이전으로</button>
-									<button type="submit" class="btn btn-primary me-2">임시저장</button>
-									<button type="submit" class="btn btn-primary me-2">다음 단계로</button>
-								</div>
+					
+						<!-- 검색기능 -->
+						<div class="d-flex justify-content-end mt-3 mb-3 me-5">
+							<form class="d-flex" id="estimateForm" action="${pageContext.request.contextPath }/est2" method="GET" >
+								<select class="form-select me-1" name="itemType" id="itemTypeSelect">
+							        <!-- 자재 타입에 맞는 옵션을 서버에서 전달한 keyMatList에 맞춰 동적으로 생성 -->
+							        <c:forEach var="MaterialDTO" items="${keyTypeList}">
+							            <option value="${MaterialDTO.itemType}" ${MaterialDTO.itemType == param.itemType ? 'selected' : ''}> ${MaterialDTO.itemType}</option>
+							        </c:forEach>
+								</select>
+								<input type="hidden" name="estId" value="${sessionScope.keyEst.estId}">
+								<input type="hidden" name="estAddress" value="${sessionScope.keyEst.estAddress}">
+								<input type="hidden" name="dongNm" value="${sessionScope.keyEst.dongNm}">
+								<input type="hidden" name="hoNm" value="${sessionScope.keyEst.hoNm}">
+								<input type="hidden" name="estSdate" value="${sessionScope.keyEst.estSdate}">
 							</form>
+						</div>						
+					
+					
+						<div class="card-body my-card">
+							
+							<table class="table table-hover">
+							  <thead>
+							    <tr>
+							      <th scope="col"></th>
+							      <th scope="col">이름</th>
+							      <th scope="col">모델명</th>
+							      <th scope="col" >제조사</th>
+							      <th scope="col" >등급</th>
+							      <th scope="col" >타입</th>
+							    </tr>
+							  </thead>
+							  
+							  <tbody >
+								<c:forEach items="${keyMatList}" var="MaterialDTO">
+								    <tr onclick="receipt(this)" class="my-cursor">
+								      <th scope="row"><img class="my-img" src="${MaterialDTO.itemImg}"></th>
+								      <td>${MaterialDTO.itemName}</td>
+								      <td>${MaterialDTO.itemModel}</td>
+								      <td>${MaterialDTO.itemBrand}</td>
+								      <td>${MaterialDTO.itemEffiLevel}</td>
+								      <td>${MaterialDTO.itemType}</td>
+								    </tr>
+							    </c:forEach>	
+							    
+							  </tbody>
+							  
+							</table>							
+							
+
 						</div>
-						<!-- /Account -->
+						<div class="mt-2 mb-3 d-flex justify-content-end">
+							<button id="backBtn" type="button" class="btn btn-primary me-2">이전으로</button>
+							<button id="nextBtn" type="button" class="btn btn-primary me-2">임시저장 및 다음</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Content wrapper -->
 
 
 
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
-	<!-- Core JS -->
-	<!-- build:js assets/vendor/js/core.js -->
-	<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="../assets/vendor/libs/popper/popper.js"></script>
-	<script src="../assets/vendor/js/bootstrap.js"></script>
-	<script
-		src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-	<script src="../assets/vendor/js/menu.js"></script>
-	<!-- endbuild -->
-
-	<!-- Vendors JS -->
-
-	<!-- Main JS -->
-	<script src="../assets/js/main.js"></script>
-
-	<!-- Page JS -->
-	<script src="../assets/js/pages-account-settings-account.js"></script>
-
-	<!-- Place this tag in your head or just before your close body tag. -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	
+	<script type="text/javascript">
+	
+	// 저장 및 다음 버튼 클릭 시
+	document.getElementById('nextBtn').addEventListener('click', () => {
+        window.location.href = '${pageContext.request.contextPath}/est3'; 
+        alert("임시 저장되었습니다."); // 성공 시 경고창
+    });	
+	
+	
+	// 뒤로가기 버튼 클릭 시
+	document.getElementById('backBtn').addEventListener('click', () => {
+        window.location.href = '${pageContext.request.contextPath}/est1?estId='+ "${sessionScope.keyEst.estId}"; // est1.jsp 페이지로 이동
+    });
+	
+    // 'itemType' select 요소의 값이 변경될 때마다 폼을 제출하는 함수
+    document.getElementById('itemTypeSelect').addEventListener('change', function() {
+        // 폼을 제출
+        document.getElementById('estimateForm').submit();
+    });
+	
+	</script>
 </body>
 
 </html>

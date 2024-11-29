@@ -19,4 +19,9 @@ public interface IAttachDAO {
 	
 	int delAttach(int no);
 	
+	int insertEstAttach(AttachDTO attach);
+	
+	List<AttachDTO> getEstAttachList(int estId);
+	
+	boolean estFileDel(String atchFileName);
 }

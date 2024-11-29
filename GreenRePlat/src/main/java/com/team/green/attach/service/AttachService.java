@@ -41,6 +41,19 @@ public class AttachService {
 		return result;
 	};
 	
+	public int insertEstAttach(AttachDTO attach) {
+		int result = dao.insertEstAttach(attach);
+		return result;
+	};
 	
+	public List<AttachDTO> getEstAttachList(int estId){
+		List<AttachDTO> result = dao.getEstAttachList(estId);
+		return result;
+	};
+	
+	public boolean estFileDel(String atchFileName) {
+		boolean result = dao.estFileDel(atchFileName);
+		return result;
+	};
 	
 }

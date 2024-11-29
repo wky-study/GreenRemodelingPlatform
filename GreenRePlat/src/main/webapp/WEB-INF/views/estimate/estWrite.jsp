@@ -29,33 +29,33 @@
 			<div class="row">
 				<div class="col-md-12">
 				
-					
 					<div class="card mb-4">
 						
 						<hr class="my-0" />
 						<div class="card-body">
 							<form id="formAccountSettings" action="${pageContext.request.contextPath}/est2" method="POST">
-								<input class="form-control" type="hidden" id="firstName" name="memId" value="${sessionScope.memInfo.memId}" />
+								<input class="form-control" type="hidden" id="firstName" name="memId"  />
 								<input class="form-control" type="hidden" id="firstName" name="itemType" value="공기조화설비공사" />
 								<input type="hidden" id="sigunguCd" name="sigunguCd">
 								<input type="hidden" id="bjdongCd" name="bjdongCd">
 								
+								
 								<div class="mb-3 col-md-6 w-100">
 							        <label class="form-label" for="address">주소:</label>
-							        <input class="form-control" type="text" id="address" name="estAddress" value="${sessionScope.keyEst.estAddress}" placeholder="주소를 검색하세요" readonly required>
+							        <input class="form-control" type="text" id="address" name="estAddress" placeholder="주소를 검색하세요" readonly required>
 								</div>
 								
 								<div class="mb-3 col-md-6 w-100">
 							        <label class="form-label" for="detailAddress">동: </label>
-							        <input class="form-control" type="text" id="dongNm" name="dongNm" value="${sessionScope.keyEst.dongNm}" placeholder="숫자만 입력하세요.">
+							        <input class="form-control" type="text" id="dongNm" name="dongNm"  placeholder="숫자만 입력하세요.">
 								</div>
 								<div class="mb-3 col-md-6 w-100">
 							        <label class="form-label" for="detailAddress">호: </label>
-							        <input class="form-control" type="text" id="hoNm" name="hoNm" value="${sessionScope.keyEst.hoNm}" placeholder="숫자만 입력하세요.">
+							        <input class="form-control" type="text" id="hoNm" name="hoNm"  placeholder="숫자만 입력하세요.">
 								</div>
 								<div class="mb-3 col-md-6 w-100">
 									<label class="form-label" for="start-date">시공 시작일:</label>
-									<input class="form-control" type="date" id="start-date" name="estSdate" value="${sessionScope.keyEst.estSdate}" required>
+									<input class="form-control" type="date" id="start-date" name="estSdate" required>
 								</div>
 							</form>
 								<div class="mt-2 mb-3 d-flex justify-content-end">
@@ -77,7 +77,7 @@
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 	
     <script>
-
+    
 	    // 유효성 검사 함수
 	    function validateForm() {
 	        const fields = [
@@ -95,15 +95,34 @@
 	        }
 	        return true; // 유효성 검사 통과
 	    }
+	    
     
-    	// 다음버튼
-	    document.getElementById('saveBtn').addEventListener('click',()=>{
-	        
-	    	if (validateForm()) {
-	            document.getElementById('formAccountSettings').submit();
-	            alert("임시 저장되었습니다."); // 성공 시 경고창
+    
+
+		// 주소 입력란 클릭 시 Daum 주소 API 열기
+		document.getElementById('address').addEventListener('click', function() {
+		    new daum.Postcode({
+		        oncomplete: function(data) {
+		            // 우편번호와 주소 정보를 자동으로 입력
+		            document.getElementById('address').value = data.address; // 주소 입력란에 주소 설정
+		
+		            // 시군구 코드와 법정동 코드를 숨겨진 입력 필드에 설정
+		            document.getElementById('sigunguCd').value = data.sigunguCode; // 시군구 코드 설정
+		            // 법정동 코드에서 앞의 5자리를 삭제한 나머지를 설정
+		            const bjdongCode = data.bcode ? data.bcode.substring(5) : ''; // 'bcode' 사용
+		            document.getElementById('bjdongCd').value = bjdongCode; // 법정동 코드 설정
+		        }
+		    }).open();
+		});
+    
+	    // 다음 버튼 클릭 이벤트
+	    document.getElementById('saveBtn').addEventListener('click', () => {
+	        // 유효성 검사 통과 시 폼 제출
+	        if (validateForm()) {
+	            alert("임시 저장되었습니다."); // 성공 시 알림창
+	            document.getElementById('formAccountSettings').submit(); // 폼 제출
 	        }
-	    })
+	    });
 	    
 	    
     	// 이전버튼
@@ -113,21 +132,6 @@
 	    	
 	    })
 	    
-		document.getElementById('address').addEventListener('click', function() {
-		    new daum.Postcode({
-		        oncomplete: function(data) {
-		            // 우편번호와 주소 정보를 자동으로 입력
-		            document.getElementById('address').value = data.address; // 주소 입력란에 주소 설정
-		
-		            // 시군구 코드와 법정동 코드를 숨겨진 입력 필드에 설정
-		            document.getElementById('sigunguCd').value = data.sigunguCd; // 시군구 코드 설정
-		            
-		            // 법정동 코드에서 앞의 5자리를 삭제한 나머지를 설정
-		            const bjdongCode = data.bcode ? data.bcode.substring(5) : ''; // 'bcode' 사용
-		            document.getElementById('bjdongCd').value = bjdongCode; // 법정동 코드 설정
-		        }
-		    }).open();
-		});
     </script>
 	
 	

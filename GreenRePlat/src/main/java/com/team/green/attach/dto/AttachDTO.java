@@ -5,6 +5,7 @@ public class AttachDTO {
 	private int atchNo;						/* 첨부파일 번호 */
 	private int atchNoticeNo;				/* 연결된 notice 글 번호 */
 	private int prodNo;						/* 연결된 product 글 번호 */
+	private int estId;						/* 연결된 임시견적서 글 번호 */
 	private String atchFileName;			/* 실제 서버 로컬에 저장된 파일명 */
 	private String atchOriginalName;		/* 사용자가 첨부했을때 파일명 */
 	private long atchFileSize;				/* byte 단위 파일 사이즈 */
@@ -17,11 +18,12 @@ public class AttachDTO {
 	}
 
 
-	public AttachDTO(int atchNo, int atchNoticeNo, int prodNo, String atchFileName, String atchOriginalName,
+	public AttachDTO(int atchNo, int atchNoticeNo, int prodNo, int estId, String atchFileName, String atchOriginalName,
 			long atchFileSize, String atchFancySize, String atchContentType, String atchPath) {
 		this.atchNo = atchNo;
 		this.atchNoticeNo = atchNoticeNo;
 		this.prodNo = prodNo;
+		this.estId = estId;
 		this.atchFileName = atchFileName;
 		this.atchOriginalName = atchOriginalName;
 		this.atchFileSize = atchFileSize;
@@ -33,10 +35,10 @@ public class AttachDTO {
 
 	@Override
 	public String toString() {
-		return "AttachDTO [atchNo=" + atchNo + ", atchNoticeNo=" + atchNoticeNo + ", prodNo=" + prodNo
-				+ ", atchFileName=" + atchFileName + ", atchOriginalName=" + atchOriginalName + ", atchFileSize="
-				+ atchFileSize + ", atchFancySize=" + atchFancySize + ", atchContentType=" + atchContentType
-				+ ", atchPath=" + atchPath + "]";
+		return "AttachDTO [atchNo=" + atchNo + ", atchNoticeNo=" + atchNoticeNo + ", prodNo=" + prodNo + ", estId="
+				+ estId + ", atchFileName=" + atchFileName + ", atchOriginalName=" + atchOriginalName
+				+ ", atchFileSize=" + atchFileSize + ", atchFancySize=" + atchFancySize + ", atchContentType="
+				+ atchContentType + ", atchPath=" + atchPath + "]";
 	}
 
 
@@ -67,6 +69,16 @@ public class AttachDTO {
 
 	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
+	}
+
+
+	public int getEstId() {
+		return estId;
+	}
+
+
+	public void setEstId(int estId) {
+		this.estId = estId;
 	}
 
 
@@ -128,7 +140,8 @@ public class AttachDTO {
 	public void setAtchPath(String atchPath) {
 		this.atchPath = atchPath;
 	}
-	
+
+
 	
 
 	

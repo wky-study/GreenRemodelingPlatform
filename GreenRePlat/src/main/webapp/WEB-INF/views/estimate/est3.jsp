@@ -7,6 +7,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>견적서 입력</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -18,159 +22,180 @@
 		<!-- Content -->
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">설정 /</span> 회원정보
+				<span class="text-muted fw-light">견적서 생성 /</span> 도면 및 설명
 			</h4>
 			<div class="row">
 				<div class="col-md-12">
-					<%@ include file="/WEB-INF/inc/estmenu.jsp"%>
 					<div class="card mb-4">
-						<h5 class="card-header">프로필 이미지</h5>
-						<!-- Account -->
-						<div class="card-body">
-							<div class="d-flex align-items-start align-items-sm-center gap-4">
-								<img src="../assets/img/avatars/1.png" alt="user-avatar"
-									class="d-block rounded" height="100" width="100"
-									id="uploadedAvatar" />
-								<div class="button-wrapper">
-									<label for="upload" class="btn btn-primary me-2 mb-4"
-										tabindex="0"> <span class="d-none d-sm-block">업로드</span>
-										<i class="bx bx-upload d-block d-sm-none"></i> <input
-										type="file" id="upload" class="account-file-input" hidden
-										accept="image/png, image/jpeg" />
-									</label>
-									<button type="button"
-										class="btn btn-outline-secondary account-image-reset mb-4">
-										<i class="bx bx-reset d-block d-sm-none"></i> <span
-											class="d-none d-sm-block">초기화</span>
-									</button>
-
-									<p class="text-muted mb-0">800KB 이하의 JPG, GIF 또는 PNG 파일만
-										가능합니다</p>
-								</div>
-							</div>
-						</div>
-						<hr class="my-0" />
-						<div class="card-body">
-							<form id="formAccountSettings"
-								action="${pageContext.request.contextPath}/updateAccount"
-								method="POST">
-								<div class="row">
-									<div class="mb-3 col-md-6">
-										<input class="form-control" type="hidden" id="firstName"
-											name="memId" value="${sessionScope.memInfo.memId}" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="firstName" class="form-label">비밀번호</label> <input
-											class="form-control" type="password" id="firstName"
-											name="memPw" value="John" autofocus />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="lastName" class="form-label">비밀번호 확인</label> <input
-											class="form-control" type="password" name="lastName"
-											id="lastName" value="Doe" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="email" class="form-label">이메일</label> <input
-											class="form-control" type="text" id="email" name="email"
-											value="john.doe@example.com"
-											placeholder="john.doe@example.com" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="organization" class="form-label">닉네임</label> <input
-											type="text" class="form-control" id="organization"
-											name="memNick" value="ThemeSelection" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="phoneNumber">전화번호</label>
-										<div class="input-group input-group-merge">
-											<span class="input-group-text">US (+1)</span> <input
-												type="text" id="phoneNumber" name="memPhone"
-												class="form-control" placeholder="202 555 0111" />
-										</div>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="address" class="form-label">주소</label> <input
-											type="text" class="form-control" id="address" name="address"
-											placeholder="Address" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="state" class="form-label">State</label> <input
-											class="form-control" type="text" id="state" name="state"
-											placeholder="California" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="zipCode" class="form-label">Zip Code</label> <input
-											type="text" class="form-control" id="zipCode" name="zipCode"
-											placeholder="231465" maxlength="6" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="country">Country</label> <select
-											id="country" class="select2 form-select">
-											<option value="">Select</option>
-											<option value="Australia">Australia</option>
-											<option value="Bangladesh">Bangladesh</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="language" class="form-label">Language</label> <select
-											id="language" class="select2 form-select">
-											<option value="">Select Language</option>
-											<option value="en">English</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="timeZones" class="form-label">Timezone</label> <select
-											id="timeZones" class="select2 form-select">
-											<option value="">Select Timezone</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="currency" class="form-label">Currency</label> <select
-											id="currency" class="select2 form-select">
-											<option value="">Select Currency</option>
-											<option value="usd">USD</option>
-										</select>
-									</div>
-								</div>
-								<div class="mt-2 d-flex justify-content-end">
-									<button type="submit" class="btn btn-primary me-2">이전으로</button>
-									<button type="submit" class="btn btn-primary me-2">임시저장</button>
-									<button type="submit" class="btn btn-primary me-2">다음 단계로</button>
-								</div>
+					
+						<div class="card-body my-card">
+							
+							<form id="estimateForm" enctype="multipart/form-data">
+								
+								<div class="mb-3 col-md-6 w-100">
+							        <label class="form-label" >인테리어 설명 </label>
+							        <input class="form-control" type="text"  name="estInteriorDesc" value="${sessionScope.keyEst.estInteriorDesc}">
+								</div>							
+								<div class="mb-3 col-md-6 w-100">
+							        <label class="form-label" >이미지 및 도면 업로드</label>
+							        <input class="form-control" type="file"  name="estFile" value="" multiple accept="image/*,.pdf" >
+							        <small class="form-text text-muted">이미지 파일(.jpg, .png) 또는 PDF 형식의 파일만 업로드 가능합니다.</small>
+							        
+								</div>		
+								
+							    <!-- 파일 리스트 표시 부분 -->
+							    <div class="mb-3 col-md-12">
+							        <label class="form-label">현재 업로드된 파일들:</label>
+							        <ul>
+							            <!-- 파일 리스트가 비어있지 않은 경우에만 출력 -->
+										<c:if test="${not empty atchList}">
+										    <c:forEach items="${atchList}" var="AttachDTO">
+										        <li>
+										            <!-- 파일명 표시 -->
+										            <span>${AttachDTO.atchOriginalName}</span> 
+										
+										            <!-- 이미지 파일의 경우 미리보기 표시 -->
+										            <c:if test="${AttachDTO.atchContentType.startsWith('image')}">
+										                <img src="${pageContext.request.contextPath}/filedownload?fileName=${AttachDTO.atchFileName}&fileOriName=${AttachDTO.atchOriginalName}"
+										                     alt="${AttachDTO.atchOriginalName}" style="max-width: 50px; max-height: 50px; margin-right: 10px;">
+										            </c:if>
+										
+										            <!-- 파일 다운로드 링크 -->
+										            <a href="${pageContext.request.contextPath}/filedownload?fileName=${AttachDTO.atchFileName}&fileOriName=${AttachDTO.atchOriginalName}">
+										                다운로드
+										            </a>
+										
+													<!-- 삭제 버튼 -->
+													<button type="button" class="btn btn-danger" onclick="estFileDel('${AttachDTO.atchFileName}')"
+													        style="background: none; border: none; font-size: 24px; color: #dc3545; cursor: pointer;">
+													    <i class="fas fa-times"></i> <!-- X 아이콘 -->
+													</button>
+										        </li>
+										    </c:forEach>
+										</c:if>
+							
+							            <!-- 파일 리스트가 비어있을 때 -->
+							            <c:if test="${empty atchList}">
+							                <p>현재 업로드된 파일이 없습니다.</p>
+							            </c:if>
+							        </ul>
+							    </div>								
+													
 							</form>
 						</div>
-						<!-- /Account -->
+						
+						<div class="mt-2 mb-3 d-flex justify-content-end">
+							<button id="backBtn" type="button" class="btn btn-primary me-2">이전으로</button>
+							<button id="saveBtn" type="button" class="btn btn-primary me-2">임시저장</button>
+							<button id="editBtn" type="button" class="btn btn-primary me-2">제출하기</button>
+						</div>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Content wrapper -->
 
 
 
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
-	<!-- Core JS -->
-	<!-- build:js assets/vendor/js/core.js -->
-	<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-	<script src="../assets/vendor/libs/popper/popper.js"></script>
-	<script src="../assets/vendor/js/bootstrap.js"></script>
-	<script
-		src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-	<script src="../assets/vendor/js/menu.js"></script>
-	<!-- endbuild -->
 
-	<!-- Vendors JS -->
+<script type="text/javascript">
 
-	<!-- Main JS -->
-	<script src="../assets/js/main.js"></script>
+	//뒤로가기 버튼 클릭 시
+	document.getElementById('backBtn').addEventListener('click', () => {
+	    // POST 요청 대신, GET 요청으로 단순히 이동만 시킴
+	    window.location.href = '${pageContext.request.contextPath}/est2?itemType=공기조화설비공사'; 
+	});
 
-	<!-- Page JS -->
-	<script src="../assets/js/pages-account-settings-account.js"></script>
+    // 임시저장 버튼
+	document.getElementById('saveBtn').addEventListener('click', () => {
+	    const formData = new FormData(document.getElementById('estimateForm'));
+	
+	    fetch('${pageContext.request.contextPath}/saveEstimate', {
+	        method: 'POST',
+	        body: formData,
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	            // 응답 상태가 200이 아닌 경우 오류 발생
+	            throw new Error(`HTTP error! status: ${response.status}`);
+	        }
+	        return response.text(); // 응답 본문을 문자열로 처리
+	    })
+	    .then(data => {
+	        // 서버에서 반환한 문자열 ("임시 저장 완료")을 출력
+	        alert(data);
+	        location.reload();
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	        alert('임시 저장 중 오류가 발생했습니다.');
+	    });
+	});
+    
+    // 제출하기 버튼
+	document.getElementById('editBtn').addEventListener('click', () => {
+	    const formData = new FormData(document.getElementById('estimateForm'));
+	
+	    fetch('${pageContext.request.contextPath}/saveEstimate', {
+	        method: 'POST',
+	        body: formData,
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	            throw new Error(`HTTP error! status: ${response.status}`);
+	        }
+	        return response.text(); // 응답 본문을 텍스트로 처리
+	    })
+	    .then(data => {
+	        alert(data); // 서버에서 받은 메시지를 표시
+	        if (data.includes("임시 저장 완료")) {
+	            // 페이지 이동 전에 잠시 딜레이를 두고 이동
+	            setTimeout(() => {
+	                window.location.href = '${pageContext.request.contextPath}/est4?estId='+ '${sessionScope.keyEst.estId}'; // 성공 시 이동
+	            }, 500); // 0.5초 딜레이 후 이동
+	        }
+	    })
+	    .catch(error => {
+	        console.error('Error:', error);
+	        alert('제출 중 오류가 발생했습니다.');
+	    });
+	});
+	
+    // 파일 삭제
+	function estFileDel(atchFileName) {
+	    if (confirm("정말로 이 파일을 삭제하시겠습니까?")) {
+	        // 서버로 삭제 요청을 보냄
+	        fetch('${pageContext.request.contextPath}/estFileDel', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify({
+	            	atchFileName: atchFileName
+	            })
+	        })
+	        .then(response => response.json())
+	        .then(data => {
+	            if (data.success) {
+	                alert("파일이 삭제되었습니다.");
+	                location.reload(); // 페이지 새로 고침 (파일 목록 갱신)
+	            } else {
+	                alert("파일 삭제에 실패했습니다.");
+	            }
+	        })
+	        .catch(error => {
+	            console.error('Error:', error);
+	            alert('파일 삭제 중 오류가 발생했습니다.');
+	        });
+	    }
+	}    
+    
 
-	<!-- Place this tag in your head or just before your close body tag. -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
+</script>
+
 </body>
 
 </html>
