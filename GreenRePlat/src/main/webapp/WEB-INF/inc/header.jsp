@@ -121,37 +121,17 @@
 						</span> <span class="hide-menu">회원수정</span>
 					</a></li>
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/createEstimation"
+						href="${pageContext.request.contextPath}/estListView"
 						aria-expanded="false"> <span> <iconify-icon
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서 첫페이지</span>
+						</span> <span class="hide-menu">견적서(제출전)</span>
 					</a></li>
 					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/goEst2"
+						href="${pageContext.request.contextPath}/estSubmitList"
 						aria-expanded="false"> <span> <iconify-icon
 									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서 2페이지</span>
+						</span> <span class="hide-menu">견적서(제출후)</span>
 					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/goEst3"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서 3페이지</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/goEst4"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서 4페이지</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/goEstFinal"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서 마지막</span>
-					</a></li>
-					</a>
-					</li>
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="${pageContext.request.contextPath}/chatListView"
 						aria-expanded="false"> <span> <iconify-icon
