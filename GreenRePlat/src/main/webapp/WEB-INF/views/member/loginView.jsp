@@ -70,10 +70,11 @@
 									
 									
 								</form>
+								
 								<div class="d-flex align-items-center justify-content-center">
-									<a class="text-primary fw-bold ms-2"
-										href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pq95RcUR8Axo8_g97G8i&state=STATE_STRING&redirect_uri=http://localhost:9090/green/naverlogin" target="_blank">
-										<img style="width: 45px;" src="${pageContext.request.contextPath}/resources/images/btnG_아이콘사각.png"></a>
+								    <button onclick="openNaverLogin()" class="btn">
+								        <img style="width: 45px;" src="${pageContext.request.contextPath}/resources/images/btnG_아이콘사각.png">
+								    </button>
 								</div>
 								
 							</div>
@@ -97,6 +98,22 @@
 	<script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+		
+	<script>
+	function openNaverLogin() {
+	    const naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pq95RcUR8Axo8_g97G8i&state=STATE_STRING&redirect_uri=http://localhost:9090/green/naverlogin";
+	    const loginWindow = window.open(naverLoginUrl, "NaverLogin", "width=500,height=700");
+
+	    // 로그인 창이 닫혔을 때 부모 창에서 리다이렉트
+	    const timer = setInterval(() => {
+	        if (loginWindow.closed) {
+	            clearInterval(timer);
+	            window.location.href = "/green/";
+	        }
+	    }, 500); // 0.5초마다 확인
+	}
+	</script>		
+		
 </body>
 
 

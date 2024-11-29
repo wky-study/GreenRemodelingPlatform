@@ -30,7 +30,7 @@ public class NaverController {
 
 	@ResponseBody
 	@GetMapping("/naverlogin")
-	public MemberDTO naverLogin(@RequestParam(name = "code") String code, @RequestParam(name = "state") String state, HttpSession session, HttpServletResponse resp) throws IOException {
+	public String naverLogin(@RequestParam(name = "code") String code, @RequestParam(name = "state") String state, HttpSession session, HttpServletResponse resp) throws IOException {
 		
         // 1. 네이버 로그인에서 전달된 'code'와 'state' 파라미터로 사용자 인증 후 접근 토큰을 받음
 	    String accessToken = naverApi.getAccessToken(code, state);
@@ -61,6 +61,7 @@ public class NaverController {
         mem.setMemPhone(mobile);
         mem.setMemAddress(birthyear + "-" + birthday);
         mem.setMemDate(memDate);
+        mem.setMemType("1");
         
         System.out.println("member 객체: "+mem);
         System.out.println(email);
@@ -81,7 +82,11 @@ public class NaverController {
              resp.addCookie(cookie);
              
              // 리다이렉트: 로그인 후 홈 페이지로 이동
-             resp.sendRedirect("/green/"); // 원하는 URL로 리다이렉트
+             return "<html>" +
+             "  <script>" +
+             "    window.close();" +  // 현재 창 닫기
+             "  </script>" +
+             "</html>";
          } else {
              // 새로운 사용자 -> DB에 저장 후 가입 처리
              memberService.registMember(mem);
@@ -97,10 +102,12 @@ public class NaverController {
              
              System.out.println(userInfo);
              
-             // 리다이렉트: 가입 후 홈 페이지로 이동
-             resp.sendRedirect("/green/"); // 원하는 URL로 리다이렉트
          }
-         return mem;  // 실제로는 이 반환값을 사용하지 않으므로 생략 가능
+         return "<html>" +
+         "  <script>" +
+         "    window.close();" +  // 현재 창 닫기
+         "  </script>" +
+         "</html>";
 	}
 
 

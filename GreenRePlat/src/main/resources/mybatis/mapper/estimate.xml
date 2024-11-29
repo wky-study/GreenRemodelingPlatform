@@ -94,11 +94,20 @@
     </update>
 
 
-	<!-- 제출 완료된 임시견적서 리스트 가져오기 -->
+	<!-- 제출 완료된 임시견적서 리스트 가져오기(일반회원) -->
 	<select id="getMemSubList" resultType="com.team.green.estimate.dto.EstimateDTO">
 		SELECT * 
 	    FROM estimate  
 	    WHERE mem_id = #{memId}	
+	    AND est_submit = 'Y'
+	</select>
+	
+	
+	<!-- 제출 완료된 임시견적서 리스트 가져오기 (기업회원) -->
+	<select id="getComSubList" resultType="com.team.green.estimate.dto.EstimateDTO">
+		SELECT * 
+	    FROM estimate  
+	    WHERE 1=1	 
 	    AND est_submit = 'Y'
 	</select>
 
