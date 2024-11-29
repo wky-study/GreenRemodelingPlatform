@@ -18,5 +18,11 @@ public interface IMemberDAO {
 	MemberDTO socialLoginMember(String memId); 
 
 	public List<MemberDTO> getMemList();
+	
+    // ID 중복 확인
+    int checkIdDuplication(String memId); 
 
+    // 닉네임 중복 확인
+    int checkNickDuplication(String memNick); 
 }
+

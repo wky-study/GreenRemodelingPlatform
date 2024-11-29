@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.green.member.dao.IMemberDAO">
 
-<!-- 회원가입 -->
-<insert id = "registMember" parameterType = "com.team.green.member.dto.MemberDTO">
-	INSERT INTO members(
+	<!-- 회원가입 -->
+	<insert id="registMember"
+		parameterType="com.team.green.member.dto.MemberDTO">
+		INSERT INTO members(
 		MEM_NAME
 		,MEM_ID
 		,MEM_PW
@@ -21,7 +22,7 @@
 		,MEM_HP
 		,mem_email
 		,MEM_DATE
-	) VALUES(
+		) VALUES(
 		#{memName}
 		,#{memId}
 		,#{memPw}
@@ -38,11 +39,13 @@
 		,#{memHp}
 		,#{memEmail}
 		,#{memDate}
-	)
-</insert>
+		)
+	</insert>
 
-<select id = "loginMember" parameterType = "com.team.green.member.dto.MemberDTO" resultType = "com.team.green.member.dto.MemberDTO">
-	SELECT
+	<select id="loginMember"
+		parameterType="com.team.green.member.dto.MemberDTO"
+		resultType="com.team.green.member.dto.MemberDTO">
+		SELECT
 		MEM_NAME
 		,MEM_ID
 		,MEM_PW
@@ -59,46 +62,54 @@
 		,MEM_HP
 		,mem_email
 		,MEM_DATE
-	FROM
+		FROM
 		MEMBERS
-	WHERE 1=1
+		WHERE 1=1
 		AND MEM_ID = #{memId}
-		AND MEM_PW = #{memPw}
-</select>
+		AND MEM_PW
+		= #{memPw}
+	</select>
 
-<update id = "updateMember" parameterType = "com.team.green.member.dto.MemberDTO">
-	UPDATE members
-	SET
+	<update id="updateMember"
+		parameterType="com.team.green.member.dto.MemberDTO">
+		UPDATE members
+		SET
 		MEM_NAME = #{memName}
 		,MEM_PW = #{memPw}
 		,MEM_ADDRESS = #{memAddress}
 		,MEM_PHONE = #{memPhone}
-		,MEM_NICK = #{memNick}
+		,MEM_NICK =
+		#{memNick}
 		,MEM_TYPE = #{memType}
 		,MEM_IMG = #{memImg}
-		,COM_CEO = #{comCeo}
+		,COM_CEO =
+		#{comCeo}
 		,COM_BRC = #{comBrc}
 		,COM_MA_NM = #{comMaNm}
-		,COM_MA_PN = #{comMaPn}
+		,COM_MA_PN =
+		#{comMaPn}
 		,MEM_HP = #{memHp}
 		,mem_email = #{memEmail}
-	WHERE 1=1
-		AND MEM_ID = #{memId}	
-</update>
+		WHERE 1=1
+		AND
+		MEM_ID = #{memId}
+	</update>
 
 
-<!-- 소셜 로그인 -->
-<select id="getMember" resultType="String">
+	<!-- 소셜 로그인 -->
+	<select id="getMember" resultType="String">
 
-    SELECT 
+		SELECT
 		mem_id
-    FROM members
-    WHERE mem_id = #{memId}
+		FROM members
+		WHERE
+		mem_id = #{memId}
 
-</select>
+	</select>
 
-<select id="socialLoginMember"  resultType = "com.team.green.member.dto.MemberDTO">
-	SELECT
+	<select id="socialLoginMember"
+		resultType="com.team.green.member.dto.MemberDTO">
+		SELECT
 		MEM_NAME
 		,MEM_ID
 		,MEM_PW
@@ -115,17 +126,19 @@
 		,MEM_HP
 		,mem_email
 		,MEM_DATE
-	FROM
+		FROM
 		MEMBERS
-	WHERE 1=1
+		WHERE 1=1
 		AND MEM_ID = #{memId}
 
-</select>
-	<select id="getMemList" resultType="com.team.green.member.dto.MemberDTO">
+	</select>
+	<select id="getMemList"
+		resultType="com.team.green.member.dto.MemberDTO">
 		SELECT * FROM members
 	</select>
-	<select id = "searchMember" parameterType = "String" resultType = "com.team.green.member.dto.MemberDTO">
-	SELECT
+	<select id="searchMember" parameterType="String"
+		resultType="com.team.green.member.dto.MemberDTO">
+		SELECT
 		MEM_NAME
 		,MEM_ID
 		,MEM_PW
@@ -142,11 +155,27 @@
 		,MEM_HP
 		,mem_email
 		,MEM_DATE
-	FROM
+		FROM
 		MEMBERS
-	WHERE 1=1
+		WHERE 1=1
 		AND MEM_ID = #{memId}
-</select>
+	</select>
+
+	<!-- ID 중복 확인 -->
+	<select id="checkIdDuplication" resultType="int"
+		parameterType="String">
+		SELECT COUNT(*)
+		FROM members
+		WHERE MEM_ID = #{memId}
+	</select>
+
+	<!-- 닉네임 중복 확인 -->
+	<select id="checkNickDuplication" resultType="int"
+		parameterType="String">
+		SELECT COUNT(*)
+		FROM members
+		WHERE MEM_NICK = #{memNick}
+	</select>
 
 
 </mapper>

@@ -7,14 +7,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입 약관</title>
-<!-- Bootstrap 5 CSS 연결 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+
 </head>
 <body>
-	<div class="container mt-5">
-		<h2 class="text-center mb-4">회원가입 약관</h2>
+
+
+
+	<div class="d-flex align-items-center justify-content-center w-100">
+		<h2 class="col-md-8 col-lg-6 col-xxl-3">회원가입 약관</h2>
 
 		<!-- 약관 내용 -->
 		<div class="card">
@@ -31,17 +31,32 @@
 				<!-- 추가적인 약관 항목을 여기에 추가할 수 있습니다. -->
 			</div>
 		</div>
-
-		<!-- 회원가입 -->
-		<div class="mt-4">
-			<button
-				onclick='window.location.href = "${pageContext.request.contextPath}/registView"'>돌아가기</button>
-		</div>
 	</div>
 
-	<!-- Bootstrap 5 JS 및 Popper.js 연결 -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-
+	<!-- 이전페이지 저장된 정보들 -->
+	<form action="${pageContext.request.contextPath}/registView"
+		method="POST">
+		<input type="hidden" name="inputId" value="${sessionScope.inputId}">
+		<input type="hidden" name="inputPw" value="${sessionScope.inputPw}">
+		<input type="hidden" id="inputPassword2"
+			value="${sessionScope.inputPassword2}"> <input type="hidden"
+			name="inputName" value="${sessionScope.inputName}"> <input
+			type="hidden" name="inputName" value="${sessionScope.inputName}">
+		<input type="hidden" name="inputRn" value="${sessionScope.inputRn}">
+		<input type="hidden" id="postcode" value="${sessionScope.postcode}">
+		<input type="hidden" id="roadAddress"
+			value="${sessionScope.roadAddress}"> <input type="hidden"
+			id="jibunAddress" value="${sessionScope.jibunAddress}"> <input
+			type="hidden" id="detailAddress"
+			value="${sessionScope.detailAddress}"> <input type="hidden"
+			id="extraAddress" value="${sessionScope.extraAddress}"> <input
+			type="hidden" name="inputPhone" value="${sessionScope.inputPhone}">
+		<input type="hidden" name="inputNick"
+			value="${sessionScope.inputNick}"> <input type="hidden"
+			name="inputNick" value="${sessionScope.inputNick}"> <input
+			type="hidden" name="inputEmail" value="${sessionScope.inputEmail}">
+		<input type="hidden" name="memType" value="${sessionScope.memType}">
+		<button class="btn btn-primary" type="submit">돌아가기</button>
+	</form>
 </body>
 </html>
