@@ -251,32 +251,84 @@
 				submitBtn.disabled = true; // 체크 해제되면 버튼 비활성화
 			}
 		});
-		
-		// 아이디 중복 확인
-		function checkId() {
-			const inputId = document.getElementById("inputId").value;
-			if (inputId) {
-				// 실제로 서버에 아이디 중복을 체크하는 로직을 넣어야 합니다.
-				// 임시로 중복되지 않는다고 처리
-				document.getElementById("idCheckResult").textContent = "사용 가능한 아이디입니다.";
-				document.getElementById("idCheckResult").style.color = "green";
-			} else {
-				document.getElementById("idCheckResult").textContent = "아이디를 입력해 주세요.";
-				document.getElementById("idCheckResult").style.color = "red";
-			}
-		}
+	</script>
 
+
+
+	<script>
+    // 아이디 중복 확인
+    function checkId() {
+        const inputId = document.getElementById("inputtext1").value; // 사용자가 입력한 ID값
+
+        // 아이디가 입력되지 않은 경우 처리
+        if (!inputId) {
+            document.getElementById("idCheckResult").textContent = "아이디를 입력해 주세요.";
+            document.getElementById("idCheckResult").style.color = "red";
+            return;
+        }
+
+        // 서버에 중복 체크를 요청하는 Ajax 요청
+        fetch('${pageContext.request.contextPath}/checkIdDuplication', {  // 서버의 /checkIdDuplication URL로 요청
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ memId: inputId })  // 서버로 입력한 ID값 전송
+        })
+        .then(response => response.json())  // 서버 응답을 JSON 형태로 받기
+        .then(data => {
+            if (data.isDuplicate) {  // 서버에서 중복 여부 확인 (isDuplicate가 true이면 중복)
+                document.getElementById("idCheckResult").textContent = "이미 사용 중인 아이디입니다.";
+                document.getElementById("idCheckResult").style.color = "red";
+            } else {
+                document.getElementById("idCheckResult").textContent = "사용 가능한 아이디입니다.";
+                document.getElementById("idCheckResult").style.color = "green";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById("idCheckResult").textContent = "서버와의 통신에 오류가 발생했습니다.";
+            document.getElementById("idCheckResult").style.color = "red";
+        });
+    }
+		</script>
+
+	<script>
 		// 닉네임 중복 확인
-		function checkNickname() {
-			const inputNick = document.getElementById("inputNick").value;
-			if (inputNick) {
-				// 서버에서 닉네임 중복을 체크하는 로직을 넣어야 합니다.
-				// 임시로 중복되지 않는다고 처리
-				document.getElementById("nickCheckResult").textContent = "사용 가능한 닉네임입니다.";
-				document.getElementById("nickCheckResult").style.color = "green";
-			} else {
-				document.getElementById("nickCheckResult").textContent = "닉네임을 입력해 주세요.";
-				document.getElementById("nickCheckResult").style.color = "red";
+			    function checkNickname() {
+			        const inputNick = document.getElementById("inputNick").value; // 사용자가 입력한 닉네임값
+
+			        // 닉네임이 입력되지 않은 경우 처리
+			        if (!inputNick) {
+			            document.getElementById("nickCheckResult").textContent = "닉네임을 입력해 주세요.";
+			            document.getElementById("nickCheckResult").style.color = "red";
+			            return;
+			        }
+
+			        // 서버에 중복 체크를 요청하는 Ajax 요청
+			        fetch('${pageContext.request.contextPath}/checkNickDuplication', {  // 서버의 /checkNickDuplication URL로 요청
+			            method: 'POST',
+			            headers: {
+			                'Content-Type': 'application/json',
+			            },
+			            body: JSON.stringify({ memNick: inputNick })  // 서버로 입력한 닉네임값 전송
+			        })
+			        .then(response => response.json())  // 서버 응답을 JSON 형태로 받기
+			        .then(data => {
+			            if (data.isDuplicate) {  // 서버에서 중복 여부 확인 (isDuplicate가 true이면 중복)
+			                document.getElementById("nickCheckResult").textContent = "이미 사용 중인 닉네임입니다.";
+			                document.getElementById("nickCheckResult").style.color = "red";
+			            } else {
+			                document.getElementById("nickCheckResult").textContent = "사용 가능한 닉네임입니다.";
+			                document.getElementById("nickCheckResult").style.color = "green";
+			            }
+			        })
+			        .catch(error => {
+			            console.error('Error:', error);
+			            document.getElementById("nickCheckResult").textContent = "서버와의 통신에 오류가 발생했습니다.";
+			            document.getElementById("nickCheckResult").style.color = "red";
+			        });
+			    }
 		
 	</script>
 

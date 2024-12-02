@@ -2,6 +2,8 @@ package com.team.green.member.web;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -89,23 +91,23 @@ public class MemberController {
 		 * 각종 validation 작업할것
 		 */
 
-		// 비밀번호 확인
-		if (!memSvc.checkPasswordMatch(memPw, memRn)) {
-			model.addAttribute("passwordMismatch", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-			return "member/registView";
-		}
-
-		// ID 중복 확인
-		if (!memSvc.checkIdDuplication(memId)) {
-			model.addAttribute("idDuplication", "이미 사용 중인 ID입니다.");
-			return "member/registView";
-		}
-
-		// 닉네임 중복 확인
-		if (!memSvc.checkNickDuplication(memNick)) {
-			model.addAttribute("nickDuplication", "이미 사용 중인 닉네임입니다.");
-			return "member/registView";
-		}
+//		// 비밀번호 확인
+//		if (!memSvc.checkPasswordMatch(memPw, memRn)) {
+//			model.addAttribute("passwordMismatch", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+//			return "member/registView";
+//		}
+//
+//		// ID 중복 확인
+//		if (!memSvc.checkIdDuplication(memId)) {
+//			model.addAttribute("idDuplication", "이미 사용 중인 ID입니다.");
+//			return "member/registView";
+//		}
+//
+//		// 닉네임 중복 확인
+//		if (!memSvc.checkNickDuplication(memNick)) {
+//			model.addAttribute("nickDuplication", "이미 사용 중인 닉네임입니다.");
+//			return "member/registView";
+//		}
 
 		try {
 			memDate = new Timestamp(new Date().getTime());
@@ -173,6 +175,57 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	
+    // ID 중복 확인
+    @PostMapping("/checkIdDuplication")
+    @ResponseBody  // JSON 형식으로 응답을 반환
+    public Map<String, Boolean> checkIdDuplication(@RequestBody Map<String, String> requestData) {
+        String memId = requestData.get("memId");  // 클라이언트로부터 ID 받기
+        boolean isDuplicate = !memSvc.checkIdDuplication(memId);  // 중복이면 true, 아니면 false
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isDuplicate", isDuplicate);  // 응답 JSON으로 반환
+
+        return response;
+    }
+
+    // 닉네임 중복 확인
+    
+    @PostMapping("/checkNickDuplication")
+    @ResponseBody  // JSON 형식으로 응답을 반환
+    public Map<String, Boolean> checkNickDuplication(@RequestBody Map<String, String> requestData) {
+        String memNick = requestData.get("memNick");  // 클라이언트로부터 닉네임 받기
+        boolean isDuplicate = !memSvc.checkNickDuplication(memNick);  // 중복이면 true, 아니면 false
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isDuplicate", isDuplicate);  // 응답 JSON으로 반환
+
+        return response;
+    }
+
+//    // 이메일 인증
+//    @RequestMapping("/sendEmailVerification")
+//    @ResponseBody
+//    public String sendEmailVerification(@RequestParam("email") String email) {
+//        String verificationCode = UUID.randomUUID().toString().substring(0, 6);  // 인증 코드 생성
+//        boolean isSent = emailService.sendVerificationEmail(email, verificationCode);
+//
+//       if (isSent) {
+//            return "인증 코드가 이메일로 전송되었습니다.";
+//        } else {
+//            return "이메일 전송에 실패했습니다.";
+//        }
+//    }
+
+//    // 비밀번호 확인 (가입 시)
+//    @PostMapping("/registDo")
+//    public String registMember(HttpServletRequest req, Model model) {
+//        // ... (기존 코드)
+//        // 비밀번호 확인 체크
+//        if (!memSvc.checkPasswordMatch(memPw, memRn)) {
+//            model.addAttribute("passwordMismatch", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+//            return "member/registView";
+//        }
+//        // ... (기존 코드)
+//    }
 	
 }
