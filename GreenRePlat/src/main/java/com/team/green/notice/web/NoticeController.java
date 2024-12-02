@@ -59,7 +59,7 @@ public class NoticeController {
 	    model.addAttribute("keySearch", search);
 
 	    // 세션에 로그인된 사용자 정보가 있는 경우 ID를 모델에 추가
-	    MemberDTO login = (MemberDTO) session.getAttribute("login");
+	    MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 	    if (login != null) {
 	        model.addAttribute("loggedInUserId", login.getMemId());
 	    }
@@ -68,8 +68,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeDetailView")
-	public String noticeDetailView(ReplyDTO reply, int no, Model model) {
+	public String noticeDetailView(ReplyDTO reply, int no, Model model, HttpSession session) {
 		System.out.println("클릭한 게시글 번호" + no);
+		
+		MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
+	    if (login != null) {
+	        model.addAttribute("loggedInUserId", login.getMemId());
+	    }
 		
 		// 조회수 기능 추가 할거
 		noticeService.noticeCountUp(no);
@@ -156,7 +161,7 @@ public class NoticeController {
 	    System.out.println(notice);
 
 	    // 세션에 담긴 회원 정보 확인
-	    MemberDTO login = (MemberDTO) session.getAttribute("login");
+	    MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 
 	    // 로그인 정보가 없을 경우 memId에 null 값을 설정 - 작업용으로 해둔 코드
 	 	if (login == null) {

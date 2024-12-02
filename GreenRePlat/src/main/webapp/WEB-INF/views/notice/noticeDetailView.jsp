@@ -38,19 +38,19 @@
 					</div>
 					
 					<div class="d-flex justify-content-end">
+						<c:if test="${loggedInUserId == keyNotice.memId}">
 
 							<form action="${pageContext.request.contextPath }/noticeEditView"
 								method="POST">
 								<input type="hidden" value="${keyNotice.noticeNo}" name="no">
 								<button class="btn btn-warning" type="submit">수정</button>
 							</form>
-
-					<%-- <c:if test="${ sessionScope.memInfo.memId == keyNotice.memId && sessionScope.memInfo.memId != null || sessionScope.memInfo.memAdmin == '0'}"> --%>
+					
 							<form id="delForm" action="${pageContext.request.contextPath }/noticeDeleteDo" method="POST">
 								<input type="hidden" value="${keyNotice.noticeNo}" name="no">
 								<button id="delBtn" class="btn btn-danger ms-2" type="button">삭제</button>
 							</form>
-					<%-- </c:if> --%>
+						</c:if>
 					
 					</div>
 
