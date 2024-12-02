@@ -48,16 +48,12 @@
 
 									<!-- 일반/기업 나누기 -->
 									<div class="mb-3">
-										<select class="form-control" name="memType" id="memType">
+										<select class="form-control" name="inputType" id="memType">
 											<option value="select">[회원유형선택]</option>
-											<option value="1"
-												${sessionScope.userType == '1' ? 'selected' : ''}>일반회원</option>
-											<option value="5"
-												${sessionScope.userType == '5' ? 'selected' : ''}>시공사</option>
-											<option value="6"
-												${sessionScope.userType == '6' ? 'selected' : ''}>판매사</option>
-											<option value="7"
-												${sessionScope.userType == '7' ? 'selected' : ''}>설계사</option>
+											<option value="1">일반회원</option>
+											<option value="5">시공사</option>
+											<option value="6">판매사</option>
+											<option value="7">설계사</option>
 										</select>
 									</div>
 
