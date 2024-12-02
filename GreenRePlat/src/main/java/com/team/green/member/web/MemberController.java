@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
-import com.team.green.review.web.ReviewController;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -188,5 +188,6 @@ public class MemberController {
 
         return response;
     }
+    
 	
 }

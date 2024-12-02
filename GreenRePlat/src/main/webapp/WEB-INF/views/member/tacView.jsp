@@ -8,6 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입 약관</title>
 
+<link rel="shortcut icon" type="image/png"
+	href="${pageContext.request.contextPath}/assets/images/logos/seodashlogo.png" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/styles.min.css" />
+
 </head>
 <body>
 
@@ -18,9 +23,6 @@
 
 		<!-- 약관 내용 -->
 		<div class="card">
-			<div class="card-header">
-				<h5>회원가입 약관</h5>
-			</div>
 			<div class="card-body">
 				<h6>1. 개인정보 보호</h6>
 				<p>우리는 사용자의 개인정보를 안전하게 보호하며, 제3자에게 제공하지 않습니다.</p>
@@ -56,7 +58,23 @@
 			name="inputNick" value="${sessionScope.inputNick}"> <input
 			type="hidden" name="inputEmail" value="${sessionScope.inputEmail}">
 		<input type="hidden" name="memType" value="${sessionScope.memType}">
-		<button class="btn btn-primary" type="submit">돌아가기</button>
+		<button class="btn btn-primary" type="submit" style="display: block; margin: 0 auto;">돌아가기</button>
 	</form>
+
+	<script
+		src="${pageContext.request.contextPath}/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/libs/simplebar/dist/simplebar.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/js/sidebarmenu.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/app.min.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
 </body>
 </html>

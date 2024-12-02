@@ -2,6 +2,7 @@ package com.team.green.member.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,6 @@ public class MemberService {
         return count == 0;  // 중복되지 않으면 true
     }
     
+
 
 }
