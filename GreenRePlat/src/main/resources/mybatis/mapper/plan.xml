@@ -46,7 +46,7 @@
 			quo_edate = #{quoEdate},
 			quo_cont = #{quoCont}
 		WHERE 1=1
-			AND est_id = #{estId}
+			AND quo_id = #{quoId}
 	
 	</update>
 </mapper>

@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.green.member.dto.MemberDTO;
+import com.team.green.plan.dao.IPlanDAO;
 import com.team.green.plan.dto.PlanDTO;
 import com.team.green.plan.service.PlanService;
+
+import lombok.extern.slf4j.Slf4j;
 import oracle.sql.json.OracleJsonParser.Event;
 
+@Slf4j
 @Controller
 public class PlanController {
 	
@@ -34,7 +38,11 @@ public class PlanController {
 	@RequestMapping("/planView")
 	public String planView(Model model, HttpSession session) {
 		
+		
 		MemberDTO login= (MemberDTO)session.getAttribute("memInfo");
+		if (login == null) {
+			return "redirect:/loginView"; // 로그인 페이지로 리다이렉트
+		}
 		String memId = login.getMemId();
 		String memType = login.getMemType();
 		List<PlanDTO> planList = planService.getPlanList(login);
@@ -42,8 +50,10 @@ public class PlanController {
 		// planList 를 JSON String으로 변환해서 모델에 저장 (Gson 이용) "[{}, {}, {}]"
 		
 		
+		
         model.addAttribute("planList", planList);
-        
+        System.out.println();
+        System.out.println("플랜리스트:"+planList);
 
 		
 		
@@ -52,12 +62,16 @@ public class PlanController {
 	}
 	@PostMapping("/planEditDo")
 	public String planEditDo(PlanDTO plan) {
-		System.out.println(plan);
+		System.out.println("/planEditDo");
+		System.out.println("플랜"+plan);
 		planService.editPlan(plan);
 		
+
 		return "redirect:/planView";
 		
 	}
+
+	
 	
 		
 		
