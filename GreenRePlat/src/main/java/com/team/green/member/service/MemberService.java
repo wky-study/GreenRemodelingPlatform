@@ -60,9 +60,5 @@ public class MemberService {
         return count == 0;  // 중복되지 않으면 true
     }
     
-    // 비밀번호 확인
-    public boolean checkPasswordMatch(String memPw, String memRn) {
-        return memPw.equals(memRn);  // 비밀번호와 확인용 비밀번호가 같으면 true
-    }
 
 }
