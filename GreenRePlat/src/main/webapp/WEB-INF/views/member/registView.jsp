@@ -145,7 +145,7 @@
 									<div class="d-flex align-items-center justify-content-center">
 										<p class="fs-4 mb-0 fw-bold">이미 회원이십니까?</p>
 										<a class="text-primary fw-bold ms-2"
-											href="./authentication-login.html">로그인</a>
+											href="${pageContext.request.contextPath}/loginView">로그인</a>
 									</div>
 								</form>
 							</div>
