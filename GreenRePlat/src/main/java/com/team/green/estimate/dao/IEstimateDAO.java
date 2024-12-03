@@ -10,36 +10,38 @@ import com.team.green.member.dto.MemberDTO;
 @Mapper
 public interface IEstimateDAO {
 	
-	// µ¥ÀÌÅÍ Á¸Àç ¿©ºÎ È®ÀÎ
+	// ë°ì´í„° ì¡´ì¬ ì—¬ë¶€ í™•ì¸
 	int countEstimateByCriteria(EstimateDTO estimate);
 
-	// ÀÓ½Ã°ßÀû¼­ »ı¼º
+	// ì„ì‹œê²¬ì ì„œ ìƒì„±
 	int insertEstimate(EstimateDTO estimate);
 	
-	// ÀÓ½Ã°ßÀû¼­ ¼öÁ¤
+	// ì„ì‹œê²¬ì ì„œ ìˆ˜ì •
 	int updateEstimate(EstimateDTO estimate);
 	
-	// ÀÓ½Ã°ßÀû¼­ ÇÑ°³ Å¬¸¯½Ã
+	// ì„ì‹œê²¬ì ì„œ í•œê°œ í´ë¦­ì‹œ
 	EstimateDTO getEst(int estId);
 	
-	// ÃÖÁ¾ ¼öÁ¤
+	// ìµœì¢… ìˆ˜ì •
 	int updateEst(EstimateDTO estimate);
 	
-	// ÀÓ½Ã°ßÀû¼­ ¸®½ºÆ®
+	// ì„ì‹œê²¬ì ì„œ ë¦¬ìŠ¤íŠ¸
 	List<EstimateDTO> getMemEstList(String memId);
 	
-	// »ı¼ºÇÒ °ßÀû¼­ estId °¡Á®¿À±â
+	// ìƒì„±í•  ê²¬ì ì„œ estId ê°€ì ¸ì˜¤ê¸°
 	int getEstId();
 	
-	// Á¦ÃâÇÏ±â Å¬¸¯½Ã ¾÷µ¥ÀÌÆ®
+	// ì œì¶œí•˜ê¸° í´ë¦­ì‹œ ì—…ë°ì´íŠ¸
 	int estSubmit(EstimateDTO estimate);
 	
-	// Á¦Ãâ ¿Ï·áÇÑ ÀÓ½Ã°ßÀû¼­ ¸®½ºÆ®
+	// ì œì¶œ ì™„ë£Œí•œ ì„ì‹œê²¬ì ì„œ ë¦¬ìŠ¤íŠ¸
 	List<EstimateDTO> getMemSubList(String memId);
 	
-	// Á¦Ãâ ¿Ï·áÇÑ ÀÓ½Ã°ßÀû¼­ ¸®½ºÆ® (±â¾÷ Àü¿ë)
+	// ì œì¶œ ì™„ë£Œí•œ ì„ì‹œê²¬ì ì„œ ë¦¬ìŠ¤íŠ¸ (ê¸°ì—… ì „ìš©)
 	List<EstimateDTO> getComSubList(MemberDTO member);
+
 	
-	// ½Ã°ø»ç Á¤º¸ ¾÷µ¥ÀÌÆ®
+	// ì‹œê³µì‚¬ ì •ë³´ ì—…ë°ì´íŠ¸
 	int updateComId(EstimateDTO estimate);
+
 }
