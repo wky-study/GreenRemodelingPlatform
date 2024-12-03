@@ -186,7 +186,7 @@
 	<select id="getComId" resultType="String">
 	
 		SELECT 
-			com_id
+			mem_id
 		FROM members
 		WHERE 1=1
 		AND mem_name = #{memName}
