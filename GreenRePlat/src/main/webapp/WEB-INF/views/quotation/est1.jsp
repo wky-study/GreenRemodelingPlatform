@@ -22,7 +22,6 @@
 			</h4>
 			<div class="row">
 				<div class="col-md-12">
-					<%@ include file="/WEB-INF/inc/estmenu.jsp"%>
 					<div class="card mb-4">
 						<h5 class="card-header">프로필 이미지</h5>
 						<!-- Account -->

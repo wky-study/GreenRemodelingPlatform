@@ -40,7 +40,14 @@ public class MemberController {
 	 * 
 	 */
 	@RequestMapping("/registView")
-	public String registView() {
+	public String registView(HttpSession session) {
+		
+		System.out.println(session.getAttribute("memInfo"));
+		
+		if(session.getAttribute("memInfo") == null) {
+			return "redirect:/loginView";
+		}
+		
 		return "member/registView";
 	}
 
