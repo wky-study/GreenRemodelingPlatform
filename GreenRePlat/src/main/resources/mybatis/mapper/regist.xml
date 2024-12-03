@@ -177,5 +177,4 @@
 		WHERE MEM_NICK = #{memNick}
 	</select>
 
-
 </mapper>

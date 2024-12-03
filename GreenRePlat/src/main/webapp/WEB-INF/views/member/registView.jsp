@@ -48,16 +48,12 @@
 
 									<!-- 일반/기업 나누기 -->
 									<div class="mb-3">
-										<select class="form-control" name="memType" id="memType">
+										<select class="form-control" name="inputType" id="memType">
 											<option value="select">[회원유형선택]</option>
-											<option value="1"
-												${sessionScope.userType == '1' ? 'selected' : ''}>일반회원</option>
-											<option value="5"
-												${sessionScope.userType == '5' ? 'selected' : ''}>시공사</option>
-											<option value="6"
-												${sessionScope.userType == '6' ? 'selected' : ''}>판매사</option>
-											<option value="7"
-												${sessionScope.userType == '7' ? 'selected' : ''}>설계사</option>
+											<option value="1">일반회원</option>
+											<option value="5">시공사</option>
+											<option value="6">판매사</option>
+											<option value="7">설계사</option>
 										</select>
 									</div>
 
@@ -74,14 +70,19 @@
 										<label for="inputPassword1" class="form-label">비밀번호</label> <input
 											type="password" class="form-control" name="inputPw"
 											id="inputPassword1"
-											value="${sessionScope.inputPw != null ? sessionScope.inputPw : ''}">
+											value="${sessionScope.inputPw != null ? sessionScope.inputPw : ''}"
+											required />
 									</div>
 									<div class="mb-4">
 										<label for="inputPassword1" class="form-label">비밀번호확인</label>
 										<input type="password" class="form-control"
 											id="inputPassword2"
-											value="${sessionScope.inputPassword2 != null ? sessionScope.inputPassword2 : ''}">
-										<span id="passwordMatch" style="color: red;"></span>
+											value="${sessionScope.inputPassword2 != null ? sessionScope.inputPassword2 : ''}"
+											required />
+										<div class="alert alert-success" id="alert-success">비밀번호가
+											일치합니다.</div>
+										<div class="alert alert-danger" id="alert-danger">비밀번호가
+											일치하지 않습니다.</div>
 									</div>
 									<div class="mb-3">
 										<label for="inputtext1" class="form-label">이름</label> <input
@@ -138,7 +139,9 @@
 											type="email" class="form-control" id="inputEmail"
 											aria-describedby="emailHelp" name="inputEmail"
 											value="${sessionScope.inputEmail != null ? sessionScope.inputEmail : ''}">
-
+										<button type="button" class="btn btn-secondary"
+											onclick="sendVerificationEmail()">이메일 인증</button>
+										<span id="emailVerificationResult" style="color: red;"></span>
 									</div>
 
 									<button class="btn btn-primary w-100 py-8 fs-4 mb-4" id="do"
@@ -331,6 +334,30 @@
 			    }
 		
 	</script>
+
+	<script>
+	// 비밀번호 확인
+	$(function(){
+		$("#alert-success").hide();
+		$("#alert-danger").hide();
+		$("#inputPassword1, #inputPassword2").keyup(function(){
+			var inputPassword1 = $("#inputPassword1").val();
+			var inputPassword2 = $("#inputPassword2").val();
+			if(inputPassword1 != "" || inputPassword2 != ""){
+				if(inputPassword1 == inputPassword2){
+					$("#alert-success").show();	// 비밀번호 일치 시 성공 메시지 표시
+					$("#alert-danger").hide();	// 실패 메시지 숨기기
+					$("#do").removeAttr("disabled");	// 버튼 활성화
+				}else{
+					$("#alert-success").hide();	// 비밀번호 불일치 시 성공 메시지 숨기기
+					$("#alert-danger").show();	// 실패 메시지 표시
+					$("#do").attr("disabled", "disabled");	// 버튼 비활성화
+				}
+			}
+		});
+	});
+	</script>
+	
 
 </body>
 
