@@ -108,7 +108,7 @@
 	    const timer = setInterval(() => {
 	        if (loginWindow.closed) {
 	            clearInterval(timer);
-	            window.location.href = "/green/";
+	            window.location.href = "/	";
 	        }
 	    }, 500); // 0.5초마다 확인
 	}
