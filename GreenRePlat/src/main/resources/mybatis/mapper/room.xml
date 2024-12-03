@@ -49,7 +49,7 @@
         , #{roomName}
         , #{memId}
         , SYSDATE
-        , 'N'
+        , '0'
         , #{partMem}  <!-- 신청받은 참가자 ID -->
     )
 	</insert>
@@ -67,7 +67,7 @@
         , #{roomName}
         , #{memId}
         , SYSDATE
-        , 'N'
+        , '0'
         , #{partMem}  <!-- 신청받은 참가자 ID -->
     )
 	</insert>

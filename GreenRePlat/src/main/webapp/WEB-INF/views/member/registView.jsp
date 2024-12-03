@@ -31,7 +31,6 @@
 									<img src="../assets/images/logos/logo-light.svg" alt="">
 								</a>
 
-
 								<p class="text-center">회원가입</p>
 								<form action="${pageContext.request.contextPath}/registDo"
 									method="POST">
