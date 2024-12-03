@@ -106,7 +106,6 @@
 							</form>
 						</div>
 
-
 						<div id="replyBox" class="reply-box mb-5">
 							<!-- 밑에 참고 -->
 							<c:forEach items="${keyReplyList }" var="replyDTO">
