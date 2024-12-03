@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.team.green.estimate.dto.EstimateDTO;
+import com.team.green.member.dto.MemberDTO;
 
 @Mapper
 public interface IEstimateDAO {
@@ -37,5 +38,5 @@ public interface IEstimateDAO {
 	List<EstimateDTO> getMemSubList(String memId);
 	
 	// 제출 완료한 임시견적서 리스트 (기업 전용)
-	List<EstimateDTO> getComSubList();
+	List<EstimateDTO> getComSubList(MemberDTO member);
 }
