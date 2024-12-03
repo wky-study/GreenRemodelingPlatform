@@ -30,6 +30,7 @@ import com.team.green.estimate.service.KakaoAddressService;
 import com.team.green.material.dto.MaterialDTO;
 import com.team.green.material.service.MaterialService;
 import com.team.green.member.dto.MemberDTO;
+import com.team.green.member.service.MemberService;
 
 @Controller
 public class EstimateController {
@@ -51,6 +52,9 @@ public class EstimateController {
 
 	@Autowired
 	KakaoAddressService kakaoAddressService;
+	
+	@Autowired
+	MemberService memSvc;
 
 	/*
 	 * Estimate 첫 페이지
@@ -111,10 +115,11 @@ public class EstimateController {
 
 		System.out.println(itemType);
 
-		List<MaterialDTO> materialList = matSvc.materialList(itemType);
-		List<MaterialDTO> typeList = matSvc.typeList();
-		model.addAttribute("keyMatList", materialList);
-		model.addAttribute("keyTypeList", typeList);
+		List<MemberDTO> comList = memSvc.getComList();
+		model.addAttribute("keyComList", comList);
+
+//		List<MaterialDTO> materialList = matSvc.materialList(itemType);
+//		model.addAttribute("keyMatList", materialList);
 
 		return "estimate/est2"; // 자재 선택으로 이동
 	}
@@ -126,11 +131,10 @@ public class EstimateController {
 
 		// itemType 값이 null이 아니면 해당 값에 맞는 자재 목록을 불러옴
 		if (itemType != null) {
-			List<MaterialDTO> materialList = matSvc.materialList(itemType);
-			List<MaterialDTO> typeList = matSvc.typeList();
-
-			model.addAttribute("keyMatList", materialList);
-			model.addAttribute("keyTypeList", typeList);
+//			List<MaterialDTO> materialList = matSvc.materialList(itemType);
+			List<MemberDTO> comList = memSvc.getComList();
+//			model.addAttribute("keyMatList", materialList);
+			model.addAttribute("keyComList", comList);
 		}
 
 		// 모델에 기존 estimate 정보도 담기
@@ -140,11 +144,18 @@ public class EstimateController {
 	}
 
 	@RequestMapping("/est3")
-	public String est3(HttpSession session, Model model) {
+	public String est3(@RequestBody Map<String, String> requestData,HttpSession session, Model model) {
 
+	    // 클라이언트에서 전송된 memName 값 추출
+	    String memName = requestData.get("memName");
+	    System.out.println("선택된 시공사명: " + memName);
+	    String comId = memSvc.getComId(memName);
+	    System.out.println("comId : "+ comId);
 		EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
-
+		// 시공사명도 저장 해야함
+		est.setComId(comId);
 		System.out.println(est);
+		estSvc.updateComId(est);
 
 		List<AttachDTO> atchList = attachService.getEstAttachList(est.getEstId());
 
@@ -246,7 +257,7 @@ public class EstimateController {
 			System.out.println(memType);
 			
 			if(memType.equals("5") || memType.equals("0")) {
-				estList = estSvc.getComSubList();
+				estList = estSvc.getComSubList(member);
 				System.out.println("여기로옴");
 			}else {
 				estList = estSvc.getMemSubList(memId);

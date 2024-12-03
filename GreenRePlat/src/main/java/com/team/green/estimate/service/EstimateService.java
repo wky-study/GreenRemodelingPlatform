@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.green.estimate.dao.IEstimateDAO;
 import com.team.green.estimate.dto.EstimateDTO;
+import com.team.green.member.dto.MemberDTO;
 
 @Service
 public class EstimateService {
@@ -69,9 +70,14 @@ public class EstimateService {
 	};
 	
 	// 제출 완료한 임시견적서 리스트 (기업 전용)
-	public List<EstimateDTO> getComSubList(){
-		List<EstimateDTO> result = dao.getComSubList();
+	public List<EstimateDTO> getComSubList(MemberDTO member){
+		List<EstimateDTO> result = dao.getComSubList(member);
 		return result;
 	};
 	
+	// 시공사 정보 업데이트
+	public int updateComId(EstimateDTO estimate) {
+		int result = dao.updateComId(estimate);
+		return result;
+	};
 }

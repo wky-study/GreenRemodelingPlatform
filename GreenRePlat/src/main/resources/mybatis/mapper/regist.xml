@@ -176,5 +176,21 @@
 		FROM members
 		WHERE MEM_NICK = #{memNick}
 	</select>
-
+	
+	<select id="getComList" resultType="com.team.green.member.dto.MemberDTO">
+		SELECT *
+		FROM members
+		WHERE mem_type = '5'
+	</select>
+	
+	<select id="getComId" resultType="String">
+	
+		SELECT 
+			com_id
+		FROM members
+		WHERE 1=1
+		AND mem_name = #{memName}
+	
+	</select>
+ 
 </mapper>

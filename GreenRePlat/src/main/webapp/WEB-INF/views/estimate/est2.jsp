@@ -40,28 +40,12 @@
 		<!-- Content -->
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">견적서 생성 /</span> 자재
+				<span class="text-muted fw-light">견적서 생성 /</span> 시공사 선택
 			</h4>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card mb-4">
 					
-						<!-- 검색기능 -->
-						<div class="d-flex justify-content-end mt-3 mb-3 me-5">
-							<form class="d-flex" id="estimateForm" action="${pageContext.request.contextPath }/est2" method="GET" >
-								<select class="form-select me-1" name="itemType" id="itemTypeSelect">
-							        <!-- 자재 타입에 맞는 옵션을 서버에서 전달한 keyMatList에 맞춰 동적으로 생성 -->
-							        <c:forEach var="MaterialDTO" items="${keyTypeList}">
-							            <option value="${MaterialDTO.itemType}" ${MaterialDTO.itemType == param.itemType ? 'selected' : ''}> ${MaterialDTO.itemType}</option>
-							        </c:forEach>
-								</select>
-								<input type="hidden" name="estId" value="${sessionScope.keyEst.estId}">
-								<input type="hidden" name="estAddress" value="${sessionScope.keyEst.estAddress}">
-								<input type="hidden" name="dongNm" value="${sessionScope.keyEst.dongNm}">
-								<input type="hidden" name="hoNm" value="${sessionScope.keyEst.hoNm}">
-								<input type="hidden" name="estSdate" value="${sessionScope.keyEst.estSdate}">
-							</form>
-						</div>						
 					
 					
 						<div class="card-body my-card">
@@ -70,16 +54,16 @@
 							  <thead>
 							    <tr>
 							      <th scope="col"></th>
-							      <th scope="col">이름</th>
-							      <th scope="col">모델명</th>
-							      <th scope="col" >제조사</th>
-							      <th scope="col" >등급</th>
-							      <th scope="col" >타입</th>
+							      <th scope="col"></th>
+							      <th scope="col"></th>
+							      <th scope="col" ></th>
+							      <th scope="col" >시공사명</th>
+							      <th scope="col" >선택</th>
 							    </tr>
 							  </thead>
 							  
 							  <tbody >
-								<c:forEach items="${keyMatList}" var="MaterialDTO">
+<%-- 								<c:forEach items="${keyMatList}" var="MaterialDTO">
 								    <tr onclick="receipt(this)" class="my-cursor">
 								      <th scope="row"><img class="my-img" src="${MaterialDTO.itemImg}"></th>
 								      <td>${MaterialDTO.itemName}</td>
@@ -87,6 +71,16 @@
 								      <td>${MaterialDTO.itemBrand}</td>
 								      <td>${MaterialDTO.itemEffiLevel}</td>
 								      <td>${MaterialDTO.itemType}</td>
+								    </tr>
+							    </c:forEach> --%>	
+								<c:forEach items="${keyComList}" var="MemberDTO">
+								    <tr onclick="receipt(this)" class="my-cursor">
+								      <th scope="row"><img class="my-img" src="${MemberDTO.memImg}"></th>
+								      <td></td>
+								      <td></td>
+								      <td></td>
+								      <td>${MemberDTO.memName}</td>
+								      <td><input type="radio" name="selectedCompany" value="${MemberDTO.memName}"></td>
 								    </tr>
 							    </c:forEach>	
 							    
@@ -114,9 +108,36 @@
 	
 	// 저장 및 다음 버튼 클릭 시
 	document.getElementById('nextBtn').addEventListener('click', () => {
-        window.location.href = '${pageContext.request.contextPath}/est3'; 
-        alert("임시 저장되었습니다."); // 성공 시 경고창
-    });	
+	    const selectedRadio = document.querySelector('input[name="selectedCompany"]:checked');
+	    if (!selectedRadio) {
+	        alert("시공사를 선택해주세요.");
+	        return;
+	    }
+	
+	    const memName = selectedRadio.value; // 선택된 시공사명
+	
+	    // 서버로 데이터 전송
+	    fetch('${pageContext.request.contextPath}/est3', {
+	        method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: JSON.stringify({ memName: memName }) // memName만 전송
+	    })
+	    .then(response => {
+	        if (response.ok) {
+	            // 성공 시 다음 페이지로 이동
+	            alert("시공사가 저장되었습니다.");
+	            window.location.href = '${pageContext.request.contextPath}/est3';
+	        } else {
+	            alert("저장에 실패했습니다. 다시 시도해주세요.");
+	        }
+	    })
+	    .catch(error => {
+	        console.error("저장 중 오류 발생:", error);
+	        alert("저장 중 오류가 발생했습니다.");
+	    });
+	});	
 	
 	
 	// 뒤로가기 버튼 클릭 시
@@ -124,11 +145,6 @@
         window.location.href = '${pageContext.request.contextPath}/est1?estId='+ "${sessionScope.keyEst.estId}"; // est1.jsp 페이지로 이동
     });
 	
-    // 'itemType' select 요소의 값이 변경될 때마다 폼을 제출하는 함수
-    document.getElementById('itemTypeSelect').addEventListener('change', function() {
-        // 폼을 제출
-        document.getElementById('estimateForm').submit();
-    });
 	
 	</script>
 </body>
