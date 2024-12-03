@@ -61,6 +61,16 @@ public class MemberService {
         return count == 0;  // 중복되지 않으면 true
     }
     
-
+    // 기업 회원 리스트 불러오기
+    public List<MemberDTO> getComList(){
+    	List<MemberDTO> result = dao.getComList();
+    	return result;
+    };
+    
+    // 기업 회원 아이디 찾기
+    public String getComId(String memName) {
+    	String result = dao.getComId(memName);
+    	return result;
+    };
 
 }

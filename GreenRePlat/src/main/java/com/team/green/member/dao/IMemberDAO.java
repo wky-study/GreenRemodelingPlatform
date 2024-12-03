@@ -23,6 +23,13 @@ public interface IMemberDAO {
     int checkIdDuplication(String memId); 
 
     // 닉네임 중복 확인
-    int checkNickDuplication(String memNick); 
+    int checkNickDuplication(String memNick);
+    
+    // 기업 회원 리스트 불러오기
+    List<MemberDTO> getComList();
+    
+    // 기업 회원 아이디 찾기
+    String getComId(String memName);
+    
 }
 

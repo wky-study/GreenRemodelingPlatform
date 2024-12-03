@@ -75,4 +75,9 @@ public class EstimateService {
 		return result;
 	};
 	
+	// 시공사 정보 업데이트
+	public int updateComId(EstimateDTO estimate) {
+		int result = dao.updateComId(estimate);
+		return result;
+	};
 }

@@ -13,12 +13,13 @@ public class EstimateDTO {
 	private String sigunguCd;
 	private String bjdongCd;
 	private String estArea;
+	private String comId;
 	
 	public EstimateDTO() {
 	}
 
 	public EstimateDTO(int estId, String memId, String estAddress, String dongNm, String hoNm, String estSdate,
-			String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd, String estArea) {
+			String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd, String estArea, String comId) {
 		this.estId = estId;
 		this.memId = memId;
 		this.estAddress = estAddress;
@@ -30,13 +31,15 @@ public class EstimateDTO {
 		this.sigunguCd = sigunguCd;
 		this.bjdongCd = bjdongCd;
 		this.estArea = estArea;
+		this.comId = comId;
 	}
 
 	@Override
 	public String toString() {
 		return "EstimateDTO [estId=" + estId + ", memId=" + memId + ", estAddress=" + estAddress + ", dongNm=" + dongNm
 				+ ", hoNm=" + hoNm + ", estSdate=" + estSdate + ", estInteriorDesc=" + estInteriorDesc + ", estSubmit="
-				+ estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd + ", estArea=" + estArea + "]";
+				+ estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd + ", estArea=" + estArea
+				+ ", comId=" + comId + "]";
 	}
 
 	public int getEstId() {
@@ -126,6 +129,15 @@ public class EstimateDTO {
 	public void setEstArea(String estArea) {
 		this.estArea = estArea;
 	}
+
+	public String getComId() {
+		return comId;
+	}
+
+	public void setComId(String comId) {
+		this.comId = comId;
+	}
+
 
 
 
