@@ -38,7 +38,6 @@
 			<div class="row">
 				<div class="col-md-12">
 				
-					<%@ include file="/WEB-INF/inc/estmenu.jsp"%>
 					
 					<div class="card mb-4">
 						

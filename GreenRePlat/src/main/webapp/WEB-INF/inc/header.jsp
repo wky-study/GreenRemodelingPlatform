@@ -21,7 +21,7 @@
 		<div>
 			<div
 				class="brand-logo d-flex align-items-center justify-content-between">
-				<a href="${pageContext.request.contextPath}"
+				<a href="${pageContext.request.contextPath}/"
 					class="text-nowrap logo-img"> <img
 					src="${pageContext.request.contextPath}/assets/images/logos/logo-light.svg"
 					alt="" />
