@@ -97,9 +97,9 @@ public class RoomController {
 	public String requestChat(String partMem, HttpSession session, Model model) {
 	    MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 
-//	    if (login == null) {
-//	        return "redirect:/loginView";
-//	    }
+	    if (login == null) {
+	        return "redirect:/loginView";
+	    }
 
 	    // 로그인된 사용자 정보
 	    String memId = login.getMemId();
