@@ -245,7 +245,7 @@ public class EstimateController {
 
 			System.out.println(memType);
 			
-			if(memType.equals("2") || memType.equals("0")) {
+			if(memType.equals("5") || memType.equals("0")) {
 				estList = estSvc.getComSubList();
 				System.out.println("¿©±â·Î¿È");
 			}else {
