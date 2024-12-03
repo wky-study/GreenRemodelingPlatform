@@ -23,8 +23,8 @@
 				class="brand-logo d-flex align-items-center justify-content-between">
 				<a href="${pageContext.request.contextPath}/"
 					class="text-nowrap logo-img"> <img
-					src="${pageContext.request.contextPath}/assets/images/logos/logo-light.svg"
-					alt="" />
+					src="${pageContext.request.contextPath}/assets/images/logos/mainlogo.png"
+					alt="" style="width: 200px; height: auto; padding-top: 10%;"/>
 				</a>
 				<div
 					class="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
