@@ -215,7 +215,7 @@ public class OrderController {
 	        	    + "</table>"
 	        	    + "<p style='font-size: 16px; color: #555; margin-top: 20px;'>주문 내용 확인을 원하시면 언제든지 웹사이트를 방문해 주세요.</p>"
 	        	    + "<div style='text-align: center; margin-top: 30px;'>"
-	        	    + "<a href='http://192.168.0.136/' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>웹사이트 방문</a>"
+	        	    + "<a href='http://localhost/' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>웹사이트 방문</a>"
 	        	    + "</div>"
 	        	    + "</div>"
 	        	    + "</body></html>";
