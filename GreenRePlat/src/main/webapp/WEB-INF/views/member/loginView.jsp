@@ -101,7 +101,7 @@
 		
 	<script>
 	function openNaverLogin() {
-	    const naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pq95RcUR8Axo8_g97G8i&state=STATE_STRING&redirect_uri=http://localhost:9090/green/naverlogin";
+	    const naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pq95RcUR8Axo8_g97G8i&state=STATE_STRING&redirect_uri=http://192.168.0.136/naverlogin";
 	    const loginWindow = window.open(naverLoginUrl, "NaverLogin", "width=500,height=700");
 
 	    // 로그인 창이 닫혔을 때 부모 창에서 리다이렉트
