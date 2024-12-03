@@ -139,9 +139,6 @@
 											type="email" class="form-control" id="inputEmail"
 											aria-describedby="emailHelp" name="inputEmail"
 											value="${sessionScope.inputEmail != null ? sessionScope.inputEmail : ''}">
-										<button type="button" class="btn btn-secondary"
-											onclick="sendVerificationEmail()">이메일 인증</button>
-										<span id="emailVerificationResult" style="color: red;"></span>
 									</div>
 
 									<button class="btn btn-primary w-100 py-8 fs-4 mb-4" id="do"
