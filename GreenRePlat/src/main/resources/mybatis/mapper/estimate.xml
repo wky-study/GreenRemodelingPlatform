@@ -85,6 +85,7 @@
 	    FROM estimate
 	</select>
 	
+	
 	<!-- 제출하기 클릭시 업데이트 -->
     <update id="estSubmit" parameterType="com.team.green.estimate.dto.EstimateDTO">
         UPDATE ESTIMATE
@@ -119,7 +120,7 @@
 	<update id="updateComId" parameterType="com.team.green.estimate.dto.EstimateDTO">
         UPDATE ESTIMATE 
         SET 
-            com_id = #{comId},
+            com_id = #{comId}
         WHERE 1=1 
         AND est_id = #{estId}		
 	</update>

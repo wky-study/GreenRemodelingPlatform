@@ -7,6 +7,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>견적서 입력</title>
+
+<!-- jquery (AJAX 통신) -->
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
 </head>
 
 <style>
@@ -74,7 +78,7 @@
 								    </tr>
 							    </c:forEach> --%>	
 								<c:forEach items="${keyComList}" var="MemberDTO">
-								    <tr onclick="receipt(this)" class="my-cursor">
+								    <tr  class="my-cursor">
 								      <th scope="row"><img class="my-img" src="${MemberDTO.memImg}"></th>
 								      <td></td>
 								      <td></td>
@@ -106,38 +110,19 @@
 	
 	<script type="text/javascript">
 	
-	// 저장 및 다음 버튼 클릭 시
 	document.getElementById('nextBtn').addEventListener('click', () => {
+	    // 선택된 라디오 버튼을 가져오기
 	    const selectedRadio = document.querySelector('input[name="selectedCompany"]:checked');
 	    if (!selectedRadio) {
 	        alert("시공사를 선택해주세요.");
 	        return;
 	    }
-	
+
 	    const memName = selectedRadio.value; // 선택된 시공사명
-	
-	    // 서버로 데이터 전송
-	    fetch('${pageContext.request.contextPath}/est3', {
-	        method: 'POST',
-	        headers: {
-	            'Content-Type': 'application/json'
-	        },
-	        body: JSON.stringify({ memName: memName }) // memName만 전송
-	    })
-	    .then(response => {
-	        if (response.ok) {
-	            // 성공 시 다음 페이지로 이동
-	            alert("시공사가 저장되었습니다.");
-	            window.location.href = '${pageContext.request.contextPath}/est3';
-	        } else {
-	            alert("저장에 실패했습니다. 다시 시도해주세요.");
-	        }
-	    })
-	    .catch(error => {
-	        console.error("저장 중 오류 발생:", error);
-	        alert("저장 중 오류가 발생했습니다.");
-	    });
-	});	
+
+	    alert("시공사가 저장되었습니다.");
+	    window.location.href = '${pageContext.request.contextPath}/est3?memName=' + memName;
+	});
 	
 	
 	// 뒤로가기 버튼 클릭 시

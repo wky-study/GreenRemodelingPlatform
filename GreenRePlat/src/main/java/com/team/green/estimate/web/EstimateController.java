@@ -83,21 +83,24 @@ public class EstimateController {
 	@PostMapping("/est2")
 	public String est2(EstimateDTO estimate, Model model, String itemType, HttpSession session) {
 
+		
+		EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
+		System.out.println("세션 : " + est);
+
+		
 		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 		String memId = member.getMemId();
-
+		int estId = 0;
+		if (est != null) {
+			estId = est.getEstId();
+			estimate.setEstId(estId);
+		}
 		System.out.println();
 		System.out.println(memId);
-
-		int estId = estSvc.getEstId();
-		estimate.setEstId(estId);
 
 		estimate.setMemId(memId);
 		System.out.println();
 		System.out.println("들어온 estimate : " + estimate);
-
-		session.removeAttribute("keyEst");
-		session.setAttribute("keyEst", estimate);
 
 		// 기존에 같은 MEM_ID와 EST_ADDRESS를 가진 데이터가 있는지 체크
 		int cnt = estSvc.countEstimateByCriteria(estimate);
@@ -107,13 +110,18 @@ public class EstimateController {
 
 		if (cnt == 0) {
 			// 기존 데이터가 없으면 새로운 견적서 저장
+			estId = estSvc.getEstId();
+			estimate.setEstId(estId);
 			estSvc.insertEstimate(estimate);
 		} else {
 			// 기존 데이터가 있으면 업데이트
 			estSvc.updateEstimate(estimate);
 		}
 
-		System.out.println(itemType);
+//		System.out.println(itemType);
+		
+		session.removeAttribute("keyEst");
+		session.setAttribute("keyEst", estimate);
 
 		List<MemberDTO> comList = memSvc.getComList();
 		model.addAttribute("keyComList", comList);
@@ -144,10 +152,8 @@ public class EstimateController {
 	}
 
 	@RequestMapping("/est3")
-	public String est3(@RequestBody Map<String, String> requestData,HttpSession session, Model model) {
+	public String est3( String memName,HttpSession session, Model model) {
 
-	    // 클라이언트에서 전송된 memName 값 추출
-	    String memName = requestData.get("memName");
 	    System.out.println("선택된 시공사명: " + memName);
 	    String comId = memSvc.getComId(memName);
 	    System.out.println("comId : "+ comId);
