@@ -11,15 +11,20 @@
 
 
 
-
 </head>
 
 <body>
 
-	<%@ include file="/WEB-INF/inc/header.jsp"%>
+	<%@ include file="/WEB-INF/inc/header.jsp" %>
 
 	<!--  Header End -->
-	<div class="container-fluid">
+<div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title d-flex align-items-center gap-2 mb-4">
+                  오늘의 추천
 
                 </h5>
                 <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
@@ -250,11 +255,7 @@
       </div>
     </div>
 
-
-
-
-
-	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+<%@ include file="/WEB-INF/inc/footer.jsp" %>
 
 </body>
 
