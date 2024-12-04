@@ -21,131 +21,71 @@
 		<!-- Content -->
 		<div class="container-xxl flex-grow-1 container-p-y">
 			<h4 class="fw-bold py-3 mb-4">
-				<span class="text-muted fw-light">설정 /</span> 회원정보
+				<span class="text-muted fw-light">Mypage /</span> 회원정보
 			</h4>
 			<div class="row">
 				<div class="col-md-12">
 					<ul class="nav nav-pills flex-column flex-md-row mb-3">
 						<li class="nav-item"><a class="nav-link active"
-							href="javascript:void(0);"><i class="bx bx-user me-1"></i>
+							href="${pageContext.request.contextPath}/settingView"><i class="bx bx-user me-1"></i>
 								회원정보</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="pages-account-settings-notifications.html"><i
-								class="bx bx-bell me-1"></i> 마이 프로젝트</a></li>
+							href="${pageContext.request.contextPath}/cartView"><i
+								class="bx bx-bell me-1"></i>장바구니</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="pages-account-settings-connections.html"><i
+							href="${pageContext.request.contextPath}/orderSummary"><i
 								class="bx bx-link-alt me-1"></i> 주문 내역</a></li>
 					</ul>
 					<div class="card mb-4">
-						<h5 class="card-header">프로필 이미지</h5>
-						<!-- Account -->
-						<div class="card-body">
-							<div class="d-flex align-items-start align-items-sm-center gap-4">
-								<img src="../assets/img/avatars/1.png" alt="user-avatar"
-									class="d-block rounded" height="100" width="100"
-									id="uploadedAvatar" />
-								<div class="button-wrapper">
-									<label for="upload" class="btn btn-primary me-2 mb-4"
-										tabindex="0"> <span class="d-none d-sm-block">업로드</span>
-										<i class="bx bx-upload d-block d-sm-none"></i> <input
-										type="file" id="upload" class="account-file-input" hidden
-										accept="image/png, image/jpeg" />
-									</label>
-									<button type="button"
-										class="btn btn-outline-secondary account-image-reset mb-4">
-										<i class="bx bx-reset d-block d-sm-none"></i> <span
-											class="d-none d-sm-block">초기화</span>
-									</button>
-
-									<p class="text-muted mb-0">800KB 이하의 JPG, GIF 또는 PNG 파일만
-										가능합니다</p>
-								</div>
-							</div>
-						</div>
 						<hr class="my-0" />
 						<div class="card-body">
 							<form id="formAccountSettings"
 								action="${pageContext.request.contextPath}/updateAccount"
 								method="POST">
 								<div class="row">
-									<input name="memId" value="${sessionScope.memInfo.memId}"
-										/ hidden>
+									<input name="memId" value="${sessionScope.memInfo.memId}" type="hidden">
+									<input name="memName" value="${sessionScope.memInfo.memName}" type="hidden">
+									<input name="memRn" value="${sessionScope.memInfo.memRn}" type="hidden">
+									<input name="memType" value="${sessionScope.memInfo.memType}" type="hidden">
+									<input name="comCeo" value="${sessionScope.memInfo.comCeo}" type="hidden">
+									<input name="comBrc" value="${sessionScope.memInfo.comBrc}" type="hidden">
+									<input name="comMaNm" value="${sessionScope.memInfo.comMaNm}" type="hidden">
+									<input name="comMaPn" value="${sessionScope.memInfo.comMaPn}" type="hidden">
 									<div class="mb-3 col-md-6">
 										<label for="firstName" class="form-label">비밀번호</label> <input
-											class="form-control" type="password" id="firstName"
-											name="memPw" value="John" autofocus />
+											class="form-control" type="password" id="password"
+											name="memPw"  autofocus oninput="validatePasswords()" />
 									</div>
 									<div class="mb-3 col-md-6">
 										<label for="lastName" class="form-label">비밀번호 확인</label> <input
 											class="form-control" type="password" name="lastName"
-											id="lastName" value="Doe" />
+											id="passwordConfirm"  oninput="validatePasswords()"/>
 									</div>
 									<div class="mb-3 col-md-6">
 										<label for="email" class="form-label">이메일</label> <input
-											class="form-control" type="text" id="email" name="email"
-											value="john.doe@example.com"
-											placeholder="john.doe@example.com" />
+											class="form-control" type="text" id="email" name="memEmail"
+											value="${sessionScope.memInfo.memEmail}"
+											 />
 									</div>
 									<div class="mb-3 col-md-6">
 										<label for="organization" class="form-label">닉네임</label> <input
 											type="text" class="form-control" id="organization"
-											name="memNick" value="ThemeSelection" />
+											name="memNick" value="${sessionScope.memInfo.memNick}" />
 									</div>
 									<div class="mb-3 col-md-6">
 										<label class="form-label" for="phoneNumber">전화번호</label>
 										<div class="input-group input-group-merge">
-											<span class="input-group-text">US (+1)</span> <input
-												type="text" id="phoneNumber" name="memPhone"
-												class="form-control" placeholder="202 555 0111" />
+											 <input type="text" id="phoneNumber" name="memPhone"
+												class="form-control"  value="${sessionScope.memInfo.memPhone}"/>
 										</div>
 									</div>
 									<div class="mb-3 col-md-6">
-										<label for="address" class="form-label">주소</label> <input
-											type="text" class="form-control" id="address" name="address"
-											placeholder="Address" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="state" class="form-label">State</label> <input
-											class="form-control" type="text" id="state" name="state"
-											placeholder="California" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="zipCode" class="form-label">Zip Code</label> <input
-											type="text" class="form-control" id="zipCode" name="zipCode"
-											placeholder="231465" maxlength="6" />
-									</div>
-									<div class="mb-3 col-md-6">
-										<label class="form-label" for="country">Country</label> <select
-											id="country" class="select2 form-select">
-											<option value="">Select</option>
-											<option value="Australia">Australia</option>
-											<option value="Bangladesh">Bangladesh</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="language" class="form-label">Language</label> <select
-											id="language" class="select2 form-select">
-											<option value="">Select Language</option>
-											<option value="en">English</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="timeZones" class="form-label">Timezone</label> <select
-											id="timeZones" class="select2 form-select">
-											<option value="">Select Timezone</option>
-										</select>
-									</div>
-									<div class="mb-3 col-md-6">
-										<label for="currency" class="form-label">Currency</label> <select
-											id="currency" class="select2 form-select">
-											<option value="">Select Currency</option>
-											<option value="usd">USD</option>
-										</select>
+										<label for="address" class="form-label">주소</label> 
+										<input type="text" class="form-control" id="address" name="memAddress" value="${sessionScope.memInfo.memAddress}"/>
 									</div>
 								</div>
 								<div class="mt-2 d-flex justify-content-end">
-									<button type="submit" class="btn btn-primary me-2">회원정보
-										수정</button>
+									<button type="submit" class="btn btn-primary me-2" id="submitButton">회원정보 수정</button>
 									<button type="reset" class="btn me-2 btn-outline-secondary">초기화</button>
 									<button type="reset" class="btn btn-outline-secondary">취소</button>
 								</div>
@@ -165,13 +105,10 @@
 							<form id="formAccountDeactivation" action="" method="POST"
 								onsubmit="return false">
 								<div class="form-check mb-3">
-									<input class="form-check-input" type="checkbox"
-										name="accountActivation" id="accountActivation" /> <label
-										class="form-check-label" for="accountActivation">회원
-										탈퇴에 동의합니다</label>
+									<input class="form-check-input" type="checkbox" name="accountActivation" id="accountActivation" onchange="validatePasswords()"/> 
+									<label class="form-check-label" for="accountActivation">회원 탈퇴에 동의합니다</label> 	
 								</div>
-								<button type="submit" class="btn btn-danger deactivate-account">회원
-									탈퇴</button>
+								<button type="submit" class="btn btn-danger deactivate-account" id="deactivateButton">회원 탈퇴</button>
 							</form>
 						</div>
 					</div>
@@ -205,6 +142,32 @@
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	
+	<script>
+    // 비밀번호와 확인 비밀번호를 비교하고 버튼 활성화/비활성화
+    function validatePasswords() {
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordConfirm').value;
+        const submitButton = document.getElementById('submitButton');
+        const deactivateButton = document.getElementById('deactivateButton');
+        const agreementChecked = document.getElementById('accountActivation').checked;
+
+        // 조건: 비밀번호와 확인 비밀번호가 같아야 수정 버튼 활성화
+        if (password === passwordConfirm && password.length > 0) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+
+        // 조건: 비밀번호와 확인 비밀번호가 같고 탈퇴 동의가 체크되었을 때 탈퇴 버튼 활성화
+        if (password === passwordConfirm && password.length > 0 && agreementChecked) {
+            deactivateButton.disabled = false;
+        } else {
+            deactivateButton.disabled = true;
+        }
+    }
+</script>
+	
 </body>
 
 </html>
