@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.plan.dao.IPlanDAO;
+import com.team.green.plan.dto.ContDTO;
 import com.team.green.plan.dto.PlanDTO;
 
 
@@ -22,16 +23,36 @@ public class PlanService {
         return result;  // XML에서 정의된 쿼리 호출
     }
     
-    public PlanDTO getPlan(int quoId) {
-    	PlanDTO result = dao.getPlan(quoId);
-    	return result;
-    	
-    }
     
-    public int editPlan(PlanDTO plan) {
+    public int editPlan(PlanDTO plan) { // 일정 수정
     	int result = dao.editPlan(plan);
     	return result;
     }
+    
+    public int writeCont(ContDTO contents) { // 일정콘텐츠 추가 
+    	int result = dao.writeCont(contents);
+    	return result;
+    }
+    
+    public ContDTO getCont(String contNo) {
+    	ContDTO result = dao.getCont(contNo);
+    	return result;
+    }
+    
+    
+    
+    public int delCont(String contNo) {
+    	int result = dao.delCont(contNo);
+    	return result;
+    }
+    
+    public List<ContDTO> getData(int quoId) {
+    	List<ContDTO> result = dao.getDataByQuoId(quoId);
+        return result; // DB 쿼리 실행
+    }
 
+ 
+    	
+    
 
 }
