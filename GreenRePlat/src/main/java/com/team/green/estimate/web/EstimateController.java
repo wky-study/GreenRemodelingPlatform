@@ -213,12 +213,12 @@ public class EstimateController {
 			session.setAttribute("keyEst", estimate);
 
 			return ResponseEntity.ok().header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
-					.body("임시 저장 완료"); // 경로를 포함
+					.body("요청 완료"); // 경로를 포함
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
-					.body("임시 저장 실패");
+					.body("요청에 실패했습니다.");
 		}
 	}
 
