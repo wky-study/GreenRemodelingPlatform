@@ -31,7 +31,7 @@
 									<img src="../assets/images/logos/logo-light.svg" alt="">
 								</a>
 
-								<p class="text-center">회원가입</p>
+								<h2 class="text-center">회원가입</h2>
 								<form action="${pageContext.request.contextPath}/registDo"
 									method="POST">
 
@@ -44,7 +44,7 @@
 											(필수)약관에 동의하십니까? </label> <a
 											href="${pageContext.request.contextPath}/tacView">보기</a>
 									</div>
-
+									<br>
 									<!-- 일반/기업 나누기 -->
 									<div class="mb-3">
 										<select class="form-control" name="inputType" id="memType">
@@ -60,7 +60,7 @@
 										<label for="inputtext1" class="form-label">아이디</label> <input
 											type="text" class="form-control" id="inputtext1"
 											name="inputId" aria-describedby="textHelp"
-											value="${sessionScope.inputId != null ? sessionScope.inputId : ''}">
+											value="">
 										<button type="button" class="btn btn-secondary"
 											id="idCheckBtn" onclick="checkId()">아이디 중복 확인</button>
 										<span id="idCheckResult" style="color: red;"></span>
@@ -69,14 +69,14 @@
 										<label for="inputPassword1" class="form-label">비밀번호</label> <input
 											type="password" class="form-control" name="inputPw"
 											id="inputPassword1"
-											value="${sessionScope.inputPw != null ? sessionScope.inputPw : ''}"
+											value=""
 											required />
 									</div>
 									<div class="mb-4">
 										<label for="inputPassword1" class="form-label">비밀번호확인</label>
 										<input type="password" class="form-control"
 											id="inputPassword2"
-											value="${sessionScope.inputPassword2 != null ? sessionScope.inputPassword2 : ''}"
+											value=""
 											required />
 										<div class="alert alert-success" id="alert-success">비밀번호가
 											일치합니다.</div>
@@ -87,46 +87,33 @@
 										<label for="inputtext1" class="form-label">이름</label> <input
 											type="text" class="form-control" id="inputName"
 											name="inputName" aria-describedby="textHelp"
-											value="${sessionScope.inputName != null ? sessionScope.inputName : ''}">
+											value="">
 									</div>
 									<div class="mb-3">
 										<label for="inputtext1" class="form-label">주민등록번호</label> <input
 											type="text" class="form-control" id="inputRn" name="inputRn"
 											aria-describedby="textHelp"
-											value="${sessionScope.inputRn != null ? sessionScope.inputRn : ''}">
+											value="">
 									</div>
 									<div class="mb-3">
-										<label for="inputtext1" class="form-label">주소</label> <input
-											type="text" class="form-control" id="postcode"
-											placeholder="우편번호"
-											value="${sessionScope.postcode != null ? sessionScope.postcode : ''}">
+										<label for="inputtext1" class="form-label">주소</label>
 										<input type="button"
 											class="btn btn-primary w-100 py-8 fs-4 mb-4"
-											onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" id="roadAddress" placeholder="도로명주소"
-											value="${sessionScope.roadAddress != null ? sessionScope.roadAddress : ''}">
-										<input type="text" id="jibunAddress" placeholder="지번주소"
-											value="${sessionScope.jibunAddress != null ? sessionScope.jibunAddress : ''}">
-										<span id="guide" style="color: #999; display: none"></span> <input
-											type="text" id="detailAddress" placeholder="상세주소"
-											oninput="inputFullAddress()"
-											value="${sessionScope.detailAddress != null ? sessionScope.detailAddress : ''}">
-										<input type="text" id="extraAddress" placeholder="참고항목"
-											value="${sessionScope.extraAddress != null ? sessionScope.extraAddress : ''}"><input
-											type="text" class="form-control" id="fullAddress"
-											name="inputAddress" aria-describedby="textHelp" hidden>
+											onclick="execDaumPostcode()" value="우편번호" ><br>
+											<input placeholder="우편번호클릭" type="text" class="form-control" id="fullAddress"
+											name="inputAddress" aria-describedby="textHelp" readonly />
 									</div>
 									<div class="mb-3">
 										<label for="inputtext1" class="form-label">전화번호</label> <input
 											type="text" class="form-control" id="inputPhone"
 											name="inputPhone" aria-describedby="textHelp"
-											value="${sessionScope.inputPhone != null ? sessionScope.inputPhone : ''}">
+											value="">
 									</div>
 									<div class="mb-3">
 										<label for="inputtext1" class="form-label">닉네임</label> <input
 											type="text" class="form-control" id="inputNick"
 											name="inputNick" aria-describedby="textHelp"
-											value="${sessionScope.inputNick != null ? sessionScope.inputNick : ''}">
+											value="">
 										<button type="button" class="btn btn-secondary"
 											id="nickCheckBtn" onclick="checkNickname()">닉네임 중복
 											확인</button>
@@ -137,7 +124,7 @@
 										<label for="inputEmail1" class="form-label">이메일</label> <input
 											type="email" class="form-control" id="inputEmail"
 											aria-describedby="emailHelp" name="inputEmail"
-											value="${sessionScope.inputEmail != null ? sessionScope.inputEmail : ''}">
+											value="">
 									</div>
 
 									<button class="btn btn-primary w-100 py-8 fs-4 mb-4" id="do"
@@ -175,84 +162,32 @@
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-		function execDaumPostcode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							var roadAddr = data.roadAddress; // 도로명 주소 변수
-							var extraRoadAddr = ''; // 참고 항목 변수
+	function execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 각 주소 정보를 변수로 저장
+	            var roadAddr = data.roadAddress;  // 도로명 주소
+	            var jibunAddr = data.autoJibunAddress ? data.autoJibunAddress : data.jibunAddress;  // 지번 주소
+	            var extraRoadAddr = '';  // 추가 도로명 주소
+	            var postcode = data.zonecode;  // 우편번호
 
-							if (data.bname !== ''
-									&& /[동|로|가]$/g.test(data.bname)) {
-								extraRoadAddr += data.bname;
-							}
+	            // 추가 도로명 주소 처리
+	            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+	                extraRoadAddr += data.bname;
+	            }
+	            if (data.buildingName !== '' && data.apartment === 'Y') {
+	                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
 
-							if (data.buildingName !== ''
-									&& data.apartment === 'Y') {
-								extraRoadAddr += (extraRoadAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
+	            // 하나의 필드에 우편번호, 도로명 주소, 지번 주소, 추가 주소를 합쳐서 넣기
+	            var fullAddress = postcode + ' ' + roadAddr + ' ' + jibunAddr + ' ' + extraRoadAddr;
 
-							if (extraRoadAddr !== '') {
-								extraRoadAddr = ' (' + extraRoadAddr + ')';
-							}
-
-							document.getElementById('postcode').value = data.zonecode;
-							document.getElementById("roadAddress").value = roadAddr;
-							document.getElementById("jibunAddress").value = data.jibunAddress;
-
-							if (roadAddr !== '') {
-								document.getElementById("extraAddress").value = extraRoadAddr;
-							} else {
-								document.getElementById("extraAddress").value = '';
-							}
-
-							var guideTextBox = document.getElementById("guide");
-
-							if (data.autoRoadAddress) {
-								var expRoadAddr = data.autoRoadAddress
-										+ extraRoadAddr;
-								guideTextBox.innerHTML = '(예상 도로명 주소 : '
-										+ expRoadAddr + ')';
-								guideTextBox.style.display = 'block';
-
-							} else if (data.autoJibunAddress) {
-								var expJibunAddr = data.autoJibunAddress;
-								guideTextBox.innerHTML = '(예상 지번 주소 : '
-										+ expJibunAddr + ')';
-								guideTextBox.style.display = 'block';
-							} else {
-								guideTextBox.innerHTML = '';
-								guideTextBox.style.display = 'none';
-							}
-							inputFullAddress();
-						}
-					}).open();
-
-		}
-		function inputFullAddress() {
-			var fullAddress = document.getElementById("fullAddress").value;
-			fullAddress = document.getElementById("roadAddress").value + " "
-					+ document.getElementById("detailAddress").value;
-		}
+	            // 지번 주소 필드에 모든 주소 정보 입력
+	            $('#fullAddress').val(fullAddress);  // 지번 주소 필드에 모든 데이터 넣기
+	        }
+	    }).open();
+	}
 	</script>
-
-
-	<!-- 체크박스 상태에 따라 회원가입 버튼 활성화/비활성화 -->
-	<script>
-		const checkbox = document.getElementById("flexCheckDefault");
-		const submitBtn = document.getElementById("do");
-
-		checkbox.addEventListener("change", function() {
-			if (checkbox.checked) {
-				submitBtn.disabled = false; // 체크되면 버튼 활성화
-			} else {
-				submitBtn.disabled = true; // 체크 해제되면 버튼 비활성화
-			}
-		});
-	</script>
-
-
 
 	<script>
     // 아이디 중복 확인
@@ -290,7 +225,7 @@
             document.getElementById("idCheckResult").style.color = "red";
         });
     }
-		</script>
+	</script>
 
 	<script>
 		// 닉네임 중복 확인
@@ -343,17 +278,42 @@
 				if(inputPassword1 == inputPassword2){
 					$("#alert-success").show();	// 비밀번호 일치 시 성공 메시지 표시
 					$("#alert-danger").hide();	// 실패 메시지 숨기기
-					$("#do").removeAttr("disabled");	// 버튼 활성화
 				}else{
 					$("#alert-success").hide();	// 비밀번호 불일치 시 성공 메시지 숨기기
 					$("#alert-danger").show();	// 실패 메시지 표시
-					$("#do").attr("disabled", "disabled");	// 버튼 비활성화
 				}
 			}
 		});
 	});
 	</script>
 	
+	<script>
+	// 회원가입 불가능하게 만들기
+	$(function(){
+		// 필수 입력 필드를 선택
+		$("#inputtext1, #inputName, #inputRn, #fullAddress, #inputPhone, #inputNick, #inputEmail").keyup(function(){
+			// 모든 필수 입력 필드 값 가져오기
+			var inputId = $("#inputtext1").val();
+			var inputName = $("#inputName").val();
+			var inputRn = $("#inputRn").val();
+			var fullAddress = $("#fullAddress").val();
+			var inputPhone = $("#inputPhone").val();
+			var inputNick = $("#inputNick").val();
+			var inputEmail = $("#inputEmail").val();
+			var password1 = $("#inputPassword1").val();
+			var password2 = $("#inputPassword2").val();
+			var checkboxChecked = $("#flexCheckDefault").prop("checked");
+			
+			// 모든 필드가 입력되었고, 비밀번호가 일치하고, 약관 체크박스가 체크되었는지 확인
+			if(inputId !== "" && inputName !== "" && inputRn !== "" && fullAddress !== "" && inputPhone !== "" && inputNick !== "" && inputEmail !== "" && password1 === password2 && checkboxChecked){
+				$("#do").removeAttr("disabled");	// 버튼 활성화
+			}else{
+				$("#do").attr("disabled", "disabled");	// 버튼 비활성화
+			}
+		});
+	});
+	</script>
+
 
 </body>
 
