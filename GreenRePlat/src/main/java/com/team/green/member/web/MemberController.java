@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.ui.Model;
@@ -29,27 +28,34 @@ public class MemberController {
 	@Autowired
 	MemberService memSvc;
 
+	/* 그린리모델링 소개페이지 */
+	@RequestMapping("/introductionView")
+	public String introductionView() {
+
+		return "introduction/introductionView";
+	}
+
 	/*
 	 * 약관페이지로 이동
 	 * 
 	 */
 	@GetMapping("/tacView")
 	public String tacView(HttpServletRequest request, HttpSession session) {
-		
+
 		// 현재 요청의 리퍼러 URL을 세션에 저장
 		String referrer = request.getHeader("Referer");
 		session.setAttribute("prevPageUrl", referrer);
-		
+
 		return "member/tacView";
 	}
-	
+
 	/*
 	 * 회원가입화면으로 이동
 	 * 
 	 */
 	@RequestMapping("/registView")
 	public String registView() {
-		
+
 		return "member/registView";
 	}
 
@@ -96,7 +102,6 @@ public class MemberController {
 		/*
 		 * 각종 validation 작업할것
 		 */
-
 
 		try {
 			memDate = new Timestamp(new Date().getTime());
@@ -163,32 +168,31 @@ public class MemberController {
 		session.setAttribute("memInfo", memInfo);
 		return "redirect:/";
 	}
-	
-    // ID 중복 확인
-    @PostMapping("/checkIdDuplication")
-    @ResponseBody  // JSON 형식으로 응답을 반환
-    public Map<String, Boolean> checkIdDuplication(@RequestBody Map<String, String> requestData) {
-        String memId = requestData.get("memId");  // 클라이언트로부터 ID 받기
-        boolean isDuplicate = !memSvc.checkIdDuplication(memId);  // 중복이면 true, 아니면 false
 
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("isDuplicate", isDuplicate);  // 응답 JSON으로 반환
+	// ID 중복 확인
+	@PostMapping("/checkIdDuplication")
+	@ResponseBody // JSON 형식으로 응답을 반환
+	public Map<String, Boolean> checkIdDuplication(@RequestBody Map<String, String> requestData) {
+		String memId = requestData.get("memId"); // 클라이언트로부터 ID 받기
+		boolean isDuplicate = !memSvc.checkIdDuplication(memId); // 중복이면 true, 아니면 false
 
-        return response;
-    }
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("isDuplicate", isDuplicate); // 응답 JSON으로 반환
 
-    // 닉네임 중복 확인
-    @PostMapping("/checkNickDuplication")
-    @ResponseBody  // JSON 형식으로 응답을 반환
-    public Map<String, Boolean> checkNickDuplication(@RequestBody Map<String, String> requestData) {
-        String memNick = requestData.get("memNick");  // 클라이언트로부터 닉네임 받기
-        boolean isDuplicate = !memSvc.checkNickDuplication(memNick);  // 중복이면 true, 아니면 false
+		return response;
+	}
 
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("isDuplicate", isDuplicate);  // 응답 JSON으로 반환
+	// 닉네임 중복 확인
+	@PostMapping("/checkNickDuplication")
+	@ResponseBody // JSON 형식으로 응답을 반환
+	public Map<String, Boolean> checkNickDuplication(@RequestBody Map<String, String> requestData) {
+		String memNick = requestData.get("memNick"); // 클라이언트로부터 닉네임 받기
+		boolean isDuplicate = !memSvc.checkNickDuplication(memNick); // 중복이면 true, 아니면 false
 
-        return response;
-    }
-    
-	
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("isDuplicate", isDuplicate); // 응답 JSON으로 반환
+
+		return response;
+	}
+
 }
