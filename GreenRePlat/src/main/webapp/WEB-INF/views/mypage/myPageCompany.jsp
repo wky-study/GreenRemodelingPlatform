@@ -35,6 +35,9 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/orderSummary"><i
 								class="bx bx-link-alt me-1"></i> 주문 내역</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/chatListView"><i
+								class="bx bx-link-alt me-1"></i>채팅 목록</a></li>
 					</ul>
 					<div class="card mb-4">
 						<hr class="my-0" />
@@ -51,6 +54,14 @@
 									<input name="comBrc" value="${sessionScope.memInfo.comBrc}" type="hidden">
 									<input name="comMaNm" value="${sessionScope.memInfo.comMaNm}" type="hidden">
 									<input name="comMaPn" value="${sessionScope.memInfo.comMaPn}" type="hidden">
+									<div class="mb-3 col-md-6">
+										<label for="firstName" class="form-label">아이디</label> <input
+											class="form-control" value="${sessionScope.memInfo.memId}"  readonly />
+									</div>
+									<div class="mb-3 col-md-6">
+										<label for="firstName" class="form-label">이름</label> <input
+											class="form-control" value="${sessionScope.memInfo.memName}"  readonly />
+									</div>
 									<div class="mb-3 col-md-6">
 										<label for="firstName" class="form-label">비밀번호</label> <input
 											class="form-control" type="password" id="password"

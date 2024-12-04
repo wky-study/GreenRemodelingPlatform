@@ -55,9 +55,16 @@ li {
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
+            
+            
                 <div class="chatWrap">
                     <div class="main_tit">
-                        <h1>방 정보: [ ${room.roomNo}번방 ${room.roomName } ]</h1>
+                    	<c:if test="${keyMember.memType == 1}">
+	                        <h2>방 정보: [ ${room.roomNo}번방 _ ${room.roomName } _ ${room.partMem}]</h2>
+                    	</c:if>
+                    	<c:if test="${keyMember.memType == 5}">
+	                        <h2>방 정보: [ ${room.roomNo}번방 _ ${room.roomName } _ ${room.memId}]</h2>
+                    	</c:if>
                         <button type="button" id="downloadBtn" class="btn btn-primary float-right">채팅내역 다운로드</button>
                     </div>
                     <div class="content chatcontent border border-secondary" data-room-no="${room.roomNo}">

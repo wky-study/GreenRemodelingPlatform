@@ -145,7 +145,7 @@
 				data: v_formData,
 				success: function(resp){
 					// 이미지 태그 생성
-					let imgTag = '<img style="width: 800px; display: block; margin-left: auto; margin-right: auto;" src="';
+					let imgTag = '<img onclick="window.parent.parent.f_sizeCtrl(this)" style="width: 800px; display: block; margin-left: auto; margin-right: auto;" src="';
 						imgTag += '${pageContext.request.contextPath}/displayImage?fileName=' + resp;
 						imgTag += '">'; 
 					// 지금 시점에 resp 를 쏘기

@@ -53,6 +53,9 @@
 							<li class="nav-item"><a class="nav-link "
 								href="${pageContext.request.contextPath}/orderSummary"><i
 									class="bx bx-link-alt me-1"></i> 주문 내역</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="${pageContext.request.contextPath}/chatListView"><i
+									class="bx bx-link-alt me-1"></i>채팅 목록</a></li>									
 						</ul>
 					</div>
 				</div>
