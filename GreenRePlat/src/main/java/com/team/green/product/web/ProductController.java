@@ -146,7 +146,7 @@ public class ProductController {
 	 					attachService.insertProdAttach(attach);
 	 				}
 	 				// 첫번째 이미지를 대표이미지로 등록  
-	 				atchFileName = "http://localhost:9090/green/displayImage?fileName=" + attachList.get(0).getAtchFileName();
+	 				atchFileName = "http://localhost/displayImage?fileName=" + attachList.get(0).getAtchFileName();
 	 			}
 	 		} catch(IOException e) {
 	 			e.printStackTrace();
