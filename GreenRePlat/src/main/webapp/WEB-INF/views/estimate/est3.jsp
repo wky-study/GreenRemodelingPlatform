@@ -141,11 +141,10 @@
 	    });
 	});
     
-    // 제출하기 버튼
 	document.getElementById('editBtn').addEventListener('click', () => {
-		
 	    const formData = new FormData(document.getElementById('estimateForm'));
-	
+	    
+	    // 먼저 임시 저장 요청
 	    fetch('${pageContext.request.contextPath}/saveEstimate', {
 	        method: 'POST',
 	        body: formData,
@@ -157,30 +156,51 @@
 	        return response.text(); // 응답 본문을 텍스트로 처리
 	    })
 	    .then(data => {
-	        alert(data); // 서버에서 받은 메시지를 표시
-	        if (data.includes("요청 완료")) {
-	            // 2단계: 채팅방 생성
-	            const roomName = document.querySelector('input[name="roomName"]').value;
-	            const partMem = document.querySelector('input[name="partMem"]').value;
+	        alert(data); // 서버에서 받은 메시지 표시
 
-	            return fetch('${pageContext.request.contextPath}/roomCreateDo2', {
-	                method: 'POST',
-	                headers: {
-	                    'Content-Type': 'application/json',
-	                },
-	                body: JSON.stringify({ roomName, partMem }),
+	        if (data.includes("요청 완료")) {
+	            // 2단계: 서버에 estAddress를 보내기 전에, 채팅방 생성을 위한 fetch 진행
+	            const estAddress = document.querySelector('input[name="roomName"]').value;
+
+	            // Flask 서버에 요청 보내기
+	            return fetch('${pageContext.request.contextPath}/fetchAndSave?estAddress=' + encodeURIComponent(estAddress), {
+	                method: 'GET'
 	            });
 	        } else {
 	            throw new Error("요청에 실패했습니다.");
 	        }
 	    })
-	    .then(response => response.json())
+	    .then(fetchResponse => {
+	        // 서버에서 받은 응답을 확인 (필요시 추가 처리 가능)
+	        return fetchResponse.text(); // 응답 본문을 텍스트로 처리
+	    })
+	    .then(fetchData => {
+	        alert(fetchData); // "데이터가 저장되었습니다." 같은 응답 메시지 출력
+
+	        // 3단계: 채팅방 생성 요청
+	        const roomName = document.querySelector('input[name="roomName"]').value;
+	        const partMem = document.querySelector('input[name="partMem"]').value;
+
+	        return fetch('${pageContext.request.contextPath}/roomCreateDo2', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json',
+	            },
+	            body: JSON.stringify({ roomName, partMem }),
+	        });
+	    })
 	    .then(roomResponse => {
-	        if (roomResponse.success) {
-	            alert(roomResponse.message); // 예: "방 생성 완료"
-	            // 모든 작업 완료 후 페이지 이동
-	            window.location.href = '${pageContext.request.contextPath}/est4?estId=${sessionScope.keyEst.estId}';
-	        } 
+	        if (roomResponse.ok) {
+	            return roomResponse.json(); // 채팅방 생성 응답 받기
+	        } else {
+	            throw new Error("채팅방 생성 실패");
+	        }
+	    })
+	    .then(roomData => {
+	        alert(roomData.message); // 예: "방 생성 완료"
+
+	        // 4단계: 페이지 이동
+	        window.location.href = '${pageContext.request.contextPath}/est4?estId=${sessionScope.keyEst.estId}';
 	    })
 	    .catch(error => {
 	        console.error('Error:', error);

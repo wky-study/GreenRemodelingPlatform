@@ -81,4 +81,10 @@ public class EstimateService {
 		return result;
 	};
 	
+	// 모델링한 타입 업데이트
+	public int updateType(EstimateDTO estimate) {
+		int result = dao.updateType(estimate);
+		return result;
+	};
+	
 }

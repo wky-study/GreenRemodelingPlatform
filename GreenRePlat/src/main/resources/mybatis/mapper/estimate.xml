@@ -125,6 +125,14 @@
         WHERE 1=1 
         AND est_id = #{estId}		
 	</update>
+	
+	<update id="updateType" parameterType="com.team.green.estimate.dto.EstimateDTO">
+        UPDATE ESTIMATE 
+        SET 
+            est_type = #{estType}
+        WHERE 1=1 
+        AND est_id = #{estId}		
+	</update>
 
 
 
