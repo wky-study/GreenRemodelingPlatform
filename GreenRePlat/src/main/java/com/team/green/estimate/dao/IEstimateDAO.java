@@ -42,5 +42,8 @@ public interface IEstimateDAO {
 
 	// 시공사 정보 업데이트
 	int updateComId(EstimateDTO estimate);
+	
+	// 모델링한 타입 업데이트
+	int updateType(EstimateDTO estimate);
 
 }
