@@ -51,6 +51,7 @@ public class RoomController {
         }
 		System.out.println("새로운 메시지 방 번호 및 메시지 개수:" + unreadCounts);
 		
+		model.addAttribute("keyMember", login);
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("memList", memList);
 		model.addAttribute("unreadCounts", unreadCounts);

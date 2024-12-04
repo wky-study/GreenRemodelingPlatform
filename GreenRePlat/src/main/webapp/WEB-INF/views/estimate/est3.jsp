@@ -31,6 +31,7 @@
 						<div class="card-body my-card">
 							
 							<form id="estimateForm" enctype="multipart/form-data">
+							
 								
 								<div class="mb-3 col-md-6 w-100">
 							        <label class="form-label" >인테리어 설명 </label>
@@ -96,6 +97,11 @@
 		</div>
 	</div>
 
+	<form id="boardWriteForm" action="${pageContext.request.contextPath }/roomCreateDo" method="POST">
+			<input class="form-control" type="hidden" name="roomName" placeholder="방 제목" value="${sessionScope.keyEst.estAddress}"/>
+			<input class="form-control" type="hidden" name="partMem" placeholder="시공사 아이디" value="${sessionScope.keyEst.comId}"/>
+	</form>
+
 
 
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
@@ -137,6 +143,7 @@
     
     // 제출하기 버튼
 	document.getElementById('editBtn').addEventListener('click', () => {
+		
 	    const formData = new FormData(document.getElementById('estimateForm'));
 	
 	    fetch('${pageContext.request.contextPath}/saveEstimate', {
@@ -152,6 +159,9 @@
 	    .then(data => {
 	        alert(data); // 서버에서 받은 메시지를 표시
 	        if (data.includes("임시 저장 완료")) {
+	        	
+	        	document.getElementById('boardWriteForm').submit();
+	        	
 	            // 페이지 이동 전에 잠시 딜레이를 두고 이동
 	            setTimeout(() => {
 	                window.location.href = '${pageContext.request.contextPath}/est4?estId='+ '${sessionScope.keyEst.estId}'; // 성공 시 이동
