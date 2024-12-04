@@ -67,7 +67,12 @@ public class MemberController {
 	 * 
 	 */
 	@RequestMapping("/settingView")
-	public String settingView() {
+	public String settingView(HttpSession session) {
+		
+		if(session.getAttribute("memInfo") == null) {
+			return "redirect:/loginView";
+		}
+		
 		return "mypage/myPageCompany";
 	}
 
