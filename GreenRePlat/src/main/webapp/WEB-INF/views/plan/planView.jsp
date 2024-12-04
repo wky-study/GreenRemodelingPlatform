@@ -33,7 +33,10 @@
 }
 /* 이벤트바 div */
 .fc-daygrid-event-harness {
-	pointer-events: auto;
+	pointer-events: none;
+}
+.fc-addEventButton-button{
+	display: none !important;
 }
 </style>
 </head>
@@ -155,12 +158,20 @@
 									class="form-control" name="quoEdate" />
 							</div>
 						</div>
+	</form>
 						<!-- 컨텐츠 첨부 -->
 						<div class="col-md-12 mt-6">
 							<div>
-								<label class="form-label">Contents</label> <input id="event-quoCont"	type="text" class="form-control" 
-								name="quoCont" value="asdf">
+								<label class="form-label">Contents</label>
+							 	<form id="contForm" action="<c:url value="/writeContDo" />" method="POST">
+								<input id="contInput" type="text" class="form-control" name="cont" >
+								<input type="hidden" id="hiddenQuoId" name="hiddenQuoId" value="">
+								<input type="hidden" name="memId" value="${sessionScope.login.memId }">
+								
+								<button id="contBtn" type="button">등록</button>
+								</form>
 							</div>
+							<ul class = "list-group d-flex" id = "myConts"></ul>
 						</div>
 						<input type="hidden" name="quoId" id="event-quo-id" />
 
@@ -186,7 +197,6 @@
 				</div>
 			</div>
 		</div>
-	</form>
 	<!-- END MODAL -->
 	</div>
 	</div>
@@ -306,10 +316,43 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
         
      // 모달에 quoId 값 설정
         var quoId = eventObj.id;  // 이미 이벤트 객체에 quoId가 들어있다고 가정
+        let quoIdValue = '';
         console.log("픈ㅇㅇ",quoId);
         document.querySelector("#event-quo-id").value = quoId; // #event-quo-id는 quoId를 입력 받을 input 필드
-        
+         	
+    	$.ajax({
+    		type: 'GET',
+    		url: '${pageContext.request.contextPath}/getData',
+    		data: {'quoId': quoId },
+    		success: function(response){
+    			console.log(response);
+    			
+    			if (response && response.length > 0) {
+    	            v_quoIdValue = response[0].quoId; // 첫 번째 객체의 quoId
+    	            console.log("quoId:", v_quoIdValue);
+    	        }
+    			
+    			document.getElementById("hiddenQuoId").value = v_quoIdValue;
+    			
+    			const v_dataContainer = document.getElementById("myConts");
+    	        // response는 JSON 배열로 가정, 해당 데이터를 HTML 형식으로 변환하여 삽입
+    	        let v_htmlContent = '';
+    	        response.forEach(item => {
+    	        	v_htmlContent += '<li class="list-group-item">'+item.memId + item.cont + item.contDate+'</li>';
+    	        });
 
+    	        // innerHTML을 사용하여 데이터를 삽입
+    	        v_dataContainer.innerHTML = v_htmlContent;
+    			
+    		}
+    		
+    	
+    			
+    	});
+        
+        
+        
+		
 
 
         getModalTitleEl.value = eventObj.title;
@@ -336,12 +379,12 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
       unselect: function () {
         console.log("unselected");
       },
-      customButtons: {
+      /* customButtons: {
         addEventButton: {
           text: "Add Event",
           click: calendarAddEvent
         }
-      },
+      }, */
       eventClassNames: function ({ event: calendarEvent }) {
         const getColorValue = calendarsEvents[calendarEvent._def.extendedProps.calendar];
         return ["event-fc-color fc-bg-" + getColorValue];
@@ -410,13 +453,39 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
     });
   });
   console.log(document.getElementById('addEventsModal')); // DOM에 존재하는지 확인
+
+  const v_contBtn = document.getElementById("contBtn");
+  const v_contForm = document.getElementById("contForm");
+  
+  v_contBtn.addEventListener('click',()=>{
+	  let v_contForm = $('#contForm');
+	  let v_url = v_contForm.attr('action');
+	  let v_formData = v_contForm.serialize();
+	  
+	  v_formData += '&quoId=' + v_quoIdValue;  // quoId 값을 POST 데이터에 추가
+
+	    console.log(v_contForm);
+	    console.log(v_url);
+	    console.log(v_formData);
+
+	    $.ajax({
+	        type: 'POST',
+	        url: v_url,
+	        data: v_formData,
+	        success: function(data) {
+	            console.log(data);
+	        }
+	    });
+  });
+
   
 
-
   
 
-
+  
 </script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
 
 

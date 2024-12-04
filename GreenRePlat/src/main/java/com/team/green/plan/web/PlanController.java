@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.plan.dao.IPlanDAO;
+import com.team.green.plan.dto.ContDTO;
 import com.team.green.plan.dto.PlanDTO;
 import com.team.green.plan.service.PlanService;
 
@@ -39,12 +41,14 @@ public class PlanController {
 	public String planView(Model model, HttpSession session) {
 		
 		
+		
 		MemberDTO login= (MemberDTO)session.getAttribute("memInfo");
 		if (login == null) {
 			return "redirect:/loginView"; // 로그인 페이지로 리다이렉트
 		}
 		String memId = login.getMemId();
 		String memType = login.getMemType();
+		
 		List<PlanDTO> planList = planService.getPlanList(login);
 
 		// planList 를 JSON String으로 변환해서 모델에 저장 (Gson 이용) "[{}, {}, {}]"
@@ -60,6 +64,8 @@ public class PlanController {
 		return "plan/planView";
 		
 	}
+	
+	
 	@PostMapping("/planEditDo")
 	public String planEditDo(PlanDTO plan) {
 		System.out.println("/planEditDo");
@@ -70,6 +76,33 @@ public class PlanController {
 		return "redirect:/planView";
 		
 	}
+	@ResponseBody
+	@RequestMapping("/writeContDo")
+	public ContDTO writeContDo(ContDTO contents) {
+		System.out.println();
+		System.out.println("콘탠츠"+contents);
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssSSS");
+		String uniqueId = sdf.format(date);
+		for(int i = 0; i < 3; i++) {
+			uniqueId += (int)(Math.random() * 10);
+		}
+		
+		contents.setContNo(uniqueId);
+		planService.writeCont(contents);
+		ContDTO result = planService.getCont(uniqueId);
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@GetMapping("/getData") // AJAX 요청을 처리할 URL
+    public List<ContDTO> getData(@RequestParam(required = false) int quoId) {
+        // DB에서 데이터 가져오기
+        List<ContDTO> dataList = planService.getData(quoId);
+        return dataList; // JSON 형태로 반환
+    }
 
 	
 	
