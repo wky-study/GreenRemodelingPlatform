@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,6 +53,7 @@ public class RoomController {
         }
 		System.out.println("새로운 메시지 방 번호 및 메시지 개수:" + unreadCounts);
 		
+		model.addAttribute("keyMember", login);
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("memList", memList);
 		model.addAttribute("unreadCounts", unreadCounts);
@@ -91,6 +94,36 @@ public class RoomController {
 	    System.out.println("방 생성 완료");
 
 	    return "redirect:/chatListView";
+	}
+	
+	// 채팅방 생성 (AJAX)
+	@PostMapping("/roomCreateDo2")
+	@ResponseBody
+	public Map<String, Object> roomCreateDo2(@RequestBody RoomDTO room, HttpSession session) {
+	    Map<String, Object> response = new HashMap<>();
+
+	    try {
+	        MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
+
+	        // 로그인 여부 확인 후 임의의 값 설정
+	        if (login == null) {
+	            room.setMemId("testId");   // 임의로 설정할 memId 값
+	            room.setMemNick("임시닉네임"); // 임의로 설정할 memNick 값
+	        } else {
+	            room.setMemId(login.getMemId());
+	            room.setMemNick(login.getMemNick());
+	        }
+
+	        roomService.createRoom(room);
+	        response.put("success", true);
+	        response.put("message", "방 생성 완료");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.put("success", false);
+	        response.put("message", "방 생성 중 오류가 발생했습니다.");
+	    }
+
+	    return response; // JSON 형태로 응답
 	}
 	
 	@RequestMapping("/requestChat")

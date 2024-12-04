@@ -31,17 +31,41 @@
 	<div class="container-fluid">
 		<div class="col">
 			<div class="card">
-				<div class="card-body">
-					<!-- 제목과 방 만들기 버튼 -->
-					<div class="header-row">
-						<h5 class="card-title">채팅방</h5>
-						<button class="btn btn-primary"
-							onclick="location.href='${pageContext.request.contextPath}/roomCreateView'">방
-							만들기</button>
 
+				<div class="container-xxl flex-grow-1 container-p-y">
+					<h4 class="fw-bold py-3 mb-4">
+						<span class="text-muted fw-light">Mypage /</span> 채팅 목록
+					</h4>
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="nav nav-pills flex-column flex-md-row mb-3">
+								<li class="nav-item"><a class="nav-link "
+									href="${pageContext.request.contextPath}/settingView"><i class="bx bx-user me-1"></i>
+										회원정보</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="${pageContext.request.contextPath}/cartView"><i
+										class="bx bx-bell me-1"></i>장바구니</a></li>
+								<li class="nav-item"><a class="nav-link "
+									href="${pageContext.request.contextPath}/orderSummary"><i
+										class="bx bx-link-alt me-1"></i> 주문 내역</a></li>
+								<li class="nav-item"><a class="nav-link active"
+									href="${pageContext.request.contextPath}/chatListView"><i
+										class="bx bx-link-alt me-1"></i>채팅 목록</a></li>								
+							</ul>
+						</div>
+					</div>
+				</div>				
+			
+				<div class="card-body">
+				
+					<!-- 제목과 방 만들기 버튼 -->
+<%-- 					<div class="header-row">
+						<h5 class="card-title">채팅방</h5>
+						<button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/roomCreateView'">방 만들기</button>
 						<!-- 채팅 신청하기 폼 -->
 						<form action="${pageContext.request.contextPath}/requestChat"
 							method="POST" class="chat-apply-form">
+							
 							<select class="form-select" name="partMem" required>
 								<option value="" disabled selected>채팅 신청할 사용자 선택</option>
 								<!-- 사용자 목록을 select 옵션으로 표시 -->
@@ -49,9 +73,11 @@
 									<option style="" value="${member.memId}">${member.memNick}</option>
 								</c:forEach>
 							</select>
+							
+							
 							<button type="submit" class="btn btn-success">채팅 신청하기</button>
 						</form>
-					</div>
+					</div> --%>
 
 					<div class="table-responsive">
 						<table class="table text-nowrap align-middle mb-0">
@@ -59,7 +85,14 @@
 								<tr class="border-2 border-bottom border-primary border-0">
 									<th scope="col" class="ps-0">방번호</th>
 									<th scope="col">방제목</th>
-									<th scope="col" class="text-center">방장</th>
+									
+									<c:if test="${keyMember.memType == 1}">
+										<th scope="col" class="text-center">시공업체명</th>
+									</c:if>
+									<c:if test="${keyMember.memType == 5}">
+										<th scope="col" class="text-center">고객명</th>
+									</c:if>
+									
 									<th scope="col" class="text-center">생성일</th>
 								</tr>
 							</thead>
@@ -69,14 +102,21 @@
 										<th scope="row" class="ps-0 fw-medium"><span
 											class="table-link1 text-truncate d-block">${room.roomNo}</span></th>
 										<td>
-											<!-- 방제목 앞에 읽지 않은 메시지 뱃지 추가 --> <a
-											href="${pageContext.request.contextPath}/chatView?no=${room.roomNo}"
-											class="text-dark"> ${room.roomName} </a> <c:if
-												test="${unreadCounts[room.roomNo] > 0}">
+											<!-- 방제목 앞에 읽지 않은 메시지 뱃지 추가 --> 
+											<a href="${pageContext.request.contextPath}/chatView?no=${room.roomNo}"
+											class="text-dark"  target="_blank"> ${room.roomName} </a> 
+											<c:if test="${unreadCounts[room.roomNo] > 0}">
 												<span class="badge bg-danger">${unreadCounts[room.roomNo]}</span>
 											</c:if>
 										</td>
-										<td class="text-center fw-medium">${room.memNick}(방장)</td>
+										
+										<c:if test="${keyMember.memType == 1}">
+											<td class="text-center fw-medium">${room.partMem}</td>
+										</c:if>
+										<c:if test="${keyMember.memType == 5}">
+											<td class="text-center fw-medium">${room.memId}</td>
+										</c:if>
+									
 										<td class="text-center fw-medium">${room.regDate}</td>
 										<!-- 로그인된 사용자 ID가 글 작성자 ID와 같을 때만 삭제 버튼 표시 -->
 										<c:if test="${loggedInUserId == room.memId}">
@@ -97,7 +137,7 @@
 					</div>
 				</div>
 
-				<!-- 페이징 시작 -->
+<%-- 				<!-- 페이징 시작 -->
 				<div class="d-flex justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
@@ -129,7 +169,7 @@
 						</ul>
 					</nav>
 				</div>
-				<!-- 페이징 끝 -->
+				<!-- 페이징 끝 --> --%>
 			</div>
 		</div>
 	</div>

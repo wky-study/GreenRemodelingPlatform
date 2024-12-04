@@ -70,7 +70,8 @@ public class ChatLogController {
 		// 메시지 읽음 처리
 	    int updatedRows = chatService.readUpdate(no, memId);
 	    System.out.println("읽은 메세지 수: " + updatedRows);
-		
+	    
+		model.addAttribute("keyMember", login);
 		model.addAttribute("room", room);
 		model.addAttribute("chatList", chatList);
 		

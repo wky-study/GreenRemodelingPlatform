@@ -37,11 +37,34 @@
 	<div class="container-fluid">
 		<div class="card">
 			
+			
+		<div class="container-xxl flex-grow-1 container-p-y">
+			<h4 class="fw-bold py-3 mb-4">
+				<span class="text-muted fw-light">Mypage /</span> 주문내역
+			</h4>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="nav nav-pills flex-column flex-md-row mb-3">
+						<li class="nav-item"><a class="nav-link "
+							href="${pageContext.request.contextPath}/settingView"><i class="bx bx-user me-1"></i>
+								회원정보</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/cartView"><i
+								class="bx bx-bell me-1"></i>장바구니</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="${pageContext.request.contextPath}/orderSummary"><i
+								class="bx bx-link-alt me-1"></i> 주문 내역</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${pageContext.request.contextPath}/chatListView"><i
+								class="bx bx-link-alt me-1"></i>채팅 목록</a></li>								
+					</ul>
+				</div>
+			</div>
+		</div>			
+			
+			
 			<div class="card-body">
 			
-				<div class="d-flex justify-content-center mb-5">
-					<h2>주문내역</h2>
-				</div>
 				<div class="d-flex justify-content-end mb-5">
 					<button class="btn btn-outline-success" id="downloadBtn" type="button">Excele 다운로드</button>
 				</div>

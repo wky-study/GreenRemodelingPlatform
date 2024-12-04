@@ -31,6 +31,7 @@
 						<div class="card-body my-card">
 							
 							<form id="estimateForm" enctype="multipart/form-data">
+							
 								
 								<div class="mb-3 col-md-6 w-100">
 							        <label class="form-label" >인테리어 설명 </label>
@@ -96,6 +97,11 @@
 		</div>
 	</div>
 
+	<form id="boardWriteForm" action="${pageContext.request.contextPath }/roomCreateDo" method="POST">
+			<input class="form-control" type="hidden" name="roomName" placeholder="방 제목" value="${sessionScope.keyEst.estAddress}"/>
+			<input class="form-control" type="hidden" name="partMem" placeholder="시공사 아이디" value="${sessionScope.keyEst.comId}"/>
+	</form>
+
 
 
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
@@ -137,6 +143,7 @@
     
     // 제출하기 버튼
 	document.getElementById('editBtn').addEventListener('click', () => {
+		
 	    const formData = new FormData(document.getElementById('estimateForm'));
 	
 	    fetch('${pageContext.request.contextPath}/saveEstimate', {
@@ -151,12 +158,29 @@
 	    })
 	    .then(data => {
 	        alert(data); // 서버에서 받은 메시지를 표시
-	        if (data.includes("임시 저장 완료")) {
-	            // 페이지 이동 전에 잠시 딜레이를 두고 이동
-	            setTimeout(() => {
-	                window.location.href = '${pageContext.request.contextPath}/est4?estId='+ '${sessionScope.keyEst.estId}'; // 성공 시 이동
-	            }, 500); // 0.5초 딜레이 후 이동
+	        if (data.includes("요청 완료")) {
+	            // 2단계: 채팅방 생성
+	            const roomName = document.querySelector('input[name="roomName"]').value;
+	            const partMem = document.querySelector('input[name="partMem"]').value;
+
+	            return fetch('${pageContext.request.contextPath}/roomCreateDo2', {
+	                method: 'POST',
+	                headers: {
+	                    'Content-Type': 'application/json',
+	                },
+	                body: JSON.stringify({ roomName, partMem }),
+	            });
+	        } else {
+	            throw new Error("요청에 실패했습니다.");
 	        }
+	    })
+	    .then(response => response.json())
+	    .then(roomResponse => {
+	        if (roomResponse.success) {
+	            alert(roomResponse.message); // 예: "방 생성 완료"
+	            // 모든 작업 완료 후 페이지 이동
+	            window.location.href = '${pageContext.request.contextPath}/est4?estId=${sessionScope.keyEst.estId}';
+	        } 
 	    })
 	    .catch(error => {
 	        console.error('Error:', error);

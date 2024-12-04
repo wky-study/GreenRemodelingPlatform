@@ -60,8 +60,8 @@
 										<a class="text-primary fw-bold" href="./index.html">비밀번호
 											찾기</a>
 									</div>
-									<button class="btn btn-primary w-100 py-8 fs-4 mb-4"
-										type="submit">로그인</button>
+									<button class="btn btn-primary w-100 py-8 fs-4 mb-4" id="do"
+										type="submit" disabled>로그인</button>
 									<div class="d-flex align-items-center justify-content-center">
 										<p class="fs-4 mb-0 fw-bold">아이디가 없나요?</p>
 										<a class="text-primary fw-bold ms-2"
@@ -112,7 +112,30 @@
 	        }
 	    }, 500); // 0.5초마다 확인
 	}
-	</script>		
+	</script>	
+	
+		<script>
+	// 비밀번호 확인
+	$(function(){
+		$("#alert-success").hide();
+		$("#alert-danger").hide();
+		$("#exampleInputtext1, #exampleInputPassword1").keyup(function(){
+			var exampleInputtext1 = $("#exampleInputtext1").val();
+			var exampleInputPassword1 = $("#exampleInputPassword1").val();
+			if(exampleInputtext1 != "" || exampleInputPassword1 != ""){
+				if(exampleInputtext1, exampleInputPassword1){
+					$("#alert-success").show();	// 비밀번호 일치 시 성공 메시지 표시
+					$("#alert-danger").hide();	// 실패 메시지 숨기기
+					$("#do").removeAttr("disabled");	// 버튼 활성화
+				}else{
+					$("#alert-success").hide();	// 비밀번호 불일치 시 성공 메시지 숨기기
+					$("#alert-danger").show();	// 실패 메시지 표시
+					$("#do").attr("disabled", "disabled");	// 버튼 비활성화
+				}
+			}
+		});
+	});
+	</script>	
 		
 </body>
 

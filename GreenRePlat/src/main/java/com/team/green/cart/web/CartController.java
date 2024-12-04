@@ -31,6 +31,9 @@ public class CartController {
 	public String cartView(HttpSession session) {
 		
 		MemberDTO member = (MemberDTO)session.getAttribute("memInfo");
+		if (member == null) {
+			return "redirect:/loginView";
+		}
 		String memId = member.getMemId();
 		System.out.println(memId);
 		

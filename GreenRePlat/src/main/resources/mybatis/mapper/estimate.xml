@@ -111,9 +111,10 @@
 	    SELECT * 
 	    FROM estimate a, members b
 	    WHERE 1=1
-	    	AND a.est_submit = 'Y'
-	    	<if test="#{memType == 5}">
-	    		AND a.com_id = #{memId}
+	    	AND a.mem_id = b.mem_id
+	    	AND est_submit = 'Y'
+	    	<if test="memType == 5">
+	    	AND com_id = #{memId}
 	    	</if>
 	</select>
 

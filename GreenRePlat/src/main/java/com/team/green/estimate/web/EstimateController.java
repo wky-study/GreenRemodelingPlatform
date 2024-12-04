@@ -27,7 +27,6 @@ import com.team.green.estimate.dto.EstimateDTO;
 import com.team.green.estimate.service.BuildingInfoService;
 import com.team.green.estimate.service.EstimateService;
 import com.team.green.estimate.service.KakaoAddressService;
-import com.team.green.material.dto.MaterialDTO;
 import com.team.green.material.service.MaterialService;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
@@ -214,12 +213,12 @@ public class EstimateController {
 			session.setAttribute("keyEst", estimate);
 
 			return ResponseEntity.ok().header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
-					.body("임시 저장 완료"); // 경로를 포함
+					.body("요청 완료"); // 경로를 포함
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.header("Content-Type", "text/plain; charset=UTF-8") // 인코딩 명시
-					.body("임시 저장 실패");
+					.body("요청에 실패했습니다.");
 		}
 	}
 
@@ -255,9 +254,6 @@ public class EstimateController {
 			return "redirect:/loginView";
 		} else {
 			String memId = member.getMemId();
-			// 0 = 관리자
-			// 1 = 일반
-			// 2 = 기업
 			String memType = member.getMemType();
 
 			System.out.println(memType);
@@ -276,7 +272,7 @@ public class EstimateController {
 			return "estimate/estSubmitList";
 		}
 	}
-
+	
 	@GetMapping("/est4")
 	public String est4(@RequestParam("estId") int estId, HttpSession session, Model model) {
 

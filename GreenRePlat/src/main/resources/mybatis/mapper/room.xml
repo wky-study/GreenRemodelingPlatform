@@ -29,6 +29,7 @@
 			, b.mem_nick
 			, a.reg_date
 			, a.del_yn
+			, a.part_mem
 		FROM 
 			rooms a, members b
 		WHERE
