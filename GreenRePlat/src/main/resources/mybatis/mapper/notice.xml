@@ -102,4 +102,17 @@
         WHERE 1=1
         	AND notice_no = #{noticeNo}
     </update>
+    
+    <select id="getNoti" resultType="com.team.green.notice.dto.NoticeDTO">
+    
+    	SELECT * 
+    	FROM ( 
+    		SELECT *
+	    	FROM notice
+	    	WHERE del_yn = 'N'
+	    	ORDER BY notice_no DESC
+	    )
+    	WHERE ROWNUM <![CDATA[<=]]> #{limit}
+    	
+    </select>
 </mapper>

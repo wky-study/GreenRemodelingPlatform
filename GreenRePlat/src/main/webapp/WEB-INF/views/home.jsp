@@ -29,15 +29,22 @@
                 </h5>
                 <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
                   <div class="carousel-inner">
+                  <a target= "_blank"  href= "https://blog.naver.com/PostView.naver?blogId=greenremodeling2&logNo=223339651078&categoryNo=10&parentCategoryNo=&from=thumbnailList&photoView=0">
                     <div class="carousel-item">
                       <img src="${pageContext.request.contextPath}/assets/images/blog/img1.jpg" class="d-block w-100" alt="seodash-img">
                     </div>
+                   </a>
+                   <a target= "_blank" href="https://blog.naver.com/PostView.naver?blogId=greenremodeling2&logNo=223229850360&categoryNo=10&parentCategoryNo=&from=thumbnailList">
                     <div class="carousel-item active">
                       <img src="${pageContext.request.contextPath}/assets/images/blog/img3.jpg" class="d-block w-100" alt="seodash-img">
                     </div>
+                   </a>
+                   <a target= "_blank"  href= "https://blog.naver.com/PostView.naver?blogId=greenremodeling2&logNo=223316170694&categoryNo=10&parentCategoryNo=&from=thumbnailList">
+                   
                     <div class="carousel-item">
                       <img src="${pageContext.request.contextPath}/assets/images/blog/img2.jpg" class="d-block w-100" alt="seodash-img">
                     </div>
+                   </a>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -57,11 +64,11 @@
               <div class="card">
                 <img class="card-img-top img-responsive" src="http://www.cenews.co.kr/news/photo/202010/10229_6425_024.png" alt="Card image cap">
                 <div class="card-body">
-                  <h4 class="card-title">Card title</h4>
+                  <h4 class="card-title">그린 리모델링으로 삶을 더 가치있게</h4>
                   <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                    에코빌더스는 주거공간의 탄소중립을 지향합니다.  그린 리모델링으로 에너지비용을 절약하고, 더 깨끗한 지구를 만드세요. 에코빌더스가 함께합니다.
                   </p>
-                  <a href="javascript:void(0)" class="btn btn-primary">바로가기</a>
+                  <a href="${pageContext.request.contextPath}/introductionView" class="btn btn-primary">그린 리모델링 소개</a>
                 </div>
               </div>
               <!-- Card -->
@@ -78,74 +85,33 @@
           <div class="container">
   			<div class="card row" style="display: flex; flex-direction: row;">
               <div class="card-body col-7">
-                <h5 class="card-title">Notice</h5>
+                <h5 class="card-title">공지사항</h5>
                 <div class="table-responsive">
                   <table class="table text-nowrap align-middle mb-0">
                     <thead>
                       <tr class="border-2 border-bottom border-primary border-0">
-                        <th scope="col" class="ps-0">Page Title</th>
-                        <th scope="col">Link</th>
-                        <th scope="col" class="text-center">Pageviews</th>
-                        <th scope="col" class="text-center">Page Value</th>
+                        <th scope="col" class="ps-0">글번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col" class="text-center">작성자</th>
+                        <th scope="col" class="text-center">조회수</th>
                       </tr>
                     </thead>
                     <tbody class="table-group-divider">
+                     <c:forEach var="notice" items="${notices}">
+                    
                       <tr>
                         <th scope="row" class="ps-0 fw-medium">
-                          <span class="table-link1 text-truncate d-block">Welcome to our
-                            website</span>
+                          <span class="table-link1 text-truncate d-block">${notice.noticeNo}</span>
                         </th>
                         <td>
-                          <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
+                          <a href="${pageContext.request.contextPath }/noticeDetailView?no=${notice.noticeNo}" class="link-primary text-dark fw-medium d-block">${notice.noticeTitle}</a>
                         </td>
-                        <td class="text-center fw-medium">18,456</td>
-                        <td class="text-center fw-medium">$2.40</td>
+                        <td class="text-center fw-medium"> ${notice.memId }</td>
+                        <td class="text-center fw-medium"> ${notice.noticeCount} </td>
                       </tr>
-                      <tr>
-                        <th scope="row" class="ps-0 fw-medium">
-                          <span class="table-link1 text-truncate d-block">Modern Admin
-                            Dashboard Template</span>
-                        </th>
-                        <td>
-                          <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/dashboard</a>
-                        </td>
-                        <td class="text-center fw-medium">17,452</td>
-                        <td class="text-center fw-medium">$0.97</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ps-0 fw-medium">
-                          <span class="table-link1 text-truncate d-block">Explore our
-                            product catalog</span>
-                        </th>
-                        <td>
-                          <a href="javascript:void(0)"
-                            class="link-primary text-dark fw-medium d-block">/product-checkout</a>
-                        </td>
-                        <td class="text-center fw-medium">12,180</td>
-                        <td class="text-center fw-medium">$7,50</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ps-0 fw-medium">
-                          <span class="table-link1 text-truncate d-block">Comprehensive
-                            User Guide</span>
-                        </th>
-                        <td>
-                          <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/docs</a>
-                        </td>
-                        <td class="text-center fw-medium">800</td>
-                        <td class="text-center fw-medium">$5,50</td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="ps-0 fw-medium border-0">
-                          <span class="table-link1 text-truncate d-block">Check out our
-                            services</span>
-                        </th>
-                        <td class="border-0">
-                          <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/services</a>
-                        </td>
-                        <td class="text-center fw-medium border-0">1300</td>
-                        <td class="text-center fw-medium border-0">$2,15</td>
-                      </tr>
+					</c:forEach>
+                      
+                      
                     </tbody>
                   </table>
                 </div>

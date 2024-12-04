@@ -63,4 +63,8 @@ public class NoticeService {
 	public int getNoticeNo() {
 		return dao.getNoticeNo();
 	}
+	
+	public List<NoticeDTO> getNoti(int limit) {
+		return dao.getNoti(limit);
+	}
 }
