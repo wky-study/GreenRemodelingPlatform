@@ -14,12 +14,14 @@ public class EstimateDTO {
 	private String bjdongCd;
 	private String estArea;
 	private String comId;
+	private String estType;
 	
 	public EstimateDTO() {
 	}
 
 	public EstimateDTO(int estId, String memId, String estAddress, String dongNm, String hoNm, String estSdate,
-			String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd, String estArea, String comId) {
+			String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd, String estArea, String comId,
+			String estType) {
 		this.estId = estId;
 		this.memId = memId;
 		this.estAddress = estAddress;
@@ -32,6 +34,7 @@ public class EstimateDTO {
 		this.bjdongCd = bjdongCd;
 		this.estArea = estArea;
 		this.comId = comId;
+		this.estType = estType;
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class EstimateDTO {
 		return "EstimateDTO [estId=" + estId + ", memId=" + memId + ", estAddress=" + estAddress + ", dongNm=" + dongNm
 				+ ", hoNm=" + hoNm + ", estSdate=" + estSdate + ", estInteriorDesc=" + estInteriorDesc + ", estSubmit="
 				+ estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd + ", estArea=" + estArea
-				+ ", comId=" + comId + "]";
+				+ ", comId=" + comId + ", estType=" + estType + "]";
 	}
 
 	public int getEstId() {
@@ -136,6 +139,14 @@ public class EstimateDTO {
 
 	public void setComId(String comId) {
 		this.comId = comId;
+	}
+
+	public String getEstType() {
+		return estType;
+	}
+
+	public void setEstType(String estType) {
+		this.estType = estType;
 	}
 
 
