@@ -68,7 +68,7 @@ public class MemberController {
 	 */
 	@RequestMapping("/settingView")
 	public String settingView() {
-		return "member/settingView";
+		return "mypage/myPageCompany";
 	}
 
 	@PostMapping("/registDo")

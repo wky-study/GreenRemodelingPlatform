@@ -40,7 +40,6 @@ public interface IEstimateDAO {
 	// 제출 완료한 임시견적서 리스트 (기업 전용)
 	List<EstimateDTO> getComSubList(MemberDTO member);
 
-	
 	// 시공사 정보 업데이트
 	int updateComId(EstimateDTO estimate);
 

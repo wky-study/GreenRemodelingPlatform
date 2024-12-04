@@ -51,13 +51,12 @@
 								      <th scope="col">주소</th>
 								      <th scope="col" class="item-name">동</th>
 								      <th scope="col" class="item-name">호</th>
-								      <th scope="col" class="item-name">면적</th>
+								      <th scope="col" class="item-name">면적(㎡)</th>
 								      <th scope="col" class="item-name">요청 시공일</th>
 								    </tr>
 								  </thead>
 								  
 								  <tbody>
-								  
 										<c:forEach items="${keyEstList}" var="EstimateDTO"  varStatus="status">
 										    <tr class="clickable-row" onclick="goToEstDetail(${EstimateDTO.estId})">
 										      <th scope="row">${status.index + 1}</th>

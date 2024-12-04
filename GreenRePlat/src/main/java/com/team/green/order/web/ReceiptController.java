@@ -46,6 +46,9 @@ public class ReceiptController {
 		
 		// 세션에서 memId 가져오기
 		MemberDTO member = (MemberDTO)session.getAttribute("memInfo");
+		if (member == null) {
+			return "redirect:/loginView";
+		}
 		String memId = member.getMemId();
 		// DB에서 주문내역 가져오기
 		List<PaymentDTO> paymentList = orderService.getOrderList(memId);
