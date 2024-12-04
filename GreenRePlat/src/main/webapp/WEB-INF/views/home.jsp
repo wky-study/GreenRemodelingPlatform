@@ -30,13 +30,13 @@
                 <div id="carouselExampleControls" class="carousel slide carousel-dark" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item">
-                      <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img2.jpg" class="d-block w-100" alt="seodash-img">
+                      <img src="${pageContext.request.contextPath}/assets/images/blog/img1.jpg" class="d-block w-100" alt="seodash-img">
                     </div>
                     <div class="carousel-item active">
-                      <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img3.jpg" class="d-block w-100" alt="seodash-img">
+                      <img src="${pageContext.request.contextPath}/assets/images/blog/img3.jpg" class="d-block w-100" alt="seodash-img">
                     </div>
                     <div class="carousel-item">
-                      <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img2.jpg" class="d-block w-100" alt="seodash-img">
+                      <img src="${pageContext.request.contextPath}/assets/images/blog/img2.jpg" class="d-block w-100" alt="seodash-img">
                     </div>
                   </div>
                   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
@@ -51,171 +51,33 @@
               </div>
             </div>
           </div>
-
-          <!-- card -->
-          <div class="col-lg-4" style="padding-top: 30.5px;">
-            <div class="card">
-              <h5 class="card-title d-flex align-items-center gap-2 mb-4">
-                Eco-Builders
-
-              </h5>
-              <div class="row gx-3">
-                <div class="col-6">
-                  
-                  <div class="card text-white bg-primary rounded">
-                    <div class="card-body p-4">
-                      <span>
-                        <i class="ti ti-layout-grid fs-8"></i>
-                      </span>
-                      <h3 class="card-title mt-3 mb-0 text-white">450</h3>
-                      <p class="card-text text-white-50 fs-3 fw-normal">
-                        고효율 가전제품
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="card text-white text-bg-success">
-                    <div class="card-body p-4">
-                      <span>
-                        <i class="ti ti-archive fs-8"></i>
-                      </span>
-                      <h3 class="card-title mt-3 mb-0 text-white">50</h3>
-                      <p class="card-text text-white-50 fs-3 fw-normal">
-                        친환경 자재
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="card text-white text-bg-warning">
-                    <div class="card-body p-4">
-                      <span>
-                        <i class="ti ti-users fs-8"></i>
-                      </span>
-                      <h3 class="card-title mt-3 mb-0 text-white">80</h3>
-                      <p class="card-text text-white-50 fs-3 fw-normal">
-                        리모델링 후기
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="card text-white text-bg-danger">
-                    <div class="card-body p-4">
-                      <span>
-                        <i class="ti ti-gift fs-8"></i>
-                      </span>
-                      <h3 class="card-title mt-3 mb-0 text-white">15</h3>
-                      <p class="card-text text-white-50 fs-3 fw-normal">
-                        데이터 분석
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 mt-3">
-              <div class="card w-100">
-                <div class="card-header text-bg-primary">
-                  <h4 class="mb-0 text-white card-title">프로젝트 소개</h4>
-                </div>
+          
+          <div class="col-lg-4 col-md-6" style="padding-top: 150px; ">
+              <!-- Card -->
+              <div class="card">
+                <img class="card-img-top img-responsive" src="http://www.cenews.co.kr/news/photo/202010/10229_6425_024.png" alt="Card image cap">
                 <div class="card-body">
-                  <h3 class="card-title">Special title treatment</h3>
+                  <h4 class="card-title">Card title</h4>
                   <p class="card-text">
-                    With supporting text below as a natural lead-in to additional content.
+                    Some quick example text to build on the card title and make up the bulk of the card's content.
                   </p>
-                  <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                  <a href="javascript:void(0)" class="btn btn-primary">바로가기</a>
                 </div>
               </div>
+              <!-- Card -->
             </div>
+
+          
+            
           </div>
-          <!-- card end -->
+         
 
 
-          <div class="card">
-            <div class="card-body">
+         
 
-              <h4 class="card-title">그린 리모델링 소개</h4>
-
-              <p class="mb-3 card-subtitle">
-                If you need responsive nav variations, consider using a
-                series of flexbox utilities.
-              </p>
-              <!-- Nav tabs -->
-              <ul class="nav nav-pills flex-column flex-sm-row mt-4" role="tablist">
-                <li class="nav-item flex-sm-fill text-sm-center" role="presentation">
-                  <a class="nav-link active" data-bs-toggle="tab" href="#navpill-11" role="tab" aria-selected="true">
-                    <span>Tab 1</span>
-                  </a>
-                </li>
-                <li class="nav-item flex-sm-fill text-sm-center" role="presentation">
-                  <a class="nav-link" data-bs-toggle="tab" href="#navpill-22" role="tab" aria-selected="false"
-                    tabindex="-1">
-                    <span>Tab 2</span>
-                  </a>
-                </li>
-                <li class="nav-item flex-sm-fill text-sm-center" role="presentation">
-                  <a class="nav-link" data-bs-toggle="tab" href="#navpill-33" role="tab" aria-selected="false"
-                    tabindex="-1">
-                    <span>Tab 3</span>
-                  </a>
-                </li>
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content border mt-2">
-                <div class="tab-pane p-3 active show" id="navpill-11" role="tabpanel">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img2.jpg" alt="seodash-img" class="img-fluid">
-                    </div>
-                    <div class="col-md-8">
-                      <p>
-                        Raw denim you probably haven't heard of them jean
-                        shorts Austin. Nesciunt tofu stumptown aliqua,
-                        retro synth master cleanse. Mustache cliche
-                        tempor, williamsburg carles vegan helvetica.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane p-3" id="navpill-22" role="tabpanel">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <p>
-                        Raw denim you probably haven't heard of them jean
-                        shorts Austin. Nesciunt tofu stumptown aliqua,
-                        retro synth master cleanse. Mustache cliche
-                        tempor, williamsburg carles vegan helvetica.
-                      </p>
-                    </div>
-                    <div class="col-md-4">
-                      <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img1.jpg" alt="seodash-img" class="img-fluid">
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane p-3" id="navpill-33" role="tabpanel">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img3.jpg" alt="seodash-img" class="img-fluid">
-                    </div>
-                    <div class="col-md-8">
-                      <p>
-                        Raw denim you probably haven't heard of them jean
-                        shorts Austin. Nesciunt tofu stumptown aliqua,
-                        retro synth master cleanse. Mustache cliche
-                        tempor, williamsburg carles vegan helvetica.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-8">
-            <div class="card">
-              <div class="card-body">
+          <div class="container">
+  			<div class="card row" style="display: flex; flex-direction: row;">
+              <div class="card-body col-7">
                 <h5 class="card-title">Notice</h5>
                 <div class="table-responsive">
                   <table class="table text-nowrap align-middle mb-0">
@@ -288,10 +150,7 @@
                   </table>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4" style="padding: 30px;">
-            <div class="card-body">
+              <div class="card-body col-3">
 
               <div class="mb-4">
                 <h4 class="card-title mb-0">FAQ</h4>
@@ -377,108 +236,15 @@
                 </div>
               </div>
             </div>
+            </div>
+          </div>
+          <div class="col-lg-4" style="padding: 30px;">
+            
           </div>
 
         <div class="row" style="padding: 30px; margin: 0;">
-          <h4 class="card-title" style="padding: 15px; color: #3a4752;">Review</h4>
-
-          <div class="col-lg-4">
-            <div class="card overflow-hidden hover-img">
-              <div class="position-relative">
-                <a href="javascript:void(0)">
-                  <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img1.jpg" class="card-img-top" alt="matdash-img">
-                </a>
-                <span
-                  class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">2
-                  min Read</span>
-                <img src="${pageContext.request.contextPath}/assets/images/profile/user-3.jpg" alt="matdash-img"
-                  class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9" width="40" height="40"
-                  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Georgeanna Ramero">
-              </div>
-              <div class="card-body p-4">
-                <span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">Social</span>
-                <a class="d-block my-4 fs-5 text-dark fw-semibold link-primary" href="">As yen tumbles, gadget-loving
-                  Japan goes
-                  for secondhand iPhones</a>
-                <div class="d-flex align-items-center gap-4">
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="ti ti-eye text-dark fs-5"></i>9,125
-                  </div>
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="ti ti-message-2 text-dark fs-5"></i>3
-                  </div>
-                  <div class="d-flex align-items-center fs-2 ms-auto">
-                    <i class="ti ti-point text-dark"></i>Mon, Dec 19
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card overflow-hidden hover-img">
-              <div class="position-relative">
-                <a href="javascript:void(0)">
-                  <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img2.jpg" class="card-img-top" alt="matdash-img">
-                </a>
-                <span
-                  class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">2
-                  min Read</span>
-                <img src="${pageContext.request.contextPath}/assets/images/profile/user-2.jpg" alt="matdash-img"
-                  class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9" width="40" height="40"
-                  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Georgeanna Ramero">
-              </div>
-              <div class="card-body p-4">
-                <span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">Gadget</span>
-                <a class="d-block my-4 fs-5 text-dark fw-semibold link-primary" href="">Intel loses bid to revive
-                  antitrust case
-                  against patent foe Fortress</a>
-                <div class="d-flex align-items-center gap-4">
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="ti ti-eye text-dark fs-5"></i>4,150
-                  </div>
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="ti ti-message-2 text-dark fs-5"></i>38
-                  </div>
-                  <div class="d-flex align-items-center fs-2 ms-auto">
-                    <i class="ti ti-point text-dark"></i>Sun, Dec 18
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card overflow-hidden hover-img">
-              <div class="position-relative">
-                <a href="javascript:void(0)">
-                  <img src="${pageContext.request.contextPath}/assets/images/blog/blog-img3.jpg" class="card-img-top" alt="matdash-img">
-                </a>
-                <span
-                  class="badge text-bg-light text-dark fs-2 lh-sm mb-9 me-9 py-1 px-2 fw-semibold position-absolute bottom-0 end-0">2
-                  min Read</span>
-                <img src="${pageContext.request.contextPath}/assets/images/profile/user-3.jpg" alt="matdash-img"
-                  class="img-fluid rounded-circle position-absolute bottom-0 start-0 mb-n9 ms-9" width="40" height="40"
-                  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Georgeanna Ramero">
-              </div>
-              <div class="card-body p-4">
-                <span class="badge text-bg-light fs-2 py-1 px-2 lh-sm  mt-3">Health</span>
-                <a class="d-block my-4 fs-5 text-dark fw-semibold link-primary" href="">COVID outbreak deepens as more
-                  lockdowns
-                  loom in China</a>
-                <div class="d-flex align-items-center gap-4">
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="ti ti-eye text-dark fs-5"></i>9,480
-                  </div>
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="ti ti-message-2 text-dark fs-5"></i>12
-                  </div>
-                  <div class="d-flex align-items-center fs-2 ms-auto">
-                    <i class="ti ti-point text-dark"></i>Sat, Dec 17
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          
+         
           <div class="py-6 px-6 text-center">
             <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
                 class="pe-1 text-primary text-decoration-underline">AdminMart.com</a>Distributed by <a
