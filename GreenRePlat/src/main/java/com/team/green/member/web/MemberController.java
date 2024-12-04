@@ -131,8 +131,11 @@ public class MemberController {
 			System.out.println("로그인성공: " + memInfo);
 			log.info("로그인 성공: {}", memInfo);
 		} else {
+			session.setAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다."); // 에러 메시지 전달
 			System.out.println("로그인실패");
 			log.warn("로그인 실패: {}", member.getMemId());
+	        return "redirect:/loginView";
+
 
 		}
 		session.setAttribute("memInfo", memInfo);
