@@ -78,7 +78,7 @@
 
 		<div>
 			<img
-				src="${pageContext.request.contextPath}/assets/images/homeImg/home09.jpeg">
+				src="${pageContext.request.contextPath}/assets/images/homeImg/home09.jpg">
 		</div>
 
 		<div class="container-foot">
