@@ -87,4 +87,19 @@ public class EstimateService {
 		return result;
 	};
 	
+	// 종료날짜 계산
+    public int calculateConstructionPeriod(double squareMeter) {
+        if (squareMeter <= 66) {
+            return 7; // 7일 = 1주
+        } else if (squareMeter <= 132) {
+            return 14; // 14일 = 2주
+        } else if (squareMeter <= 198) {
+            return 21; // 21일 = 3주
+        } else {
+            // 198㎡ 초과: 기본 4주 + 추가 계산
+            int extraDays = (int)((squareMeter - 198) / 33) * 2; // 33㎡당 2일 추가
+            return 28 + extraDays;
+        }
+    }
+	
 }
