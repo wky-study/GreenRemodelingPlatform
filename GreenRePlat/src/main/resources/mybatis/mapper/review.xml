@@ -129,6 +129,19 @@
 			AND mem_id = #{memId}
 	</update>	
 	
+	<!-- 홈 화면 용 -->
+	<select id="getHomeReview" resultType="com.team.green.review.dto.ReviewDTO">
+	
+		SELECT *
+		FROM (
+		    SELECT * 
+		    FROM review
+		    ORDER BY review_no DESC
+		)
+		WHERE ROWNUM &lt;= 3
+	 
+	</select>
+	
 
 
 
