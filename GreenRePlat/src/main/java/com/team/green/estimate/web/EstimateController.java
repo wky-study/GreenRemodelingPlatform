@@ -378,7 +378,7 @@ public class EstimateController {
 		String estType = est.getEstType();
 
 		// http://192.168.0.187:5000/material?area=50&type=1
-		String flaskUrl = "http://192.168.0.187:5000/material?area=" + estArea + "&type=" + estType;
+		String flaskUrl = "http://192.168.0.47:5000/material?area=" + estArea + "&type=" + estType;
 
 		System.out.println("Flask URL: " + flaskUrl);
 
