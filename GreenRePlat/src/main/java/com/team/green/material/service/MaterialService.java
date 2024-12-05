@@ -45,4 +45,10 @@ public class MaterialService {
 		return result;
 	};
 	
+	// 견적서 디테일용
+	public MaterialDTO getMaterialByItemId(String itemId) {
+		MaterialDTO result = dao.getMaterialByItemId(itemId);
+		return result;
+	};
+	
 }

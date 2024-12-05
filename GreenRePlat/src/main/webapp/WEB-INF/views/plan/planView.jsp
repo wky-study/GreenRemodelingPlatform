@@ -166,7 +166,7 @@
 							 	<form id="contForm" action="<c:url value="/writeContDo" />" method="POST">
 								<input id="contInput" type="text" class="form-control" name="cont" >
 								<input type="hidden" id="hiddenQuoId" name="hiddenQuoId" value="">
-								<input type="hidden" name="memId" value="${sessionScope.login.memId }">
+								<input type="hidden" name="memId" value="${sessionScope.memInfo.memId }">
 								
 								<button id="contBtn" type="button">등록</button>
 								</form>
@@ -265,12 +265,12 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
     var calendarEventsList = [];
     
     let data = {};
-    <c:forEach var="plan" items="${planList}">
+    <c:forEach var="est" items="${estList}">
 	    data = {};
-	    data.id = "${plan.quoId}";
-	    data.title = "${plan.estId}";
-	    data.start = "${plan.quoSdate}";
-	    data.end = "${plan.quoEdate}";
+	    data.id = "${est.estId}";
+	    data.title = "${est.estAddress}";
+	    data.start = "${est.estSdate}";
+	    data.end = "${est.estEdate}";
 	   	data.extendedProps = { calendar: "Primary" };
 	    calendarEventsList.push(data);
 	</c:forEach>

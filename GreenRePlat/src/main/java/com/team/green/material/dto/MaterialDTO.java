@@ -10,20 +10,15 @@ public class MaterialDTO {
 	private String itemType;						/*  자재타입 */
 	private String itemSize;						/*  자재크기 */
 	private String itemImg;							/*  자재이미지 */
+	private String itemPrice;						/*  자재가격 */
+	
+	private long itemQuantity;					/* 수량 견적서용 */
 	
 	public MaterialDTO() {
 	}
 
-	@Override
-	public String toString() {
-		return "MaterialDTO [itemName=" + itemName + ", itemId=" + itemId + ", itemModel=" + itemModel + ", itemBrand="
-				+ itemBrand + ", itemEffiLevel=" + itemEffiLevel + ", itemType=" + itemType + ", itemSize=" + itemSize
-				+ ", itemImg=" + itemImg + "]";
-	}
-
 	public MaterialDTO(String itemName, String itemId, String itemModel, String itemBrand, String itemEffiLevel,
-			String itemType, String itemSize, String itemImg) {
-		super();
+			String itemType, String itemSize, String itemImg, String itemPrice, long itemQuantity) {
 		this.itemName = itemName;
 		this.itemId = itemId;
 		this.itemModel = itemModel;
@@ -32,6 +27,15 @@ public class MaterialDTO {
 		this.itemType = itemType;
 		this.itemSize = itemSize;
 		this.itemImg = itemImg;
+		this.itemPrice = itemPrice;
+		this.itemQuantity = itemQuantity;
+	}
+
+	@Override
+	public String toString() {
+		return "MaterialDTO [itemName=" + itemName + ", itemId=" + itemId + ", itemModel=" + itemModel + ", itemBrand="
+				+ itemBrand + ", itemEffiLevel=" + itemEffiLevel + ", itemType=" + itemType + ", itemSize=" + itemSize
+				+ ", itemImg=" + itemImg + ", itemPrice=" + itemPrice + ", itemQuantity=" + itemQuantity + "]";
 	}
 
 	public String getItemName() {
@@ -97,5 +101,25 @@ public class MaterialDTO {
 	public void setItemImg(String itemImg) {
 		this.itemImg = itemImg;
 	}
+
+	public String getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(String itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+
+	public long getItemQuantity() {
+		return itemQuantity;
+	}
+
+	public void setItemQuantity(long itemQuantity) {
+		this.itemQuantity = itemQuantity;
+	}
+
+
+
+
 	
 }

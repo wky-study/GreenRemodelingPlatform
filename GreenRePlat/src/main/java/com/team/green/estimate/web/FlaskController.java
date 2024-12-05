@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -61,16 +60,12 @@ public class FlaskController {
 
 				return "데이터가 저장되었습니다. type: " + type;
 			} catch (Exception e) {
-				e.printStackTrace();
 				return "Flask 응답 처리 중 오류가 발생했습니다.";
 			}
 		} else {
 			return "Flask 서버와 통신 실패!";
 		}
 	}
-	
-	
-	
 	
 	
 	

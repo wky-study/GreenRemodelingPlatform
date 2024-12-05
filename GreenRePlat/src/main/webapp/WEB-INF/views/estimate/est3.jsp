@@ -156,7 +156,6 @@
 	        return response.text(); // 응답 본문을 텍스트로 처리
 	    })
 	    .then(data => {
-	        alert(data); // 서버에서 받은 메시지 표시
 
 	        if (data.includes("요청 완료")) {
 	            // 2단계: 서버에 estAddress를 보내기 전에, 채팅방 생성을 위한 fetch 진행
@@ -175,7 +174,6 @@
 	        return fetchResponse.text(); // 응답 본문을 텍스트로 처리
 	    })
 	    .then(fetchData => {
-	        alert(fetchData); // "데이터가 저장되었습니다." 같은 응답 메시지 출력
 
 	        // 3단계: 채팅방 생성 요청
 	        const roomName = document.querySelector('input[name="roomName"]').value;

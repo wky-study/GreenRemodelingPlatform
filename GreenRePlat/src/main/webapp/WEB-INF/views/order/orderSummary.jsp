@@ -57,6 +57,11 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/chatListView"><i
 								class="bx bx-link-alt me-1"></i>채팅 목록</a></li>								
+<%-- 						<c:if test="${sessionScope.memInfo != null && sessionScope.memInfo.memType == 5}">
+							<li class="nav-item"><a class="nav-link"
+								href="${pageContext.request.contextPath}/planView"><i
+									class="bx bx-link-alt me-1"></i>시공 일정</a></li>
+						</c:if>		 --%>						
 					</ul>
 				</div>
 			</div>
