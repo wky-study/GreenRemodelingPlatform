@@ -4,13 +4,17 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +31,11 @@ public class MemberController {
 
 	@Autowired
 	MemberService memSvc;
-	
-	/*비밀번호찾기 페이지*/
+
+	@Autowired
+	private JavaMailSender mailSender;
+
+	/* 비밀번호찾기 페이지 */
 	@RequestMapping("/findCheck")
 	public String findCheck() {
 		return "member/findCheck";
@@ -80,11 +87,11 @@ public class MemberController {
 	 */
 	@RequestMapping("/settingView")
 	public String settingView(HttpSession session) {
-		
-		if(session.getAttribute("memInfo") == null) {
+
+		if (session.getAttribute("memInfo") == null) {
 			return "redirect:/loginView";
 		}
-		
+
 		return "mypage/myPageCompany";
 	}
 
@@ -140,8 +147,7 @@ public class MemberController {
 			session.setAttribute("loginError", "아이디 또는 비밀번호가 잘못되었습니다."); // 에러 메시지 전달
 			System.out.println("로그인실패");
 			log.warn("로그인 실패: {}", member.getMemId());
-	        return "redirect:/loginView";
-
+			return "redirect:/loginView";
 
 		}
 		session.setAttribute("memInfo", memInfo);
@@ -209,4 +215,70 @@ public class MemberController {
 		return response;
 	}
 
+	// 비밀번호찾기
+	@RequestMapping("/findPw")
+	public String findPassword(@RequestParam String memId, @RequestParam String memName, Model model) {
+		// 1. 아이디와 이름으로 회원 정보 찾기
+		MemberDTO member = memSvc.getMI(memId, memName);
+
+		if (member == null) {
+			// 아이디와 이름이 일치하는 회원이 없으면 에러 메시지 반환
+			model.addAttribute("error", "아이디 또는 이름이 일치하지 않습니다.");
+			return "member/findCheck"; // 다시 비밀번호 찾기 페이지로 이동
+		}
+
+		// 2. 임시 비밀번호 생성
+		String newPassword = generateRandomPassword();
+
+		// 3. 임시 비밀번호로 업데이트
+		member.setMemPw(newPassword);
+		memSvc.updateMember(member);
+
+		// 4. 새 비밀번호 이메일로 전송
+		sendNewPasswordEmail(member.getMemEmail(), newPassword, model);
+
+		// 4-1. 새 비밀번호 반환
+		model.addAttribute("success", "임시 비밀번호가 생성되었습니다. 새 비밀번호는: " + newPassword);
+		return "member/findCheck";
+	}
+
+	private String generateRandomPassword() {
+		// 간단한 임시 비밀번호 생성 로직 (영문 대소문자와 숫자 포함)
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		Random random = new Random();
+		StringBuilder password = new StringBuilder();
+		for (int i = 0; i < 10; i++) {
+			password.append(chars.charAt(random.nextInt(chars.length())));
+		}
+		return password.toString();
+	}
+
+	private void sendNewPasswordEmail(String memEmail, String newPassword, Model model) {
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+			// 이메일 제목과 내용
+			String subject = "에코빌더스 임시 비밀번호 안내";
+			String content = "<html><body>" + "<p>안녕하세요, 고객님.</p>" + "<p>요청하신 임시 비밀번호가 생성되었습니다.</p>"
+					+ "<p><strong>임시 비밀번호: " + newPassword + "</strong></p>" + "<p>로그인 후 비밀번호를 변경해 주세요.</p>"
+					+ "<p>감사합니다.</p>" + "</body></html>";
+
+			messageHelper.setFrom("ecobuiltest@gmail.com"); // 보내는 이메일
+			messageHelper.setTo(memEmail); // 받는 이메일
+			messageHelper.setSubject(subject); // 이메일 제목
+			messageHelper.setText(content, true); // HTML 형식으로 이메일 내용 설정
+
+	        // 이메일 전송
+	        mailSender.send(mimeMessage);
+
+	        // 이메일 전송 성공 메시지 추가
+	        model.addAttribute("emailSuccess", "임시 비밀번호가 이메일로 전송되었습니다. 이메일을 확인해주세요.");
+	        
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("emailError", "이메일 전송에 실패했습니다. 다시 시도해주세요.");
+	    }
+	}
 }
