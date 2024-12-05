@@ -192,5 +192,14 @@
 		AND mem_name = #{memName}
 	
 	</select>
+	
+	<select id="getMemInfo" resultType="com.team.green.member.dto.MemberDTO">
+	
+		SELECT *
+		FROM members
+		WHERE 1=1
+		AND mem_id = #{memId}
+	
+	</select>
  
 </mapper>

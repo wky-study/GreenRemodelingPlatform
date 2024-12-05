@@ -1,5 +1,6 @@
 package com.team.green.estimate.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.green.attach.dto.AttachDTO;
 import com.team.green.attach.service.AttachService;
 import com.team.green.common.vo.FileUploadVO;
@@ -27,6 +32,7 @@ import com.team.green.estimate.dto.EstimateDTO;
 import com.team.green.estimate.service.BuildingInfoService;
 import com.team.green.estimate.service.EstimateService;
 import com.team.green.estimate.service.KakaoAddressService;
+import com.team.green.material.dto.MaterialDTO;
 import com.team.green.material.service.MaterialService;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.member.service.MemberService;
@@ -51,7 +57,7 @@ public class EstimateController {
 
 	@Autowired
 	KakaoAddressService kakaoAddressService;
-	
+
 	@Autowired
 	MemberService memSvc;
 
@@ -82,11 +88,9 @@ public class EstimateController {
 	@PostMapping("/est2")
 	public String est2(EstimateDTO estimate, Model model, String itemType, HttpSession session) {
 
-		
 		EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
 		System.out.println("세션 : " + est);
 
-		
 		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 		String memId = member.getMemId();
 		int estId = 0;
@@ -118,7 +122,7 @@ public class EstimateController {
 		}
 
 //		System.out.println(itemType);
-		
+
 		session.removeAttribute("keyEst");
 		session.setAttribute("keyEst", estimate);
 
@@ -151,11 +155,11 @@ public class EstimateController {
 	}
 
 	@RequestMapping("/est3")
-	public String est3( String memName,HttpSession session, Model model) {
+	public String est3(String memName, HttpSession session, Model model) {
 
-	    System.out.println("선택된 시공사명: " + memName);
-	    String comId = memSvc.getComId(memName);
-	    System.out.println("comId : "+ comId);
+		System.out.println("선택된 시공사명: " + memName);
+		String comId = memSvc.getComId(memName);
+		System.out.println("comId : " + comId);
 		EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
 		// 시공사명도 저장 해야함
 		est.setComId(comId);
@@ -249,7 +253,7 @@ public class EstimateController {
 		MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 
 		List<EstimateDTO> estList = null;
-		
+
 		if (member == null) {
 			return "redirect:/loginView";
 		} else {
@@ -257,22 +261,22 @@ public class EstimateController {
 			String memType = member.getMemType();
 
 			System.out.println(memType);
-			
-			if(memType.equals("5") || memType.equals("0")) {
+
+			if (memType.equals("5") || memType.equals("0")) {
 				estList = estSvc.getComSubList(member);
 				System.out.println("여기로옴");
-			}else {
+			} else {
 				estList = estSvc.getMemSubList(memId);
 			}
 
 			System.out.println(estList);
-			
+
 			model.addAttribute("keyEstList", estList);
 
 			return "estimate/estSubmitList";
 		}
 	}
-	
+
 	@GetMapping("/est4")
 	public String est4(@RequestParam("estId") int estId, HttpSession session, Model model) {
 
@@ -337,18 +341,78 @@ public class EstimateController {
 	}
 
 	@RequestMapping("/estDetailView")
-	public String estDetailView(@RequestParam("estId") int estId, HttpSession session) {
+	public String estDetailView(@RequestParam("estId") int estId, HttpSession session, Model model) {
 
-		// 화면 만들어야함
-
-		System.out.println();
 		System.out.println(estId);
 
-		EstimateDTO estimate = estSvc.getEst(estId);
+		EstimateDTO est = estSvc.getEst(estId);
+		System.out.println("불러온 est: " + est);
+		String estArea = est.getEstArea();
+		String estType = est.getEstType();
 
-		System.out.println(estimate);
-		session.removeAttribute("keyEst");
-		session.setAttribute("keyEst", estimate);
+		// http://192.168.0.187:5000/material?area=50&type=1
+		String flaskUrl = "http://192.168.0.187:5000/material?area=" + estArea + "&type=" + estType;
+
+		System.out.println("Flask URL: " + flaskUrl);
+
+		// RestTemplate 생성
+		RestTemplate restTemplate = new RestTemplate();
+
+		// Flask 서버에 요청 보내기
+		ResponseEntity<String> response = restTemplate.getForEntity(flaskUrl, String.class);
+
+		if (response.getStatusCode().is2xxSuccessful()) {
+			// Flask 서버 응답을 JSON 파싱
+			String responseData = response.getBody();
+			System.out.println("Flask에서 온 응답: " + responseData);
+
+			try {
+				System.out.println(responseData);
+				// JSON 데이터를 Map<String, Double>으로 변환
+				ObjectMapper objectMapper = new ObjectMapper();
+				Map<String, Double> dataMap = objectMapper.readValue(responseData,
+						new TypeReference<Map<String, Double>>() {
+						});
+
+				// DB에서 데이터를 불러오는 서비스 호출 (각 itemId로 조회)
+				List<MaterialDTO> materialList = new ArrayList<>();
+
+				for (Map.Entry<String, Double> entry : dataMap.entrySet()) {
+					String itemId = entry.getKey(); // itemId (key)
+					Double itemQuantity = entry.getValue(); // itemQuantity (value)
+
+					// DB에서 itemId에 맞는 정보 조회 (예: 서비스 호출)
+					MaterialDTO material = matSvc.getMaterialByItemId(itemId); // DB 조회 메서드
+					
+					if (material != null) {
+						// DB에서 조회한 데이터와 itemQuantity를 MaterialDTO에 설정
+						material.setItemQuantity(itemQuantity);
+						
+						System.out.println(material);
+						// 조회된 DTO를 리스트에 추가
+						materialList.add(material);
+						
+					}
+				}
+				
+				System.out.println(materialList);
+				
+				String memId = est.getMemId();
+				MemberDTO member = memSvc.getMemInfo(memId);
+				
+				model.addAttribute("keyMem", member);
+
+				// 모델에 리스트 추가
+				model.addAttribute("materialList", materialList);
+				
+				session.removeAttribute("keyEst");
+				session.setAttribute("keyEst", est);
+
+			} catch (Exception e) {
+				System.out.println("JSON 파싱 중 오류 발생: " + e.getMessage());
+				e.printStackTrace();
+			}
+		}
 
 		return "estimate/estDetailView";
 	}
