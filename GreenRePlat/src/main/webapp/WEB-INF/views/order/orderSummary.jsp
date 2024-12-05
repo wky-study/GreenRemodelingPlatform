@@ -71,7 +71,7 @@
 			<div class="card-body">
 			
 				<div class="d-flex justify-content-end mb-5">
-					<button class="btn btn-outline-success" id="downloadBtn" type="button">Excele 다운로드</button>
+					<button class="btn btn-outline-success" id="downloadBtn" type="button">Excel 다운로드</button>
 				</div>
 				
 				<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">
