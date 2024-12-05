@@ -27,6 +27,12 @@ public class MemberController {
 
 	@Autowired
 	MemberService memSvc;
+	
+	/*비밀번호찾기 페이지*/
+	@RequestMapping("/findCheck")
+	public String findCheck() {
+		return "member/findCheck";
+	}
 
 	/* 그린리모델링 소개페이지 */
 	@RequestMapping("/introductionView")

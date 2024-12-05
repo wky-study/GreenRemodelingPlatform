@@ -25,11 +25,10 @@
 					<div class="col-md-8 col-lg-6 col-xxl-3">
 						<div class="card mb-0">
 							<div class="card-body">
-							<c:if test="${not empty sessionScope.loginError}">
-							    <div class="alert alert-danger">
-							        ${sessionScope.loginError}
-							    </div>
-							</c:if>
+								<c:if test="${not empty sessionScope.loginError}">
+									<div class="alert alert-danger">
+										${sessionScope.loginError}</div>
+								</c:if>
 								<a href="#"
 									class="text-nowrap logo-img text-center d-block py-3 w-100">
 									<img src="../assets/images/logos/logo-light.svg" alt="">
@@ -38,31 +37,31 @@
 								<form action="${pageContext.request.contextPath}/loginDo"
 									method="POST">
 									<div class="mb-3">
-										<label for="exampleInputtext1" class="form-label">아이디</label> <input
-											type="text" class="form-control" id="exampleInputtext1" name = "memId" value = "${cookie.rememberId.value}"
+										<label for="exampleInputtext1" class="form-label">아이디</label>
+										<input type="text" class="form-control" id="exampleInputtext1"
+											name="memId" value="${cookie.rememberId.value}"
 											aria-describedby="textHelp">
 									</div>
 									<div class="mb-4">
 										<label for="exampleInputPassword1" class="form-label">비밀번호</label>
 										<input type="password" class="form-control"
-											id="exampleInputPassword1" name = "memPw">
+											id="exampleInputPassword1" name="memPw">
 									</div>
 									<div
 										class="d-flex align-items-center justify-content-between mb-4">
 										<div class="form-check">
 											<input class="form-check-input primary" type="checkbox"
-												 id="flexCheckChecked" name = "rememberId" checked> <label
+												id="flexCheckChecked" name="rememberId" checked> <label
 												class="form-check-label text-dark" for="flexCheckChecked">
 												아이디 기억하기 </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input primary" type="checkbox"
-												 id="flexCheckChecked" name = "rememberLogin"> <label
+												id="flexCheckChecked" name="rememberLogin"> <label
 												class="form-check-label text-dark" for="flexCheckChecked">
 												자동 로그인 </label>
 										</div>
-
-										<a class="text-primary fw-bold" href="./index.html">비밀번호
+										<a class="text-primary fw-bold" href="${pageContext.request.contextPath}/findCheck">비밀번호
 											찾기</a>
 									</div>
 									<button class="btn btn-primary w-100 py-8 fs-4 mb-4" id="do"
@@ -72,16 +71,17 @@
 										<a class="text-primary fw-bold ms-2"
 											href="${pageContext.request.contextPath}/registView">회원가입</a>
 									</div>
-									
-									
+
+
 								</form>
-								
+
 								<div class="d-flex align-items-center justify-content-center">
-								    <button onclick="openNaverLogin()" class="btn">
-								        <img style="width: 45px;" src="${pageContext.request.contextPath}/resources/images/btnG_아이콘사각.png">
-								    </button>
+									<button onclick="openNaverLogin()" class="btn">
+										<img style="width: 45px;"
+											src="${pageContext.request.contextPath}/resources/images/btnG_아이콘사각.png">
+									</button>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -103,7 +103,7 @@
 	<script src="${pageContext.request.contextPath}/assets/js/dashboard.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-		
+
 	<script>
 	function openNaverLogin() {
 	    const naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=pq95RcUR8Axo8_g97G8i&state=STATE_STRING&redirect_uri=http://192.168.0.136/naverlogin";
@@ -117,9 +117,9 @@
 	        }
 	    }, 500); // 0.5초마다 확인
 	}
-	</script>	
-	
-		<script>
+	</script>
+
+	<script>
 	// 비밀번호 확인
 	$(function(){
 		$("#alert-success").hide();
@@ -140,8 +140,8 @@
 			}
 		});
 	});
-	</script>	
-		
+	</script>
+
 </body>
 
 
