@@ -168,7 +168,7 @@
 							<span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none"><path stroke="currentColor" stroke-width="2" d="M2 12c0-3.771 0-5.657 1.172-6.828S6.229 4 10 4h4c3.771 0 5.657 0 6.828 1.172S22 8.229 22 12v2c0 3.771 0 5.657-1.172 6.828S17.771 22 14 22h-4c-3.771 0-5.657 0-6.828-1.172S2 17.771 2 14z"/><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 4V2.5M17 4V2.5M2.5 9h19"/><path fill="currentColor" d="M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></g></svg>
 							</span>
-							<span class="hide-menu">시공일정</span>
+							<span class="hide-menu">시공 일정</span>
 						</a></li>
 
 					</c:if>
@@ -183,9 +183,6 @@
 					</a></li>
 					</c:if>
 					
-					
-					
-					
 					<c:if test="${sessionScope.memInfo != null}">
 					
 					<li class="sidebar-item"><a class="sidebar-link"
@@ -197,136 +194,6 @@
 						<span class="hide-menu">로그아웃</span>
 					</a></li>
 					</c:if>
-					
-			
-					
-						
-					
-						
-<!--  추후 지워야될 부분 -->
-						
-					<%-- <li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/planView"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">planView</span>
-					</a></li> --%>
-					<%-- <li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/cartView"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">장바구니</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/orderSummary"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">주문내역</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/productWriteView"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">제품 등록</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/settingView"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">회원수정</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/estListView"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서(제출전)</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/estSubmitList"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">견적서(제출후)</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/chatListView"
-						aria-expanded="false"> <span> <iconify-icon
-									icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">채팅방 리스트</span>
-					</a></li>
-
-					<!-- 여기까지 우리메뉴 -->
-
-
-					<li class="nav-small-cap"><i
-						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
-						class="hide-menu">Home</span></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${pageContext.request.contextPath}/" aria-expanded="false">
-							<span> <iconify-icon icon="solar:home-smile-bold-duotone"
-									class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Dashboard</span>
-					</a></li>
-					<li class="nav-small-cap"><i
-						class="ti ti-dots nav-small-cap-icon fs-6"></i> <span
-						class="hide-menu">UI COMPONENTS</span></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./ui-buttons.html" aria-expanded="false"> <span>
-								<iconify-icon icon="solar:layers-minimalistic-bold-duotone"
-									class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Buttons</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./ui-alerts.html" aria-expanded="false"> <span> <iconify-icon
-									icon="solar:danger-circle-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Alerts</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./ui-card.html" aria-expanded="false"> <span> <iconify-icon
-									icon="solar:bookmark-square-minimalistic-bold-duotone"
-									class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Card</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./ui-forms.html" aria-expanded="false"> <span> <iconify-icon
-									icon="solar:file-text-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Forms</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./ui-typography.html" aria-expanded="false"> <span>
-								<iconify-icon icon="solar:text-field-focus-bold-duotone"
-									class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Typography</span>
-					</a></li>
-					<li class="nav-small-cap"><iconify-icon
-							icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-6"
-							class="fs-6"></iconify-icon> <span class="hide-menu">AUTH</span>
-					</li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./authentication-login.html" aria-expanded="false"> <span>
-								<iconify-icon icon="solar:login-3-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Login</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./authentication-register.html" aria-expanded="false"> <span>
-								<iconify-icon icon="solar:user-plus-rounded-bold-duotone"
-									class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Register</span>
-					</a></li>
-					<li class="nav-small-cap"><iconify-icon
-							icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"
-							class="fs-6"></iconify-icon> <span class="hide-menu">EXTRA</span>
-					</li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./icon-tabler.html" aria-expanded="false"> <span>
-								<iconify-icon icon="solar:sticker-smile-circle-2-bold-duotone"
-									class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Icons</span>
-					</a></li>
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="./sample-page.html" aria-expanded="false"> <span>
-								<iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
-						</span> <span class="hide-menu">Sample Page</span>
-					</a></li> --%>
 				</ul>
 				
 			</nav>
@@ -366,13 +233,13 @@
 								<a href="${pageContext.request.contextPath}/loginView"
 										class="d-flex align-items-center gap-2 dropdown-item">
 										<i class="ti ti-user fs-6"></i>
-										<p class="mb-0 fs-3">Login</p>
+										<p class="mb-0 fs-3">로그인</p>
 									</a> 
 									<a href="${pageContext.request.contextPath}/registView" class="d-flex align-items-center gap-2 dropdown-item"> 
 									<i>
 										<svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="22" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="6" r="4"/><circle cx="18" cy="16" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="m16.667 16l.833 1l1.833-1.889"/><path d="M15 13.327A13.6 13.6 0 0 0 12 13c-4.418 0-8 2.015-8 4.5S4 22 12 22c5.687 0 7.331-1.018 7.807-2.5"/></g></svg>
 									</i>
-										<p class="mb-0 fs-3">Create Account</p>
+										<p class="mb-0 fs-3">회원 가입</p>
 									</a>
 							
 							</div>
@@ -392,28 +259,24 @@
 						</a>
 							<div class="dropdown-menu content-ff dropdown-menu-end dropdown-menu-animate-up "aria-labelledby="drop2">
 								<div class="message-body">
-									<a href="javascript:void(0)"
+									<a href="${pageContext.request.contextPath }/settingView"
 										class="d-flex align-items-center gap-2 dropdown-item">
 										<i class="ti ti-user fs-6"></i>
-										<p class="mb-0 fs-3">My Profile</p>
+										<p class="mb-0 fs-3">마이 페이지</p>
 									</a> 
 									<a href="${pageContext.request.contextPath}/cartView" class="d-flex align-items-center gap-2 dropdown-item"> 
 									<i>
 										<svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="22" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m2 3l.265.088c1.32.44 1.98.66 2.357 1.184S5 5.492 5 6.883V9.5c0 2.828 0 4.243.879 5.121c.878.879 2.293.879 5.121.879h8"/><path d="M7.5 18a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm9 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3ZM5 6h11.45c2.055 0 3.083 0 3.528.674c.444.675.04 1.619-.77 3.508l-.429 1c-.378.882-.567 1.322-.942 1.57c-.376.248-.856.248-1.815.248H5"/></g></svg>
 									</i>
-										<p class="mb-0 fs-3">My Cart</p>
+										<p class="mb-0 fs-3">장 바구니</p>
 									</a> <a href="${pageContext.request.contextPath}/orderSummary"
 										class="d-flex align-items-center gap-2 dropdown-item"> 
 										<i>
 											<svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.8" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M7.099 1.25H16.9c1.017 0 1.717 0 2.306.204a3.8 3.8 0 0 1 2.348 2.412l-.713.234l.713-.234c.196.597.195 1.307.195 2.36v14.148c0 1.466-1.727 2.338-2.864 1.297a.196.196 0 0 0-.271 0l-.484.442c-.928.85-2.334.85-3.262 0a.907.907 0 0 0-1.238 0c-.928.85-2.334.85-3.262 0a.907.907 0 0 0-1.238 0c-.928.85-2.334.85-3.262 0l-.483-.442a.196.196 0 0 0-.272 0c-1.137 1.04-2.864.169-2.864-1.297V6.227c0-1.054 0-1.764.195-2.361a3.8 3.8 0 0 1 2.348-2.412c.59-.205 1.289-.204 2.306-.204m.146 1.5c-1.221 0-1.642.01-1.96.121A2.3 2.3 0 0 0 3.87 4.334c-.111.338-.12.784-.12 2.036v14.004c0 .12.059.192.134.227a.2.2 0 0 0 .11.018a.2.2 0 0 0 .107-.055a1.695 1.695 0 0 1 2.296 0l.483.442a.907.907 0 0 0 1.238 0a2.407 2.407 0 0 1 3.262 0a.907.907 0 0 0 1.238 0a2.407 2.407 0 0 1 3.262 0a.907.907 0 0 0 1.238 0l.483-.442a1.695 1.695 0 0 1 2.296 0c.043.04.08.052.108.055a.2.2 0 0 0 .109-.018c.075-.035.135-.108.135-.227V6.37c0-1.252-.01-1.698-.12-2.037a2.3 2.3 0 0 0-1.416-1.462c-.317-.11-.738-.12-1.959-.12zM15 7.44a.75.75 0 0 1 .06 1.06l-3.572 4a.75.75 0 0 1-1.119 0l-1.428-1.6a.75.75 0 0 1 1.118-1l.87.974l3.012-3.373A.75.75 0 0 1 15 7.44M6.75 15.5a.75.75 0 0 1 .75-.75h9a.75.75 0 0 1 0 1.5h-9a.75.75 0 0 1-.75-.75" clip-rule="evenodd"/></svg>
 										</i>
-										<p class="mb-0 fs-3">My Payments</p>
-									</a> <a href="#"
-										class="d-flex align-items-center gap-2 dropdown-item"> <i
-										class="ti ti-list-check fs-6"></i>
-										<p class="mb-0 fs-3">My Task</p>
-									</a> <a href="${pageContext.request.contextPath}/logoutDo"
-										class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+										<p class="mb-0 fs-3">구매 내역</p>
+									</a>  <a href="${pageContext.request.contextPath}/logoutDo"
+										class="btn btn-outline-primary mx-3 mt-2 d-block">로그 아웃</a>
 								</div>
 							</div>
 						</li>
