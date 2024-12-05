@@ -39,19 +39,23 @@
 								<input type="hidden" id="sigunguCd" name="sigunguCd">
 								<input type="hidden" id="bjdongCd" name="bjdongCd">
 								
-								
+								<div class="alert alert-primary text-center">
+								<span class="mb-3">리모델링을 받을 주소를 입력해주세요.</span>
+								</div>
 								<div class="mb-3 col-md-6 w-100">
 							        <label class="form-label" for="address">주소:</label>
 							        <input class="form-control" type="text" id="address" name="estAddress" placeholder="주소를 검색하세요" readonly required>
 								</div>
 								
-								<div class="mb-3 col-md-6 w-100">
+								<div class="row">
+								<div class="mb-3 col-md-6 ">
 							        <label class="form-label" for="detailAddress">동: </label>
 							        <input class="form-control" type="text" id="dongNm" name="dongNm"  placeholder="숫자만 입력하세요.">
 								</div>
-								<div class="mb-3 col-md-6 w-100">
+								<div class="mb-3 col-md-6 ">
 							        <label class="form-label" for="detailAddress">호: </label>
 							        <input class="form-control" type="text" id="hoNm" name="hoNm"  placeholder="숫자만 입력하세요.">
+								</div>
 								</div>
 								<div class="mb-3 col-md-6 w-100">
 									<label class="form-label" for="start-date">시공 시작일:</label>

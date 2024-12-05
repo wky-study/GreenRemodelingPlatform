@@ -67,7 +67,7 @@
 						href="${pageContext.request.contextPath}/estSubmitList"
 						aria-expanded="false">
 						<span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
 						  <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
 						</svg>
 						</span> 
@@ -268,7 +268,7 @@
 									<i>
 										<svg xmlns="http://www.w3.org/2000/svg" width="20.2" height="22" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="m2 3l.265.088c1.32.44 1.98.66 2.357 1.184S5 5.492 5 6.883V9.5c0 2.828 0 4.243.879 5.121c.878.879 2.293.879 5.121.879h8"/><path d="M7.5 18a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3Zm9 0a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3ZM5 6h11.45c2.055 0 3.083 0 3.528.674c.444.675.04 1.619-.77 3.508l-.429 1c-.378.882-.567 1.322-.942 1.57c-.376.248-.856.248-1.815.248H5"/></g></svg>
 									</i>
-										<p class="mb-0 fs-3">장 바구니</p>
+										<p class="mb-0 fs-3">장바구니</p>
 									</a> <a href="${pageContext.request.contextPath}/orderSummary"
 										class="d-flex align-items-center gap-2 dropdown-item"> 
 										<i>
