@@ -45,5 +45,8 @@ public interface IEstimateDAO {
 	
 	// 모델링한 타입 업데이트
 	int updateType(EstimateDTO estimate);
+	
+	// 면적값 없을때 업데이트
+	int estErr(int estId);
 
 }

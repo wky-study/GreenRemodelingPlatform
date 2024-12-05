@@ -87,6 +87,12 @@ public class EstimateService {
 		return result;
 	};
 	
+	// 면적값 없을때 업데이트
+	public int estErr(int estId) {
+		int result = dao.estErr(estId);
+		return result;
+	};
+	
 	// 종료날짜 계산
     public int calculateConstructionPeriod(double squareMeter) {
         if (squareMeter <= 66) {

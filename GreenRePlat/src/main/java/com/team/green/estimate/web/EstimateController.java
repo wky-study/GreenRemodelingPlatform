@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.green.attach.dto.AttachDTO;
 import com.team.green.attach.service.AttachService;
+import com.team.green.chat.dto.RoomDTO;
 import com.team.green.common.vo.FileUploadVO;
 import com.team.green.estimate.dto.AddressVO;
 import com.team.green.estimate.dto.EstimateDTO;
@@ -263,7 +264,7 @@ public class EstimateController {
 			String memType = member.getMemType();
 
 			System.out.println(memType);
-
+			
 			if (memType.equals("5") || memType.equals("0")) {
 				estList = estSvc.getComSubList(member);
 				System.out.println("여기로옴");
@@ -272,7 +273,8 @@ public class EstimateController {
 			}
 
 			System.out.println(estList);
-
+			
+			
 			model.addAttribute("keyEstList", estList);
 
 			return "estimate/estSubmitList";
@@ -467,6 +469,15 @@ public class EstimateController {
 		}
 
 		return "estimate/estDetailView";
+	}
+	
+	@GetMapping("/estErr")
+	public String estErr(@RequestParam("estId") int estId) {
+		
+		// 임시견적서로 보내버리기
+		estSvc.estErr(estId);
+		
+		return "redirect:/estWrite";
 	}
 
 }
