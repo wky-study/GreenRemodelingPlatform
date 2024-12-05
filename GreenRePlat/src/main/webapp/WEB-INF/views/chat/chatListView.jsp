@@ -89,7 +89,7 @@
 									<c:if test="${keyMember.memType == 1}">
 										<th scope="col" class="text-center">시공업체명</th>
 									</c:if>
-									<c:if test="${keyMember.memType == 5}">
+									<c:if test="${keyMember.memType != 1}">
 										<th scope="col" class="text-center">고객명</th>
 									</c:if>
 									
@@ -113,7 +113,7 @@
 										<c:if test="${keyMember.memType == 1}">
 											<td class="text-center fw-medium">${room.partMem}</td>
 										</c:if>
-										<c:if test="${keyMember.memType == 5}">
+										<c:if test="${keyMember.memType != 1}">
 											<td class="text-center fw-medium">${room.memId}</td>
 										</c:if>
 									

@@ -119,7 +119,7 @@
               <div class="card-body col-3">
 
               <div class="mb-4">
-                <h4 class="card-title mb-0">FAQ</h4>
+                <h4 class="card-title mb-0">리뷰</h4>
               </div>
               <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
