@@ -34,7 +34,7 @@
 							
 								
 								<div class="mb-3 col-md-6 w-100">
-							        <label class="form-label" >인테리어 설명 </label>
+							        <label class="form-label" >인테리어 요구사항 </label><span>(선택)</span>
 							        <input class="form-control" type="text"  name="estInteriorDesc" value="${sessionScope.keyEst.estInteriorDesc}">
 								</div>							
 								<div class="mb-3 col-md-6 w-100">

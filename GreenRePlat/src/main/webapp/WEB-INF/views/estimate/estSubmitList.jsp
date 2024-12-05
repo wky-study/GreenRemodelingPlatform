@@ -72,6 +72,12 @@
 								  
 								</table>					
 							</div>
+							
+							<c:if test="${empty keyEstList}">
+							  	<div class="alert alert-danger text-center">
+							  		제출된 견적서가 없습니다.
+							  	</div>
+							</c:if>	
 										
 						</div>
 						<!-- /Account -->
@@ -80,6 +86,12 @@
 			</div>
 		</div>
 	</div>
+	
+	
+
+		
+	
+	
 	<!-- Content wrapper -->
 
 

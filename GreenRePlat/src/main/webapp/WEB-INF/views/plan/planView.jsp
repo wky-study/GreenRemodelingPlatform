@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
+<title>시공 일정</title>
 
 
 <link rel="stylesheet"
