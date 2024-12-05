@@ -195,7 +195,7 @@
 	        }
 	    })
 	    .then(roomData => {
-	        alert(roomData.message); // 예: "방 생성 완료"
+	        alert("제출 완료"); // 예: "방 생성 완료"
 
 	        // 4단계: 페이지 이동
 	        window.location.href = '${pageContext.request.contextPath}/est4?estId=${sessionScope.keyEst.estId}';
