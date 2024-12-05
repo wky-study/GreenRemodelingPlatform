@@ -78,6 +78,12 @@ public class MemberService {
     	MemberDTO result = dao.getMemInfo(memId);
     	return result;
     };
+    
+    // 비밀번호찾기
+    public MemberDTO getMI(String memId, String memName) {
+        return dao.getMI(memId, memName);
+    }
+
 
 
 }
