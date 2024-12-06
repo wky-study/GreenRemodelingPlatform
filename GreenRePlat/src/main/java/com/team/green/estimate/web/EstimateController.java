@@ -477,7 +477,7 @@ public class EstimateController {
 		// 임시견적서로 보내버리기
 		estSvc.estErr(estId);
 		
-		return "redirect:/estWrite";
+		return "redirect:/estListView";
 	}
 
 }
