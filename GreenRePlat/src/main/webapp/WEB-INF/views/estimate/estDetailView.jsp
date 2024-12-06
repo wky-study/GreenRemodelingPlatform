@@ -16,6 +16,44 @@
 		
 	}
 	
+	/* 금액 항목 스타일 */
+	.price-section {
+		font-size: 16px; /* 글씨 크기 적당히 */
+		font-weight: bold;
+		color: #333; /* 어두운 회색으로 텍스트 강조 */
+		text-align: right; /* 오른쪽 정렬 */
+		margin-top: 15px; /* 항목 간 여백 */
+		padding: 10px 20px; /* 패딩 추가 */
+		border: 1px solid #ddd; /* 연한 회색 테두리 */
+		border-radius: 8px; /* 둥근 테두리 */
+		background-color: #f8f8f8; /* 연한 배경색 */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+	}
+
+	/* 마지막 항목에만 아래 여백 없애기 */
+	.price-section:last-child {
+		margin-bottom: 0;
+	}
+
+	/* 총 금액 스타일 */
+	.total-amount {
+		font-size: 28px; /* 글씨 크기 크게 */
+		font-weight: bold;
+		color: #D9534F; /* 빨간색 강조 */
+		text-align: right; /* 우측 정렬 */
+		margin-top: 20px; /* 상단 여백 */
+		padding: 15px 30px; /* 여유 있는 패딩 */
+		border: 2px solid #D9534F; /* 빨간색 테두리 */
+		border-radius: 10px; /* 둥근 테두리 */
+		background-color: #fff4f4; /* 연한 빨간색 배경 */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 강조 */
+	}
+
+	/* 금액 앞에 '원' 추가 */
+	.price-section span {
+		margin-left: 10px;
+	}
+	
 	</style>
 
 
@@ -63,12 +101,21 @@
 							    </div>
 							</div>
 							    
-							<div class="row">
+							<div class="row mb-3">
 							    <div class="col">
 	                                <h5><strong>리모델링 주소:</strong> ${sessionScope.keyEst.estAddress}</h5>
 							    </div>
 							    <div class="col">
 	                                <h5><strong>평수(㎡):</strong> ${sessionScope.keyEst.estArea}</h5>
+							    </div>
+							</div>
+							
+							<div class="row">
+							    <div class="col">
+	                                <h5><strong>시공 시작 일:</strong> ${sessionScope.keyEst.estSdate}</h5>
+							    </div>
+							    <div class="col">
+	                                <h5><strong>시공 종료 일:</strong> ${sessionScope.keyEst.estEdate}</h5>
 							    </div>
 							</div>
 
@@ -94,7 +141,7 @@
 							
 							<hr>
 						
-							<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">
+							<div class="col-md-4 my-card-box w-100 justify-content-between">
 								
 								<table class="table">
 								  <thead>
@@ -121,8 +168,31 @@
 								    
 								  </tbody>
 								  
-								</table>					
+								</table>	
+	
+								<!-- 자재비 총합 -->
+								<div class="price-section">
+									<span>자재비 : ${formattedTotalAmount}</span><span>원</span>
+								</div>
+								
+								<!-- 시공비 -->
+								<div class="price-section">
+									<span>시공비 : ${formattedConstructionCost}</span><span>원</span>
+								</div>
+								
+								<!-- 부가세 -->
+								<div class="price-section">
+									<span>부가세 : ${formattedVat}</span><span>원</span>
+								</div>
+								
+								<!-- 총 금액 -->
+								<div class="total-amount">
+									<span>총 금액 : ${formattedFinalAmount}</span><span>원</span>
+								</div>							
+												
 							</div>
+							
+							
 										
 						</div>
 					</div>

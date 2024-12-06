@@ -1,6 +1,10 @@
 package com.team.green.estimate.web;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.green.attach.dto.AttachDTO;
 import com.team.green.attach.service.AttachService;
+import com.team.green.chat.dto.RoomDTO;
 import com.team.green.common.vo.FileUploadVO;
 import com.team.green.estimate.dto.AddressVO;
 import com.team.green.estimate.dto.EstimateDTO;
@@ -185,9 +190,6 @@ public class EstimateController {
 			EstimateDTO est = (EstimateDTO) session.getAttribute("keyEst");
 			estimate.setEstId(est.getEstId());
 
-			System.out.println();
-			System.out.println(estimate);
-
 			// 세션에 담긴 회원 정보 확인
 			MemberDTO member = (MemberDTO) session.getAttribute("memInfo");
 			String memId = member.getMemId();
@@ -208,6 +210,7 @@ public class EstimateController {
 					}
 				}
 			}
+			
 
 			estSvc.updateEst(estimate);
 
@@ -261,7 +264,7 @@ public class EstimateController {
 			String memType = member.getMemType();
 
 			System.out.println(memType);
-
+			
 			if (memType.equals("5") || memType.equals("0")) {
 				estList = estSvc.getComSubList(member);
 				System.out.println("여기로옴");
@@ -270,7 +273,8 @@ public class EstimateController {
 			}
 
 			System.out.println(estList);
-
+			
+			
 			model.addAttribute("keyEstList", estList);
 
 			return "estimate/estSubmitList";
@@ -312,8 +316,33 @@ public class EstimateController {
 		}
 		System.out.println(estArea);
 		est.setEstArea(estArea);
+		
+		try {
+		    // String -> double 변환
+		    double area = Double.parseDouble(estArea); // "80.32" -> 80.32
+
+		    // 면적에 따른 추가 시공 기간 계산
+		    int additionalDays = estSvc.calculateConstructionPeriod(area);
+
+		    // 시작 날짜 가져오기
+		    String startDate = est.getEstSdate(); // 예: "2025-02-14"
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    Date date = sdf.parse(startDate);
+
+		    // 추가 기간을 더한 날짜 계산
+		    Calendar calendar = Calendar.getInstance();
+		    calendar.setTime(date);
+		    calendar.add(Calendar.DATE, additionalDays);
+
+		    // 계산된 종료 날짜를 포맷팅
+		    String endDate = sdf.format(calendar.getTime());
+		    est.setEstEdate(endDate); // 종료일 저장 필드로 설정			
+			
+		}catch (Exception e) {}
+
 		System.out.println("DB 저장전 : " + est);
 		// 제출하기 누르면 오는 페이지 제출된 프로젝트 리스트
+		
 		estSvc.estSubmit(est);
 
 		List<EstimateDTO> estList = estSvc.getMemSubList(memId);
@@ -351,7 +380,7 @@ public class EstimateController {
 		String estType = est.getEstType();
 
 		// http://192.168.0.187:5000/material?area=50&type=1
-		String flaskUrl = "http://192.168.0.187:5000/material?area=" + estArea + "&type=" + estType;
+		String flaskUrl = "http://192.168.0.47:5000/material?area=" + estArea + "&type=" + estType;
 
 		System.out.println("Flask URL: " + flaskUrl);
 
@@ -377,9 +406,12 @@ public class EstimateController {
 				// DB에서 데이터를 불러오는 서비스 호출 (각 itemId로 조회)
 				List<MaterialDTO> materialList = new ArrayList<>();
 
+				long totalAmount = 0;
+				
 				for (Map.Entry<String, Double> entry : dataMap.entrySet()) {
 					String itemId = entry.getKey(); // itemId (key)
-					Double itemQuantity = entry.getValue(); // itemQuantity (value)
+				    // itemQuantity를 int로 받아서 사용
+					long itemQuantity = entry.getValue().longValue(); // Double -> long로 변환
 
 					// DB에서 itemId에 맞는 정보 조회 (예: 서비스 호출)
 					MaterialDTO material = matSvc.getMaterialByItemId(itemId); // DB 조회 메서드
@@ -388,14 +420,36 @@ public class EstimateController {
 						// DB에서 조회한 데이터와 itemQuantity를 MaterialDTO에 설정
 						material.setItemQuantity(itemQuantity);
 						
-						System.out.println(material);
+				        // itemPrice가 String 타입이므로 이를 int로 변환
+				        int itemPrice = Integer.parseInt(material.getItemPrice());  // String -> int 변환
+
+				        // itemQuantity는 이미 int로 변환했으므로 곱셈을 바로 진행
+				        long itemTotalPrice = itemPrice * itemQuantity; // itemQuantity는 int
+
+				        // 총 금액에 합산
+				        totalAmount += itemTotalPrice;						
+						
 						// 조회된 DTO를 리스트에 추가
 						materialList.add(material);
 						
 					}
 				}
 				
-				System.out.println(materialList);
+				Long constructionCost = totalAmount * 20 / 100;  // 시공비 20% (Long 타입으로 계산)
+				Long vat = (totalAmount + constructionCost) * 10 / 100;  // 부가세 10% (자재 가격 + 시공비에 대해 계산)
+				Long finalAmount = totalAmount + constructionCost + vat;  // 최종 금액 (자재 가격 + 시공비 + 부가세)
+				
+				// 금액 포맷팅 (3자리마다 쉼표 추가)
+				DecimalFormat df = new DecimalFormat("#,###");
+				String formattedTotalAmount = df.format(totalAmount);
+				String formattedConstructionCost = df.format(constructionCost);
+				String formattedVat = df.format(vat);
+				String formattedFinalAmount = df.format(finalAmount);
+				
+				model.addAttribute("formattedTotalAmount", formattedTotalAmount);	// 자재비 총합
+				model.addAttribute("formattedConstructionCost", formattedConstructionCost);	// 시공비
+				model.addAttribute("formattedVat", formattedVat);	// 부가세
+				model.addAttribute("formattedFinalAmount", formattedFinalAmount); // 최종 금액
 				
 				String memId = est.getMemId();
 				MemberDTO member = memSvc.getMemInfo(memId);
@@ -415,6 +469,15 @@ public class EstimateController {
 		}
 
 		return "estimate/estDetailView";
+	}
+	
+	@GetMapping("/estErr")
+	public String estErr(@RequestParam("estId") int estId) {
+		
+		// 임시견적서로 보내버리기
+		estSvc.estErr(estId);
+		
+		return "redirect:/estWrite";
 	}
 
 }

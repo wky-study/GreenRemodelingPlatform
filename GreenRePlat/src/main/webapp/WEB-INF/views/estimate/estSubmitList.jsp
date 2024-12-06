@@ -58,20 +58,38 @@
 								  
 								  <tbody>
 										<c:forEach items="${keyEstList}" var="EstimateDTO"  varStatus="status">
-										    <tr class="clickable-row" onclick="goToEstDetail(${EstimateDTO.estId})">
-										      <th scope="row">${status.index + 1}</th>
-										      <td>${EstimateDTO.estAddress}</td>
-										      <td>${EstimateDTO.dongNm}</td>
-										      <td>${EstimateDTO.hoNm}</td>
-										      <td>${EstimateDTO.estArea}</td>
-										      <td>${EstimateDTO.estSdate}</td>
-										    </tr>
+											<c:if test="${EstimateDTO.estArea != '알 수 없음'}">
+											    <tr class="clickable-row" onclick="goToEstDetail(${EstimateDTO.estId})">
+											      <th scope="row">${status.index + 1}</th>
+											      <td>${EstimateDTO.estAddress}</td>
+											      <td>${EstimateDTO.dongNm}</td>
+											      <td>${EstimateDTO.hoNm}</td>
+											      <td>${EstimateDTO.estArea}</td>
+											      <td>${EstimateDTO.estSdate}</td>
+											    </tr>
+											</c:if>
+											
+											<c:if test="${EstimateDTO.estArea == '알 수 없음'}">
+											    <tr class="clickable-row" onclick="errClick(${EstimateDTO.estId})">
+											      <th scope="row">${status.index + 1}</th>
+											      <td>${EstimateDTO.estAddress}</td>
+											      <td>${EstimateDTO.dongNm}</td>
+											      <td>${EstimateDTO.hoNm}</td>
+											      <td>${EstimateDTO.estArea}</td>
+											      <td>${EstimateDTO.estSdate}</td>
+											    </tr>
+											</c:if>
 										</c:forEach>					    
-								    
 								  </tbody>
 								  
 								</table>					
 							</div>
+							
+							<c:if test="${empty keyEstList}">
+							  	<div class="alert alert-danger text-center">
+							  		제출된 견적서가 없습니다.
+							  	</div>
+							</c:if>	
 										
 						</div>
 						<!-- /Account -->
@@ -80,6 +98,12 @@
 			</div>
 		</div>
 	</div>
+	
+	
+
+		
+	
+	
 	<!-- Content wrapper -->
 
 
@@ -93,6 +117,10 @@
         window.location.href = '${pageContext.request.contextPath}/estDetailView?estId=' + estId;
       }
     
+    function errClick(estId){
+    	alert("유효하지 않은 견적서 입니다. 다시 견적서를 작성해주세요.");
+    	 window.location.href = '${pageContext.request.contextPath}/estErr?estId=' + estId;
+    }
     
     </script>
 	

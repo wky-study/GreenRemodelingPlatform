@@ -91,7 +91,8 @@
         UPDATE ESTIMATE
         SET 
             est_submit = 'Y',
-            est_area = #{estArea}
+            est_area = #{estArea},
+            est_edate = #{estEdate}
         WHERE 1=1 
         AND est_id = #{estId}
     </update>
@@ -135,6 +136,14 @@
 	</update>
 
 
+	<update id="estErr">
+        UPDATE ESTIMATE 
+        SET 
+            est_submit = 'N'
+        WHERE 1=1 
+        AND est_id = #{estId}		
+	
+	</update>
 
 
 </mapper>

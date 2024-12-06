@@ -35,4 +35,7 @@ public interface IReviewDAO {
 	// 탈퇴 회원 아이디 null 값 변경
 	int noMemIdReview(String memId);
 	
+	// 홈 화면용
+	List<ReviewDTO> getHomeReview();
+	
 }

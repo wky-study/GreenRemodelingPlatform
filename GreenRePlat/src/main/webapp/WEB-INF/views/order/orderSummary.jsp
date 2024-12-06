@@ -57,6 +57,11 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/chatListView"><i
 								class="bx bx-link-alt me-1"></i>채팅 목록</a></li>								
+<%-- 						<c:if test="${sessionScope.memInfo != null && sessionScope.memInfo.memType == 5}">
+							<li class="nav-item"><a class="nav-link"
+								href="${pageContext.request.contextPath}/planView"><i
+									class="bx bx-link-alt me-1"></i>시공 일정</a></li>
+						</c:if>		 --%>						
 					</ul>
 				</div>
 			</div>
@@ -66,7 +71,7 @@
 			<div class="card-body">
 			
 				<div class="d-flex justify-content-end mb-5">
-					<button class="btn btn-outline-success" id="downloadBtn" type="button">Excele 다운로드</button>
+					<button class="btn btn-outline-success" id="downloadBtn" type="button">Excel 다운로드</button>
 				</div>
 				
 				<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">

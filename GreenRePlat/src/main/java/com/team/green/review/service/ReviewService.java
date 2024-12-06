@@ -70,4 +70,10 @@ public class ReviewService {
 		int result = dao.noMemIdReview(memId);
 		return result;
 	};
+	
+	// 홈 화면용
+	public List<ReviewDTO> getHomeReview(){
+		List<ReviewDTO>result = dao.getHomeReview();
+		return result;
+	};
 }

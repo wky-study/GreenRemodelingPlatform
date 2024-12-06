@@ -8,6 +8,7 @@ public class EstimateDTO {
 	private String dongNm;
 	private String hoNm;
 	private String estSdate;
+	private String estEdate;
 	private String estInteriorDesc;
 	private String estSubmit;
 	private String sigunguCd;
@@ -20,14 +21,15 @@ public class EstimateDTO {
 	}
 
 	public EstimateDTO(int estId, String memId, String estAddress, String dongNm, String hoNm, String estSdate,
-			String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd, String estArea, String comId,
-			String estType) {
+			String estEdate, String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd,
+			String estArea, String comId, String estType) {
 		this.estId = estId;
 		this.memId = memId;
 		this.estAddress = estAddress;
 		this.dongNm = dongNm;
 		this.hoNm = hoNm;
 		this.estSdate = estSdate;
+		this.estEdate = estEdate;
 		this.estInteriorDesc = estInteriorDesc;
 		this.estSubmit = estSubmit;
 		this.sigunguCd = sigunguCd;
@@ -40,9 +42,9 @@ public class EstimateDTO {
 	@Override
 	public String toString() {
 		return "EstimateDTO [estId=" + estId + ", memId=" + memId + ", estAddress=" + estAddress + ", dongNm=" + dongNm
-				+ ", hoNm=" + hoNm + ", estSdate=" + estSdate + ", estInteriorDesc=" + estInteriorDesc + ", estSubmit="
-				+ estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd + ", estArea=" + estArea
-				+ ", comId=" + comId + ", estType=" + estType + "]";
+				+ ", hoNm=" + hoNm + ", estSdate=" + estSdate + ", estEdate=" + estEdate + ", estInteriorDesc="
+				+ estInteriorDesc + ", estSubmit=" + estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd
+				+ ", estArea=" + estArea + ", comId=" + comId + ", estType=" + estType + "]";
 	}
 
 	public int getEstId() {
@@ -91,6 +93,14 @@ public class EstimateDTO {
 
 	public void setEstSdate(String estSdate) {
 		this.estSdate = estSdate;
+	}
+
+	public String getEstEdate() {
+		return estEdate;
+	}
+
+	public void setEstEdate(String estEdate) {
+		this.estEdate = estEdate;
 	}
 
 	public String getEstInteriorDesc() {
@@ -149,11 +159,5 @@ public class EstimateDTO {
 		this.estType = estType;
 	}
 
-
-
-
-
-	
-	
 	
 }
