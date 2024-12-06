@@ -112,7 +112,15 @@
 				    
 				  </ul>
 				</nav>
-			</div>					
+			</div>		
+			
+			<!-- 제품 등록 -->
+			<c:if test="${sessionScope.memInfo.memType == 0}">
+				<div class="d-flex justify-content-end me-5 my-write-btn" >
+					<button id="writeBtn" class="btn btn-outline-secondary" >제품등록</button>
+				</div>			
+			</c:if>
+						
 			<!-- 검색기능 -->
 			<div class="d-flex justify-content-center mb-3">
 				<form class="d-flex" action="${pageContext.request.contextPath }/productView" method="GET" >
@@ -219,6 +227,15 @@
 	})	
 	
 	
+	</script>
+	
+			<!-- 글 작성 script -->
+	<script type="text/javascript">
+		document.getElementById("writeBtn").addEventListener("click", ()=>{
+			
+			location.href = '${pageContext.request.contextPath }/productWriteView';
+			
+		})
 	</script>
 	
 
