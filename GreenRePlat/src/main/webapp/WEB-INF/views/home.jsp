@@ -19,6 +19,12 @@
 .card-image-container {
     position: relative;
 }
+.card-image-container img {
+    transition: transform 0.3s ease; 
+}
+.card-image-container img:hover {
+	transform: scale(1.03); 
+}
 
 .card-title-overlay {
     position: absolute;
