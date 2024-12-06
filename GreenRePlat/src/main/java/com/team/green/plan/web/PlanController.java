@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team.green.estimate.dto.EstimateDTO;
+import com.team.green.estimate.service.EstimateService;
 import com.team.green.member.dto.MemberDTO;
 import com.team.green.plan.dao.IPlanDAO;
 import com.team.green.plan.dto.ContDTO;
@@ -37,27 +39,36 @@ public class PlanController {
 	@Autowired
 	private PlanService planService;
 	
+	@Autowired
+	private EstimateService estSvc ;
+	
 	@RequestMapping("/planView")
 	public String planView(Model model, HttpSession session) {
+
+		MemberDTO member= (MemberDTO)session.getAttribute("memInfo");
 		
-		
-		
-		MemberDTO login= (MemberDTO)session.getAttribute("memInfo");
-		if (login == null) {
+		if (member == null) {
 			return "redirect:/loginView"; // 로그인 페이지로 리다이렉트
 		}
-		String memId = login.getMemId();
-		String memType = login.getMemType();
 		
-		List<PlanDTO> planList = planService.getPlanList(login);
+		List<EstimateDTO> estList = null;
+		String memId = member.getMemId();
+		String memType = member.getMemType();
 
-		// planList 를 JSON String으로 변환해서 모델에 저장 (Gson 이용) "[{}, {}, {}]"
+		if (memType.equals("5") || memType.equals("0")) {
+			estList = estSvc.getComSubList(member);
+			System.out.println("여기로옴");
+		} else {
+			estList = estSvc.getMemSubList(memId);
+		}
 		
+		model.addAttribute("estList", estList);
 		
-		
-        model.addAttribute("planList", planList);
-        System.out.println();
-        System.out.println("플랜리스트:"+planList);
+//		List<PlanDTO> planList = planService.getPlanList(login);
+//
+//        model.addAttribute("planList", planList);
+//        System.out.println();
+//        System.out.println("플랜리스트:"+planList);
 
 		
 		

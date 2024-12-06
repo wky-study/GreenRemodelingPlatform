@@ -48,7 +48,11 @@
 					<form action="${pageContext.request.contextPath }/prodDeleteDo" method="POST" id="delForm">							
 						<div class="d-flex justify-content-end">
 							<input type="hidden" value="${keyProduct.prodNo}" name="no">
-							<button class="btn btn-outline-danger py-3 px-5 mt-3 me-3"  type="button" id="delBtn" >삭제</button>
+							
+							<c:if test="${sessionScope.memInfo.memType == 0}">
+								<button class="btn btn-outline-danger py-3 px-5 mt-3 me-3"  type="button" id="delBtn" >삭제</button>
+							</c:if>							
+							
 						</div>
 					</form>						
 				

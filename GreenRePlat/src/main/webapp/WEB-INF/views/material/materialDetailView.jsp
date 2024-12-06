@@ -94,7 +94,7 @@
 					</div>
 
 					<!-- 자재 상세 정보 -->
-					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="padding-top: 10%;">
 						<h5 class="mb-3">
 							<i class="far fa-check-circle text-primary me-3"></i>자재이름 :
 							${keyMaterial.itemName}
@@ -116,17 +116,6 @@
 							${keyMaterial.itemEffiLevel}등급
 						</h5>
 
-						<!-- 수량 선택 및 가격 표시 -->
-						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>수량 <input
-								type="number" id="quantity" value="1" min="1"
-								onchange="updateTotalPrice(10000)"
-								style="width: 60px; margin-left: 10px;"> <a
-								class="badge text-bg-light text-dark">수량을선택해주세요</a>
-						</h5>
-
-						<!-- 견적버튼 -->
-						<a class="btn btn-primary py-3 px-5 mt-3" href="">견적서 담기</a>
 					</div>
 				</div>
 

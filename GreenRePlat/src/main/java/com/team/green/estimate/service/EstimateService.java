@@ -81,4 +81,31 @@ public class EstimateService {
 		return result;
 	};
 	
+	// 모델링한 타입 업데이트
+	public int updateType(EstimateDTO estimate) {
+		int result = dao.updateType(estimate);
+		return result;
+	};
+	
+	// 면적값 없을때 업데이트
+	public int estErr(int estId) {
+		int result = dao.estErr(estId);
+		return result;
+	};
+	
+	// 종료날짜 계산
+    public int calculateConstructionPeriod(double squareMeter) {
+        if (squareMeter <= 66) {
+            return 7; // 7일 = 1주
+        } else if (squareMeter <= 132) {
+            return 14; // 14일 = 2주
+        } else if (squareMeter <= 198) {
+            return 21; // 21일 = 3주
+        } else {
+            // 198㎡ 초과: 기본 4주 + 추가 계산
+            int extraDays = (int)((squareMeter - 198) / 33) * 2; // 33㎡당 2일 추가
+            return 28 + extraDays;
+        }
+    }
+	
 }

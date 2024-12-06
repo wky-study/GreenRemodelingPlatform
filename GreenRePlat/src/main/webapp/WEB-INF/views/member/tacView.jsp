@@ -38,26 +38,6 @@
 	<!-- 이전페이지 저장된 정보들 -->
 	<form action="${pageContext.request.contextPath}/registView"
 		method="POST">
-		<input type="hidden" name="inputId" value="${sessionScope.inputId}">
-		<input type="hidden" name="inputPw" value="${sessionScope.inputPw}">
-		<input type="hidden" id="inputPassword2"
-			value="${sessionScope.inputPassword2}"> <input type="hidden"
-			name="inputName" value="${sessionScope.inputName}"> <input
-			type="hidden" name="inputName" value="${sessionScope.inputName}">
-		<input type="hidden" name="inputRn" value="${sessionScope.inputRn}">
-		<input type="hidden" id="postcode" value="${sessionScope.postcode}">
-		<input type="hidden" id="roadAddress"
-			value="${sessionScope.roadAddress}"> <input type="hidden"
-			id="jibunAddress" value="${sessionScope.jibunAddress}"> <input
-			type="hidden" id="detailAddress"
-			value="${sessionScope.detailAddress}"> <input type="hidden"
-			id="extraAddress" value="${sessionScope.extraAddress}"> <input
-			type="hidden" name="inputPhone" value="${sessionScope.inputPhone}">
-		<input type="hidden" name="inputNick"
-			value="${sessionScope.inputNick}"> <input type="hidden"
-			name="inputNick" value="${sessionScope.inputNick}"> <input
-			type="hidden" name="inputEmail" value="${sessionScope.inputEmail}">
-		<input type="hidden" name="memType" value="${sessionScope.memType}">
 		<button class="btn btn-primary" type="submit" style="display: block; margin: 0 auto;">돌아가기</button>
 	</form>
 

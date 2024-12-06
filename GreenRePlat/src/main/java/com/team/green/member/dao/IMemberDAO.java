@@ -31,5 +31,12 @@ public interface IMemberDAO {
     // 기업 회원 아이디 찾기
     String getComId(String memName);
     
+    // 회원 정보 조회
+    MemberDTO getMemInfo(String memId);
+
+    // 비밀번호찾기
+    MemberDTO getMI(String memId, String memName);
+	
+    
 }
 

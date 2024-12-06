@@ -8,38 +8,43 @@ public class EstimateDTO {
 	private String dongNm;
 	private String hoNm;
 	private String estSdate;
+	private String estEdate;
 	private String estInteriorDesc;
 	private String estSubmit;
 	private String sigunguCd;
 	private String bjdongCd;
 	private String estArea;
 	private String comId;
+	private String estType;
 	
 	public EstimateDTO() {
 	}
 
 	public EstimateDTO(int estId, String memId, String estAddress, String dongNm, String hoNm, String estSdate,
-			String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd, String estArea, String comId) {
+			String estEdate, String estInteriorDesc, String estSubmit, String sigunguCd, String bjdongCd,
+			String estArea, String comId, String estType) {
 		this.estId = estId;
 		this.memId = memId;
 		this.estAddress = estAddress;
 		this.dongNm = dongNm;
 		this.hoNm = hoNm;
 		this.estSdate = estSdate;
+		this.estEdate = estEdate;
 		this.estInteriorDesc = estInteriorDesc;
 		this.estSubmit = estSubmit;
 		this.sigunguCd = sigunguCd;
 		this.bjdongCd = bjdongCd;
 		this.estArea = estArea;
 		this.comId = comId;
+		this.estType = estType;
 	}
 
 	@Override
 	public String toString() {
 		return "EstimateDTO [estId=" + estId + ", memId=" + memId + ", estAddress=" + estAddress + ", dongNm=" + dongNm
-				+ ", hoNm=" + hoNm + ", estSdate=" + estSdate + ", estInteriorDesc=" + estInteriorDesc + ", estSubmit="
-				+ estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd + ", estArea=" + estArea
-				+ ", comId=" + comId + "]";
+				+ ", hoNm=" + hoNm + ", estSdate=" + estSdate + ", estEdate=" + estEdate + ", estInteriorDesc="
+				+ estInteriorDesc + ", estSubmit=" + estSubmit + ", sigunguCd=" + sigunguCd + ", bjdongCd=" + bjdongCd
+				+ ", estArea=" + estArea + ", comId=" + comId + ", estType=" + estType + "]";
 	}
 
 	public int getEstId() {
@@ -90,6 +95,14 @@ public class EstimateDTO {
 		this.estSdate = estSdate;
 	}
 
+	public String getEstEdate() {
+		return estEdate;
+	}
+
+	public void setEstEdate(String estEdate) {
+		this.estEdate = estEdate;
+	}
+
 	public String getEstInteriorDesc() {
 		return estInteriorDesc;
 	}
@@ -138,11 +151,13 @@ public class EstimateDTO {
 		this.comId = comId;
 	}
 
+	public String getEstType() {
+		return estType;
+	}
 
+	public void setEstType(String estType) {
+		this.estType = estType;
+	}
 
-
-
-	
-	
 	
 }

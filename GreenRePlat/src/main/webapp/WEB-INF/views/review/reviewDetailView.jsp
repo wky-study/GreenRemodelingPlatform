@@ -45,7 +45,7 @@
 				<!-- 바디 부분 -->
 				<div class="d-block">
 					<div class="d-flex justify-content-between">
-						<h1>${keyReview.reviewTitle }</h1>
+						<h3>${keyReview.reviewTitle }</h3>
 						<span>${keyReview.reviewDate }</span>
 					</div>
 					<div class="d-flex justify-content-end">

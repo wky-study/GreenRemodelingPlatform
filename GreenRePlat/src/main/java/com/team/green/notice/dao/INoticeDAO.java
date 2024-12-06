@@ -35,5 +35,6 @@ public interface INoticeDAO {
 	// 게시글 번호 조회
 	int getNoticeNo();
 	
+	List<NoticeDTO> getNoti(int limit);
 
 }

@@ -72,5 +72,18 @@ public class MemberService {
     	String result = dao.getComId(memName);
     	return result;
     };
+    
+    // 회원 정보 조회
+    public MemberDTO getMemInfo(String memId) {
+    	MemberDTO result = dao.getMemInfo(memId);
+    	return result;
+    };
+    
+    // 비밀번호찾기
+    public MemberDTO getMI(String memId, String memName) {
+        return dao.getMI(memId, memName);
+    }
+
+
 
 }
