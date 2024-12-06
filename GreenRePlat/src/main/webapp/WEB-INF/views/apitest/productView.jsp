@@ -22,6 +22,16 @@
 		cursor:pointer;
 	}
 	
+	.img-fluid {
+		width: 100%;
+}
+  .carousel-image {
+    width: 100%;         
+    height: 500px;           
+    object-fit: cover;     
+    object-position: center; 
+  }
+	
 </style>
 
 
@@ -31,195 +41,191 @@
 
 	<div class="container-fluid">
 		<div class="card">
-			
-			<div class="card-body">
-				<div class="col-md-4 d-flex my-card-box w-100 justify-content-between">
-					<!-- 카드 그리기 -->
-					<c:forEach items="${keyProduct}" var="ProductDTO">
-						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/productDetailView?no=${ProductDTO.prodNo}"'>
-							<img
-								src="${ProductDTO.prodImageSrc}"
-								class="card-img-top" style="height: 200.59px;" >
-							<div class="card-body">
-								<h5 class="card-title">${ProductDTO.prodName}</h5>
-								<p class="card-text">${ProductDTO.prodModel}</p>
-								<span class="fw-bold">${ProductDTO.prodPrice}원</span>
+
+			<div class="container-xxl py-5">
+				<div class="container">
+				
+					<form action="${pageContext.request.contextPath }/prodDeleteDo" method="POST" id="delForm">							
+						<div class="d-flex justify-content-end">
+							<input type="hidden" value="${keyProduct.prodNo}" name="no">
+							<button class="btn btn-outline-danger py-3 px-5 mt-3 me-3"  type="button" id="delBtn" >삭제</button>
+						</div>
+					</form>						
+				
+					<div class="d-flex justify-content-around">
+
+						<div class="col-lg-6 wow fadeInUp border-end" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+							
+							<div id="carouselExampleFade" class="carousel slide carousel-fade">
+							
+							  <div class="carousel-inner">
+							  
+							    <div class="carousel-item active">
+							      <img src="${keyProduct.prodImageSrc}" class="carousel-image" >
+							    </div>
+							    
+							    <!-- 이미지 여러개일때 그릴곳 -->
+								<c:forEach items="${keyAtchList}" var="AttachDTO">
+								    <div class="carousel-item">
+								      <img src="${pageContext.request.contextPath }/displayImage?fileName=${AttachDTO.atchFileName} " class="carousel-image" >
+								    </div>							    
+							    </c:forEach>
+
+							    
+							  </div>
+							  
+							  <c:if test="${keyAtchList.size() != 0}">
+								  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+								    <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+								    <span class="visually-hidden">Previous</span>
+								  </button>
+								  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+								    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								    <span class="visually-hidden">Next</span>
+								  </button>
+							  </c:if>
+							  
+							</div>								
+							
+						</div>
+	
+						<div class="d-flex flex-column justify-content-between ms-3" data-wow-delay="0.1s"
+							style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+							<div>
+								<h2 class="mb-4">
+									${keyProduct.prodName}
+								</h2>
+								<span>${keyProduct.prodModel}</span>
+							</div>
+							<div>
+								<h5>업체명 : ${keyProduct.prodName}</h5>
+							</div>
+							<div>
+								<h5>제조원 : ${keyProduct.prodManufacturer}</h5>
+							</div>
+							<div>
+								<h5>에너지효율 : ${keyProduct.prodEfficiency}</h5>
+							</div>
+							<div>
+								<h4>가격 : ${keyProduct.prodPrice}</h4>
+							</div>
+							<div class="d-flex">
+								<button class="btn btn-outline-dark py-3 px-5 mt-3 me-3" id="cartBtn" >장바구니</button>
+								<button class="btn btn-dark py-3 px-5 mt-3" id="payBtn" >구매하기</button>
 							</div>
 						</div>
-					</c:forEach>
-					
-					
+
+					</div>
 				</div>
 			</div>
 
-				<!-- 페이징 시작 -->
-			<div class="d-flex justify-content-center">
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination">
-				   
-				  
-				  	<!-- 검색중이면 검색옵션과 검색어를 유지하면서 페이징 처리 -->
-					<!-- 검색중이지 않으면 검색 옵션과 검색어가 주소창에 나타나지 않게 하기 -->
-					<!-- searchWord가 null이면 a태그의 href에서 searchOption 과 searchWord 떼어내기 -->
 
-			    	<!-- 이전 페이지 -->
-					    <li class="page-item ${keySearch.firstPage == 1 ? 'disabled' : '' }">
 
-					    	<c:if test="${keySearch.searchWord != null}">
-						      <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-					    	</c:if>
-					    	<c:if test="${keySearch.searchWord == null}">
-						      <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.firstPage - 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-					    	</c:if>
-			    	
-
-					    </li>
-				    
-				    <!-- 중간 페이지 번호 부분 -->
-				    <!-- model에 keySearch 이름으로 searchVO를 담음 -->
-				    <!-- searchVO 내 pageNo, firstPage, lastPage 채워져있음 -->
-			    			    
-					    <c:forEach begin="${keySearch.firstPage }" end="${keySearch.lastPage }" var="num">
-							    <li class="page-item ${keySearch.pageNo == num ? 'active' : '' } ">
-							    	<c:if test="${keySearch.searchWord != null}">
-									    <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
-							    	</c:if>						    
-							    	<c:if test="${keySearch.searchWord == null}">
-									    <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${num }&rowSizePerPage=${keySearch.rowSizePerPage}">${num }</a>
-							    	</c:if>						    
-							    </li>
-					    </c:forEach>
-				   
-				    <!-- 다음 페이지 -->
-				    <!-- 마지막 페이지 도달 시 disabled 추가 -->
-					    <li class="page-item ${keySearch.pageNo == keySearch.finalPage ? 'disabled' : ''  }">
-						    <c:if test="${keySearch.searchWord == null}">
-						     <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}" aria-label="Next">
-						    	 <span aria-hidden="true">&raquo;</span>
-						     </a>
-						    </c:if>
-						    <c:if test="${keySearch.searchWord != null}">
-						     <a class="page-link" href="${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1 }&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}" aria-label="Next">
-						    	 <span aria-hidden="true">&raquo;</span>
-						     </a>
-						    </c:if>
-					    </li>
-
-				    
-				  </ul>
-				</nav>
-			</div>					
-			<!-- 검색기능 -->
-			<div class="d-flex justify-content-center mb-3">
-				<form class="d-flex" action="${pageContext.request.contextPath }/productView" method="GET" >
-					<select class="form-select me-1" name="searchOption">
-						<option value="name" selected>제품명</option>
-						<option value="model">모델명</option>
-						<option value="type">타입</option>
-					</select>
-
-					<input class="form-control me-1" type="text" name="searchWord">
-					<button class="btn btn-outline-primary" type="submit">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-						  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-						</svg>
-					</button>
-				</form>
-			</div>				
 
 		</div>
-
-
-
-
-
 	</div>
 
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
-	<script type="text/javascript">
-	    window.onload = function() {
-	        const baseUrl = "${pageContext.request.contextPath}/productView";
-	        // 주소창의 URL을 기본 URL로 설정
-	        window.history.replaceState({}, '', baseUrl);
-	    };	
-	</script>
-
 
 	<script type="text/javascript">
 	
-	let v_search = '${keySearch.searchWord}';
+	let v_name = "${keyProduct.prodName}";
+	let v_price = "${keyProduct.prodPrice}";
+	let v_memId = "${sessionScope.memInfo.memId}";
+	v_price = parseInt(v_price.replace(/,/g, ''));
 	
-	function f_change() {
-		console.log(event.target);
-		console.log(event.target.value);
-		
-		let v_url = "${pageContext.request.contextPath}/productView";
-		let v_query = "?rowSizePerPage=" + event.target.value;
-			v_query += "&pageNo=${keySearch.pageNo}";
-		
-		if(v_search){
-			v_query += "&searchOption=${keySearch.searchOption}";
-			v_query += "&searchWord=${keySearch.searchWord}";
-		}
-			
-		
-		location.href = v_url + v_query;
-	}	
+	console.log(v_price);
 	
-	/* 끝으로 이동 */
-	let v_aTagBtn = document.getElementById("aTagBtn");
-	v_aTagBtn.addEventListener("click", ()=>{
-		
-	     let v_searchWord = '${keySearch.searchWord}';
-	     let v_lastPage = '${keySearch.lastPage}';
-	     let v_rowSizePerPage = '${keySearch.rowSizePerPage}';
-	     console.log(v_searchWord);
-	     console.log(v_lastPage);
-	     console.log(v_rowSizePerPage);
-	     
-	     if(v_searchWord == "" ){
-	    	 if(v_lastPage % 10 != 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage}";
-	    	 }else if(v_lastPage % 10 == 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1}";
-	    	 }
-	     }else if(v_searchWord != ""){
-	    	 if(v_lastPage % 10 != 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
-	    	 }else if(v_lastPage % 10 == 0){
-	    		 v_aTagBtn.href = "${pageContext.request.contextPath }/productView?pageNo=${keySearch.lastPage + 1}&rowSizePerPage=${keySearch.rowSizePerPage}&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}";
-	    	 }
-	     }
-		
-	})	
+
 	
+     // 카카오페이 결제 팝업창 연결
+    $(function() {
+        $("#payBtn").click(function(e) {
+        	
+        	let v_orderNo = 'ORD' + new Date().getTime(); // 예: 'ORD' + 현재 시간(ms)
+            // 아래 데이터 외에도 필요한 데이터를 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨
+            let data = [{
+                name: v_name,    // 카카오페이에 보낼 대표 상품명
+                totalPrice: v_price,  // 총 결제금액
+                memId: v_memId,
+                partnerOrderId: v_orderNo
+            }];
+          
+        	if(!v_memId){
+        		alert("로그인 후 이용해주세요.");
+        		location.href = '${pageContext.request.contextPath}/loginView'
+        	}
+        	
+        	console.log(data);
+            
+            $.ajax({
+                type: 'POST',
+                url: '${pageContext.request.contextPath}/pay/ready',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: function(response) {
+                	
+                	window.open(response.next_redirect_pc_url, "_blank");
+                }
+            });
+        });
+    }); 
 	
-		/* 인풋태그 엔터 입력시 반응 */
-		let v_searchButton = document.getElementById("searchButton");
-		
-		document.addEventListener("keydown", ()=>{
-			if (event.key === "Enter"){
-				v_searchButton.click();
-			}
-			
+    
+     
+    // 장바구니 버튼 클릭시 
+    document.getElementById("cartBtn").addEventListener("click", ()=>{
+    	
+    	if(!v_memId){
+    		alert("로그인 후 이용해주세요.");
+    		location.href = '${pageContext.request.contextPath}/loginView'
+    	}else{
+    		alert("장바구니에 담겼습니다.");
+    		
+    		let v_prodNo = "${keyProduct.prodNo}";
+    		
+    		let v_quantity = 1; 
+    		
+            // 장바구니 정보 설정
+            const cartData = {
+                memId: v_memId, // 사용자 아이디 (로그인된 사용자 ID)
+                prodNo: v_prodNo, // 상품 번호
+                quantity: v_quantity // 상품 수량
+            };
+    		
+            let v_url = '${pageContext.request.contextPath}/addToCart';
+            
+    		$.ajax({
+    			type : "POST",
+    			url : v_url,
+    			data : cartData,
+    			success : function(resp){
+    				console.log(resp);	  //JSON 객체 (jQuery에서 자동으로 parse 해줌)
+    			}
+    		});
+    		
+    		
+    	}
+    })
+    
+    
+	/* 게시글 삭제 경고 창 */
+	let v_delForm = document.getElementById("delForm");
+	
+	if(document.getElementById("delBtn")){
+		document.getElementById("delBtn").addEventListener("click", ()=>{
+			/*  삭제 확인 메시지를 띄움 */
+			if(confirm("정말로 삭제하시겠습니까?")){
+				v_delForm.submit();  // submit 버튼을 누른것과 동일
+			};
 		})
-		
-		let v_searchForm = document.getElementById("searchForm");
-			
-		/* 검색 버튼 클릭 */
-		v_searchButton.addEventListener("click", ()=>{
-			
-			v_searchForm.submit();
-		
-	})	
-	
+	}	    
 	
 	</script>
+	
+	
+	
 	
 
 </body>

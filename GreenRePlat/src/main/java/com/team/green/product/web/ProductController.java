@@ -301,6 +301,13 @@ public class ProductController {
 		return "product/ocrTest";
 	}
     
-    
+    @RequestMapping("/apitest")
+    public String getProducts() {
+    	return "/apitest/apitest";
+    }
+    @RequestMapping("/prodViewAPI")
+    public String getProductsFromAPI() {
+    	return "/product/prodViewAPI";
+    }
 	
 }
