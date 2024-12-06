@@ -33,9 +33,10 @@
 }
 /* 이벤트바 div */
 .fc-daygrid-event-harness {
-	pointer-events: none;
+	pointer-events: auto;
 }
-.fc-addEventButton-button{
+
+.fc-addEventButton-button {
 	display: none !important;
 }
 </style>
@@ -67,9 +68,10 @@
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 								class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M15 6l-6 6l6 6"></path>
-                  </svg></span>
+                        <path stroke="none" d="M0 0h24v24H0z"
+									fill="none"></path>
+                        <path d="M15 6l-6 6l6 6"></path>
+                    </svg></span>
 					</button>
 
 					<h2 class="fc-toolbar-title" id="calendarMonth"></h2>
@@ -81,9 +83,10 @@
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 								class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M9 6l6 6l-6 6"></path>
-                  </svg></span>
+                        <path stroke="none" d="M0 0h24v24H0z"
+									fill="none"></path>
+                        <path d="M9 6l6 6l-6 6"></path>
+                    </svg></span>
 					</button>
 				</div>
 
@@ -102,16 +105,11 @@
 				<div class="d-flex justify-content-between"></div>
 				<div id="calendarDates" class="d-flex flex-wrap">
 					<!-- Dates will be injected here -->
-
 				</div>
 			</div>
 		</div>
-
 	</div>
 
-
-	<!-- BEGIN MODAL -->
-	<form action='<c:url value="/planEditDo" />' method="POST">
 		<div class="modal fade" id="addEventsModal" tabindex="-1"
 			aria-labelledby="eventModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -126,8 +124,8 @@
 						<div class="row">
 							<!-- Event Title Input -->
 							<div class="col-md-12">
-								<label class="form-label" for="event-title">제목</label>
-								<input id="event-title" type="text" class="form-control"
+								<label class="form-label" for="event-title">제목</label> <input
+									id="event-title" type="text" class="form-control"
 									placeholder="프로젝트 제목입력" />
 							</div>
 
@@ -135,47 +133,43 @@
 							<div class="col-md-12 mt-4">
 								<label class="form-label">Event Color</label>
 								<div class="d-flex">
-									
-									
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="radio"
 											name="event-level" value="Primary" id="modalPrimary" /> <label
 											class="form-check-label" for="modalPrimary">Primary</label>
 									</div>
-									
 								</div>
 							</div>
 
 							<!-- Event Start Date -->
 							<div class="col-md-6 mt-4">
-								<label class="form-label" for="event-start-date">시작일</label> <input id="event-start-date" type="date"
-									class="form-control" name="quoSdate" />
+								<label class="form-label" for="event-start-date">시작일</label> <input
+									id="event-start-date" type="date" class="form-control"
+									name="quoSdate" />
 							</div>
 
 							<!-- Event End Date -->
 							<div class="col-md-6 mt-4">
-								<label class="form-label" for="event-end-date">종료일</label> <input id="event-end-date" type="date"
-									class="form-control" name="quoEdate" />
+								<label class="form-label" for="event-end-date">종료일</label> <input
+									id="event-end-date" type="date" class="form-control"
+									name="quoEdate" />
 							</div>
 						</div>
-	</form>
 						<!-- 컨텐츠 첨부 -->
 						<div class="col-md-12 mt-6">
 							<div>
 								<label class="form-label">Contents</label>
-							 	<form id="contForm" action="<c:url value="/writeContDo" />" method="POST">
-								<input id="contInput" type="text" class="form-control" name="cont" >
-								<input type="hidden" id="hiddenQuoId" name="hiddenQuoId" value="">
-								<input type="hidden" name="memId" value="${sessionScope.memInfo.memId }">
-								
-								<button id="contBtn" type="button">등록</button>
+								<form id="contForm" action="<c:url value='/writeContDo' />" method="POST">
+									<input id="contInput" type="text" class="form-control"
+										name="cont"> <input type="hidden" id="hiddenQuoId"
+										name="hiddenQuoId" value=""> <input type="hidden"
+										name="memId" value="${sessionScope.memInfo.memId}">
+									<button id="contBtn" type="button">등록</button>
 								</form>
 							</div>
-							<ul class = "list-group d-flex" id = "myConts"></ul>
+							<ul class="list-group d-flex" id="myConts"></ul>
 						</div>
-						<input type="hidden" name="quoId" id="event-quo-id" />
-
-
+						<input type="hidden" name="quoId" id="event-quo-id">
 					</div>
 					<div class="modal-footer">
 						<!-- Close Button -->
@@ -183,23 +177,18 @@
 							data-bs-dismiss="modal">Close</button>
 
 						<!-- Update Event Button -->
-
-						<button type="submit" class="btn btn-success btn-update-event">
-							Update changes</button>
+						<button type="submit" class="btn btn-success btn-update-event">Update
+							changes</button>
 						<button type="button" class="btn btn-danger btn-update-event"
 							data-fc-event-public-id="">Delete event</button>
 
-
 						<!-- Add Event Button -->
-						<button type="button" class="btn btn-primary btn-add-event">
-							Add Event</button>
+						<button type="button" class="btn btn-primary btn-add-event">Add
+							Event</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	<!-- END MODAL -->
-	</div>
-	</div>
 
 
 
@@ -271,6 +260,7 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
 	    data.title = "${est.estAddress}";
 	    data.start = "${est.estSdate}";
 	    data.end = "${est.estEdate}";
+	    data.url = "${pageContext.request.contextPath}/estDetailView?estId=${est.estId}"; // URL 추가
 	   	data.extendedProps = { calendar: "Primary" };
 	    calendarEventsList.push(data);
 	</c:forEach>
@@ -305,8 +295,11 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
       var eventObj = info.event;
 
       if (eventObj.url) {
-        window.open(eventObj.url);
-        info.jsEvent.preventDefault();
+    	  
+		  console.log(eventObj.url);
+    	  
+          window.location.href = eventObj.url; // 현재 창에서 URL로 이동
+          info.jsEvent.preventDefault(); // 기본 동작 방지
       } else {
         var getModalEventId = eventObj._def.publicId;
         var getModalEventLevel = eventObj._def.extendedProps["calendar"];
@@ -314,7 +307,7 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
           'input[value="' + getModalEventLevel + '"]'
         );
         
-     // 모달에 quoId 값 설정
+/*      // 모달에 quoId 값 설정
         var quoId = eventObj.id;  // 이미 이벤트 객체에 quoId가 들어있다고 가정
         let quoIdValue = '';
         console.log("픈ㅇㅇ",quoId);
@@ -348,7 +341,7 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
     		
     	
     			
-    	});
+    	}); */
         
         
         
@@ -485,7 +478,9 @@ console.log(document.getElementById('addEventsModal')); // DOM에 존재하는�
   
 </script>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+		crossorigin="anonymous"></script>
 
 
 

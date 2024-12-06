@@ -139,6 +139,7 @@
 		    ORDER BY review_no DESC
 		)
 		WHERE ROWNUM &lt;= 3
+		AND del_yn = 'N'
 	 
 	</select>
 	
