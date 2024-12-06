@@ -76,7 +76,7 @@
 
 					<div class="card w-50">
 						<div class="card-body">
-							<h5 class="card-title d-flex align-items-center gap-2 mb-4"> 오늘의 추천</h5>
+							<h5 class="card-title d-flex align-items-center gap-2 mb-4"> 뉴스룸</h5>
 							<div id="carouselExampleControls"
 								class="carousel slide carousel-dark" data-bs-ride="carousel">
 								<div class="carousel-inner">
@@ -170,22 +170,13 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
 										aria-expanded="false" aria-controls="flush-collapseOne">
-										Accordion Item #1</button>
+										그린리모델링 사업의 개념이 뭔가요? </button>
 								</h2>
 								<div id="flush-collapseOne" class="accordion-collapse collapse"
 									aria-labelledby="flush-headingOne"
 									data-bs-parent="#accordionFlushExample" style="">
-									<div class="accordion-body">Anim pariatur cliche
-										reprehenderit, enim eiusmod high life accusamus terry
-										richardson ad squid. 3 wolf moon officia aute, non cupidatat
-										skateboard dolor brunch. Food truck quinoa nesciunt laborum
-										eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on
-										it squid single-origin coffee nulla assumenda shoreditch et.
-										Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-										cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-										vice lomo. Leggings occaecat craft beer farm-to-table, raw
-										denim aesthetic synth nesciunt you probably haven't heard of
-										them accusamus labore sustainable VHS.</div>
+									<div class="accordion-body">그린리모델링이란 에너지 효율을 높이고 온실가스 배출을 낮추어 쾌적한 생활환경을 제공하는 기존 건물의 가치를 지속적으로 향상시키기 위한 사업을 말합니다.
+                        예를 들어, 기존 건물의 창호를 개선하거나, 단열재를 교체하는 공사가 그린리모델링 사업이 될 수 있습니다.</div>
 								</div>
 							</div>
 							<div class="accordion-item">
@@ -193,22 +184,13 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
 										aria-expanded="false" aria-controls="flush-collapseTwo">
-										Accordion Item #2</button>
+										그린리모델링의 장점이 뭔가요?</button>
 								</h2>
 								<div id="flush-collapseTwo" class="accordion-collapse collapse"
 									aria-labelledby="flush-headingTwo"
 									data-bs-parent="#accordionFlushExample" style="">
-									<div class="accordion-body">Anim pariatur cliche
-										reprehenderit, enim eiusmod high life accusamus terry
-										richardson ad squid. 3 wolf moon officia aute, non cupidatat
-										skateboard dolor brunch. Food truck quinoa nesciunt laborum
-										eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on
-										it squid single-origin coffee nulla assumenda shoreditch et.
-										Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-										cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-										vice lomo. Leggings occaecat craft beer farm-to-table, raw
-										denim aesthetic synth nesciunt you probably haven't heard of
-										them accusamus labore sustainable VHS.</div>
+									<div class="accordion-body">에너지비용 절약, 임대 건물의 경우에는 임대료 상승, 건축물의 가치 상승, 거주자 쾌적성 향상 등등이 있습니다.
+</div>
 								</div>
 							</div>
 							<div class="accordion-item">
@@ -216,23 +198,16 @@
 									<button class="accordion-button collapsed" type="button"
 										data-bs-toggle="collapse"
 										data-bs-target="#flush-collapseThree" aria-expanded="false"
-										aria-controls="flush-collapseThree">Accordion Item #3</button>
+										aria-controls="flush-collapseThree">건축법상 리모델링과 그린 리모델링은 어떻게 구분되나요?</button>
 								</h2>
 								<div id="flush-collapseThree"
 									class="accordion-collapse collapse"
 									aria-labelledby="flush-headingThree"
 									data-bs-parent="#accordionFlushExample">
-									<div class="accordion-body">Anim pariatur cliche
-										reprehenderit, enim eiusmod high life accusamus terry
-										richardson ad squid. 3 wolf moon officia aute, non cupidatat
-										skateboard dolor brunch. Food truck quinoa nesciunt laborum
-										eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on
-										it squid single-origin coffee nulla assumenda shoreditch et.
-										Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-										cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-										vice lomo. Leggings occaecat craft beer farm-to-table, raw
-										denim aesthetic synth nesciunt you probably haven't heard of
-										them accusamus labore sustainable VHS.</div>
+									<div class="accordion-body">건축법상 리모델링이란 건축물의 노후화를 억제 또는 기능적 향상 등을 위하여 증축하거나 개축 또는 대수선을 행하는 행위를 의미합니다.
+                       그러나 그린리모델링은 신축을 제외한 모든 건축행위를 대상으로 하고, 다만 수선의 경우에는 전체 창호면적의 15% 이상을 교체하는 창호수선 사업,
+                        외피면적의 15% 이상을 교체하는 외피 등 단열재 수선 사업, 기계설비 또는 전기설비를 교체하는 설비수선 사업을 대상으로 합니다.
+                        [녹색건축물조성지원법(2014년 개정): 에너지성능향상 및 효율개선 등을 위한 리모델링을 그린리모델링이라 함.]</div>
 								</div>
 							</div>
 						</div>
