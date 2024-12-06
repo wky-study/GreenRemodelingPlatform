@@ -237,8 +237,8 @@ public class MemberController {
 		// 4. 새 비밀번호 이메일로 전송
 		sendNewPasswordEmail(member.getMemEmail(), newPassword, model);
 
-		// 4-1. 새 비밀번호 반환
-		model.addAttribute("success", "임시 비밀번호가 생성되었습니다. 새 비밀번호는: " + newPassword);
+
+
 		return "member/findCheck";
 	}
 
@@ -273,7 +273,7 @@ public class MemberController {
 	        mailSender.send(mimeMessage);
 
 	        // 이메일 전송 성공 메시지 추가
-	        model.addAttribute("emailSuccess", "임시 비밀번호가 이메일로 전송되었습니다. 이메일을 확인해주세요.");
+	        model.addAttribute("emailSuccess", "임시 비밀번호가 가입된 이메일로 전송되었습니다. 이메일을 확인해주세요.");
 	        
 
 	    } catch (Exception e) {

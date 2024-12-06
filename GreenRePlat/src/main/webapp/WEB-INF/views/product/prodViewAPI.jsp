@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="utf-8">
@@ -68,7 +68,9 @@
 
 
 	<script type="text/javascript">
+
     function getProducts() {
+    	
         fetch('${pageContext.request.contextPath}/getProducts', {
             method: 'POST',
             headers: {
@@ -141,35 +143,110 @@
     	}
     }
     
-    // 페이지네이션 처리 함수
     function setupPagination(products) {
-        const itemsPerPage = 5;  // 한 페이지에 표시할 상품 수
+        const itemsPerPage = 16;  // 한 페이지에 표시할 상품 수
         const totalPages = Math.ceil(products.length / itemsPerPage);  // 총 페이지 수
         const paginationContainer = document.getElementById('pagination-container');
         paginationContainer.innerHTML = ''; // 기존 페이지네이션 비우기
 
-        // 페이지 번호 생성
-        for (let page = 1; page <= totalPages; page++) {
-            var pageItem = document.createElement('li');
-            pageItem.classList.add('page-item');
+        // 페이지네이션에서 한 번에 보여줄 페이지 번호 개수
+        const pageGroupSize = 10;
 
-            var pageLink = document.createElement('a');
+        // 페이지 범위 계산 (현재 페이지 그룹 시작과 끝)
+        let currentPageGroupStart = 1;
+        let currentPageGroupEnd = Math.min(pageGroupSize, totalPages);
+        
+        // 현재 페이지 추적
+        let currentPage = 1;
+
+        // 페이지 번호 생성
+        function createPageLink(page) {
+            const pageItem = document.createElement('li');
+            pageItem.classList.add('page-item');
+            
+            const pageLink = document.createElement('a');
             pageLink.classList.add('page-link');
             pageLink.href = '#';
             pageLink.textContent = page;
 
+            // 현재 페이지에 볼드체 스타일 적용
+            if (page === currentPage) {
+                pageLink.style.fontWeight = 'bold';
+            }
+
             // 페이지 클릭 이벤트
             pageLink.onclick = function () {
+                currentPage = page;  // 클릭한 페이지로 업데이트
                 displayPage(products, page, itemsPerPage);
+                updatePagination(page);
             };
 
             pageItem.appendChild(pageLink);
             paginationContainer.appendChild(pageItem);
         }
 
-        // 초기 페이지를 1번 페이지로 설정
+        // 페이지 그룹에 맞는 페이지 번호 생성
+        function generatePageLinks(start, end) {
+            paginationContainer.innerHTML = ''; // 기존 페이지네이션 비우기
+            // 이전 그룹으로 이동
+            if (currentPageGroupStart > 1) {
+                const prevGroup = document.createElement('li');
+                prevGroup.classList.add('page-item');
+                const prevLink = document.createElement('a');
+                prevLink.classList.add('page-link');
+                prevLink.href = '#';
+                prevLink.textContent = '<<';
+                prevLink.onclick = function() {
+                    currentPageGroupStart -= pageGroupSize;
+                    currentPageGroupEnd -= pageGroupSize;
+                    if (currentPageGroupEnd > totalPages) currentPageGroupEnd = totalPages;
+                    updatePagination(currentPageGroupStart);
+                };
+                prevGroup.appendChild(prevLink);
+                paginationContainer.appendChild(prevGroup);
+            }
+
+            // 페이지 링크 생성
+            for (let page = start; page <= end; page++) {
+                if (page <= totalPages) {
+                    createPageLink(page);
+                }
+            }
+
+            // 다음 그룹으로 이동
+            if (currentPageGroupEnd < totalPages) {
+                const nextGroup = document.createElement('li');
+                nextGroup.classList.add('page-item');
+                const nextLink = document.createElement('a');
+                nextLink.classList.add('page-link');
+                nextLink.href = '#';
+                nextLink.textContent = '>>';
+                nextLink.onclick = function() {
+                    currentPageGroupStart += pageGroupSize;
+                    currentPageGroupEnd += pageGroupSize;
+                    if (currentPageGroupEnd > totalPages) currentPageGroupEnd = totalPages;
+                    updatePagination(currentPageGroupStart);
+                };
+                nextGroup.appendChild(nextLink);
+                paginationContainer.appendChild(nextGroup);
+            }
+        }
+
+        // 페이지 변경 시 페이지네이션 업데이트
+        function updatePagination(page) {
+            currentPage = page;
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+            currentPageGroupStart = Math.floor((currentPage - 1) / pageGroupSize) * pageGroupSize + 1;
+            currentPageGroupEnd = Math.min(currentPageGroupStart + pageGroupSize - 1, totalPages);
+            generatePageLinks(currentPageGroupStart, currentPageGroupEnd);
+        }
+
+        // 초기 페이지 설정
         displayPage(products, 1, itemsPerPage);
+        updatePagination(1);
     }
+
+
 
     // 특정 페이지에 맞는 데이터 표시
     function displayPage(products, pageNumber, itemsPerPage) {

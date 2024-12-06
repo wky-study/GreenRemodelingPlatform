@@ -36,6 +36,7 @@
 										name="memName" required /> <br>
 									<button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4">비밀번호 찾기</button>
 								</form>
+									<a href="${pageContext.request.contextPath}/loginView" type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4">로그인화면이동</a>
 
 								<!-- 이메일 전송 성공 메시지 출력 -->
 								<c:if test="${not empty emailSuccess}">

@@ -22,6 +22,13 @@
 		cursor:pointer;
 	}
 	
+	.my-card img {
+	    transition: transform 0.3s ease; 
+	}
+	.my-card img:hover {
+		transform: scale(1.1); 
+	}	
+	
 	
 </style>
 
