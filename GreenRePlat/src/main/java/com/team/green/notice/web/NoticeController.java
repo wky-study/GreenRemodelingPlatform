@@ -209,7 +209,7 @@ public class NoticeController {
 	// 글 삭제
 	@PostMapping("/noticeDeleteDo")
 	public String noticeDeleteDo(@RequestParam int noticeNo) { 
-		// 'noticeNo' 파라미터를 @RequestParam으로 받음
+		// 'noticeNo' 파라미터를 @RequestParam으로 
 	    System.out.println("삭제할 글 번호: " + noticeNo);
 
 	    noticeService.noticeDeleteDo(noticeNo);

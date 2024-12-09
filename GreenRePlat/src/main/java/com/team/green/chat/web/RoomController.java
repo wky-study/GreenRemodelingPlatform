@@ -112,8 +112,16 @@ public class RoomController {
 	            room.setMemId(login.getMemId());
 	            room.setMemNick(login.getMemNick());
 	        }
+	        
+	        RoomDTO existingRoom = roomService.findRoom(room.getMemId(), room.getPartMem());
 
-	        roomService.createRoom(room);
+		    if (existingRoom != null) {
+		        // 기존 채팅방이 존재하는 경우 해당 채팅방으로 이동
+		    	System.out.println("기존 방 번호 확인: " + existingRoom.getRoomNo());
+		    } else {		    	
+		    	roomService.createRoom(room);
+		    }
+
 	        response.put("success", true);
 	        response.put("message", "방 생성 완료");
 	    } catch (Exception e) {

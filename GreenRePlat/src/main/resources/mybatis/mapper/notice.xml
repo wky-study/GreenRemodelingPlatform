@@ -44,6 +44,7 @@
             , mem_id
             , notice_content
             , notice_date
+            , notice_count
             , del_yn
         ) VALUES (
               (SELECT COUNT(*)+1 FROM notice)
@@ -51,6 +52,7 @@
             , #{memId}
             , #{noticeContent}
             , SYSDATE
+            , 0
             , 'N'
         )
     </insert>
