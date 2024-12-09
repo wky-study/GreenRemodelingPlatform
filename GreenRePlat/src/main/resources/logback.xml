@@ -59,7 +59,6 @@
     <!-- 비동기 로깅 설정 예 -->
     <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="FILE" />
-        <shutdownTimeout>3000</shutdownTimeout>
     </appender>
 
     <!-- 애플리케이션 종료 시 자원을 정리하는 설정 -->
