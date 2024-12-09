@@ -2,14 +2,14 @@
 
 <configuration scan="true" scanPeriod="10 seconds">
 
-<!--     콘솔 로그 설정
+<!--     콘솔 로그 설정   -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
                 {"timestamp":"%date{ISO8601}", "level":"%level", "logger":"%logger", "message":"%message", "thread":"%thread", "exception":"%ex", "memId":"%X{memId}", "ip":"%X{ip}", "requestURI":"%X{requestURI}", "userAgent":"%X{userAgent}"}
             </pattern>
         </encoder>
-    </appender> -->
+    </appender> 
 
 	<!-- 파일 로그 설정 -->
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
