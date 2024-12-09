@@ -28,7 +28,7 @@ public class FastApiService {
     public String postProductsList(String memId) {
     	System.out.println(memId);
         // FastAPI 서버 URL
-        String url = "http://127.0.0.1:8000/api/products/list";
+        String url = "http://192.168.0.18:8000/api/products/list";
 
         // 요청 본문에 포함될 객체 (mem_id 전달)
         ProductRequest request = new ProductRequest(memId);
@@ -54,7 +54,7 @@ public class FastApiService {
     public String postOrderList(List<Map<String, String>> order) {
     	System.out.println(order);
         // FastAPI 서버 URL
-        String url = "http://127.0.0.1:8000/api/products/order";
+        String url = "http://192.168.0.18:8000/api/products/order";
 
         // 요청 본문에 포함될 객체 (mem_id 전달)
         List<OrderRequest> orderList = new ArrayList<>();
