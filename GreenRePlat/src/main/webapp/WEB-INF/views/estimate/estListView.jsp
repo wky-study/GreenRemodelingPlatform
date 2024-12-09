@@ -154,14 +154,11 @@
     </script>
     
 	<script>
-var keyEstList = ${keyEstList};
 
 	document.addEventListener('DOMContentLoaded', function () {
 	    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
 	    const reopenModalButton = document.getElementById('reopenModal');
 	    
-	    console.log("견적서목록", keyEstList);
-
 	    // 페이지 로드 시 모달 자동 표시
 	    const dontShowAgain = localStorage.getItem('dontShowModal');
 	    if (!dontShowAgain) {
