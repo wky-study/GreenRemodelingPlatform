@@ -29,10 +29,6 @@
 									<div class="alert alert-danger">
 										${sessionScope.loginError}</div>
 								</c:if>
-								<a href="#"
-									class="text-nowrap logo-img text-center d-block py-3 w-100">
-									<img src="../assets/images/logos/logo-light.svg" alt="">
-								</a>
 								<p class="text-center">로그인 페이지</p>
 								<form action="${pageContext.request.contextPath}/loginDo"
 									method="POST">
