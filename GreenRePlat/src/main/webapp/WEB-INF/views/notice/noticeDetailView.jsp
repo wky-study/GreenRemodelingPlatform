@@ -47,7 +47,7 @@
 							</form>
 					
 							<form id="delForm" action="${pageContext.request.contextPath }/noticeDeleteDo" method="POST">
-								<input type="hidden" value="${keyNotice.noticeNo}" name="no">
+								<input type="hidden" value="${keyNotice.noticeNo}" name="noticeNo">
 								<button id="delBtn" class="btn btn-danger ms-2" type="button">삭제</button>
 							</form>
 						</c:if>
