@@ -51,7 +51,7 @@
 					</div>
 	
 					<div class="mb-3">
-						<textarea id="smartEditor" class="form-control"  rows="10" name="reviewContent" >${keyReview.reviewContent}</textarea>
+						<textarea id="smartEditor" class="form-control"  rows="10" name="reviewContent" style="min-height: 600px;">${keyReview.reviewContent}</textarea>
 					</div>					
 					
 					<div class="d-flex justify-content-end">

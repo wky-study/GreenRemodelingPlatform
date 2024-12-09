@@ -56,7 +56,7 @@
 						</div>
 	
 					<div class="mb-3">
-						<textarea id="smartEditor" class="form-control"  rows="10" name="noticeContent" >${keyNotice.noticeContent}</textarea>
+						<textarea id="smartEditor" class="form-control"  rows="10" name="noticeContent" style="min-height: 600px;">${keyNotice.noticeContent}</textarea>
 					</div>					
 					
 					<div class="d-flex justify-content-end">
