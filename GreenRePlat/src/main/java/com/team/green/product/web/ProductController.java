@@ -68,7 +68,7 @@ public class ProductController {
 	public String productView(Model model, SearchVO search) {
     	
 		int productCount = productService.getProductCount(search);
-		// DB·Î ºÎÅÍ °¡Á®¿Â ÀüÃ¼ °Ô½Ã±ÛÀÇ ¼ö¸¦ searchÀÇ ÇÊµåº¯¼ö¿¡ ³Ö¾îÁÜ
+		// DBë¡œ ë¶€í„° ê°€ì ¸ì˜¨ ì „ì²´ ê²Œì‹œê¸€ì˜ ìˆ˜ë¥¼ searchì˜ í•„ë“œë³€ìˆ˜ì— ë„£ì–´ì¤Œ
 		search.setProdCount(productCount);
 		search.setting();
 		
@@ -84,11 +84,11 @@ public class ProductController {
 		return "product/productView";
 	}
     
-	// Á¦Ç° ±Û »ó¼¼ ÆäÀÌÁö
+	// ì œí’ˆ ê¸€ ìƒì„¸ í˜ì´ì§€
 	@RequestMapping("/productDetailView")
 	public String reviewDetailView(Model model, int no) {
 		
-		System.out.println("Å¬¸¯ÇÑ °Ô½Ã±Û ¹øÈ£" + no);
+		System.out.println("í´ë¦­í•œ ê²Œì‹œê¸€ ë²ˆí˜¸" + no);
 		
 		ProductDTO product = null;
 		product = productService.getProduct(no);
@@ -97,7 +97,7 @@ public class ProductController {
 		
 		model.addAttribute("keyProduct", product);
 		
-		// ÀÌ¹ÌÁö ¿©·¯°³ °æ·Î °¡Á®¿À±â
+		// ì´ë¯¸ì§€ ì—¬ëŸ¬ê°œ ê²½ë¡œ ê°€ì ¸ì˜¤ê¸°
 		List<AttachDTO> atch = attachService.getProdAttachList(no);
 		model.addAttribute("keyAtchList", atch);
 		
@@ -106,7 +106,7 @@ public class ProductController {
 		return "product/productDetailView";
 	}
 	
-	// Á¦Ç° ±Û µî·Ï ÆäÀÌÁö
+	// ì œí’ˆ ê¸€ ë“±ë¡ í˜ì´ì§€
 	@RequestMapping("/productWriteView")
 	public String productWriteView(HttpSession session) {
 		
@@ -119,7 +119,7 @@ public class ProductController {
 		return "product/productWriteView";
 	}
 	
-	// Á¦Ç° ±Û µî·Ï Å¬¸¯
+	// ì œí’ˆ ê¸€ ë“±ë¡ í´ë¦­
 	@PostMapping("/productWriteDo")
 	public String productWriteDo(ProductDTO product, MultipartFile[] imgFile) {
 
@@ -129,10 +129,10 @@ public class ProductController {
 	 	
 	 	String atchFileName = "";
 	 	
-	 	// Ã·ºÎµÈ ÆÄÀÏÀÌ Á¸ÀçÇÒ ½Ã ÆÄÀÏÀ» ·ÎÄÃ¿¡ ÀúÀåÇÏ°í DB¿¡ ÀúÀåµÈ ÆÄÀÏÀÇ Á¤º¸¸¦ Àü´ŞÇÔ
-	 	// Ã·ºÎÆÄÀÏÀÌ ÀÖÀ» ¶§ ½ÇÇàµÇ¾ßÇÔ
+	 	// ì²¨ë¶€ëœ íŒŒì¼ì´ ì¡´ì¬í•  ì‹œ íŒŒì¼ì„ ë¡œì»¬ì— ì €ì¥í•˜ê³  DBì— ì €ì¥ëœ íŒŒì¼ì˜ ì •ë³´ë¥¼ ì „ë‹¬í•¨
+	 	// ì²¨ë¶€íŒŒì¼ì´ ìˆì„ ë•Œ ì‹¤í–‰ë˜ì•¼í•¨
 	 	if(imgFile != null && imgFile.length > 0 && !imgFile[0].isEmpty()) {
-	 		System.out.println("ÆÄÀÏ °³¼ö: " + imgFile.length);
+	 		System.out.println("íŒŒì¼ ê°œìˆ˜: " + imgFile.length);
 	 		
 	 		
 	 		try {
@@ -145,28 +145,28 @@ public class ProductController {
 	 					attach.setProdNo(prodNo);
 	 					attachService.insertProdAttach(attach);
 	 				}
-	 				// Ã¹¹øÂ° ÀÌ¹ÌÁö¸¦ ´ëÇ¥ÀÌ¹ÌÁö·Î µî·Ï  
-	 				atchFileName = "http://localhost/displayImage?fileName=" + attachList.get(0).getAtchFileName();
+	 				// ì²«ë²ˆì§¸ ì´ë¯¸ì§€ë¥¼ ëŒ€í‘œì´ë¯¸ì§€ë¡œ ë“±ë¡  
+	 				atchFileName = "http://192.168.0.136/displayImage?fileName=" + attachList.get(0).getAtchFileName();
 	 			}
 	 		} catch(IOException e) {
 	 			e.printStackTrace();
-	 			System.out.println("¾÷·Îµå¾ÈµÊ");
+	 			System.out.println("ì—…ë¡œë“œì•ˆë¨");
 	 			return "product/productView";
 	 		}
 	 	}
 	 	
-	 	// img src ´ã±â
+	 	// img src ë‹´ê¸°
 	 	System.out.println(atchFileName);
 	 	product.setProdImageSrc(atchFileName);
 
-	    // °øÁö»çÇ× µî·Ï
-	    productService.writeProduct(product); // °øÁö»çÇ× µî·Ï ¼­ºñ½º È£Ãâ
+	    // ê³µì§€ì‚¬í•­ ë“±ë¡
+	    productService.writeProduct(product); // ê³µì§€ì‚¬í•­ ë“±ë¡ ì„œë¹„ìŠ¤ í˜¸ì¶œ
 
 		
 		return "redirect:/productView";
 	}
 	
-	// Á¦Ç° »èÁ¦
+	// ì œí’ˆ ì‚­ì œ
 	@PostMapping("/prodDeleteDo")
 	public String prodDeleteDo(int no) {
 		System.out.println(no);
@@ -216,14 +216,14 @@ public class ProductController {
 
 		  }
 	
-	// Á¦Ç° µî·Ï ¾ç½Ä
+	// ì œí’ˆ ë“±ë¡ ì–‘ì‹
     Logger logger = LoggerFactory.getLogger(ReceiptController.class);
  
     @GetMapping("/downloadProdExcel")
     public ResponseEntity<InputStreamResource> downloadProdExcel(HttpServletResponse response, HttpSession session) throws IOException {
  
         try (Workbook workbook = new XSSFWorkbook()) {
-            Sheet sheet = workbook.createSheet("Á¦Ç° µî·Ï ¾ç½Ä");
+            Sheet sheet = workbook.createSheet("ì œí’ˆ ë“±ë¡ ì–‘ì‹");
             int rowNo = 0;
  
             CellStyle headStyle = workbook.createCellStyle();
@@ -235,29 +235,29 @@ public class ProductController {
             headStyle.setFont(font);
  
             Row headerRow = sheet.createRow(rowNo++);
-            headerRow.createCell(0).setCellValue("¾÷Ã¼¸í");
-            headerRow.createCell(1).setCellValue("¸ğµ¨¸í");
-            headerRow.createCell(2).setCellValue("Á¦Á¶¿ø");
-            headerRow.createCell(3).setCellValue("¿¡³ÊÁöÈ¿À²");
-            headerRow.createCell(4).setCellValue("Á¦Ç°ÀÌ¸§");
-            headerRow.createCell(5).setCellValue("°¡°İ");
-            headerRow.createCell(6).setCellValue("Á¦Ç°Å¸ÀÔ");
-            headerRow.createCell(7).setCellValue("´ëÇ¥ÀÌ¹ÌÁöÁÖ¼Ò");
+            headerRow.createCell(0).setCellValue("ì—…ì²´ëª…");
+            headerRow.createCell(1).setCellValue("ëª¨ë¸ëª…");
+            headerRow.createCell(2).setCellValue("ì œì¡°ì›");
+            headerRow.createCell(3).setCellValue("ì—ë„ˆì§€íš¨ìœ¨");
+            headerRow.createCell(4).setCellValue("ì œí’ˆì´ë¦„");
+            headerRow.createCell(5).setCellValue("ê°€ê²©");
+            headerRow.createCell(6).setCellValue("ì œí’ˆíƒ€ì…");
+            headerRow.createCell(7).setCellValue("ëŒ€í‘œì´ë¯¸ì§€ì£¼ì†Œ");
             for(int i=0; i<=7; i++){
-            	// ÄÃ·³¸í ½ºÅ¸ÀÏ Ãß°¡ 
+            	// ì»¬ëŸ¼ëª… ìŠ¤íƒ€ì¼ ì¶”ê°€ 
                 // headerRow.getCell(i).setCellStyle(headStyle);
                 
             }
             
             
             Row row = sheet.createRow(rowNo++);
-            row.createCell(0).setCellValue("ÄíÄíÀüÀÚ ÁÖ½ÄÈ¸»ç");
+            row.createCell(0).setCellValue("ì¿ ì¿ ì „ì ì£¼ì‹íšŒì‚¬");
             row.createCell(1).setCellValue("CRP-LHTR0620FGW");
-            row.createCell(2).setCellValue("ÄíÄíÀüÀÚ(ÁÖ)");
+            row.createCell(2).setCellValue("ì¿ ì¿ ì „ì(ì£¼)");
             row.createCell(3).setCellValue("1");
-            row.createCell(4).setCellValue("ÄíÄí Á¤Ç°³»¼Ü CRI-HC0620H ±³Ã¼¿ë CRP-LHTR0610FGW/M È£È¯ 260J");
+            row.createCell(4).setCellValue("ì¿ ì¿  ì •í’ˆë‚´ì†¥ CRI-HC0620H êµì²´ìš© CRP-LHTR0610FGW/M í˜¸í™˜ 260J");
             row.createCell(5).setCellValue("100000");
-            row.createCell(6).setCellValue("Àü±â¹ä¼Ü");
+            row.createCell(6).setCellValue("ì „ê¸°ë°¥ì†¥");
             row.createCell(7).setCellValue("https://shop2.daumcdn.net/thumb/R160x160/?fname=http%3A%2F%2Fshop2.daumcdn.net%2Fshophow%2Fp%2FD5122744359.jpg%3Fut%3D20231116171425");
  
             sheet.setColumnWidth(0, 4000);
@@ -278,7 +278,7 @@ public class ProductController {
                 public void close() throws IOException {
                     super.close();
                     if (tmpFile.delete()) {
-                    	System.out.println("ÀÓ½Ã ÆÄÀÏ »èÁ¦ ¿Ï·á");
+                    	System.out.println("ì„ì‹œ íŒŒì¼ ì‚­ì œ ì™„ë£Œ");
                     }
                 }
             };
@@ -287,7 +287,7 @@ public class ProductController {
                     .contentLength(tmpFile.length()) //
                     .contentType(MediaType.APPLICATION_OCTET_STREAM) //
                     .header("Content-Disposition", 
-                            "attachment; filename*=UTF-8''" + URLEncoder.encode("Á¦Ç°µî·Ï_¾ç½Ä.xlsx", "UTF-8"))
+                            "attachment; filename*=UTF-8''" + URLEncoder.encode("ì œí’ˆë“±ë¡_ì–‘ì‹.xlsx", "UTF-8"))
                     .body(new InputStreamResource(res));
  
         }
