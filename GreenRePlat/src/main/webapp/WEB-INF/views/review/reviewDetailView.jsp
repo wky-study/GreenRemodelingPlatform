@@ -143,7 +143,7 @@
 									<c:if
 										test="${sessionScope.memInfo.memId == replyDTO.memId && sessionScope.memInfo.memId != null}">
 										<div class="col-1">
-											<span class="my-span" onclick="f_delete()">삭제</span>
+											<span class="my-span btn btn-danger " onclick="f_delete()" style="cursor: pointer">삭제</span>
 										</div>
 									</c:if>
 								</div>
