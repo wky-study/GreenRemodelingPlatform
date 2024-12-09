@@ -59,7 +59,7 @@
 						
 							<button class="d-none" onclick="f_imgWidth(this)" id="imgBtn">입력</button>
 							
-							<textarea id="smartEditor" class="form-control"  rows="10" name="noticeContent"></textarea>
+							<textarea id="smartEditor" class="form-control"  rows="10" name="noticeContent" style="min-height: 600px;"></textarea>
 						</div>		
 						
 						<div class="d-flex justify-content-end">
