@@ -26,8 +26,10 @@
 					<!-- 제목과 글쓰기 버튼 -->
 					<div class="header-row">
 						<h5 class="card-title">공지 사항</h5>
+						<c:if test ="${sessionScope.memInfo.memType == 0 }">
 						<button class="btn btn-primary"
 							onclick="location.href='${pageContext.request.contextPath}/noticeWriteView'">글쓰기</button>
+						</c:if>
 					</div>
 
 					<div class="table-responsive">

@@ -65,7 +65,7 @@ li {
                     	<c:if test="${keyMember.memType == 5}">
 	                        <h2>방 정보: [ ${room.roomNo}번방 _ ${room.roomName } _ ${room.memId}]</h2>
                     	</c:if>
-                        <button type="button" id="downloadBtn" class="btn btn-primary float-right">채팅내역 다운로드</button>
+                        <button type="button" id="downloadBtn" class="btn btn-primary float-right mb-2">채팅내역 다운로드</button>
                     </div>
                     <div class="content chatcontent border border-secondary" data-room-no="${room.roomNo}">
                         <div id="chatList" class="">
