@@ -41,7 +41,6 @@ public class RoomController {
 		MemberDTO login = (MemberDTO) session.getAttribute("memInfo");
 		String memId = login.getMemId();
 		
-		
 		List<MemberDTO> memList = memberService.getMemList();
 		List<RoomDTO> roomList = roomService.getRoomList(memId);
 		

@@ -254,7 +254,7 @@
       $.ajax({
         type: "POST",
         url: v_url,
-        data: JSON.stringify(test), // 데이터를 JSON 형태로 전송
+        data: JSON.stringify(orderCreateFormList), // 데이터를 JSON 형태로 전송
         contentType: "application/json",
         success: function (resp) {
         	console.log("fastapi: ",resp);
