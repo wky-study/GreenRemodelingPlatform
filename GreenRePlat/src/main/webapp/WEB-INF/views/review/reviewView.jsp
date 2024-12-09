@@ -48,7 +48,7 @@
 						<div class="card my-card shadow-sm" onclick='window.location.href = "${pageContext.request.contextPath }/reviewDetailView?no=${ReviewDTO.reviewNo}"'>
 							<img
 								src="${pageContext.request.contextPath }/displayImage?fileName=${ReviewDTO.reviewPath}"
-								class="card-img-top" >
+								class="card-img-top" style="height: 200.59px;" >
 							<div class="card-body">
 								<h5 class="card-title">${ReviewDTO.reviewTitle}</h5>
 								<p class="card-text">${ReviewDTO.memName}</p>
