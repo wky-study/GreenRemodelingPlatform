@@ -64,7 +64,7 @@ public class ProductController {
 	@Autowired
 	FileUploadVO fileUpload;	
 	
-    @RequestMapping("/productView")
+    	@RequestMapping("/productView")
 	public String productView(Model model, SearchVO search) {
     	
 		int productCount = productService.getProductCount(search);
@@ -293,11 +293,8 @@ public class ProductController {
         }
     }
     
-    @RequestMapping("/ocrTest")
+    	@RequestMapping("/ocrTest")
 	public String ocrTest() {
-    	
-
-		
 		return "product/ocrTest";
 	}
     
